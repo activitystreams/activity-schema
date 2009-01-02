@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<?rfc private="Draft"?>
+<rfc category="exp" docName="atomactivity-00" ipr="none">
+  <front>
+    <title abbrev="AtomActivitySchema">Atom Activity Base Schema
+    (Draft)</title>
+
+    <author fullname="Martin Atkins" initials="M." surname="Atkins">
+      <organization>Six Apart Ltd</organization>
+    </author>
+
+    <date />
+
+    <abstract>
+      <t>This document presents a base set of object types and verbs for use
+      with Atom Activity Extensions.</t>
+    </abstract>
+
+    <note title="Requirements Language">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119">RFC 2119</xref>.</t>
+    </note>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>This document presents a base set of object types and verbs for use
+      with Atom Activity Extensions..</t>
+    </section>
+
+    <section title="Notational Conventions">
+      <t>In this document, the following namespace prefixes are used for the
+      given namespace URI from the referenced specification:</t>
+
+      <texttable>
+        <ttcol>Alias</ttcol>
+
+        <ttcol>Namespace URI</ttcol>
+
+        <ttcol>Specification</ttcol>
+
+        <c><spanx style="verb">atom:</spanx></c>
+
+        <c><spanx style="verb">http://www.w3.org/2005/Atom</spanx></c>
+
+        <c><xref target="RFC4287">The Atom Syndication Format</xref></c>
+
+        <c><spanx style="verb">thr:</spanx></c>
+
+        <c><spanx style="verb">http://purl.org/syndication/thread/1.0</spanx></c>
+
+        <c><xref target="RFC4685">Atom Threading Extensions</xref></c>
+
+        <c><spanx style="verb">activity:</spanx></c>
+
+        <c><spanx style="verb">http://activitystrea.ms/spec/1.0/</spanx></c>
+
+        <c>Atom Activity Extensions</c>
+
+        <c><spanx style="verb">media:</spanx></c>
+
+        <c><spanx style="verb">http://purl.org/syndication/atommedia</spanx></c>
+
+        <c>Atom Media Extensions</c>
+      </texttable>
+
+      <t>Note that the choices of namespace prefix are arbitrary and not
+      semantically significant.</t>
+
+      <t>This specification uses a shorthand form of terms from the XML
+      Infoset [W3C.REC-xml-infoset-20040204]. The phrase "Information Item" is
+      omitted when naming Element and Attribute Information Items. Therefore,
+      when this specification uses the term "element," it is referring to an
+      Element Information Item in Infoset terms. Likewise, when this
+      specification uses the term "attribute," it is referring to an Attribute
+      Information Item.</t>
+
+      <t>This specification allows the use of IRIs [RFC3987]. Every URI
+      [RFC3986] is also an IRI, so a URI may be used wherever an IRI is named.
+      When an IRI that is not also a URI is given for dereferencing, it MUST
+      be mapped to a URI using the steps in Section 3.1 of [RFC3987]. When an
+      IRI is serving as an identifier, it MUST NOT be so mapped.</t>
+
+      <t>Some sections of this specification are illustrated with a non-
+      normative RELAX NG Compact schema [RELAXNG]. In those sections, this
+      specification uses the atomCommonAttributes, atomMediaType, and atomURI
+      patterns, defined in [RFC4287].</t>
+
+      <t>However, the text of this specification provides the sole definition
+      of conformance.</t>
+
+      <t>This specification uses "the Atom specification" to refer to <xref
+      target="RFC4287"></xref>, and "the AtomActivity specification" to refer
+      to [insert xref here].</t>
+    </section>
+
+    <section title="Base Verbs">
+      <section title="Post">
+        <t>The "post" verb is described in section 8 of the AtomActivity
+        specification. It is only referenced here for completeness.</t>
+      </section>
+
+      <section title="Mark as Favorite">
+        <t>The "Mark as Favorite" verb indicates that the actor marked the
+        object as an item of special interest. Often objects so marked appear
+        in a collection of such objects which may be published as a feed of
+        entries annotated with this verb.</t>
+
+        <t>The verb URI for the "Mark as Favorite" verb is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/favorite/</spanx>.</t>
+
+        <t>This verb has no additional properties beyond the basic activity
+        properties described in the AtomActivity specification.</t>
+      </section>
+    </section>
+
+    <section title="Base Object Types">
+      <section title="Weblog Entry">
+        <t>The "weblog entry" object type indicates that the object is an
+        entry that has been posted in a weblog, or some similar construct such
+        as an online journal.</t>
+
+        <t>Weblog entries generally consist of paragraphs of text, in some
+        cases incorporating embedded media such as photos and inline
+        hyperlinks to other resources.</t>
+
+        <t>The object type URL for the "weblog entry" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/blog-entry/</spanx>.</t>
+
+        <t>A weblog entry has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title of the entry. Included as the
+            content of the atom:title element. If the entry does not have a
+            title, this element MUST be included with empty content</t>
+
+            <t hangText="summary">A short excerpt of the body content that
+            gives an introduction to or a summary of the full content; if the
+            entry does not have a summary, this element should be omitted.</t>
+
+            <t hangText="body">The main body content of the entry. Included as
+            the content of the atom:content element</t>
+
+            <t hangText="permalink">The canonical URL for the entry.
+            Represented as the value of the <spanx style="verb">href</spanx>
+            attribute on an <spanx style="verb">atom:link</spanx> element with
+            a <spanx style="verb">rel</spanx> value of <spanx style="verb">alternate</spanx>
+            and a <spanx style="verb">type</spanx> value of <spanx
+            style="verb">text/html</spanx>.</t>
+          </list></t>
+      </section>
+
+      <section title="Note">
+        <t>The "note" object type represents short notes or status updates.
+        This object type is intended for use in "micro-blogging" and in
+        systems where users are invited to publish a timestamped "status".</t>
+
+        <t>A note is similar in structure to a weblog entry, but it does not
+        have a title and its body tends to be shorter. Applications will often
+        display the entire content of a note in an activity stream UI, whereas
+        they may display only the title or the title and summary for a weblog
+        entry.</t>
+
+        <t>The object type URL for the "note" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/note/</spanx>.</t>
+
+        <t>A note has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="content">The content of the note. Included as the
+            content of the atom:content element. Publishers SHOULD include any
+            markup necessary to achieve a similar presentation to that on the
+            publisher's own HTML pages, including any links that the service
+            automatically adds. Processors MAY remove the markup and consider
+            the note to be plain text.</t>
+
+            <t hangText="permalink">The canonical URL for the note.
+            Represented as the value of the <spanx style="verb">href</spanx>
+            attribute on an <spanx style="verb">atom:link</spanx> element with
+            a <spanx style="verb">rel</spanx> value of <spanx style="verb">alternate</spanx>
+            and a <spanx style="verb">type</spanx> value of <spanx
+            style="verb">text/html</spanx>.</t>
+          </list></t>
+
+        <t><spanx style="strong">TODO:</spanx> Figure out how to handle the
+        notes published by Facebook and Plaxo that are full sentences that
+        always start with the name of the actor.</t>
+      </section>
+
+      <section title="Photo">
+        <t>The "photo" object type represents a graphical still image which is
+        often, but not always, a photograph. Some users publish
+        non-photographic images such as drawings into photo galleries, so this
+        specification does not attempt to create an artificial
+        distinction.</t>
+
+        <t>The object type URL for the "photo" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/photo/</spanx>.</t>
+
+        <t>A photo has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title or short caption assigned to the
+            photo by the author. Included as the content of the atom:title
+            element. If the author has not provided a title, the publisher may
+            synthesize a title e.g. from the image filename, or the publisher
+            may include the atom:title element with no content.</t>
+
+            <t hangText="thumbnail">The URL and metadata for a thumbnail
+            version of the photo. The URL is represented as the value of the
+            href attribute on an atom:link element with rel preview and a type
+            of either image/jpeg, image/png or image/gif. Publishers SHOULD
+            include media:width and media:height attributes on the atom:link
+            element describing the dimensions of the linked image. Processors
+            MAY ignore thumbnails that are of an inappropriate size for their
+            user interface.</t>
+
+            <t hangText="larger image">The URL and metadata for a larger,
+            ideally full-size version of the photo intended for standalone
+            viewing. The URL is represented as the value of the href attribute
+            on an atom:link element with rel enclosure and a type of either
+            image/jpeg, image/png or image/gif. Publishers SHOULD include
+            media:width and media:height attributes on the atom:link element
+            describing the dimensions of the linked image.</t>
+
+            <t hangText="photo page URL">The URL of a web page where the photo
+            and the associated metadata can be viewed. Represented as the
+            value of the href attribute on an atom:link element with a rel
+            value of alternate and a type value of text/html.</t>
+
+            <t hangText="time and date the photo was taken">The time and date
+            when the photo was taken, as opposed to when it was posted. This
+            information is often determined automatically by the
+            photographer's camera, but may be inaccurate due to an incorrect
+            clock in the camera. <spanx style="strong">TODO:</spanx> Figure
+            out how to publish this. There doesn't seem to be any
+            well-deployed standard.</t>
+
+            <t hangText="description">The description or long caption assigned
+            to the photo by the author. Included as the content of the
+            media:description element as described in [AtomMedia]. If the
+            author has not provided a description, this element SHOULD be
+            omitted.</t>
+          </list></t>
+
+        <t>Publishers SHOULD include an atom:content element containing
+        content that will present the photo and any necessary metadata to the
+        user of a processor that is not media-aware. Media-aware processors
+        SHOULD prefer the specific properties given above, but MAY use the
+        content in preference in cases where the properties above are
+        incomplete or unsuitable.</t>
+      </section>
+
+      <section title="Video">
+        <t>The "video" object type represents video content, which usually
+        consists of a motion picture track and an audio track.</t>
+
+        <t>The object type URL for the "video" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/video/</spanx>.</t>
+
+        <t>A video has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title or short caption assigned to the
+            video by the author. Included as the content of the atom:title
+            element. If the author has not provided a title, the publisher may
+            synthesize a title e.g. from the video filename, or the publisher
+            may include the atom:title element with no content.</t>
+
+            <t hangText="thumbnail">The URL and metadata for a thumbnail
+            version of a representative frame of the video. The URL is
+            represented as the value of the href attribute on an atom:link
+            element with rel preview and a type of either image/jpeg,
+            image/png or image/gif. Publishers SHOULD include media:width and
+            media:height attributes on the atom:link element describing the
+            dimensions of the linked image. Processors MAY ignore thumbnails
+            that are of an inappropriate size for their user interface.</t>
+
+            <t hangText="video stream">The URL and metadata for the video
+            content itself. The URL is represented as the value of the href
+            attribute on an atom:link element with rel enclosure and a type
+            that matches video/*. Publishers SHOULD include media:width and
+            media:height attributes on the atom:link element describing the
+            dimensions of the linked video, and SHOULD include a
+            media:duration attribute giving the length of the video.</t>
+
+            <t hangText="video page URL">The URL of a web page where the video
+            and the associated metadata can be viewed. Represented as the
+            value of the href attribute on an atom:link element with a rel
+            value of alternate and a type value of text/html.</t>
+
+            <t hangText="player applet">The URL and metadata for some kind of
+            applet that will allow a user to view the video. The URL is
+            represented as the value of the href attribute on an atom:link
+            element with rel alternate and an appropriate type. Publishers
+            SHOULD include media:width and media:height attributes on the
+            atom:link element describing the ideal dimensions of the linked
+            applet. If both a video page and player applet are included,
+            publishers SHOULD include the video page link element first in
+            document order for compatibility with legacy, non-activity feed
+            consumers.</t>
+
+            <t hangText="description">The description or long caption assigned
+            to the video by the author. Included as the content of the
+            media:description element as described in [AtomMedia]. If the
+            author has not provided a description, this element SHOULD be
+            omitted.</t>
+          </list></t>
+
+        <t>Publishers SHOULD include an atom:content element containing
+        content that will present the video and any necessary metadata to the
+        user of a processor that is not media-aware. Media-aware processors
+        SHOULD prefer the specific properties given above, but MAY use the
+        content in preference in cases where the properties above are
+        incomplete or unsuitable.</t>
+      </section>
+
+      <section title="Bookmark">
+        <t>The "bookmark" object type represents a pointer to some URL, which
+        is usually a web page. In most cases, a bookmark is specific to a
+        given user, and contains metadata chosen by that user. Bookmark
+        objects are similar in principle to the concept of bookmarks or
+        favorites in a web browser.</t>
+
+        <t>When dealing with bookmarks it is important to note the distinction
+        between the title, description and URL of the bookmark itself and the
+        title, content and URL of the resource that is the target of the
+        bookmark. In some implementations these may be the same, but bookmark
+        managers often allow a user to edit the title and description of his
+        own bookmarks to differ from the metadata on the target itself.</t>
+
+        <t>Some implementations refer to this object type as a "link". This
+        specification uses the term "bookmark" to avoid confusion with the
+        general concept of hyperlinks which apply to all object types.</t>
+
+        <t>Since bookmarks are often specific to a particular user, even
+        though multiple users might have bookmarks pointing at the same
+        resource, it is appropriate to use the "post" verb to describe the
+        publication of such a bookmark. The "mark as favorite" verb SHOULD be
+        used when a user flags another user's bookmark as being a favorite
+        without creating his own copy of the favorite, or when a user flags
+        his own bookmark as being a favorite as a special classification
+        within his bookmark collection.</t>
+
+        <t>The object type URL for the "bookmark" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/bookmark/</spanx>.</t>
+
+        <t>A bookmark has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title of the bookmark, as entered by the
+            user who created the bookmark. Included as the content of the
+            atom:title element. Publishers MAY use the title of the target
+            resource as a default for this property where a user hasn't
+            entered a customized value.</t>
+
+            <t hangText="description">The description of the bookmark, as
+            entered by the user who created the bookmark. Included as the
+            content of the atom:summary element. If no description has been
+            provided, publishers SHOULD omit this element.</t>
+
+            <t hangText="target URL">The URL of the item that is the target of
+            the bookmark. Represented as the value of the href attribute on an
+            atom:link element with rel "related". An entry with this object
+            type MUST NOT include related links except for the purpose of
+            representing the target URL.</t>
+
+            <t hangText="bookmark page URL">The URL of a page that describes
+            the bookmark. This URL is often specific to the user that
+            published the bookmark. Represented as the value of the href
+            attribute on an atom:link element with a rel value of alternate
+            and a type value of text/html.</t>
+
+            <t hangText="target title">The title of the item that is the
+            target of the bookmark. Represented as the value of the title
+            attribute on the atom:link element from which the target URL was
+            obtained.</t>
+
+            <t hangText="thumbnail">The URL and metadata for a thumbnail
+            version of the page. The URL is represented as the value of the
+            href attribute on an atom:link element with rel preview and a type
+            of either image/jpeg, image/png or image/gif. Publishers SHOULD
+            include media:width and media:height attributes on the atom:link
+            element describing the dimensions of the linked image. Processors
+            MAY ignore thumbnails that are of an inappropriate size for their
+            user interface.</t>
+          </list></t>
+
+        <t>Publishers SHOULD include an atom:content element containing
+        content that will present the bookmark to the user of a processor that
+        does not have special support for bookmarks. Bookmark-aware processors
+        SHOULD prefer the specific properties given above, but MAY use the
+        content in preference in cases where the properties above are
+        incomplete or unsuitable.</t>
+      </section>
+    </section>
+
+    <section title="Comments and Responses">
+      <t>Most social applications have a concept of "comments", "replies" or
+      "responses" to social objects. In many cases these are simple text
+      messages, but any object can in practice be a reply.</t>
+
+      <t>This specification does not define an object type for a comment nor a
+      verb for posting a comment. This is because an item being in response to
+      another item is orthogonal to its type, and "posting a comment" is of
+      course simply a "post" action.</t>
+
+      <t>Therefore replies SHOULD be represented using the <spanx
+      style="verb">thr:in-reply-to</spanx> element defined by <xref
+      target="RFC4685"></xref>. Publishers SHOULD also, if available, include
+      metadata about the item being replied to using the mechanisms defined in
+      [CommentMetadataExtension].</t>
+
+      <t>The act of posting a comment is represented by the post verb as with
+      "top-level" objects.</t>
+
+      <t>A simple text comment should in most cases not have an object type.
+      If the reply is in fact an object such as a video, it SHOULD be
+      annotated with an appropriate object type.</t>
+
+      <t>Many systems do not have the concept of a title or subject for a
+      comment; such systems MUST include an atom:title element with no text
+      content. Processors SHOULD refer to such comments as simply being "a
+      comment" if they are to be described in a sentence.</t>
+
+      <t><spanx style="strong">FIXME:</spanx> Must figure out how Trackback
+      and friends are represented. An entry that "tracks back" to another is
+      effectively a reply, but there are questions about who publishes this
+      relationship (the responder or the original poster -- or indeed both)
+      and how exactly the entry metadata is represented in a feed.</t>
+    </section>
+
+    <section title="Security Considerations">
+      <t>[TODO: Write some more here.]</t>
+    </section>
+
+    <section title="IANA Considerations">
+      <t>None.</t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <reference anchor="RFC4287">
+        <front>
+          <title>The Atom Syndication Format</title>
+
+          <author>
+            <organization></organization>
+          </author>
+
+          <date />
+        </front>
+      </reference>
+
+      <reference anchor="RFC2119">
+        <front>
+          <title>RFC 2119</title>
+
+          <author>
+            <organization></organization>
+          </author>
+
+          <date />
+        </front>
+      </reference>
+
+      <reference anchor="RFC3987">
+        <front>
+          <title>Internationalized Resource Identifiers (IRIs)</title>
+
+          <author>
+            <organization></organization>
+          </author>
+
+          <date />
+        </front>
+      </reference>
+
+      <reference anchor="RFC4685">
+        <front>
+          <title>Atom Threading Extensions</title>
+
+          <author fullname="James M. Snell" initials="J. M." surname="Snell">
+            <organization></organization>
+          </author>
+
+          <date month="September" year="2006" />
+        </front>
+      </reference>
+    </references>
+
+    <section title="Acknowledgements">
+      <t>...</t>
+    </section>
+  </back>
+</rfc>
