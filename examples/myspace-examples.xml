@@ -1,0 +1,452 @@
+<feed xml:lang="en-us" xml:base="http://api.myspace.com/v1/users/4859568/friends/activities.atom" xmlns="http://www.w3.org/2005/Atom"
+      xmlns:activity="http://activitystrea.ms/spec/1.0/">
+	<title type="text">Recent activities from your MySpace friends.</title>
+	<subtitle type="text">This feed contains all of the updates for the friends you are subscribed to on MySpace</subtitle>
+	<id>myspace.com:user:4859568:friends:activities</id>
+	<updated>2009-01-08T19:20:41Z</updated>
+	<generator>MySpace.Services.Factories.FriendActivitiesSyndicationFeedFactory</generator>
+	<link rel="self" href="http://api.myspace.com/v1/users/4859568/friends/activities.atom" />
+	<entry>
+		<id>myspace.com:user:81472123:ProfileSongAdd:2678359:27837114</id>
+		<title type="text">Brandon Black added a new profile song: Black Swan by MEGADETH.</title>
+		<published>2009-01-08T09:23:26Z</published>
+		<updated>2009-01-08T09:23:26Z</updated>
+		<author>
+			<name>Brandon Black</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=81472123</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=27837114&amp;artid=2678359&amp;albid=7999319" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=81472123">Brandon Black</a> added a new profile song: Black Swan by <a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=59479986">MEGADETH</a>.
+				</h3>
+				<ul>
+					<li>
+						<a href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=27837114&amp;artid=2678359&amp;albid=7999319">
+							<img src="http://a823.ac-images.myspacecdn.com/images01/101/s_b1b206776b1160c3b3b00564f57f25c6.jpg" alt="Black Swan"/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/share/</activity:verb>
+		<activity:verb>tag:myspace.com,2009:activity,post-to-profile</activity:verb>
+		<activity:object>
+			<title>Black Swan</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/song/</activity:object-type>
+			<link rel="preview" type="image/jpeg" href="http://a823.ac-images.myspacecdn.com/images01/101/s_b1b206776b1160c3b3b00564f57f25c6.jpg" />
+			<link rel="alternate" type="text/html" href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=27837114&amp;artid=2678359&amp;albid=7999319" />
+			<author>
+				<name>MEGADETH</name>
+				<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=59479986</uri>
+			</author>
+		</activity:object>
+	</entry>
+	<entry>
+		<id>myspace.com:user:279470469:BlogAdd:279470469:462356341</id>
+		<title type="text">Nick posted a new blog entry: Social Networking in Higher Education</title>
+		<published>2009-01-08T08:27:20Z</published>
+		<updated>2009-01-08T08:27:20Z</updated>
+		<author>
+			<name>Nick</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=279470469</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://blog.myspace.com/index.cfm?fuseaction=blog.view&amp;friendID=279470469&amp;blogID=462356341" />
+		<activity:verb>http://activitystrea.ms/schema/1.0/post/</activity:verb>
+		<activity:object>
+			<title>Social Networking in Higher Education</title>
+			<link rel="alternate" type="text/html" href="http://blog.myspace.com/index.cfm?fuseaction=blog.view&amp;friendID=279470469&amp;blogID=462356341" />
+		</activity:object>
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/blog.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=279470469">Nick</a> posted a new blog entry: <a href="http://blog.myspace.com/index.cfm?fuseaction=blog.view&amp;friendID=279470469&amp;blogID=462356341">Social Networking in Higher Education</a>
+				</h3>
+			</div>
+		</content>
+	</entry>
+	<entry>
+		<id>myspace.com:user:25933949:ProfileSongAdd:1421874:26192850</id>
+		<title type="text">Jason added a new profile song: She Took us to the Places by Current 93.</title>
+		<published>2009-01-08T07:05:08Z</published>
+		<updated>2009-01-08T07:05:08Z</updated>
+		<author>
+			<name>Jason</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=25933949</uri>
+		</author>
+		<link rel="related" type="text/html" href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=37110957" />
+		<link rel="alternate" type="text/html" href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=26192850&amp;artid=1421874&amp;albid=7469262" />
+		<category term="ProfileSongAdd" label="ProfileSongAdd" scheme="http://activities.myspace.com/1.0/" />
+		<category term="Post" label="Post" scheme="http://activitystrea.ms/schema/1.0/#verb" />
+		<category term="ProfileSong" label="ProfileSong" scheme="http://activitystrea.ms/schema/1.0/#object-type" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=25933949">Jason</a> added a new profile song: She Took us to the Places by <a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=37110957">Current 93</a>.
+				</h3>
+				<ul>
+					<li>
+						<a href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=26192850&amp;artid=1421874&amp;albid=7469262">
+							<img src="http://c3.ac-images.myspacecdn.com/images02/35/s_37f79ca701424a71880e34c85a89491a.jpg" alt="She Took us to the Places"/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/share/</activity:verb>
+		<activity:verb>tag:myspace.com,2009:activity,post-to-profile</activity:verb>
+		<activity:object>
+			<title>She Took us to the Places</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/song/</activity:object-type>
+			<link rel="preview" type="image/jpeg" href="http://c3.ac-images.myspacecdn.com/images02/35/s_37f79ca701424a71880e34c85a89491a.jpg" />
+		<link rel="alternate" type="text/html" href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=26192850&amp;artid=1421874&amp;albid=7469262" />
+			<author>
+				<name>Current 93</name>
+				<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=37110957</uri>
+			</author>
+		</activity:object>
+	</entry>
+	<entry>
+		<id>myspace.com:user:31517887:PhotoAdd:2475018:53711060</id>
+		<title type="text">Robbie Coleman added a new photo to the My Mobile Photos album.</title>
+		<published>2009-01-08T01:27:57Z</published>
+		<updated>2009-01-08T01:27:57Z</updated>
+		<author>
+			<name>Robbie Coleman</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=31517887</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewImage&amp;friendID=31517887&amp;albumID=2475018&amp;imageID=53711060" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/photo.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=31517887">Robbie Coleman</a> added a new photo to the <a href="http://viewmorepics.myspace.com/index.cfm?fuseaction=user.viewPicture&amp;friendID=31517887&amp;albumId=2475018">My Mobile Photos</a> album.
+				</h3>
+				<ul>
+					<li>
+						<a href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewImage&amp;friendID=31517887&amp;albumID=2475018&amp;imageID=53711060">
+							<img src="http://c2.ac-images.myspacecdn.com/images02/53/s_7e2dfa3bb70d477ea6a492d46fd4366d.jpg" alt="Robbie Coleman added a new photo to the My Mobile Photos album."/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/post/</activity:verb>
+		<activity:object>
+			<title></title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo/</activity:object-type>
+			<link rel="preview" type="image/jpeg" href="http://c2.ac-images.myspacecdn.com/images02/53/s_7e2dfa3bb70d477ea6a492d46fd4366d.jpg" />
+			<link rel="alternate" type="text/html" href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewImage&amp;friendID=31517887&amp;albumID=2475018&amp;imageID=53711060" />
+			<source>
+				<title>My Mobile Photos</title>
+				<link rel="alternate" type="text/html" href="http://viewmorepics.myspace.com/index.cfm?fuseaction=user.viewPicture&amp;friendID=31517887&amp;albumId=2475018" />
+			</source>
+		</activity:object>
+	</entry>
+	<entry>
+		<id>myspace.com:user:34375265:PhotoAdd:2541366:52531607</id>
+		<title type="text">Rob Vogel added a new photo to the Humans 2009 album.</title>
+		<published>2009-01-08T00:22:32Z</published>
+		<updated>2009-01-08T00:22:32Z</updated>
+		<author>
+			<name>Rob Vogel</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=34375265</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewImage&amp;friendID=34375265&amp;albumID=2541366&amp;imageID=52531607" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/photo.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=34375265">Rob Vogel</a> added a new photo to the <a href="http://viewmorepics.myspace.com/index.cfm?fuseaction=user.viewPicture&amp;friendID=34375265&amp;albumId=2541366">Humans 2009</a> album.
+				</h3>
+				<ul>
+					<li>
+						<a href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewImage&amp;friendID=34375265&amp;albumID=2541366&amp;imageID=52531607">
+							<img src="http://c2.ac-images.myspacecdn.com/images02/35/s_fad1c8fb9f964d8e9b0dc44db49e3805.jpg" alt="Rob Vogel added a new photo to the Humans 2009 album."/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/post/</activity:verb>
+		<activity:object>
+			<title></title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo/</activity:object-type>
+			<link rel="preview" type="image/jpeg" href="http://c2.ac-images.myspacecdn.com/images02/35/s_fad1c8fb9f964d8e9b0dc44db49e3805.jpg" />
+			<link rel="alternate" type="text/html" href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewImage&amp;friendID=34375265&amp;albumID=2541366&amp;imageID=52531607" />
+			<source>
+				<title>Humans 2009</title>
+				<link rel="alternate" type="text/html" href="http://viewmorepics.myspace.com/index.cfm?fuseaction=user.viewPicture&amp;friendID=34375265&amp;albumId=2541366" />
+			</source>
+		</activity:object>
+	</entry>
+
+	<entry>
+		<id>myspace.com:user:1231462:FavoriteVideoAdd:1231462:45971410</id>
+		<title type="text">Mr. Dog added the video Bears Play Ice Hockey to favorites.</title>
+		<published>2009-01-07T15:51:03Z</published>
+		<updated>2009-01-07T15:51:03Z</updated>
+		<author>
+			<name>Mr. Dog</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=1231462</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=45971410" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/video.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=1231462">Mr. Dog</a> added the video <a href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=45971410">Bears Play Ice Hockey</a> to <a href="http://vids.myspace.com/index.cfm?fuseaction=vids.viewFavorites&amp;channelid=1231462">favorites</a>.
+				</h3>
+				<ul>
+					<li>
+						<a href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=45971410">
+							<img src="http://d2.ac-videos.myspacecdn.com/videos02/27/thumb1_92489a27c46cb1876f6942068c181121.jpg" alt="Mr. Dog added the video Bears Play Ice Hockey to favorites."/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/favorite/</activity:verb>
+		<activity:object>
+			<title>Bears Play Ice Hockey</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/video/</activity:object-type>
+			<link rel="preview" type="image/jpeg" href="http://d2.ac-videos.myspacecdn.com/videos02/27/thumb1_92489a27c46cb1876f6942068c181121.jpg" />
+			<link rel="alternate" type="text/html" href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=45971410" />
+			<source>
+				<title>Mr. Dog's Favorite Videos</title>
+				<link rel="alternate" type="text/html" href="http://vids.myspace.com/index.cfm?fuseaction=vids.viewFavorites&amp;channelid=1231462" />
+			</source>
+		</activity:object>
+	</entry>
+	<entry>
+		<id>myspace.com:user:56313378:SongUpload:13139132:37023582</id>
+		<title type="text">theMDR -  live 012309 METRO uploaded a new track: foreign tongue</title>
+		<published>2009-01-07T14:59:44Z</published>
+		<updated>2009-01-07T14:59:44Z</updated>
+		<author>
+			<name>theMDR -  live 012309 METRO</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=56313378</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=37023582&amp;artid=13139132&amp;albid=" />
+		<category term="SongUpload" label="SongUpload" scheme="http://activities.myspace.com/1.0/" />
+		<category term="Upload" label="Upload" scheme="http://activitystrea.ms/schema/1.0/#verb" />
+		<category term="Song" label="Song" scheme="http://activitystrea.ms/schema/1.0/#object-type" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=56313378">theMDR -  live 012309 METRO</a> uploaded a new track: <a href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=37023582&amp;artid=13139132&amp;albid=">foreign tongue</a>
+				</h3>
+				<ul>
+					<li>
+						<a href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=37023582&amp;artid=13139132&amp;albid=">
+							<img src="http://c2.ac-images.myspacecdn.com/images01/86/s_a8bf34620065aa800d96891b66f5a7e1.gif" alt="foreign tongue"/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/post/</activity:verb>
+		<activity:object>
+			<title>foreign tongue</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/song/</activity:object-type>
+			<link rel="preview" type="image/gif" href="http://c2.ac-images.myspacecdn.com/images01/86/s_a8bf34620065aa800d96891b66f5a7e1.gif" />
+			<link rel="alternate" type="text/html" href="http://music.myspace.com/index.cfm?fuseaction=music.popupplayer&amp;songid=37023582&amp;artid=13139132&amp;albid=" />
+		</activity:object>
+	</entry>
+
+	<entry>
+		<id>myspace.com:user:1286603:PhotoTagged:1286603:13192509</id>
+		<title type="text">Micah was tagged in this photo.</title>
+		<published>2009-01-07T04:47:48Z</published>
+		<updated>2009-01-07T04:47:48Z</updated>
+		<author>
+			<name>Micah</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=1286603</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewTaggedPhoto&amp;friendID=1286603&amp;imageUserID=327223850&amp;imageID=13192509" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/phototag.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=1286603">Micah</a> was tagged in this photo.
+				</h3>
+				<ul>
+					<li>
+						<a href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewTaggedPhoto&amp;friendID=1286603&amp;imageUserID=327223850&amp;imageID=13192509">
+							<img src="http://c2.ac-images.myspacecdn.com/images02/19/s_953bc81f8874487cb9012dbcc46ec361.jpg" alt="Micah was tagged in this photo."/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/tagged-in/</activity:verb>
+		<activity:object>
+			<title></title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/photo/</activity:object-type>
+			<link rel="preview" type="image/jpeg" href="http://c2.ac-images.myspacecdn.com/images02/19/s_953bc81f8874487cb9012dbcc46ec361.jpg" />
+			<link rel="alternate" type="text/html" href="http://viewmorepics.myspace.com/index.cfm?fuseaction=viewPicture&amp;friendID=327223850&amp;imageID=13192509" />
+		</activity:object>
+	</entry>
+
+	<entry>
+		<id>myspace.com:user:258300759:ForumPosted:258300759:4338043</id>
+		<title type="text">Padmatt1 posted a new forum topic: Release</title>
+		<published>2009-01-06T17:20:51Z</published>
+		<updated>2009-01-06T17:20:51Z</updated>
+		<author>
+			<name>Padmatt1</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=258300759</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://forums.myspace.com/t/258300759.aspx?fuseaction=forums.viewthread" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/forum.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=258300759">Padmatt1</a> posted a new forum topic: <a href="http://forums.myspace.com/t/258300759.aspx?fuseaction=forums.viewthread">Losing Weight</a>
+				</h3>
+				<ul>
+					<li>This is a post to see what people think about Diets in 2009. Is anyone still </li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/post/</activity:verb>
+		<activity:object>
+			<title>Losing Weight</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/forum-topic/</activity:object-type>
+			<link rel="alternate" type="text/html" href="http://forums.myspace.com/t/258300759.aspx?fuseaction=forums.viewthread" />
+			<summary>This is a post to see what people think about Diets in 2009. Is anyone still </summary>
+		</activity:object>
+	</entry>
+
+	<entry>
+		<id>myspace.com:user:258300759:ProfileVideoUpdate:258300759:47968125</id>
+		<title type="text">The video Portable Sewing Machine Lets Sweatshop Employees Work On The Go was added to Padmatt1's profile.</title>
+		<published>2009-01-06T17:19:32Z</published>
+		<updated>2009-01-06T17:19:32Z</updated>
+		<author>
+			<name>Padmatt1</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=258300759</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=47968125" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/video.gif" />
+		<category term="ProfileVideoUpdate" label="ProfileVideoUpdate" scheme="http://activities.myspace.com/1.0/" />
+		<category term="AddToProfile" label="AddToProfile" scheme="http://activitystrea.ms/schema/1.0/#verb" />
+		<category term="Video" label="Video" scheme="http://activitystrea.ms/schema/1.0/#object-type" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					The video <a href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=47968125">Portable Sewing Machine Lets Sweatshop Employees Work On The Go</a> was added to <a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=258300759">Padmatt1</a>'s profile.
+				</h3>
+				<ul>
+					<li>
+						<a href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=47968125">
+							<img src="http://d3.ac-videos.myspacecdn.com/videos02/18/thumb1_f85df82a5ddb4961a978bb6255469c4a.jpg" alt="The video Portable Sewing Machine Lets Sweatshop Employees Work On The Go was added to Padmatt1's profile."/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/share/</activity:verb>
+		<activity:verb>tag:myspace.com,2009:activity,post-to-profile</activity:verb>
+		<activity:object>
+			<title>Portable Sewing Machine Lets Sweatshop Employees Work On The Go</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/song/</activity:object-type>
+			<link rel="preview" type="image/jpeg" href="http://d3.ac-videos.myspacecdn.com/videos02/18/thumb1_f85df82a5ddb4961a978bb6255469c4a.jpg" />
+			<link rel="alternate" type="text/html" href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=47968125" />
+		</activity:object>
+	</entry>
+
+	<entry>
+		<id>myspace.com:user:258300759:FriendAdd:258300759:443174994</id>
+		<title type="text">Padmatt1 is now friends with as</title>
+		<published>2009-01-05T09:50:48Z</published>
+		<updated>2009-01-05T09:50:48Z</updated>
+		<author>
+			<name>Padmatt1</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=258300759</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://friends.myspace.com/index.cfm?fuseaction=user.viewfriends&amp;friendID=258300759&amp;view=New" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/friendRequest.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=258300759">Padmatt1</a> is now friends with <a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=443174994">as</a>
+				</h3>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/make-contact/</activity:verb>
+		<activity:verb>tag:myspace.com,2009:activity,make-friend</activity:verb>
+		<activity:object>
+			<title>as</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/person/</activity:object-type>
+			<link rel="alternate" type="text/html" href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=443174994" />
+		</activity:object>
+	</entry>
+	<entry>
+		<id>myspace.com:user:279470469:ABIFriendAdd:279470469:109231460</id>
+		<title type="text">Nick is now friends with André-Philippe thanks to the Friend Finder Tool</title>
+		<published>2009-01-05T03:49:49Z</published>
+		<updated>2009-01-05T03:49:49Z</updated>
+		<author>
+			<name>Nick</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=279470469</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://friends.myspace.com/index.cfm?fuseaction=user.viewfriends&amp;friendID=279470469&amp;view=New" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/friendrequest.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=279470469">Nick</a> is now friends with <a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=109231460">André-Philippe</a> thanks to the <a href="http://invites.myspace.com/index.cfm?fuseaction=invite.abinvite&amp;carrier=">Friend Finder Tool</a>
+				</h3>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/make-contact/</activity:verb>
+		<activity:verb>tag:myspace.com,2009:activity,make-friend</activity:verb>
+		<activity:verb>tag:myspace.com,2009:activity,make-friend-with-friend-finder</activity:verb>
+		<activity:object>
+			<title>André-Philippe</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/person/</activity:object-type>
+			<link rel="alternate" type="text/html" href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=109231460" />
+		</activity:object>
+	</entry>
+
+	<entry>
+		<id>myspace.com:user:81472123:VideoAdd:81472123:48134426</id>
+		<title type="text">Brandon Black uploaded a new video.</title>
+		<published>2008-12-11T23:12:45Z</published>
+		<updated>2008-12-11T23:12:45Z</updated>
+		<author>
+			<name>Brandon Black</name>
+			<uri>http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=81472123</uri>
+		</author>
+		<link rel="alternate" type="text/html" href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=48134426" />
+		<link rel="icon" type="image/gif" href="http://x.myspacecdn.com/modules/common/static/img/video.gif" />
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<h3>
+					<a href="http://profile.myspace.com/index.cfm?fuseaction=user.viewprofile&amp;friendid=81472123">Brandon Black</a> uploaded a new video.
+				</h3>
+				<ul>
+					<li>
+						<a href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=48134426">
+							<img src="http://cache01-videos02.myspacecdn.com/31/thumb1_da0ea53f3bb346ff9019a6ee12c585aa.jpg" alt="Brandon Black uploaded a new video."/>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</content>
+		<activity:verb>http://activitystrea.ms/schema/1.0/post/</activity:verb>
+		<activity:object>
+			<title>LittleDog</title>
+			<activity:object-type>http://activitystrea.ms/schema/1.0/video/</activity:object-type>
+			<link rel="alternate" type="text/html" href="http://vids.myspace.com/index.cfm?fuseaction=vids.individual&amp;videoid=48134426" />
+			<link rel="preview" type="image/jpeg" href="http://cache01-videos02.myspacecdn.com/31/thumb1_da0ea53f3bb346ff9019a6ee12c585aa.jpg" />
+			<source>
+				<link rel="alternate" type="text/html" href="http://vids.myspace.com/index.cfm?fuseaction=vids.showvids&amp;friendID=81472123" />
+			</source>
+		</activity:object>
+	</entry>
+</feed>
+
