@@ -151,8 +151,8 @@
             gives an introduction to or a summary of the full content; if the
             entry does not have a summary, this element should be omitted.</t>
 
-            <t hangText="body">The main body content of the entry. Included as
-            the content of the atom:content element</t>
+            <t hangText="content">The main body content of the entry. Included
+            as the content of the atom:content element</t>
 
             <t hangText="permalink">The canonical URL for the entry.
             Represented as the value of the <spanx style="verb">href</spanx>
