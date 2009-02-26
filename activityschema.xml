@@ -108,12 +108,31 @@
     </section>
 
     <section title="Base Verbs">
-      <section title="Post">
+      <section anchor="post" title="Post">
         <t>The "post" verb is described in section 8 of the AtomActivity
         specification. It is only referenced here for completeness.</t>
       </section>
 
-      <section title="Mark as Favorite">
+      <section anchor="share" title="Share">
+        <t>The "share" verb indicates that the actor has called out the object
+        to readers. In most cases, the object being shared was not created by
+        the actor, but the actor is drawing attention to it.</t>
+
+        <t>The verb URI for the "Share" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/share/</spanx>.</t>
+      </section>
+
+      <section anchor="save" title="Save">
+        <t>The "share" verb indicates that the actor has called out the object
+        as being of interest primarily to him. While this action may be shared
+        publically, the implication is that the object has been saved
+        primarily for the actor's benefit rather than to show it to others as
+        indicated by the share relationship (<xref
+        target="share"></xref>).</t>
+
+        <t>The verb URI for the "Save" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save/</spanx>.</t>
+      </section>
+
+      <section anchor="favorite" title="Mark as Favorite">
         <t>The "Mark as Favorite" verb indicates that the actor marked the
         object as an item of special interest. Often objects so marked appear
         in a collection of such objects which may be published as a feed of
@@ -122,8 +141,87 @@
         <t>The verb URI for the "Mark as Favorite" verb is <spanx
         style="verb">http://activitystrea.ms/schema/1.0/favorite/</spanx>.</t>
 
-        <t>This verb has no additional properties beyond the basic activity
-        properties described in the AtomActivity specification.</t>
+        <t>If a particular service uses favorites as a mechanism by which a
+        user can recall items that were earlier marked, it may be appropriate
+        to also mark activities of this type with the "save" verb as described
+        in <xref target="save"></xref>.</t>
+      </section>
+
+      <section anchor="view" title="View">
+        <t>The "view" verb indicates that the actor viewed the object in some
+        way. This might include reading an article, watching a video or
+        listening to a song. Although "view" connotes a visual experience,
+        this verb can equally be used to describe other consumer experiences
+        as appropriate for the type of object used.</t>
+
+        <t>The verb URI for the "View" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/view/</spanx>.</t>
+      </section>
+
+      <section anchor="follow" title="Begin Following">
+        <t>The "begin following" verb indicates that the actor began following
+        the activity of the object. In most cases, the object of this verb
+        will be a person, but it can potentially be of any type that can
+        sensibly generate activity.</t>
+
+        <t>The verb URI for the "Follow" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/follow/</spanx>.</t>
+      </section>
+
+      <section anchor="make-contact" title="Add as a Contact">
+        <t>The "add as a contact" verb indicates that the actor has added the
+        object as a contact, friend or other similar social relationship. This
+        specification only defines the meaning of this verb when its object is
+        a person, though implementors should be prepared to handle other
+        object types as meaning may be provided by extension
+        specifications.</t>
+
+        <t>The verb URI for the "Add as a Contact" verb is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/make-contact/</spanx>.</t>
+      </section>
+
+      <section anchor="make-connection" title="Create a Connection">
+        <t>The "create a connection" verb indicates the creation of a contact
+        relationship as described in <xref target="make-contact"></xref> that
+        is reciprocated by the object.</t>
+
+        <t>Since this verb implies an activity on the part of its object,
+        processors must only use this verb if they are able to verify through
+        some external means that there is in fact a reciprocated connection.
+        For example, a processor may have recieved a guarantee from a
+        particular publisher that it will only use this verb in cases where a
+        reciprocal relationship exists.</t>
+
+        <t>Publishers SHOULD also include the Add as a Contact verb in all
+        activities carrying this verb, as a fallback for processors that are
+        unable to trust the Create a Connection verb for a given feed.</t>
+
+        <t>The verb URI for the "Create a Connection" verb is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/make-connection/</spanx>.</t>
+      </section>
+
+      <section anchor="join" title="Join">
+        <t>The "join" verb indicates that the actor has become a member of the
+        object. This specification only defines the meaning of this verb when
+        its object is a group, though implementors should be prepared to
+        handle other object types as meaning may be provided by extension
+        specifications.</t>
+
+        <t>The verb URI for the "Join" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join/</spanx>.</t>
+      </section>
+
+      <section anchor="leave" title="Leave">
+        <t>The "leave" verb indicates that the actor is no longer a member of
+        the object, and that this is a result of an explicit action by the
+        actor. This specification only defines the meaning of this verb when
+        its object is a group, though implementors should be prepared to
+        handle other object types as meaning may be provided by extension
+        specifications.</t>
+
+        <t>Note that the use of this verb is not appropriate when a user has
+        been ejected from the group by its administrators or any other
+        situation where the actor did not explicitly choose to leave the
+        group.</t>
+
+        <t>The verb URI for the "leave" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/leave/</spanx>.</t>
       </section>
     </section>
 
