@@ -1,28 +1,34 @@
 
 all: atomactivity.html atomactivity.txt activityschema.html activityschema.txt serviceprovidermeta.html serviceprovidermeta.txt commentmeta.html commentmeta.txt
 
-atomactivity.html: atomactivity.xml
-	xml2rfc atomactivity.xml atomactivity.html
+clean:
+	rm -rf build
 
-atomactivity.txt: atomactivity.xml
-	xml2rfc atomactivity.xml atomactivity.txt
+prepare:
+	mkdir -p build
 
-activityschema.html: activityschema.xml
-	xml2rfc activityschema.xml activityschema.html
+atomactivity.html: prepare atomactivity.xml
+	xml2rfc atomactivity.xml build/atomactivity.html
 
-activityschema.txt: activityschema.xml
-	xml2rfc activityschema.xml activityschema.txt
+atomactivity.txt: prepare atomactivity.xml
+	xml2rfc atomactivity.xml build/atomactivity.txt
 
-serviceprovidermeta.html: serviceprovidermeta.xml
-	xml2rfc serviceprovidermeta.xml serviceprovidermeta.html
+activityschema.html: prepare activityschema.xml
+	xml2rfc activityschema.xml build/activityschema.html
 
-serviceprovidermeta.txt: serviceprovidermeta.xml
-	xml2rfc serviceprovidermeta.xml serviceprovidermeta.txt
+activityschema.txt: prepare activityschema.xml
+	xml2rfc activityschema.xml build/activityschema.txt
 
-commentmeta.html: commentmeta.xml
-	xml2rfc commentmeta.xml commentmeta.html
+serviceprovidermeta.html: prepare serviceprovidermeta.xml
+	xml2rfc serviceprovidermeta.xml build/serviceprovidermeta.html
 
-commentmeta.txt: commentmeta.xml
-	xml2rfc commentmeta.xml commentmeta.txt
+serviceprovidermeta.txt: prepare serviceprovidermeta.xml
+	xml2rfc serviceprovidermeta.xml build/serviceprovidermeta.txt
+
+commentmeta.html: prepare commentmeta.xml
+	xml2rfc commentmeta.xml build/commentmeta.html
+
+commentmeta.txt: prepare commentmeta.xml
+	xml2rfc commentmeta.xml build/commentmeta.txt
 
 
