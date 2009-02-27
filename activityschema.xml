@@ -168,6 +168,38 @@
 
         <t>The verb URI for the "start following" Verb is <spanx
         style="verb">http://activitystrea.ms/schema/1.0/follow/</spanx>.</t>
+
+        <t>Publishers SHOULD NOT publish multiple "start following" activities
+        with identical Subjects and Objects unless (A) the Publisher published
+        an intervening corresponding "stop following" activity (<xref
+        target="unfollow"></xref>); (B), the Verb's attributes differ to
+        indicate a different "degree" of following; or (C), the Object's
+        attributes differ to indicate a different "aspect" of following.</t>
+
+        <t>Processors MAY ignore (silently drop) successive identical
+        "start following" activities regardless of whether they maintain state
+        sufficient to determine (A), (B), or (C) above.</t>
+      </section>
+      
+      <section anchor="unfollow" title="Stop Following">
+        <t>The "stop following" Verb indicates that the Subject ceased
+        following the activity of the Object. In most cases, the Object of
+        this Verb will be a person, but it can potentially be of any type that
+        can sensibly generate activity.</t>
+
+        <t>The verb URI for the "stop following" Verb is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/unfollow/</spanx>.</t>
+				
+        <t>Publishers SHOULD NOT publish multiple "stop following" activities
+        with identical Subjects and Objects unless (A) the Publisher published
+        an intervening corresponding "start following" activity (<xref
+        target="follow"></xref>); (B), the Verb's attributes differ to
+        indicate a different "degree" of following; or (C), the Object's
+        attributes differ to indicate a different "aspect" of following.</t>
+				
+        <t>Processors MAY ignore (silently drop) successive identical
+        "stop following" activities regardless of whether they maintain state
+        sufficient to determine (A), (B), or (C) above.</t>
       </section>
 
       <section anchor="make-contact" title="Add as a Contact">
@@ -185,6 +217,16 @@
         Subject has expressed interest in forming a connection, but that the
         connection cannot be formed until the Object reciprocates.  See
         <xref target="make-connection"></xref>.</t>
+        
+        <t>Publishers SHOULD NOT publish multiple "make contact" activities
+        with identical Subjects and Objects unless (A) the Publisher published
+        an intervening corresponding "break contact" activity (<xref
+        target="break-contact"><xref>); or (B), the Verb's attributes differ
+        to indicate a different "degree" or "style" of contact.</t>
+				
+        <t>Processors MAY ignore (silently drop) successive identical
+        "make contact" activities regardless of whether they maintain state
+        sufficient to determine (A) or (B) above.</t>
       </section>
 
       <section anchor="confirm-contact" title="Confirm a Connection">
@@ -206,6 +248,28 @@
 
         <t>The verb URI for the "confirm a connection" Verb is <spanx
         style="verb">http://activitystrea.ms/schema/1.0/confirm-connection/</spanx>.</t>
+      </section>
+      
+      <section anchor="break-contact" title="Remove as a Contact">
+        <t>The "break contact" Verb indicates that the Subject has
+        removed the Object as a contact, friend, or other similar social
+        relation. This specification only defines the meaning of this Verb
+        when its Object is a person, though implementors SHOULD be prepared to
+        accept other Object types as meaning MAY be provided by extension
+        specifications.</t>
+				
+        <t>Publishers SHOULD NOT publish multiple "break contact" activities
+        with identical Subjects and Objects unless (A) the Publisher published
+        an intervening corresponding "make contact" activity (<xref
+        target="make-contact"><xref>); or (B), the Verb's attributes differ
+        to indicate a different "degree" or "style" of contact.</t>
+				
+        <t>Processors MAY ignore (silently drop) successive identical
+        "break contact" activities regardless of whether they maintain state
+        sufficient to determine (A) or (B) above.</t>
+
+        <t>The verb URI for the "remove as a contact" Verb is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/break-contact/</spanx>.</t>
       </section>
 
       <section anchor="join" title="Join">
