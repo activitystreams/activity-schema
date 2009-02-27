@@ -77,7 +77,7 @@
         <c>Atom Media Extensions</c>
       </texttable>
 
-      <t>Note that the choices of namespace prefix are arbitrary and not
+      <t>The choices of namespace prefix are arbitrary and not
       semantically significant.</t>
 
       <t>This specification uses a shorthand form of terms from the XML
@@ -216,7 +216,7 @@
         handle other object types as meaning may be provided by extension
         specifications.</t>
 
-        <t>Note that the use of this verb is not appropriate when a user has
+        <t>The use of this verb is not appropriate when a user has
         been ejected from the group by its administrators or any other
         situation where the actor did not explicitly choose to leave the
         group.</t>
