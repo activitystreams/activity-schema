@@ -964,6 +964,33 @@
 
         <t>The object type URL for the "event" object type is <spanx
         style="verb">http://activitystrea.ms/schema/1.0/event/</spanx>.</t>
+
+        <t>An event has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="name">The name of the event as provided by its
+            organiser. Included as the content of the atom:title element.</t>
+
+            <t hangText="start date and time">The date and time that the event
+            begins. Included via a cal:dtstart element as defined in xCal.</t>
+
+            <t hangText="end date and time">The date and time that the event
+            ends. Included via a cal:dtend element as defined in xCal.</t>
+
+            <t hangText="summary">A short description of the event as provided
+            by its organiser. Included as the content of the atom:summary
+            element.</t>
+          </list></t>
+
+        <t>TODO: Include a real reference to xCal, or some other similar spec.
+        xCal is currently only an IETF Internet-Draft.</t>
+
+        <t>TODO: Find a way to represent location that allows locations to be
+        specified as full addresses, geo coordinates, natural-language strings
+        (e.g. "Julie's House") and full-blown "venue" objects when such a
+        thing exists.</t>
+
+        <t>TODO: Find a way to represent the host of an event?</t>
       </section>
     </section>
 
