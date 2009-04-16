@@ -75,10 +75,16 @@
         <c><spanx style="verb">http://purl.org/syndication/atommedia</spanx></c>
 
         <c>Atom Media Extensions</c>
+
+        <c><spanx style="verb">cal:</spanx></c>
+
+        <c><spanx style="verb">urn:ietf:params:xml:ns:xcal</spanx></c>
+
+        <c>xCal</c>
       </texttable>
 
-      <t>The choices of namespace prefix are arbitrary and not
-      semantically significant.</t>
+      <t>The choices of namespace prefix are arbitrary and not semantically
+      significant.</t>
 
       <t>This specification uses a shorthand form of terms from the XML
       Infoset [W3C.REC-xml-infoset-20040204]. The phrase "Information Item" is
@@ -116,10 +122,9 @@
       <section anchor="share" title="Share">
         <t>The "share" Verb indicates that the Subject has called out the
         Object to readers. In most cases, the actor did not create the Object
-        being	shared, but is instead drawing attention to it.</t>
+        being shared, but is instead drawing attention to it.</t>
 
-        <t>The verb URI for the "share" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/share/</spanx>.</t>
+        <t>The verb URI for the "share" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/share/</spanx>.</t>
       </section>
 
       <section anchor="save" title="Save">
@@ -130,8 +135,7 @@
         it to others as would be indicated by the "share" Verb (<xref
         target="share"></xref>).</t>
 
-        <t>The verb URI for the "save" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/save/</spanx>.</t>
+        <t>The verb URI for the "save" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save/</spanx>.</t>
       </section>
 
       <section anchor="favorite" title="Mark as Favorite">
@@ -156,8 +160,7 @@
         this Verb can equally be used to describe other consumer experiences
         as appropriate for the type of Object used.</t>
 
-        <t>The verb URI for the "view" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/view/</spanx>.</t>
+        <t>The verb URI for the "view" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/view/</spanx>.</t>
       </section>
 
       <section anchor="follow" title="Start Following">
@@ -166,8 +169,7 @@
         this Verb will be a person, but it can potentially be of any type that
         can sensibly generate activity.</t>
 
-        <t>The verb URI for the "start following" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/follow/</spanx>.</t>
+        <t>The verb URI for the "start following" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/follow/</spanx>.</t>
 
         <t>Publishers SHOULD NOT publish multiple "start following" activities
         with identical Subjects and Objects unless (A) the Publisher published
@@ -176,29 +178,28 @@
         indicate a different "degree" of following; or (C), the Object's
         attributes differ to indicate a different "aspect" of following.</t>
 
-        <t>Processors MAY ignore (silently drop) successive identical
-        "start following" activities regardless of whether they maintain state
+        <t>Processors MAY ignore (silently drop) successive identical "start
+        following" activities regardless of whether they maintain state
         sufficient to determine (A), (B), or (C) above.</t>
       </section>
-      
+
       <section anchor="unfollow" title="Stop Following">
         <t>The "stop following" Verb indicates that the Subject ceased
         following the activity of the Object. In most cases, the Object of
         this Verb will be a person, but it can potentially be of any type that
         can sensibly generate activity.</t>
 
-        <t>The verb URI for the "stop following" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/unfollow/</spanx>.</t>
-				
+        <t>The verb URI for the "stop following" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/unfollow/</spanx>.</t>
+
         <t>Publishers SHOULD NOT publish multiple "stop following" activities
         with identical Subjects and Objects unless (A) the Publisher published
         an intervening corresponding "start following" activity (<xref
         target="follow"></xref>); (B), the Verb's attributes differ to
         indicate a different "degree" of following; or (C), the Object's
         attributes differ to indicate a different "aspect" of following.</t>
-				
-        <t>Processors MAY ignore (silently drop) successive identical
-        "stop following" activities regardless of whether they maintain state
+
+        <t>Processors MAY ignore (silently drop) successive identical "stop
+        following" activities regardless of whether they maintain state
         sufficient to determine (A), (B), or (C) above.</t>
       </section>
 
@@ -215,21 +216,21 @@
 
         <t>Publishers MAY use the "add as a contact" Verb to express that the
         Subject has expressed interest in forming a connection, but that the
-        connection cannot be formed until the Object reciprocates.  See
-        <xref target="make-connection"></xref>.</t>
-        
+        connection cannot be formed until the Object reciprocates. See <xref
+        target="confirm-connection"></xref>.</t>
+
         <t>Publishers SHOULD NOT publish multiple "make contact" activities
         with identical Subjects and Objects unless (A) the Publisher published
         an intervening corresponding "break contact" activity (<xref
-        target="break-contact"><xref>); or (B), the Verb's attributes differ
+        target="break-contact"></xref>); or (B), the Verb's attributes differ
         to indicate a different "degree" or "style" of contact.</t>
-				
-        <t>Processors MAY ignore (silently drop) successive identical
-        "make contact" activities regardless of whether they maintain state
+
+        <t>Processors MAY ignore (silently drop) successive identical "make
+        contact" activities regardless of whether they maintain state
         sufficient to determine (A) or (B) above.</t>
       </section>
 
-      <section anchor="confirm-contact" title="Confirm a Connection">
+      <section anchor="confirm-connection" title="Confirm a Connection">
         <t>The "confirm a connection" Verb indicates the creation of a contact
         relationship as described in <xref target="make-contact"></xref> that
         is reciprocated by the Object.</t>
@@ -249,23 +250,23 @@
         <t>The verb URI for the "confirm a connection" Verb is <spanx
         style="verb">http://activitystrea.ms/schema/1.0/confirm-connection/</spanx>.</t>
       </section>
-      
+
       <section anchor="break-contact" title="Remove as a Contact">
-        <t>The "break contact" Verb indicates that the Subject has
-        removed the Object as a contact, friend, or other similar social
-        relation. This specification only defines the meaning of this Verb
-        when its Object is a person, though implementors SHOULD be prepared to
-        accept other Object types as meaning MAY be provided by extension
+        <t>The "break contact" Verb indicates that the Subject has removed the
+        Object as a contact, friend, or other similar social relation. This
+        specification only defines the meaning of this Verb when its Object is
+        a person, though implementors SHOULD be prepared to accept other
+        Object types as meaning MAY be provided by extension
         specifications.</t>
-				
+
         <t>Publishers SHOULD NOT publish multiple "break contact" activities
         with identical Subjects and Objects unless (A) the Publisher published
         an intervening corresponding "make contact" activity (<xref
-        target="make-contact"><xref>); or (B), the Verb's attributes differ
+        target="make-contact"></xref>); or (B), the Verb's attributes differ
         to indicate a different "degree" or "style" of contact.</t>
-				
-        <t>Processors MAY ignore (silently drop) successive identical
-        "break contact" activities regardless of whether they maintain state
+
+        <t>Processors MAY ignore (silently drop) successive identical "break
+        contact" activities regardless of whether they maintain state
         sufficient to determine (A) or (B) above.</t>
 
         <t>The verb URI for the "remove as a contact" Verb is <spanx
@@ -280,14 +281,14 @@
         specifications.</t>
 
         <t>Publishers SHOULD NOT publish multiple "join" activities with
-        identical Subjects and Objects unless (A) the Publisher published
-        and intervening corresponding "leave" activity (<xref
+        identical Subjects and Objects unless (A) the Publisher published and
+        intervening corresponding "leave" activity (<xref
         target="leave"></xref>); or (B) the Verb's attributes differ to
-        indicate a different membership role.</a>
-				
-        <t>Processors MAY ignore (silently drop) successive identical
-        "join" activities regardless of whether they maintain state sufficient
-        to determine (A) or (B) above.</t>
+        indicate a different membership role.</t>
+
+        <t>Processors MAY ignore (silently drop) successive identical "join"
+        activities regardless of whether they maintain state sufficient to
+        determine (A) or (B) above.</t>
 
         <t>The verb URI for the "join" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join/</spanx>.</t>
       </section>
@@ -300,22 +301,79 @@
         handle other Object types as meaning MAY be provided by extension
         specifications.</t>
 
-        <t>The use of this Verb is not appropriate when a user has
-        been ejected from the group by its administrators or any other
-        situation where the actor did not explicitly choose to leave the
-        group.</t>
+        <t>The use of this Verb is not appropriate when a user has been
+        ejected from the group by its administrators or any other situation
+        where the actor did not explicitly choose to leave the group.</t>
 
         <t>Publishers SHOULD NOT publish multiple "leave" activities with
-        identical Subjects and Objects unless (A) the Publisher published
-        and intervening corresponding "join" activity (<xref
+        identical Subjects and Objects unless (A) the Publisher published and
+        intervening corresponding "join" activity (<xref
         target="join"></xref>); or (B) the Verb's attributes differ to
-        indicate a different membership role.</a>
+        indicate a different membership role.</t>
 
-        <t>Processors MAY ignore (silently drop) successive identical
-        "leave" activities regardless of whether they maintain state sufficient
-        to determine (A) or (B) above.</t>
+        <t>Processors MAY ignore (silently drop) successive identical "leave"
+        activities regardless of whether they maintain state sufficient to
+        determine (A) or (B) above.</t>
 
         <t>The verb URI for the "leave" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/leave/</spanx>.</t>
+      </section>
+
+      <section anchor="rsvp-yes" title="Positive RSVP">
+        <t>The "positive RSVP" verb indicates that the actor has made a
+        positive RSVP for the object. This specification only defines the
+        meaning of this verb when its object is an event (see <xref
+        target="event"></xref>), though implementors SHOULD be prepared to
+        handle other object types as meaning MAY be provided by extension
+        specifications.</t>
+
+        <t>The use of this Verb is only appropriate when the RSVP was created
+        by an explicit action by the actor. It is not appropriate to use this
+        verb when a user has been added as an attendee by an event organiser
+        or administrator.</t>
+
+        <t>The verb URI for the "positive RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-yes/</spanx>.</t>
+      </section>
+
+      <section anchor="rsvp-maybe" title="Possible RSVP">
+        <t>The "possible RSVP" verb indicates that the actor has made a
+        possible RSVP for the object. This specification only defines the
+        meaning of this verb when its object is an event (see <xref
+        target="event"></xref>), though implementors SHOULD be prepared to
+        handle other object types as meaning MAY be provided by extension
+        specifications.</t>
+
+        <t>The use of this Verb is only appropriate when the RSVP was created
+        by an explicit action by the actor. It is not appropriate to use this
+        verb when a user has been added as an attendee by an event organiser
+        or administrator.</t>
+
+        <t>The verb URI for the "possible RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-maybe/</spanx>.</t>
+      </section>
+
+      <section anchor="rsvp-no" title="Negative RSVP">
+        <t>The "negative RSVP" verb indicates that the actor has made a
+        negative RSVP for the object. This specification only defines the
+        meaning of this verb when its object is an event (see <xref
+        target="event"></xref>), though implementors SHOULD be prepared to
+        handle other object types as meaning MAY be provided by extension
+        specifications.</t>
+
+        <t>The use of this Verb is only appropriate when the RSVP was created
+        by an explicit action by the actor. It is not appropriate to use this
+        verb when a user has been added as an attendee by an event organiser
+        or administrator.</t>
+
+        <t>The verb URI for the "negative RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-no/</spanx>.</t>
+      </section>
+
+      <section anchor="invite" title="Invite">
+        <t>The "invite" verb indicates that the actor has invited the object
+        to take part in or join the target. This specification only defines
+        the meaning of this verb when its target is either an event (see <xref
+        target="event"></xref>) or a group (see <xref
+        target="group"></xref>).</t>
+
+        <t>The verb URI for the "invite" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/invite/</spanx>.</t>
       </section>
     </section>
 
@@ -337,7 +395,7 @@
         <t><list style="hanging">
             <t hangText="title">The title of the entry. Included as the
             content of the atom:title element. This element MUST be included
-						with empty content if the entry does not have a title.</t>
+            with empty content if the entry does not have a title.</t>
 
             <t hangText="summary">A short excerpt of the body content that
             gives an introduction to or a summary of the full content. This
@@ -608,8 +666,7 @@
       </section>
 
       <section title="Movie">
-        <t>The "movie" Object type represents a cinematic
-        presentation.</t>
+        <t>The "movie" Object type represents a cinematic presentation.</t>
 
         <t>Objects of type Movie might contain information about the Movie, or
         they might contain some representation of the Movie content itself. In
@@ -743,11 +800,11 @@
 
       <section title="Bookmark">
         <t>The "bookmark" Object type represents a pointer to some URL --
-        typically a web page. In most cases, a bookmark is specific to a
-        given user and contains metadata chosen by that user. Bookmark
-        Objects are similar in principle to the concept of bookmarks or
-        favorites in a web browser. A bookmark represents a pointer to the
-        URL, not the URL or the associated resource itself.</t>
+        typically a web page. In most cases, a bookmark is specific to a given
+        user and contains metadata chosen by that user. Bookmark Objects are
+        similar in principle to the concept of bookmarks or favorites in a web
+        browser. A bookmark represents a pointer to the URL, not the URL or
+        the associated resource itself.</t>
 
         <t>When dealing with bookmarks it is important to note the distinction
         between the title, description, and URL of the bookmark itself and the
@@ -755,7 +812,7 @@
         bookmark. In some implementations these MAY be the same, but bookmark
         managers often allow a user to edit the title and description of his
         or her own bookmarks to differ from the metadata on the target
-				itself.</t>
+        itself.</t>
 
         <t>Some implementations refer to this Object type as a "link". This
         specification uses the term "bookmark" to avoid confusion with the
@@ -874,9 +931,9 @@
         person.</t>
       </section>
 
-      <section title="Group">
+      <section anchor="group" title="Group">
         <t>The "group" Object type represents a social networking group. A
-        group is a container which people can join and leave.</t>
+        group is a collection of people which people can join and leave.</t>
 
         <t>The Object type URL for the "group" Object type is <spanx
         style="verb">http://activitystrea.ms/schema/1.0/group/</spanx>.</t>
@@ -899,6 +956,14 @@
             user interface. Publishers MAY include several images of different
             sizes.</t>
           </list></t>
+      </section>
+
+      <section anchor="event" title="Event">
+        <t>The "event" object type represents an event that occurs in a
+        certain place during a particular interval of time.</t>
+
+        <t>The object type URL for the "event" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/event/</spanx>.</t>
       </section>
     </section>
 
