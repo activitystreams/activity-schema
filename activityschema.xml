@@ -81,6 +81,18 @@
         <c><spanx style="verb">urn:ietf:params:xml:ns:xcal</spanx></c>
 
         <c>xCal</c>
+
+        <c><spanx style="verb">pc:</spanx></c>
+
+        <c><spanx style="verb">http://portablecontacts.net/schema/1.0</spanx></c>
+
+        <c>PortableContacts</c>
+
+        <c><spanx style="verb">geo:</spanx></c>
+
+        <c><spanx style="verb">http://www.georss.org/georss</spanx></c>
+
+        <c>GeoRSS</c>
       </texttable>
 
       <t>The choices of namespace prefix are arbitrary and not semantically
@@ -992,6 +1004,24 @@
 
         <t>TODO: Find a way to represent the host of an event?</t>
       </section>
+
+      <section title="Place">
+        <t>The "place" object type represents a location on Earth.</t>
+
+        <t>The object type URL for the "place" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/place/</spanx>.</t>
+
+        <t>A place has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="name">The name of the place. Included as the content
+            of the atom:title element.</t>
+
+            <t hangText="geographic coordinates">The latitude and longitude of
+            the place as a point on Earth. Included via the <spanx
+            style="verb">geo:point</spanx> element.</t>
+          </list></t>
+      </section>
     </section>
 
     <section title="Comments and Responses">
@@ -1008,7 +1038,7 @@
       style="verb">thr:in-reply-to</spanx> element defined by <xref
       target="RFC4685"></xref>. Publishers SHOULD also, if available, include
       metadata about the item being replied to using the mechanisms defined in
-      [CommentMetadataExtension].</t>
+      <xref target="atomcommentmeta-00"></xref>.</t>
 
       <t>The act of posting a comment is represented by the post Verb as with
       "top-level" Objects.</t>
@@ -1085,6 +1115,18 @@
           </author>
 
           <date month="September" year="2006" />
+        </front>
+      </reference>
+
+      <reference anchor="atomcommentmeta-00">
+        <front>
+          <title>Atom Comment Metadata Extensions</title>
+
+          <author fullname="Martin Atkins" initials="M." surname="Atkins">
+            <organization></organization>
+          </author>
+
+          <date />
         </front>
       </reference>
     </references>
