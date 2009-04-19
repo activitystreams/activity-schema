@@ -1179,8 +1179,8 @@
         an optional mood icon image.</t>
 
         <t>Moods are included via a mood element in the namespace <spanx
-        style="verb">http://activitystrea.ms/context/mood/</spanx>. TODO:
-        Write a spec for this?</t>
+        style="verb">http://activitystrea.ms/context/</spanx>. TODO: Write a
+        spec for this?</t>
 
         <t>The content of the mood element is the mood keyword or phrase.</t>
 
