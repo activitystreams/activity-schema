@@ -606,9 +606,7 @@
         <t><list style="hanging">
             <t hangText="title">The title or short caption assigned to the
             album by the author. Included as the content of the atom:title
-            element. If the author has not provided a title, the publisher MAY
-            synthesize a title e.g. from the video filename, or the publisher
-            MAY include the atom:title element with no content.</t>
+            element.</t>
 
             <t hangText="thumbnail">The URL and metadata for a preview image
             for the album. The URL is represented as the value of the href
@@ -621,6 +619,67 @@
 
             <t hangText="album page URL">The URL of a web page where the photo
             album can be viewed. Represented as the value of the href
+            attribute on an atom:link element with a rel value of alternate
+            and a type value of text/html.</t>
+          </list></t>
+      </section>
+
+      <section title="Music Album">
+        <t>The "music album" object type represents a set of musical
+        recordings placed into a compilation, usually to be sold together as a
+        single set.</t>
+
+        <t>The object type URL for the "music album" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/music-album/</spanx>.</t>
+
+        <t>The music album object type has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title or short caption assigned to the
+            album by the author. Included as the content of the atom:title
+            element.</t>
+
+            <t hangText="thumbnail">The URL and metadata for a preview image
+            for the album. The URL is represented as the value of the href
+            attribute on an atom:link element with rel preview and a type of
+            either image/jpeg, image/png or image/gif. Publishers SHOULD
+            include media:width and media:height attributes on the atom:link
+            element describing the dimensions of the linked image. Processors
+            MAY ignore thumbnails that are of an inappropriate size for their
+            user interface.</t>
+
+            <t hangText="album page URL">The URL of a web page where the album
+            can be viewed. Represented as the value of the href attribute on
+            an atom:link element with a rel value of alternate and a type
+            value of text/html.</t>
+          </list></t>
+      </section>
+
+      <section title="Playlist">
+        <t>The "playlist" object type represents an ordered list of time-based
+        media items, such as video and audio objects.</t>
+
+        <t>The object type URL for the "playlist" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/playlist/</spanx>.</t>
+
+        <t>The playlist object type has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title or short caption assigned to the
+            playlist by the author. Included as the content of the atom:title
+            element.</t>
+
+            <t hangText="thumbnail">The URL and metadata for a preview image
+            for the playlist. The URL is represented as the value of the href
+            attribute on an atom:link element with rel preview and a type of
+            either image/jpeg, image/png or image/gif. Publishers SHOULD
+            include media:width and media:height attributes on the atom:link
+            element describing the dimensions of the linked image. Processors
+            MAY ignore thumbnails that are of an inappropriate size for their
+            user interface.</t>
+
+            <t hangText="playlist page URL">The URL of a web page where the
+            playlist can be viewed. Represented as the value of the href
             attribute on an atom:link element with a rel value of alternate
             and a type value of text/html.</t>
           </list></t>
@@ -1119,7 +1178,8 @@
         schema, a mood is a freeform, short mood keyword or phrase along with
         an optional mood icon image.</t>
 
-        <t>Moods are included via a mood element in the namespace TBD. TODO:
+        <t>Moods are included via a mood element in the namespace <spanx
+        style="verb">http://activitystrea.ms/context/mood/</spanx>. TODO:
         Write a spec for this?</t>
 
         <t>The content of the mood element is the mood keyword or phrase.</t>
