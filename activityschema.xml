@@ -1059,6 +1059,46 @@
       and how exactly the entry metadata is represented in a feed.</t>
     </section>
 
+    <section title="Base Activity Context Elements">
+      <t>This specification defines an initial set of activity context
+      elements that can be used with all activity entries. These provide
+      orthogonal context information that can apply to all activities.</t>
+
+      <section title="Location">
+        <t>Location context describes the location where the user was at the
+        time the activity was performed. This may be an accurate geographic
+        coordinate, a street address, a free-form location name or a
+        combination of these.</t>
+
+        <t>Geographic coordinates can be included as a <spanx style="verb">geo:point</spanx>
+        element as a direct child of the activity entry, as described by the
+        GeoRSS specification.</t>
+
+        <t>Addresses can be included using a <spanx style="verb">pc:address</spanx>
+        element. TODO: Write some more about this.</t>
+
+        <t>TODO: Figure out how to include freeform string locations.</t>
+      </section>
+
+      <section title="Mood">
+        <t>Mood describes the mood of the user when the activity was
+        performed. This is usually collected via an extra field in the user
+        interface used to perform the activity. For the purpose of this
+        schema, a mood is a freeform, short mood keyword or phrase along with
+        an optional mood icon image.</t>
+
+        <t>Moods are included via a mood element in the namespace TBD. TODO:
+        Write a spec for this?</t>
+
+        <t>The content of the mood element is the mood keyword or phrase.</t>
+
+        <t>The mood element may have an optional <spanx style="verb">icon</spanx>
+        attribute which contains the URL of a mood icon image. The mood icon
+        image SHOULD be small and appropriate to be displayed alongside the
+        mood keyword at a normal text size.</t>
+      </section>
+    </section>
+
     <section title="Security Considerations">
       <t>[TODO: Write some more here.]</t>
     </section>
