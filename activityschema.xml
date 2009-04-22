@@ -624,37 +624,6 @@
           </list></t>
       </section>
 
-      <section title="Music Album">
-        <t>The "music album" object type represents a set of musical
-        recordings placed into a compilation, usually to be sold together as a
-        single set.</t>
-
-        <t>The object type URL for the "music album" object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/music-album/</spanx>.</t>
-
-        <t>The music album object type has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title or short caption assigned to the
-            album by the author. Included as the content of the atom:title
-            element.</t>
-
-            <t hangText="thumbnail">The URL and metadata for a preview image
-            for the album. The URL is represented as the value of the href
-            attribute on an atom:link element with rel preview and a type of
-            either image/jpeg, image/png or image/gif. Publishers SHOULD
-            include media:width and media:height attributes on the atom:link
-            element describing the dimensions of the linked image. Processors
-            MAY ignore thumbnails that are of an inappropriate size for their
-            user interface.</t>
-
-            <t hangText="album page URL">The URL of a web page where the album
-            can be viewed. Represented as the value of the href attribute on
-            an atom:link element with a rel value of alternate and a type
-            value of text/html.</t>
-          </list></t>
-      </section>
-
       <section title="Playlist">
         <t>The "playlist" object type represents an ordered list of time-based
         media items, such as video and audio objects.</t>
@@ -871,34 +840,6 @@
 
         <t>An audio podcast inherits the properties of audio as defined in
         <xref target="audio"></xref>. It has no additional properties.</t>
-      </section>
-
-      <section title="Song">
-        <t>The "tv episode" Object type represents a song or a recording of a
-        song.</t>
-
-        <t>Objects of type Song might contain information about the song or
-        recording, or they might contain some representation of the recording
-        itself. In the latter case, the song SHOULD also be annotated with the
-        "audio" Object type and use its properties as described in <xref
-        target="audio"></xref>. This type should only be uesd when the
-        publisher can guarantee that the Object is a Song rather than merely a
-        generic audio.</t>
-
-        <t>The Object type URL for the "song" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/song</spanx>.</t>
-
-        <t>A song has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title of the movie. Included as the
-            content of the atom:title element.</t>
-          </list></t>
-
-        <t>TODO: Include a way to indicate the artist associated with the
-        song, the album a particular recording is from, etc. Recording artist
-        could potentially be added as an Object type in its own right to allow
-        for this.</t>
       </section>
 
       <section title="Bookmark">
