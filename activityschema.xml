@@ -81,6 +81,18 @@
         <c><spanx style="verb">urn:ietf:params:xml:ns:xcal</spanx></c>
 
         <c>xCal</c>
+
+        <c><spanx style="verb">pc:</spanx></c>
+
+        <c><spanx style="verb">http://portablecontacts.net/schema/1.0</spanx></c>
+
+        <c>PortableContacts</c>
+
+        <c><spanx style="verb">geo:</spanx></c>
+
+        <c><spanx style="verb">http://www.georss.org/georss</spanx></c>
+
+        <c>GeoRSS</c>
       </texttable>
 
       <t>The choices of namespace prefix are arbitrary and not semantically
@@ -582,6 +594,97 @@
           </list></t>
       </section>
 
+      <section title="Photo Album">
+        <t>The "photo album" object type represents a collection of
+        images.</t>
+
+        <t>The object type URL for the "photo album" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/photo-album/</spanx>.</t>
+
+        <t>The photo album object type has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title or short caption assigned to the
+            album by the author. Included as the content of the atom:title
+            element.</t>
+
+            <t hangText="thumbnail">The URL and metadata for a preview image
+            for the album. The URL is represented as the value of the href
+            attribute on an atom:link element with rel preview and a type of
+            either image/jpeg, image/png or image/gif. Publishers SHOULD
+            include media:width and media:height attributes on the atom:link
+            element describing the dimensions of the linked image. Processors
+            MAY ignore thumbnails that are of an inappropriate size for their
+            user interface.</t>
+
+            <t hangText="album page URL">The URL of a web page where the photo
+            album can be viewed. Represented as the value of the href
+            attribute on an atom:link element with a rel value of alternate
+            and a type value of text/html.</t>
+          </list></t>
+      </section>
+
+      <section title="Music Album">
+        <t>The "music album" object type represents a set of musical
+        recordings placed into a compilation, usually to be sold together as a
+        single set.</t>
+
+        <t>The object type URL for the "music album" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/music-album/</spanx>.</t>
+
+        <t>The music album object type has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title or short caption assigned to the
+            album by the author. Included as the content of the atom:title
+            element.</t>
+
+            <t hangText="thumbnail">The URL and metadata for a preview image
+            for the album. The URL is represented as the value of the href
+            attribute on an atom:link element with rel preview and a type of
+            either image/jpeg, image/png or image/gif. Publishers SHOULD
+            include media:width and media:height attributes on the atom:link
+            element describing the dimensions of the linked image. Processors
+            MAY ignore thumbnails that are of an inappropriate size for their
+            user interface.</t>
+
+            <t hangText="album page URL">The URL of a web page where the album
+            can be viewed. Represented as the value of the href attribute on
+            an atom:link element with a rel value of alternate and a type
+            value of text/html.</t>
+          </list></t>
+      </section>
+
+      <section title="Playlist">
+        <t>The "playlist" object type represents an ordered list of time-based
+        media items, such as video and audio objects.</t>
+
+        <t>The object type URL for the "playlist" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/playlist/</spanx>.</t>
+
+        <t>The playlist object type has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="title">The title or short caption assigned to the
+            playlist by the author. Included as the content of the atom:title
+            element.</t>
+
+            <t hangText="thumbnail">The URL and metadata for a preview image
+            for the playlist. The URL is represented as the value of the href
+            attribute on an atom:link element with rel preview and a type of
+            either image/jpeg, image/png or image/gif. Publishers SHOULD
+            include media:width and media:height attributes on the atom:link
+            element describing the dimensions of the linked image. Processors
+            MAY ignore thumbnails that are of an inappropriate size for their
+            user interface.</t>
+
+            <t hangText="playlist page URL">The URL of a web page where the
+            playlist can be viewed. Represented as the value of the href
+            attribute on an atom:link element with a rel value of alternate
+            and a type value of text/html.</t>
+          </list></t>
+      </section>
+
       <section anchor="video" title="Video">
         <t>The "video" Object type represents video content, which usually
         consists of a motion picture track and an audio track.</t>
@@ -992,6 +1095,24 @@
 
         <t>TODO: Find a way to represent the host of an event?</t>
       </section>
+
+      <section title="Place">
+        <t>The "place" object type represents a location on Earth.</t>
+
+        <t>The object type URL for the "place" object type is <spanx
+        style="verb">http://activitystrea.ms/schema/1.0/place/</spanx>.</t>
+
+        <t>A place has the following properties:</t>
+
+        <t><list style="hanging">
+            <t hangText="name">The name of the place. Included as the content
+            of the atom:title element.</t>
+
+            <t hangText="geographic coordinates">The latitude and longitude of
+            the place as a point on Earth. Included via the <spanx
+            style="verb">geo:point</spanx> element.</t>
+          </list></t>
+      </section>
     </section>
 
     <section title="Comments and Responses">
@@ -1008,7 +1129,7 @@
       style="verb">thr:in-reply-to</spanx> element defined by <xref
       target="RFC4685"></xref>. Publishers SHOULD also, if available, include
       metadata about the item being replied to using the mechanisms defined in
-      [CommentMetadataExtension].</t>
+      <xref target="atomcommentmeta-00"></xref>.</t>
 
       <t>The act of posting a comment is represented by the post Verb as with
       "top-level" Objects.</t>
@@ -1027,6 +1148,47 @@
       effectively a reply, but there are questions about who publishes this
       relationship (the responder or the original poster -- or indeed both)
       and how exactly the entry metadata is represented in a feed.</t>
+    </section>
+
+    <section title="Base Activity Context Elements">
+      <t>This specification defines an initial set of activity context
+      elements that can be used with all activity entries. These provide
+      orthogonal context information that can apply to all activities.</t>
+
+      <section title="Location">
+        <t>Location context describes the location where the user was at the
+        time the activity was performed. This may be an accurate geographic
+        coordinate, a street address, a free-form location name or a
+        combination of these.</t>
+
+        <t>Geographic coordinates can be included as a <spanx style="verb">geo:point</spanx>
+        element as a direct child of the activity entry, as described by the
+        GeoRSS specification.</t>
+
+        <t>Addresses can be included using a <spanx style="verb">pc:address</spanx>
+        element. TODO: Write some more about this.</t>
+
+        <t>TODO: Figure out how to include freeform string locations.</t>
+      </section>
+
+      <section title="Mood">
+        <t>Mood describes the mood of the user when the activity was
+        performed. This is usually collected via an extra field in the user
+        interface used to perform the activity. For the purpose of this
+        schema, a mood is a freeform, short mood keyword or phrase along with
+        an optional mood icon image.</t>
+
+        <t>Moods are included via a mood element in the namespace <spanx
+        style="verb">http://activitystrea.ms/context/</spanx>. TODO: Write a
+        spec for this?</t>
+
+        <t>The content of the mood element is the mood keyword or phrase.</t>
+
+        <t>The mood element may have an optional <spanx style="verb">icon</spanx>
+        attribute which contains the URL of a mood icon image. The mood icon
+        image SHOULD be small and appropriate to be displayed alongside the
+        mood keyword at a normal text size.</t>
+      </section>
     </section>
 
     <section title="Security Considerations">
@@ -1085,6 +1247,18 @@
           </author>
 
           <date month="September" year="2006" />
+        </front>
+      </reference>
+
+      <reference anchor="atomcommentmeta-00">
+        <front>
+          <title>Atom Comment Metadata Extensions</title>
+
+          <author fullname="Martin Atkins" initials="M." surname="Atkins">
+            <organization></organization>
+          </author>
+
+          <date />
         </front>
       </reference>
     </references>
