@@ -124,7 +124,7 @@
         Object to readers. In most cases, the actor did not create the Object
         being shared, but is instead drawing attention to it.</t>
 
-        <t>The verb URI for the "share" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/share/</spanx>.</t>
+        <t>The verb URI for the "share" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/share</spanx>.</t>
       </section>
 
       <section anchor="save" title="Save">
@@ -135,7 +135,7 @@
         it to others as would be indicated by the "share" Verb (<xref
         target="share"></xref>).</t>
 
-        <t>The verb URI for the "save" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save/</spanx>.</t>
+        <t>The verb URI for the "save" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save</spanx>.</t>
       </section>
 
       <section anchor="favorite" title="Mark as Favorite">
@@ -150,7 +150,7 @@
         in <xref target="save"></xref>.</t>
 
         <t>The verb URI for the "mark as favorite" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/favorite/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/favorite</spanx>.</t>
       </section>
 
       <section anchor="view" title="View">
@@ -169,7 +169,7 @@
         this Verb will be a person, but it can potentially be of any type that
         can sensibly generate activity.</t>
 
-        <t>The verb URI for the "start following" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/follow/</spanx>.</t>
+        <t>The verb URI for the "start following" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/follow</spanx>.</t>
 
         <t>Publishers SHOULD NOT publish multiple "start following" activities
         with identical Subjects and Objects unless (A) the Publisher published
@@ -189,7 +189,7 @@
         this Verb will be a person, but it can potentially be of any type that
         can sensibly generate activity.</t>
 
-        <t>The verb URI for the "stop following" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/unfollow/</spanx>.</t>
+        <t>The verb URI for the "stop following" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/unfollow</spanx>.</t>
 
         <t>Publishers SHOULD NOT publish multiple "stop following" activities
         with identical Subjects and Objects unless (A) the Publisher published
@@ -212,7 +212,7 @@
         specifications.</t>
 
         <t>The verb URI for the "add as a contact" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/make-contact/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/make-contact</spanx>.</t>
 
         <t>Publishers MAY use the "add as a contact" Verb to express that the
         Subject has expressed interest in forming a connection, but that the
@@ -248,7 +248,7 @@
         given feed.</t>
 
         <t>The verb URI for the "confirm a connection" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/confirm-connection/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/confirm-connection</spanx>.</t>
       </section>
 
       <section anchor="break-contact" title="Remove as a Contact">
@@ -270,7 +270,7 @@
         sufficient to determine (A) or (B) above.</t>
 
         <t>The verb URI for the "remove as a contact" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/break-contact/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/break-contact</spanx>.</t>
       </section>
 
       <section anchor="join" title="Join">
@@ -290,7 +290,7 @@
         activities regardless of whether they maintain state sufficient to
         determine (A) or (B) above.</t>
 
-        <t>The verb URI for the "join" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join/</spanx>.</t>
+        <t>The verb URI for the "join" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join</spanx>.</t>
       </section>
 
       <section anchor="leave" title="Leave">
@@ -315,7 +315,7 @@
         activities regardless of whether they maintain state sufficient to
         determine (A) or (B) above.</t>
 
-        <t>The verb URI for the "leave" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/leave/</spanx>.</t>
+        <t>The verb URI for the "leave" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/leave</spanx>.</t>
       </section>
 
       <section anchor="rsvp-yes" title="Positive RSVP">
@@ -331,7 +331,7 @@
         verb when a user has been added as an attendee by an event organiser
         or administrator.</t>
 
-        <t>The verb URI for the "positive RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-yes/</spanx>.</t>
+        <t>The verb URI for the "positive RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-yes</spanx>.</t>
       </section>
 
       <section anchor="rsvp-maybe" title="Possible RSVP">
@@ -347,7 +347,7 @@
         verb when a user has been added as an attendee by an event organiser
         or administrator.</t>
 
-        <t>The verb URI for the "possible RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-maybe/</spanx>.</t>
+        <t>The verb URI for the "possible RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-maybe</spanx>.</t>
       </section>
 
       <section anchor="rsvp-no" title="Negative RSVP">
@@ -363,7 +363,7 @@
         verb when a user has been added as an attendee by an event organiser
         or administrator.</t>
 
-        <t>The verb URI for the "negative RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-no/</spanx>.</t>
+        <t>The verb URI for the "negative RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-no</spanx>.</t>
       </section>
 
       <section anchor="invite" title="Invite">
@@ -373,7 +373,7 @@
         target="event"></xref>) or a group (see <xref
         target="group"></xref>).</t>
 
-        <t>The verb URI for the "invite" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/invite/</spanx>.</t>
+        <t>The verb URI for the "invite" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/invite</spanx>.</t>
       </section>
     </section>
 
@@ -388,7 +388,7 @@
         other resources.</t>
 
         <t>The Object type URL for the "Article" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/article/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/article</spanx>.</t>
 
         <t>An article has the following properties:</t>
 
@@ -424,7 +424,7 @@
         type.</t>
 
         <t>The Object type URL for the "weblog entry" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/blog-entry/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/blog-entry</spanx>.</t>
 
         <t>A weblog entry has all of the properties of an article as defined
         in <xref target="article"></xref>, and has no additional
@@ -443,7 +443,7 @@
         entry.</t>
 
         <t>The Object type URL for the "note" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/note/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/note</spanx>.</t>
 
         <t>A note has the following properties:</t>
 
@@ -480,7 +480,7 @@
         support the more specific Object type.</t>
 
         <t>The Object type URL for the "file" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/file/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/file</spanx>.</t>
 
         <t>A file has the following properties:</t>
 
@@ -501,7 +501,7 @@
         <t>The "image" Object type represents a graphical still image.</t>
 
         <t>The Object type URL for the "image" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/image/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/image</spanx>.</t>
 
         <t>A photo has the following properties:</t>
 
@@ -565,7 +565,7 @@
         screenshot.</t>
 
         <t>The Object type URL for the "photo" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/photo/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/photo</spanx>.</t>
 
         <t>The photo Object type inherits all of the properties defined for
         image in <xref target="image"></xref>, but also has the following
@@ -587,7 +587,7 @@
         consists of a motion picture track and an audio track.</t>
 
         <t>The Object type URL for the "video" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/video/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/video</spanx>.</t>
 
         <t>A video has the following properties:</t>
 
@@ -659,7 +659,7 @@
         rather than merely a generic video.</t>
 
         <t>The Object type URL for the "tv episode" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/tv-episode/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/tv-episode</spanx>.</t>
 
         <t>TODO: Perhaps define a way to describe the series title, episode
         title, season number and episode number in a machine-readable way.</t>
@@ -677,7 +677,7 @@
         a generic video.</t>
 
         <t>The Object type URL for the "movie" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/movie/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/movie</spanx>.</t>
 
         <t>A movie has the following properties:</t>
 
@@ -695,7 +695,7 @@
         video podcast.</t>
 
         <t>The Object type URL for the "video podcast" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/video-podcast/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/video-podcast</spanx>.</t>
 
         <t>Video podcast is a specialized type of video, and so publishers
         SHOULD also include the video Object type in Object entries of this
@@ -711,7 +711,7 @@
         <t>The "audio" Object type represents audio content.</t>
 
         <t>The Object type URL for the "audio" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/audio/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/audio</spanx>.</t>
 
         <t>An audio Object has the following properties:</t>
 
@@ -758,7 +758,7 @@
         audio-only podcast.</t>
 
         <t>The Object type URL for the "audio podcast" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/audio-podcast/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/audio-podcast</spanx>.</t>
 
         <t>Audio podcast is a specialized type of audio, and so publishers
         SHOULD also include the audio Object type in Object entries of this
@@ -783,7 +783,7 @@
         generic audio.</t>
 
         <t>The Object type URL for the "song" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/song/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/song</spanx>.</t>
 
         <t>A song has the following properties:</t>
 
@@ -828,7 +828,7 @@
         own bookmark collection.</t>
 
         <t>The Object type URL for the "bookmark" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/bookmark/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/bookmark</spanx>.</t>
 
         <t>A bookmark has the following properties:</t>
 
@@ -884,7 +884,7 @@
         ficticious, or some other anthropomorphised ficticious character.</t>
 
         <t>The Object type URL for the "person" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/person/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
 
         <t>Where a particular person is referred to across multiple sources,
         the same value for <spanx style="verb">atom:id</spanx> SHOULD be used
@@ -936,7 +936,7 @@
         group is a collection of people which people can join and leave.</t>
 
         <t>The Object type URL for the "group" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/group/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/group</spanx>.</t>
 
         <t>A group has the following properties:</t>
 
@@ -963,7 +963,7 @@
         certain place during a particular interval of time.</t>
 
         <t>The object type URL for the "event" object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/event/</spanx>.</t>
+        style="verb">http://activitystrea.ms/schema/1.0/event</spanx>.</t>
 
         <t>An event has the following properties:</t>
 
