@@ -1,5 +1,5 @@
 
-all: atomactivity.html atomactivity.txt activityschema.html activityschema.txt serviceprovidermeta.html serviceprovidermeta.txt commentmeta.html commentmeta.txt
+all: atomactivity.html atomactivity.txt activityschema.html activityschema.txt activityschema-music.html activityschema-music.txt serviceprovidermeta.html serviceprovidermeta.txt commentmeta.html commentmeta.txt
 
 clean:
 	rm -rf build
@@ -18,6 +18,13 @@ activityschema.html: prepare activityschema.xml
 
 activityschema.txt: prepare activityschema.xml
 	xml2rfc activityschema.xml build/activityschema.txt
+
+activityschema-music.html: prepare activityschema-music.xml
+	xml2rfc activityschema-music.xml build/activityschema-music.html
+
+activityschema-music.txt: prepare activityschema-music.xml
+	xml2rfc activityschema-music.xml build/activityschema-music.txt
+
 
 serviceprovidermeta.html: prepare serviceprovidermeta.xml
 	xml2rfc serviceprovidermeta.xml build/serviceprovidermeta.html
