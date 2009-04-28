@@ -17,7 +17,23 @@
     (Draft)</title>
 
     <author fullname="Martin Atkins" initials="M." surname="Atkins">
-      <organization>Six Apart Ltd</organization>
+      <organization>Six Apart</organization>
+    </author>
+
+    <author fullname="David Recordon" initials="D." surname="Recordon">
+      <organization>Six Apart</organization>
+    </author>
+
+    <author fullname="Chris Messina" initials="C." surname="Messina">
+      <organization>DiSo Project</organization>
+    </author>
+
+    <author fullname="Monica Keller" initials="M." surname="Keller">
+      <organization>MySpace</organization>
+    </author>
+
+    <author fullname="Ari Steinberg" initials="A." surname="Steinberg">
+      <organization>Facebook</organization>
     </author>
 
     <date />
