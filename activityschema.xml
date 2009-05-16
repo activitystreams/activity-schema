@@ -141,1010 +141,1115 @@
       to [insert xref here].</t>
     </section>
 
-    <section title="Base Verbs">
-      <section anchor="post" title="Post">
-        <t>The "Post" Verb is described in section 8 of the AtomActivity
-        specification. It is only referenced here for completeness.</t>
+    <section title="Base Schema">
+      <t>The base schema provides generic terms that all activity consumers
+      SHOULD support. The other, more specific sections that follow use
+      specializations of this base vocabulary to provide additional terms that
+      may only be useful in certain applications.</t>
+
+      <section title="Base Verbs">
+        <section anchor="post" title="Post">
+          <t>The "Post" Verb is described in section 8 of the AtomActivity
+          specification. It is only referenced here for completeness.</t>
+        </section>
+
+        <section anchor="share" title="Share">
+          <t>The "share" Verb indicates that the Subject has called out the
+          Object to readers. In most cases, the actor did not create the
+          Object being shared, but is instead drawing attention to it.</t>
+
+          <t>The verb URI for the "share" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/share</spanx>.</t>
+        </section>
+
+        <section anchor="save" title="Save">
+          <t>The "save" Verb indicates that the Subject has called out the
+          Object as being of interest primarily to him- or herself. Though
+          this action MAY be shared publicly, the implication is that the
+          Object has been saved primarily for the actor's own benefit rather
+          than to show it to others as would be indicated by the "share" Verb
+          (<xref target="share"></xref>).</t>
+
+          <t>The verb URI for the "save" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save</spanx>.</t>
+        </section>
+
+        <section anchor="favorite" title="Mark as Favorite">
+          <t>The "mark as favorite" Verb indicates that the Subject marked the
+          Object as an item of special interest. Objects so marked often
+          appear in a collection of such Objects which MAY be published as a
+          feed of entries annotated with this Verb.</t>
+
+          <t>If a particular service uses favorites as a mechanism by which a
+          user can recall items that were earlier marked, it MAY be
+          appropriate to also mark activities of this type with the "save"
+          Verb as described in <xref target="save"></xref>.</t>
+
+          <t>The verb URI for the "mark as favorite" Verb is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/favorite</spanx>.</t>
+        </section>
+
+        <section anchor="view" title="View">
+          <t>The "view" Verb indicates that the Subject viewed the Object in
+          some way. This might include reading an article, watching a video or
+          listening to a song. Although "view" connotes a visual experience,
+          this Verb can equally be used to describe other consumer experiences
+          as appropriate for the type of Object used.</t>
+
+          <t>The verb URI for the "view" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/view/</spanx>.</t>
+        </section>
+
+        <section anchor="follow" title="Start Following">
+          <t>The "start following" Verb indicates that the Subject began
+          following the activity of the Object. In most cases, the Object of
+          this Verb will be a person, but it can potentially be of any type
+          that can sensibly generate activity.</t>
+
+          <t>The verb URI for the "start following" Verb is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/follow</spanx>.</t>
+
+          <t>Publishers SHOULD NOT publish multiple "start following"
+          activities with identical Subjects and Objects unless (A) the
+          Publisher published an intervening corresponding "stop following"
+          activity (<xref target="unfollow"></xref>); (B), the Verb's
+          attributes differ to indicate a different "degree" of following; or
+          (C), the Object's attributes differ to indicate a different "aspect"
+          of following.</t>
+
+          <t>Processors MAY ignore (silently drop) successive identical "start
+          following" activities regardless of whether they maintain state
+          sufficient to determine (A), (B), or (C) above.</t>
+        </section>
+
+        <section anchor="unfollow" title="Stop Following">
+          <t>The "stop following" Verb indicates that the Subject ceased
+          following the activity of the Object. In most cases, the Object of
+          this Verb will be a person, but it can potentially be of any type
+          that can sensibly generate activity.</t>
+
+          <t>The verb URI for the "stop following" Verb is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/unfollow</spanx>.</t>
+
+          <t>Publishers SHOULD NOT publish multiple "stop following"
+          activities with identical Subjects and Objects unless (A) the
+          Publisher published an intervening corresponding "start following"
+          activity (<xref target="follow"></xref>); (B), the Verb's attributes
+          differ to indicate a different "degree" of following; or (C), the
+          Object's attributes differ to indicate a different "aspect" of
+          following.</t>
+
+          <t>Processors MAY ignore (silently drop) successive identical "stop
+          following" activities regardless of whether they maintain state
+          sufficient to determine (A), (B), or (C) above.</t>
+        </section>
+
+        <section anchor="make-contact" title="Add as a Contact">
+          <t>The "add as a contact" Verb indicates that the Subject has added
+          the Object as a contact, friend, or other similar social relation.
+          This specification only defines the meaning of this Verb when its
+          Object is a person, though implementors SHOULD be prepared to accept
+          other Object types as meaning MAY be provided by extension
+          specifications.</t>
+
+          <t>The verb URI for the "add as a contact" Verb is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/make-contact</spanx>.</t>
+
+          <t>Publishers MAY use the "add as a contact" Verb to express that
+          the Subject has expressed interest in forming a connection, but that
+          the connection cannot be formed until the Object reciprocates. See
+          <xref target="confirm-connection"></xref>.</t>
+
+          <t>Publishers SHOULD NOT publish multiple "make contact" activities
+          with identical Subjects and Objects unless (A) the Publisher
+          published an intervening corresponding "break contact" activity
+          (<xref target="break-contact"></xref>); or (B), the Verb's
+          attributes differ to indicate a different "degree" or "style" of
+          contact.</t>
+
+          <t>Processors MAY ignore (silently drop) successive identical "make
+          contact" activities regardless of whether they maintain state
+          sufficient to determine (A) or (B) above.</t>
+        </section>
+
+        <section anchor="confirm-connection" title="Confirm a Connection">
+          <t>The "confirm a connection" Verb indicates the creation of a
+          contact relationship as described in <xref
+          target="make-contact"></xref> that is reciprocated by the
+          Object.</t>
+
+          <t>Since this Verb implies an activity on the part of its Object,
+          processors MUST NOT accept activities with this Verb unless they are
+          able to verify through some external means that there is in fact a
+          reciprocated connection. For example, a processor MAY have received
+          a guarantee from a particular publisher that the publisher will only
+          use this Verb in cases where a reciprocal relationship exists.</t>
+
+          <t>Publishers SHOULD also include a corresponding "add as a contact"
+          Verb in all activities carrying this Verb, as a fallback for
+          processors that are unable to trust the Create a Connection Verb for
+          a given feed.</t>
+
+          <t>The verb URI for the "confirm a connection" Verb is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/confirm-connection</spanx>.</t>
+        </section>
+
+        <section anchor="break-contact" title="Remove as a Contact">
+          <t>The "break contact" Verb indicates that the Subject has removed
+          the Object as a contact, friend, or other similar social relation.
+          This specification only defines the meaning of this Verb when its
+          Object is a person, though implementors SHOULD be prepared to accept
+          other Object types as meaning MAY be provided by extension
+          specifications.</t>
+
+          <t>Publishers SHOULD NOT publish multiple "break contact" activities
+          with identical Subjects and Objects unless (A) the Publisher
+          published an intervening corresponding "make contact" activity
+          (<xref target="make-contact"></xref>); or (B), the Verb's attributes
+          differ to indicate a different "degree" or "style" of contact.</t>
+
+          <t>Processors MAY ignore (silently drop) successive identical "break
+          contact" activities regardless of whether they maintain state
+          sufficient to determine (A) or (B) above.</t>
+
+          <t>The verb URI for the "remove as a contact" Verb is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/break-contact</spanx>.</t>
+        </section>
+
+        <section anchor="join" title="Join">
+          <t>The "join" Verb indicates that the actor has become a member of
+          the Object. This specification only defines the meaning of this Verb
+          when its Object is a group, though implementors SHOULD be prepared
+          to handle other Object types as meaning MAY be provided by extension
+          specifications.</t>
+
+          <t>Publishers SHOULD NOT publish multiple "join" activities with
+          identical Subjects and Objects unless (A) the Publisher published
+          and intervening corresponding "leave" activity (<xref
+          target="leave"></xref>); or (B) the Verb's attributes differ to
+          indicate a different membership role.</t>
+
+          <t>Processors MAY ignore (silently drop) successive identical "join"
+          activities regardless of whether they maintain state sufficient to
+          determine (A) or (B) above.</t>
+
+          <t>The verb URI for the "join" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join</spanx>.</t>
+        </section>
+
+        <section anchor="leave" title="Leave">
+          <t>The "leave" Verb indicates that the actor is no longer a member
+          of the Object, and that this is a result of an explicit action by
+          the actor. This specification only defines the meaning of this Verb
+          when its Object is a group, though implementors SHOULD be prepared
+          to handle other Object types as meaning MAY be provided by extension
+          specifications.</t>
+
+          <t>The use of this Verb is not appropriate when a user has been
+          ejected from the group by its administrators or any other situation
+          where the actor did not explicitly choose to leave the group.</t>
+
+          <t>Publishers SHOULD NOT publish multiple "leave" activities with
+          identical Subjects and Objects unless (A) the Publisher published
+          and intervening corresponding "join" activity (<xref
+          target="join"></xref>); or (B) the Verb's attributes differ to
+          indicate a different membership role.</t>
+
+          <t>Processors MAY ignore (silently drop) successive identical
+          "leave" activities regardless of whether they maintain state
+          sufficient to determine (A) or (B) above.</t>
+
+          <t>The verb URI for the "leave" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/leave</spanx>.</t>
+        </section>
+
+        <section anchor="invite" title="Invite">
+          <t>The "invite" verb indicates that the actor has invited the object
+          to take part in or join the target. This specification only defines
+          the meaning of this verb when its target is either an event (see
+          <xref target="event"></xref>) or a group (see <xref
+          target="group"></xref>).</t>
+
+          <t>The verb URI for the "invite" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/invite</spanx>.</t>
+        </section>
       </section>
 
-      <section anchor="share" title="Share">
-        <t>The "share" Verb indicates that the Subject has called out the
-        Object to readers. In most cases, the actor did not create the Object
-        being shared, but is instead drawing attention to it.</t>
+      <section title="Base Object Types">
+        <section anchor="article" title="Article">
+          <t>The "article" Object type indicates that the Object is an
+          article, such as a news article, a knowledge base entry, or other
+          similar construct.</t>
 
-        <t>The verb URI for the "share" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/share</spanx>.</t>
+          <t>Articles generally consist of paragraphs of text, in some cases
+          incorporating embedded media such as photos and inline hyperlinks to
+          other resources.</t>
+
+          <t>The Object type URL for the "Article" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/article</spanx>.</t>
+
+          <t>An article has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title of the entry. Included as the
+              content of the atom:title element. This element MUST be included
+              with empty content if the entry does not have a title.</t>
+
+              <t hangText="summary">A short excerpt of the body content that
+              gives an introduction to or a summary of the full content. This
+              element SHOULD be omitted if the entry does not have a
+              summary.</t>
+
+              <t hangText="content">The main body content of the entry.
+              Included as the content of the atom:content element.</t>
+
+              <t hangText="permalink">The canonical URL for the entry.
+              Represented as the value of the <spanx style="verb">href</spanx>
+              attribute on an <spanx style="verb">atom:link</spanx> element
+              with a <spanx style="verb">rel</spanx> value of <spanx
+              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
+              value of <spanx style="verb">text/html</spanx>.</t>
+            </list></t>
+        </section>
+
+        <section title="Weblog Entry">
+          <t>The "weblog entry" Object type indicates that the Object is an
+          entry in a weblog or some other similar construct.</t>
+
+          <t>The "weblog entry" Object type is a specialization of the
+          "article" Object type, so publishers SHOULD also include the Object
+          type URL for the "article" Object type when publishing Object
+          entries of this type.</t>
+
+          <t>The Object type URL for the "weblog entry" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/blog-entry</spanx>.</t>
+
+          <t>A weblog entry has all of the properties of an article as defined
+          in <xref target="article"></xref>, and has no additional
+          properties.</t>
+        </section>
+
+        <section title="Note">
+          <t>The "note" Object type represents short notes or status updates.
+          This Object type is intended for use in "micro-blogging" and in
+          systems where users are invited to publish a timestamped
+          "status".</t>
+
+          <t>A note is similar in structure to a weblog entry, but it does not
+          have a title and its body tends to be shorter. Applications will
+          often display the entire content of a note in an activity stream UI,
+          whereas they MAY display only the title or the title and summary for
+          a weblog entry.</t>
+
+          <t>The Object type URL for the "note" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/note</spanx>.</t>
+
+          <t>A note has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="content">The content of the note. Included as the
+              content of the atom:content element. Publishers SHOULD include
+              any markup necessary to achieve a similar presentation to that
+              on the publisher's own HTML pages, including any links that the
+              service automatically adds. Processors MAY remove the markup and
+              consider the note to be plain text.</t>
+
+              <t hangText="permalink">The canonical URL for the note.
+              Represented as the value of the <spanx style="verb">href</spanx>
+              attribute on an <spanx style="verb">atom:link</spanx> element
+              with a <spanx style="verb">rel</spanx> value of <spanx
+              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
+              value of <spanx style="verb">text/html</spanx>.</t>
+            </list></t>
+
+          <t><spanx style="strong">TODO:</spanx> Figure out how to handle the
+          notes published by Facebook and Plaxo that are full sentences that
+          always start with the name of the actor. Also check out
+          internationalization issues: subjects don't always come at the start
+          of sentences, even in Facebook.</t>
+        </section>
+
+        <section title="File">
+          <t>The "file" Object type represents some document or other file
+          with no additional machine-readable semantics.</t>
+
+          <t>It is intended that this type be used as a base type for other
+          Objects that manifest as files, so that additional semantics can be
+          added while providing a fallback ability for clients that do not
+          support the more specific Object type.</t>
+
+          <t>The Object type URL for the "file" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/file</spanx>.</t>
+
+          <t>A file has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="associated file URL">The URL of the file described
+              by this Object entry. The URL is represented as the value of the
+              href attribute on an atom:link element with rel enclosure.
+              Should there be multiple links with rel enclosure with different
+              type attribute value, they are considered to be alternate
+              representations of the file. Should there be multiple links with
+              rel enclosure and with the <spanx>same</spanx> attribute value,
+              the meaning is undefined for the file Object type and consumers
+              MAY choose to present only the first of each supported type.</t>
+            </list></t>
+        </section>
+
+        <section anchor="image" title="Image">
+          <t>The "image" Object type represents a graphical still image.</t>
+
+          <t>The Object type URL for the "image" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/image</spanx>.</t>
+
+          <t>A photo has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title or short caption assigned to the
+              image by the author. Included as the content of the atom:title
+              element. If the author has not provided a title, the publisher
+              MAY synthesize a title e.g. from the image filename, or the
+              publisher MAY include the atom:title element with no
+              content.</t>
+
+              <t hangText="thumbnail">The URL and metadata for a thumbnail
+              version of the image. The URL is represented as the value of the
+              href attribute on an atom:link element with rel preview and a
+              type of either image/jpeg, image/png or image/gif. Publishers
+              SHOULD include media:width and media:height attributes on the
+              atom:link element describing the dimensions of the linked image.
+              Processors MAY ignore thumbnails that are of an inappropriate
+              size for their user interface.</t>
+
+              <t hangText="larger image">The URL and metadata for a larger,
+              ideally full-size version of the image intended for standalone
+              viewing. The URL is represented as the value of the href
+              attribute on an atom:link element with rel enclosure and a type
+              of either image/jpeg, image/png or image/gif. Publishers SHOULD
+              include media:width and media:height attributes on the atom:link
+              element describing the dimensions of the linked image.</t>
+
+              <t hangText="image page URL">The URL of a web page where the
+              image and the associated metadata can be viewed. Represented as
+              the value of the href attribute on an atom:link element with a
+              rel value of alternate and a type value of text/html.</t>
+
+              <t hangText="time and date the photo was taken">The time and
+              date when the photo was taken, as opposed to when it was posted.
+              This information is often determined automatically by the
+              photographer's camera, but MAY be inaccurate due to an incorrect
+              clock in the camera. <spanx style="strong">TODO:</spanx> Figure
+              out how to publish this. There doesn't seem to be any
+              well-deployed standard.</t>
+
+              <t hangText="description">The description or long caption
+              assigned to the photo by the author. Included as the content of
+              the media:description element as described in [AtomMedia]. If
+              the author has not provided a description, this element SHOULD
+              be omitted.</t>
+            </list></t>
+
+          <t>Publishers SHOULD include an atom:content element containing
+          content that will present the photo and any necessary metadata to
+          the user of a processor that is not media-aware. Media-aware
+          processors SHOULD prefer the specific properties given above, but
+          MAY use the content in preference in cases where the properties
+          above are incomplete or unsuitable.</t>
+        </section>
+
+        <section title="Photo">
+          <t>The "photo" Object type represents a digitized photograph.
+          "photo" is a specialized type of "image" that SHOULD be used when
+          the publisher can guarantee that the associated image is a
+          photograph as opposed to another kind of image such as an
+          illustration or screenshot.</t>
+
+          <t>The Object type URL for the "photo" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/photo</spanx>.</t>
+
+          <t>The photo Object type inherits all of the properties defined for
+          image in <xref target="image"></xref>, but also has the following
+          additional properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="time and date the photo was taken">The time and
+              date when the photo was taken, as opposed to when it was posted.
+              This information is often determined automatically by the
+              photographer's camera, but MAY be inaccurate due to an incorrect
+              clock in the camera. <spanx style="strong">TODO:</spanx> Figure
+              out how to publish this. There doesn't seem to be any
+              well-deployed standard.</t>
+            </list></t>
+        </section>
+
+        <section title="Photo Album">
+          <t>The "photo album" object type represents a collection of
+          images.</t>
+
+          <t>The object type URL for the "photo album" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/photo-album/</spanx>.</t>
+
+          <t>The photo album object type has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title or short caption assigned to the
+              album by the author. Included as the content of the atom:title
+              element.</t>
+
+              <t hangText="thumbnail">The URL and metadata for a preview image
+              for the album. The URL is represented as the value of the href
+              attribute on an atom:link element with rel preview and a type of
+              either image/jpeg, image/png or image/gif. Publishers SHOULD
+              include media:width and media:height attributes on the atom:link
+              element describing the dimensions of the linked image.
+              Processors MAY ignore thumbnails that are of an inappropriate
+              size for their user interface.</t>
+
+              <t hangText="album page URL">The URL of a web page where the
+              photo album can be viewed. Represented as the value of the href
+              attribute on an atom:link element with a rel value of alternate
+              and a type value of text/html.</t>
+            </list></t>
+        </section>
+
+        <section title="Playlist">
+          <t>The "playlist" object type represents an ordered list of
+          time-based media items, such as video and audio objects.</t>
+
+          <t>The object type URL for the "playlist" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/playlist/</spanx>.</t>
+
+          <t>The playlist object type has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title or short caption assigned to the
+              playlist by the author. Included as the content of the
+              atom:title element.</t>
+
+              <t hangText="thumbnail">The URL and metadata for a preview image
+              for the playlist. The URL is represented as the value of the
+              href attribute on an atom:link element with rel preview and a
+              type of either image/jpeg, image/png or image/gif. Publishers
+              SHOULD include media:width and media:height attributes on the
+              atom:link element describing the dimensions of the linked image.
+              Processors MAY ignore thumbnails that are of an inappropriate
+              size for their user interface.</t>
+
+              <t hangText="playlist page URL">The URL of a web page where the
+              playlist can be viewed. Represented as the value of the href
+              attribute on an atom:link element with a rel value of alternate
+              and a type value of text/html.</t>
+            </list></t>
+        </section>
+
+        <section anchor="video" title="Video">
+          <t>The "video" Object type represents video content, which usually
+          consists of a motion picture track and an audio track.</t>
+
+          <t>The Object type URL for the "video" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/video</spanx>.</t>
+
+          <t>A video has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title or short caption assigned to the
+              video by the author. Included as the content of the atom:title
+              element. If the author has not provided a title, the publisher
+              MAY synthesize a title e.g. from the video filename, or the
+              publisher MAY include the atom:title element with no
+              content.</t>
+
+              <t hangText="thumbnail">The URL and metadata for a thumbnail
+              version of a representative frame of the video. The URL is
+              represented as the value of the href attribute on an atom:link
+              element with rel preview and a type of either image/jpeg,
+              image/png or image/gif. Publishers SHOULD include media:width
+              and media:height attributes on the atom:link element describing
+              the dimensions of the linked image. Processors MAY ignore
+              thumbnails that are of an inappropriate size for their user
+              interface.</t>
+
+              <t hangText="video stream">The URL and metadata for the video
+              content itself. The URL is represented as the value of the href
+              attribute on an atom:link element with rel enclosure and a type
+              that matches video/*. Publishers SHOULD include media:width and
+              media:height attributes on the atom:link element describing the
+              dimensions of the linked video, and SHOULD include a
+              media:duration attribute giving the length of the video.</t>
+
+              <t hangText="video page URL">The URL of a web page where the
+              video and the associated metadata can be viewed. Represented as
+              the value of the href attribute on an atom:link element with a
+              rel value of alternate and a type value of text/html.</t>
+
+              <t hangText="player applet">The URL and metadata for some kind
+              of applet that will allow a user to view the video. The URL is
+              represented as the value of the href attribute on an atom:link
+              element with rel alternate and an appropriate type. Publishers
+              SHOULD include media:width and media:height attributes on the
+              atom:link element describing the ideal dimensions of the linked
+              applet. If both a video page and player applet are included,
+              publishers SHOULD include the video page link element first in
+              document order for compatibility with legacy, non-activity feed
+              consumers.</t>
+
+              <t hangText="description">The description or long caption
+              assigned to the video by the author. Included as the content of
+              the atom:summary element as described in [AtomMedia]. If the
+              author has not provided a description, this element SHOULD be
+              omitted.</t>
+            </list></t>
+
+          <t>Publishers SHOULD include an atom:content element containing
+          content that will present the video and any necessary metadata to
+          the user of a processor that is not media-aware. Media-aware
+          processors SHOULD prefer the specific properties given above, but
+          MAY use the content in preference in cases where the properties
+          above are incomplete or unsuitable.</t>
+        </section>
+
+        <section title="TV Episode">
+          <t>The "tv episode" Object type represents a single television
+          episode.</t>
+
+          <t>Objects of type TV Episode might contain information about the TV
+          Episode, or they might contain some representation of the TV episode
+          content itself. In the latter case, the TV Episode SHOULD also be
+          annotated with the "video" Object type and use its properties as
+          described in <xref target="video"></xref>. This type SHOULD be used
+          only when the publisher can guarantee that the Object is a TV
+          episode rather than merely a generic video.</t>
+
+          <t>The Object type URL for the "tv episode" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/tv-episode</spanx>.</t>
+
+          <t>TODO: Perhaps define a way to describe the series title, episode
+          title, season number and episode number in a machine-readable
+          way.</t>
+        </section>
+
+        <section title="Movie">
+          <t>The "movie" Object type represents a cinematic presentation.</t>
+
+          <t>Objects of type Movie might contain information about the Movie,
+          or they might contain some representation of the Movie content
+          itself. In the latter case, the Movie SHOULD also be annotated with
+          the "video" Object type and use its properties as described in <xref
+          target="video"></xref>. This type should only be uesd when the
+          publisher can guarantee that the Object is a Movie rather than
+          merely a generic video.</t>
+
+          <t>The Object type URL for the "movie" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/movie</spanx>.</t>
+
+          <t>A movie has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title of the movie. Included as the
+              content of the atom:title element.</t>
+
+              <t hangText="summary">A brief summary of the plot of the movie.
+              Included as the content of the atom:summary element.</t>
+            </list></t>
+        </section>
+
+        <section anchor="audio" title="Audio">
+          <t>The "audio" Object type represents audio content.</t>
+
+          <t>The Object type URL for the "audio" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/audio</spanx>.</t>
+
+          <t>An audio Object has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title or short caption assigned to the
+              audio by the author. Included as the content of the atom:title
+              element. If the author has not provided a title, the publisher
+              MAY synthesize a title e.g. from the audio filename, or the
+              publisher MAY include the atom:title element with no
+              content.</t>
+
+              <t hangText="audio stream">The URL and metadata for the audio
+              content itself. The URL is represented as the value of the href
+              attribute on an atom:link element with rel enclosure and a type
+              that matches audio/*. Publishers SHOULD include a media:duration
+              attribute on the atom:link element giving the length of the
+              audio presentation in seconds.</t>
+
+              <t hangText="audio page URL">The URL of a web page where the
+              audio and the associated metadata can be accessed. Represented
+              as the value of the href attribute on an atom:link element with
+              a rel value of alternate and a type value of text/html.</t>
+
+              <t hangText="player applet">The URL and metadata for some kind
+              of applet that will allow a user to listen to the audio. The URL
+              is represented as the value of the href attribute on an
+              atom:link element with rel alternate and an appropriate type.
+              Publishers SHOULD include media:width and media:height
+              attributes on the atom:link element describing the ideal
+              dimensions of the linked applet. If both an audio page and
+              player applet are included, publishers SHOULD include the audio
+              page link element first in document order for compatibility with
+              legacy, non-activity feed consumers.</t>
+
+              <t hangText="description">The description or long caption
+              assigned to the audio by the author. Included as the content of
+              the atom:summary element as described in [AtomMedia]. If the
+              author has not provided a description, this element SHOULD be
+              omitted.</t>
+            </list></t>
+        </section>
+
+        <section title="Bookmark">
+          <t>The "bookmark" Object type represents a pointer to some URL --
+          typically a web page. In most cases, a bookmark is specific to a
+          given user and contains metadata chosen by that user. Bookmark
+          Objects are similar in principle to the concept of bookmarks or
+          favorites in a web browser. A bookmark represents a pointer to the
+          URL, not the URL or the associated resource itself.</t>
+
+          <t>When dealing with bookmarks it is important to note the
+          distinction between the title, description, and URL of the bookmark
+          itself and the title, content, and URL of the resource that is the
+          target of the bookmark. In some implementations these MAY be the
+          same, but bookmark managers often allow a user to edit the title and
+          description of his or her own bookmarks to differ from the metadata
+          on the target itself.</t>
+
+          <t>Some implementations refer to this Object type as a "link". This
+          specification uses the term "bookmark" to avoid confusion with the
+          general concept of hyperlinks which apply to all Object types.</t>
+
+          <t>Since bookmarks are often specific to a particular user, even
+          though multiple users might have bookmarks pointing at the same
+          resource, it is appropriate to use the "post" Verb to describe the
+          publication of such a bookmark. The "mark as favorite" Verb SHOULD
+          be used when a user flags another user's bookmark as being a
+          favorite without creating his own bookmark, or when a user flags his
+          own bookmark as being a favorite as a special classification within
+          his own bookmark collection.</t>
+
+          <t>The Object type URL for the "bookmark" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/bookmark</spanx>.</t>
+
+          <t>A bookmark has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title of the bookmark, as entered by the
+              user who created the bookmark. Included as the content of the
+              atom:title element. Publishers MAY use the title of the target
+              resource as a default for this property where a user hasn't
+              entered a customized value.</t>
+
+              <t hangText="description">The description of the bookmark, as
+              entered by the user who created the bookmark. Included as the
+              content of the atom:summary element. If no description has been
+              provided, publishers SHOULD omit this element.</t>
+
+              <t hangText="target URL">The URL of the item that is the target
+              of the bookmark. Represented as the value of the href attribute
+              on an atom:link element with rel "related". An entry with this
+              Object type MUST NOT include related links except for the
+              purpose of representing the target URL.</t>
+
+              <t hangText="bookmark page URL">The URL of a page that describes
+              the bookmark. This URL is often specific to the user that
+              published the bookmark. Represented as the value of the href
+              attribute on an atom:link element with a rel value of alternate
+              and a type value of text/html.</t>
+
+              <t hangText="target title">The title of the item that is the
+              target of the bookmark. Represented as the value of the title
+              attribute on the atom:link element from which the target URL was
+              obtained.</t>
+
+              <t hangText="thumbnail">The URL and metadata for a thumbnail
+              version of the page. The URL is represented as the value of the
+              href attribute on an atom:link element with rel preview and a
+              type of either image/jpeg, image/png or image/gif. Publishers
+              SHOULD include media:width and media:height attributes on the
+              atom:link element describing the dimensions of the linked image.
+              Processors MAY ignore thumbnails that are of an inappropriate
+              size for their user interface.</t>
+            </list></t>
+
+          <t>Publishers SHOULD include an atom:content element containing
+          content that will present the bookmark to the user of a processor
+          that does not have special support for bookmarks. Bookmark-aware
+          processors SHOULD prefer the specific properties given above, but
+          MAY use the content in preference in cases where the properties
+          above are incomplete or unsuitable.</t>
+        </section>
+
+        <section title="Person">
+          <t>The "person" Object type represents a human person, whether real
+          or ficticious, or some other anthropomorphised ficticious
+          character.</t>
+
+          <t>The Object type URL for the "person" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
+
+          <t>Where a particular person is referred to across multiple sources,
+          the same value for <spanx style="verb">atom:id</spanx> SHOULD be
+          used whereever possible. Two person Objects in the same feed
+          document with the same <spanx style="verb">atom:id</spanx> value can
+          be considered by processors to be the same person. Processors MAY
+          use other information to determine when two person Objects refer to
+          the same person. A processor MUST NOT assume that two person Objects
+          with different values for <spanx style="verb">atom:id</spanx> refer
+          to different people; different publishers may use different id
+          values for the same person.</t>
+
+          <t>A person has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="display name">A name that can be used for the user
+              in the user interface. This is often a name by which the person
+              has chosen to be known in a given context; no restriction is
+              placed on what kind of name may be used here. Included as the
+              content of the atom:title element.</t>
+
+              <t hangText="avatar">The URL and metadata for an image that
+              represents this user. The URL is represented as the value of the
+              href attribute on an atom:link element with rel avatar and a
+              type of either image/jpeg, image/png or image/gif. Publishers
+              SHOULD include media:width and media:height attributes on the
+              atom:link element describing the dimensions of the linked image.
+              Processors MAY ignore avatars that are of an inappropriate size
+              for their user interface. Publishers MAY include several images
+              of different sizes.</t>
+            </list></t>
+
+          <t>TODO: Include in here additional properties from the
+          PortableContacts specification. However, the details for this would
+          ideally be in a separate specification for representing people in
+          Atom. The above properties ought to be sufficient for activities
+          describing the creation of friendship connections and so forth.</t>
+
+          <t>TODO: Figure out how to handle the common activity aggregator
+          case where a user claims a particular feed and the activity
+          aggregator then needs to be able to figure out the atom:id value
+          that is used to describe that user. This might manifest as the
+          concept of the "owner" of a particular feed, which is itself an
+          Object and will usually be a person.</t>
+        </section>
+
+        <section anchor="group" title="Group">
+          <t>The "group" Object type represents a social networking group. A
+          group is a collection of people which people can join and leave.</t>
+
+          <t>The Object type URL for the "group" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/group</spanx>.</t>
+
+          <t>A group has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="display name">A name that can be used for the group
+              in the user interface. This is often a name chosen by the
+              creator of the group. Included as the content of the atom:title
+              element.</t>
+
+              <t hangText="avatar">The URL and metadata for an image that
+              represents this group. The URL is represented as the value of
+              the href attribute on an atom:link element with rel avatar and a
+              type of either image/jpeg, image/png or image/gif. Publishers
+              SHOULD include media:width and media:height attributes on the
+              atom:link element describing the dimensions of the linked image.
+              Processors MAY ignore avatars that are of an inappropriate size
+              for their user interface. Publishers MAY include several images
+              of different sizes.</t>
+            </list></t>
+        </section>
+
+        <section title="Place">
+          <t>The "place" object type represents a location on Earth.</t>
+
+          <t>The object type URL for the "place" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/place/</spanx>.</t>
+
+          <t>A place has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="name">The name of the place. Included as the
+              content of the atom:title element.</t>
+
+              <t hangText="geographic coordinates">The latitude and longitude
+              of the place as a point on Earth. Included via the <spanx
+              style="verb">geo:point</spanx> element.</t>
+            </list></t>
+        </section>
       </section>
 
-      <section anchor="save" title="Save">
-        <t>The "save" Verb indicates that the Subject has called out the
-        Object as being of interest primarily to him- or herself. Though this
-        action MAY be shared publicly, the implication is that the Object has
-        been saved primarily for the actor's own benefit rather than to show
-        it to others as would be indicated by the "share" Verb (<xref
-        target="share"></xref>).</t>
+      <section title="Comments and Responses">
+        <t>Most social applications have a concept of "comments", "replies" or
+        "responses" to social Objects. In many cases these are simple text
+        messages, but any Object can in practice be a reply.</t>
 
-        <t>The verb URI for the "save" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save</spanx>.</t>
+        <t>This specification does not define an Object type for a comment nor
+        a Verb for posting a comment. This is because an item being in
+        response to another item is orthogonal to its type, and "posting a
+        comment" is of course simply a "post" action.</t>
+
+        <t>Therefore replies SHOULD be represented using the <spanx
+        style="verb">thr:in-reply-to</spanx> element defined by <xref
+        target="RFC4685"></xref>. Publishers SHOULD also, if available,
+        include metadata about the item being replied to using the mechanisms
+        defined in <xref target="atomcommentmeta-00"></xref>.</t>
+
+        <t>The act of posting a comment is represented by the post Verb as
+        with "top-level" Objects.</t>
+
+        <t>A simple text comment should in most cases not have an Object type.
+        If the reply is in fact an Object such as a video, it SHOULD be
+        annotated with an appropriate Object type.</t>
+
+        <t>Many systems do not have the concept of a title or subject for a
+        comment; such systems MUST include an atom:title element with no text
+        content. Processors SHOULD refer to such comments as simply being "a
+        comment" if they are to be described in a sentence.</t>
+
+        <t><spanx style="strong">FIXME:</spanx> Must figure out how Trackback
+        and friends are represented. An entry that "tracks back" to another is
+        effectively a reply, but there are questions about who publishes this
+        relationship (the responder or the original poster -- or indeed both)
+        and how exactly the entry metadata is represented in a feed.</t>
       </section>
 
-      <section anchor="favorite" title="Mark as Favorite">
-        <t>The "mark as favorite" Verb indicates that the Subject marked the
-        Object as an item of special interest. Objects so marked often appear
-        in a collection of such Objects which MAY be published as a feed of
-        entries annotated with this Verb.</t>
-
-        <t>If a particular service uses favorites as a mechanism by which a
-        user can recall items that were earlier marked, it MAY be appropriate
-        to also mark activities of this type with the "save" Verb as described
-        in <xref target="save"></xref>.</t>
-
-        <t>The verb URI for the "mark as favorite" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/favorite</spanx>.</t>
-      </section>
-
-      <section anchor="view" title="View">
-        <t>The "view" Verb indicates that the Subject viewed the Object in
-        some way. This might include reading an article, watching a video or
-        listening to a song. Although "view" connotes a visual experience,
-        this Verb can equally be used to describe other consumer experiences
-        as appropriate for the type of Object used.</t>
-
-        <t>The verb URI for the "view" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/view/</spanx>.</t>
-      </section>
-
-      <section anchor="follow" title="Start Following">
-        <t>The "start following" Verb indicates that the Subject began
-        following the activity of the Object. In most cases, the Object of
-        this Verb will be a person, but it can potentially be of any type that
-        can sensibly generate activity.</t>
-
-        <t>The verb URI for the "start following" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/follow</spanx>.</t>
-
-        <t>Publishers SHOULD NOT publish multiple "start following" activities
-        with identical Subjects and Objects unless (A) the Publisher published
-        an intervening corresponding "stop following" activity (<xref
-        target="unfollow"></xref>); (B), the Verb's attributes differ to
-        indicate a different "degree" of following; or (C), the Object's
-        attributes differ to indicate a different "aspect" of following.</t>
-
-        <t>Processors MAY ignore (silently drop) successive identical "start
-        following" activities regardless of whether they maintain state
-        sufficient to determine (A), (B), or (C) above.</t>
-      </section>
-
-      <section anchor="unfollow" title="Stop Following">
-        <t>The "stop following" Verb indicates that the Subject ceased
-        following the activity of the Object. In most cases, the Object of
-        this Verb will be a person, but it can potentially be of any type that
-        can sensibly generate activity.</t>
-
-        <t>The verb URI for the "stop following" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/unfollow</spanx>.</t>
-
-        <t>Publishers SHOULD NOT publish multiple "stop following" activities
-        with identical Subjects and Objects unless (A) the Publisher published
-        an intervening corresponding "start following" activity (<xref
-        target="follow"></xref>); (B), the Verb's attributes differ to
-        indicate a different "degree" of following; or (C), the Object's
-        attributes differ to indicate a different "aspect" of following.</t>
-
-        <t>Processors MAY ignore (silently drop) successive identical "stop
-        following" activities regardless of whether they maintain state
-        sufficient to determine (A), (B), or (C) above.</t>
-      </section>
-
-      <section anchor="make-contact" title="Add as a Contact">
-        <t>The "add as a contact" Verb indicates that the Subject has added
-        the Object as a contact, friend, or other similar social relation.
-        This specification only defines the meaning of this Verb when its
-        Object is a person, though implementors SHOULD be prepared to accept
-        other Object types as meaning MAY be provided by extension
-        specifications.</t>
-
-        <t>The verb URI for the "add as a contact" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/make-contact</spanx>.</t>
-
-        <t>Publishers MAY use the "add as a contact" Verb to express that the
-        Subject has expressed interest in forming a connection, but that the
-        connection cannot be formed until the Object reciprocates. See <xref
-        target="confirm-connection"></xref>.</t>
-
-        <t>Publishers SHOULD NOT publish multiple "make contact" activities
-        with identical Subjects and Objects unless (A) the Publisher published
-        an intervening corresponding "break contact" activity (<xref
-        target="break-contact"></xref>); or (B), the Verb's attributes differ
-        to indicate a different "degree" or "style" of contact.</t>
-
-        <t>Processors MAY ignore (silently drop) successive identical "make
-        contact" activities regardless of whether they maintain state
-        sufficient to determine (A) or (B) above.</t>
-      </section>
-
-      <section anchor="confirm-connection" title="Confirm a Connection">
-        <t>The "confirm a connection" Verb indicates the creation of a contact
-        relationship as described in <xref target="make-contact"></xref> that
-        is reciprocated by the Object.</t>
-
-        <t>Since this Verb implies an activity on the part of its Object,
-        processors MUST NOT accept activities with this Verb unless they are
-        able to verify through some external means that there is in fact a
-        reciprocated connection. For example, a processor MAY have received a
-        guarantee from a particular publisher that the publisher will only use
-        this Verb in cases where a reciprocal relationship exists.</t>
-
-        <t>Publishers SHOULD also include a corresponding "add as a contact"
-        Verb in all activities carrying this Verb, as a fallback for
-        processors that are unable to trust the Create a Connection Verb for a
-        given feed.</t>
-
-        <t>The verb URI for the "confirm a connection" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/confirm-connection</spanx>.</t>
-      </section>
-
-      <section anchor="break-contact" title="Remove as a Contact">
-        <t>The "break contact" Verb indicates that the Subject has removed the
-        Object as a contact, friend, or other similar social relation. This
-        specification only defines the meaning of this Verb when its Object is
-        a person, though implementors SHOULD be prepared to accept other
-        Object types as meaning MAY be provided by extension
-        specifications.</t>
-
-        <t>Publishers SHOULD NOT publish multiple "break contact" activities
-        with identical Subjects and Objects unless (A) the Publisher published
-        an intervening corresponding "make contact" activity (<xref
-        target="make-contact"></xref>); or (B), the Verb's attributes differ
-        to indicate a different "degree" or "style" of contact.</t>
-
-        <t>Processors MAY ignore (silently drop) successive identical "break
-        contact" activities regardless of whether they maintain state
-        sufficient to determine (A) or (B) above.</t>
-
-        <t>The verb URI for the "remove as a contact" Verb is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/break-contact</spanx>.</t>
-      </section>
-
-      <section anchor="join" title="Join">
-        <t>The "join" Verb indicates that the actor has become a member of the
-        Object. This specification only defines the meaning of this Verb when
-        its Object is a group, though implementors SHOULD be prepared to
-        handle other Object types as meaning MAY be provided by extension
-        specifications.</t>
-
-        <t>Publishers SHOULD NOT publish multiple "join" activities with
-        identical Subjects and Objects unless (A) the Publisher published and
-        intervening corresponding "leave" activity (<xref
-        target="leave"></xref>); or (B) the Verb's attributes differ to
-        indicate a different membership role.</t>
-
-        <t>Processors MAY ignore (silently drop) successive identical "join"
-        activities regardless of whether they maintain state sufficient to
-        determine (A) or (B) above.</t>
-
-        <t>The verb URI for the "join" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join</spanx>.</t>
-      </section>
-
-      <section anchor="leave" title="Leave">
-        <t>The "leave" Verb indicates that the actor is no longer a member of
-        the Object, and that this is a result of an explicit action by the
-        actor. This specification only defines the meaning of this Verb when
-        its Object is a group, though implementors SHOULD be prepared to
-        handle other Object types as meaning MAY be provided by extension
-        specifications.</t>
-
-        <t>The use of this Verb is not appropriate when a user has been
-        ejected from the group by its administrators or any other situation
-        where the actor did not explicitly choose to leave the group.</t>
-
-        <t>Publishers SHOULD NOT publish multiple "leave" activities with
-        identical Subjects and Objects unless (A) the Publisher published and
-        intervening corresponding "join" activity (<xref
-        target="join"></xref>); or (B) the Verb's attributes differ to
-        indicate a different membership role.</t>
-
-        <t>Processors MAY ignore (silently drop) successive identical "leave"
-        activities regardless of whether they maintain state sufficient to
-        determine (A) or (B) above.</t>
-
-        <t>The verb URI for the "leave" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/leave</spanx>.</t>
-      </section>
-
-      <section anchor="rsvp-yes" title="Positive RSVP">
-        <t>The "positive RSVP" verb indicates that the actor has made a
-        positive RSVP for the object. This specification only defines the
-        meaning of this verb when its object is an event (see <xref
-        target="event"></xref>), though implementors SHOULD be prepared to
-        handle other object types as meaning MAY be provided by extension
-        specifications.</t>
-
-        <t>The use of this Verb is only appropriate when the RSVP was created
-        by an explicit action by the actor. It is not appropriate to use this
-        verb when a user has been added as an attendee by an event organiser
-        or administrator.</t>
-
-        <t>The verb URI for the "positive RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-yes</spanx>.</t>
-      </section>
-
-      <section anchor="rsvp-maybe" title="Possible RSVP">
-        <t>The "possible RSVP" verb indicates that the actor has made a
-        possible RSVP for the object. This specification only defines the
-        meaning of this verb when its object is an event (see <xref
-        target="event"></xref>), though implementors SHOULD be prepared to
-        handle other object types as meaning MAY be provided by extension
-        specifications.</t>
-
-        <t>The use of this Verb is only appropriate when the RSVP was created
-        by an explicit action by the actor. It is not appropriate to use this
-        verb when a user has been added as an attendee by an event organiser
-        or administrator.</t>
-
-        <t>The verb URI for the "possible RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-maybe</spanx>.</t>
-      </section>
-
-      <section anchor="rsvp-no" title="Negative RSVP">
-        <t>The "negative RSVP" verb indicates that the actor has made a
-        negative RSVP for the object. This specification only defines the
-        meaning of this verb when its object is an event (see <xref
-        target="event"></xref>), though implementors SHOULD be prepared to
-        handle other object types as meaning MAY be provided by extension
-        specifications.</t>
-
-        <t>The use of this Verb is only appropriate when the RSVP was created
-        by an explicit action by the actor. It is not appropriate to use this
-        verb when a user has been added as an attendee by an event organiser
-        or administrator.</t>
-
-        <t>The verb URI for the "negative RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-no</spanx>.</t>
-      </section>
-
-      <section anchor="invite" title="Invite">
-        <t>The "invite" verb indicates that the actor has invited the object
-        to take part in or join the target. This specification only defines
-        the meaning of this verb when its target is either an event (see <xref
-        target="event"></xref>) or a group (see <xref
-        target="group"></xref>).</t>
-
-        <t>The verb URI for the "invite" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/invite</spanx>.</t>
-      </section>
-    </section>
-
-    <section title="Base Object Types">
-      <section anchor="article" title="Article">
-        <t>The "article" Object type indicates that the Object is an article,
-        such as a news article, a knowledge base entry, or other similar
-        construct.</t>
-
-        <t>Articles generally consist of paragraphs of text, in some cases
-        incorporating embedded media such as photos and inline hyperlinks to
-        other resources.</t>
-
-        <t>The Object type URL for the "Article" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/article</spanx>.</t>
-
-        <t>An article has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title of the entry. Included as the
-            content of the atom:title element. This element MUST be included
-            with empty content if the entry does not have a title.</t>
-
-            <t hangText="summary">A short excerpt of the body content that
-            gives an introduction to or a summary of the full content. This
-            element SHOULD be omitted if the entry does not have a
-            summary.</t>
-
-            <t hangText="content">The main body content of the entry. Included
-            as the content of the atom:content element.</t>
-
-            <t hangText="permalink">The canonical URL for the entry.
-            Represented as the value of the <spanx style="verb">href</spanx>
-            attribute on an <spanx style="verb">atom:link</spanx> element with
-            a <spanx style="verb">rel</spanx> value of <spanx style="verb">alternate</spanx>
-            and a <spanx style="verb">type</spanx> value of <spanx
-            style="verb">text/html</spanx>.</t>
-          </list></t>
-      </section>
-
-      <section title="Weblog Entry">
-        <t>The "weblog entry" Object type indicates that the Object is an
-        entry in a weblog or some other similar construct.</t>
-
-        <t>The "weblog entry" Object type is a specialization of the "article"
-        Object type, so publishers SHOULD also include the Object type URL for
-        the "article" Object type when publishing Object entries of this
-        type.</t>
-
-        <t>The Object type URL for the "weblog entry" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/blog-entry</spanx>.</t>
-
-        <t>A weblog entry has all of the properties of an article as defined
-        in <xref target="article"></xref>, and has no additional
-        properties.</t>
-      </section>
-
-      <section title="Note">
-        <t>The "note" Object type represents short notes or status updates.
-        This Object type is intended for use in "micro-blogging" and in
-        systems where users are invited to publish a timestamped "status".</t>
-
-        <t>A note is similar in structure to a weblog entry, but it does not
-        have a title and its body tends to be shorter. Applications will often
-        display the entire content of a note in an activity stream UI, whereas
-        they MAY display only the title or the title and summary for a weblog
-        entry.</t>
-
-        <t>The Object type URL for the "note" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/note</spanx>.</t>
-
-        <t>A note has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="content">The content of the note. Included as the
-            content of the atom:content element. Publishers SHOULD include any
-            markup necessary to achieve a similar presentation to that on the
-            publisher's own HTML pages, including any links that the service
-            automatically adds. Processors MAY remove the markup and consider
-            the note to be plain text.</t>
-
-            <t hangText="permalink">The canonical URL for the note.
-            Represented as the value of the <spanx style="verb">href</spanx>
-            attribute on an <spanx style="verb">atom:link</spanx> element with
-            a <spanx style="verb">rel</spanx> value of <spanx style="verb">alternate</spanx>
-            and a <spanx style="verb">type</spanx> value of <spanx
-            style="verb">text/html</spanx>.</t>
-          </list></t>
-
-        <t><spanx style="strong">TODO:</spanx> Figure out how to handle the
-        notes published by Facebook and Plaxo that are full sentences that
-        always start with the name of the actor. Also check out
-        internationalization issues: subjects don't always come at the start
-        of sentences, even in Facebook.</t>
-      </section>
-
-      <section title="File">
-        <t>The "file" Object type represents some document or other file with
-        no additional machine-readable semantics.</t>
-
-        <t>It is intended that this type be used as a base type for other
-        Objects that manifest as files, so that additional semantics can be
-        added while providing a fallback ability for clients that do not
-        support the more specific Object type.</t>
-
-        <t>The Object type URL for the "file" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/file</spanx>.</t>
-
-        <t>A file has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="associated file URL">The URL of the file described by
-            this Object entry. The URL is represented as the value of the href
-            attribute on an atom:link element with rel enclosure. Should there
-            be multiple links with rel enclosure with different type attribute
-            value, they are considered to be alternate representations of the
-            file. Should there be multiple links with rel enclosure and with
-            the <spanx>same</spanx> attribute value, the meaning is undefined
-            for the file Object type and consumers MAY choose to present only
-            the first of each supported type.</t>
-          </list></t>
-      </section>
-
-      <section anchor="image" title="Image">
-        <t>The "image" Object type represents a graphical still image.</t>
-
-        <t>The Object type URL for the "image" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/image</spanx>.</t>
-
-        <t>A photo has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title or short caption assigned to the
-            image by the author. Included as the content of the atom:title
-            element. If the author has not provided a title, the publisher MAY
-            synthesize a title e.g. from the image filename, or the publisher
-            MAY include the atom:title element with no content.</t>
-
-            <t hangText="thumbnail">The URL and metadata for a thumbnail
-            version of the image. The URL is represented as the value of the
-            href attribute on an atom:link element with rel preview and a type
-            of either image/jpeg, image/png or image/gif. Publishers SHOULD
-            include media:width and media:height attributes on the atom:link
-            element describing the dimensions of the linked image. Processors
-            MAY ignore thumbnails that are of an inappropriate size for their
-            user interface.</t>
-
-            <t hangText="larger image">The URL and metadata for a larger,
-            ideally full-size version of the image intended for standalone
-            viewing. The URL is represented as the value of the href attribute
-            on an atom:link element with rel enclosure and a type of either
-            image/jpeg, image/png or image/gif. Publishers SHOULD include
-            media:width and media:height attributes on the atom:link element
-            describing the dimensions of the linked image.</t>
-
-            <t hangText="image page URL">The URL of a web page where the image
-            and the associated metadata can be viewed. Represented as the
-            value of the href attribute on an atom:link element with a rel
-            value of alternate and a type value of text/html.</t>
-
-            <t hangText="time and date the photo was taken">The time and date
-            when the photo was taken, as opposed to when it was posted. This
-            information is often determined automatically by the
-            photographer's camera, but MAY be inaccurate due to an incorrect
-            clock in the camera. <spanx style="strong">TODO:</spanx> Figure
-            out how to publish this. There doesn't seem to be any
-            well-deployed standard.</t>
-
-            <t hangText="description">The description or long caption assigned
-            to the photo by the author. Included as the content of the
-            media:description element as described in [AtomMedia]. If the
-            author has not provided a description, this element SHOULD be
-            omitted.</t>
-          </list></t>
-
-        <t>Publishers SHOULD include an atom:content element containing
-        content that will present the photo and any necessary metadata to the
-        user of a processor that is not media-aware. Media-aware processors
-        SHOULD prefer the specific properties given above, but MAY use the
-        content in preference in cases where the properties above are
-        incomplete or unsuitable.</t>
-      </section>
-
-      <section title="Photo">
-        <t>The "photo" Object type represents a digitized photograph. "photo"
-        is a specialized type of "image" that SHOULD be used when the
-        publisher can guarantee that the associated image is a photograph as
-        opposed to another kind of image such as an illustration or
-        screenshot.</t>
-
-        <t>The Object type URL for the "photo" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/photo</spanx>.</t>
-
-        <t>The photo Object type inherits all of the properties defined for
-        image in <xref target="image"></xref>, but also has the following
-        additional properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="time and date the photo was taken">The time and date
-            when the photo was taken, as opposed to when it was posted. This
-            information is often determined automatically by the
-            photographer's camera, but MAY be inaccurate due to an incorrect
-            clock in the camera. <spanx style="strong">TODO:</spanx> Figure
-            out how to publish this. There doesn't seem to be any
-            well-deployed standard.</t>
-          </list></t>
-      </section>
-
-      <section title="Photo Album">
-        <t>The "photo album" object type represents a collection of
-        images.</t>
-
-        <t>The object type URL for the "photo album" object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/photo-album/</spanx>.</t>
-
-        <t>The photo album object type has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title or short caption assigned to the
-            album by the author. Included as the content of the atom:title
-            element.</t>
-
-            <t hangText="thumbnail">The URL and metadata for a preview image
-            for the album. The URL is represented as the value of the href
-            attribute on an atom:link element with rel preview and a type of
-            either image/jpeg, image/png or image/gif. Publishers SHOULD
-            include media:width and media:height attributes on the atom:link
-            element describing the dimensions of the linked image. Processors
-            MAY ignore thumbnails that are of an inappropriate size for their
-            user interface.</t>
-
-            <t hangText="album page URL">The URL of a web page where the photo
-            album can be viewed. Represented as the value of the href
-            attribute on an atom:link element with a rel value of alternate
-            and a type value of text/html.</t>
-          </list></t>
-      </section>
-
-      <section title="Playlist">
-        <t>The "playlist" object type represents an ordered list of time-based
-        media items, such as video and audio objects.</t>
-
-        <t>The object type URL for the "playlist" object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/playlist/</spanx>.</t>
-
-        <t>The playlist object type has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title or short caption assigned to the
-            playlist by the author. Included as the content of the atom:title
-            element.</t>
-
-            <t hangText="thumbnail">The URL and metadata for a preview image
-            for the playlist. The URL is represented as the value of the href
-            attribute on an atom:link element with rel preview and a type of
-            either image/jpeg, image/png or image/gif. Publishers SHOULD
-            include media:width and media:height attributes on the atom:link
-            element describing the dimensions of the linked image. Processors
-            MAY ignore thumbnails that are of an inappropriate size for their
-            user interface.</t>
-
-            <t hangText="playlist page URL">The URL of a web page where the
-            playlist can be viewed. Represented as the value of the href
-            attribute on an atom:link element with a rel value of alternate
-            and a type value of text/html.</t>
-          </list></t>
-      </section>
-
-      <section anchor="video" title="Video">
-        <t>The "video" Object type represents video content, which usually
-        consists of a motion picture track and an audio track.</t>
-
-        <t>The Object type URL for the "video" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/video</spanx>.</t>
-
-        <t>A video has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title or short caption assigned to the
-            video by the author. Included as the content of the atom:title
-            element. If the author has not provided a title, the publisher MAY
-            synthesize a title e.g. from the video filename, or the publisher
-            MAY include the atom:title element with no content.</t>
-
-            <t hangText="thumbnail">The URL and metadata for a thumbnail
-            version of a representative frame of the video. The URL is
-            represented as the value of the href attribute on an atom:link
-            element with rel preview and a type of either image/jpeg,
-            image/png or image/gif. Publishers SHOULD include media:width and
-            media:height attributes on the atom:link element describing the
-            dimensions of the linked image. Processors MAY ignore thumbnails
-            that are of an inappropriate size for their user interface.</t>
-
-            <t hangText="video stream">The URL and metadata for the video
-            content itself. The URL is represented as the value of the href
-            attribute on an atom:link element with rel enclosure and a type
-            that matches video/*. Publishers SHOULD include media:width and
-            media:height attributes on the atom:link element describing the
-            dimensions of the linked video, and SHOULD include a
-            media:duration attribute giving the length of the video.</t>
-
-            <t hangText="video page URL">The URL of a web page where the video
-            and the associated metadata can be viewed. Represented as the
-            value of the href attribute on an atom:link element with a rel
-            value of alternate and a type value of text/html.</t>
-
-            <t hangText="player applet">The URL and metadata for some kind of
-            applet that will allow a user to view the video. The URL is
-            represented as the value of the href attribute on an atom:link
-            element with rel alternate and an appropriate type. Publishers
-            SHOULD include media:width and media:height attributes on the
-            atom:link element describing the ideal dimensions of the linked
-            applet. If both a video page and player applet are included,
-            publishers SHOULD include the video page link element first in
-            document order for compatibility with legacy, non-activity feed
-            consumers.</t>
-
-            <t hangText="description">The description or long caption assigned
-            to the video by the author. Included as the content of the
-            atom:summary element as described in [AtomMedia]. If the author
-            has not provided a description, this element SHOULD be
-            omitted.</t>
-          </list></t>
-
-        <t>Publishers SHOULD include an atom:content element containing
-        content that will present the video and any necessary metadata to the
-        user of a processor that is not media-aware. Media-aware processors
-        SHOULD prefer the specific properties given above, but MAY use the
-        content in preference in cases where the properties above are
-        incomplete or unsuitable.</t>
-      </section>
-
-      <section title="TV Episode">
-        <t>The "tv episode" Object type represents a single television
-        episode.</t>
-
-        <t>Objects of type TV Episode might contain information about the TV
-        Episode, or they might contain some representation of the TV episode
-        content itself. In the latter case, the TV Episode SHOULD also be
-        annotated with the "video" Object type and use its properties as
-        described in <xref target="video"></xref>. This type SHOULD be used
-        only when the publisher can guarantee that the Object is a TV episode
-        rather than merely a generic video.</t>
-
-        <t>The Object type URL for the "tv episode" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/tv-episode</spanx>.</t>
-
-        <t>TODO: Perhaps define a way to describe the series title, episode
-        title, season number and episode number in a machine-readable way.</t>
-      </section>
-
-      <section title="Movie">
-        <t>The "movie" Object type represents a cinematic presentation.</t>
-
-        <t>Objects of type Movie might contain information about the Movie, or
-        they might contain some representation of the Movie content itself. In
-        the latter case, the Movie SHOULD also be annotated with the "video"
-        Object type and use its properties as described in <xref
-        target="video"></xref>. This type should only be uesd when the
-        publisher can guarantee that the Object is a Movie rather than merely
-        a generic video.</t>
-
-        <t>The Object type URL for the "movie" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/movie</spanx>.</t>
-
-        <t>A movie has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title of the movie. Included as the
-            content of the atom:title element.</t>
-
-            <t hangText="summary">A brief summary of the plot of the movie.
-            Included as the content of the atom:summary element.</t>
-          </list></t>
-      </section>
-
-      <section title="Video Podcast">
-        <t>The "video podcast" Object type represents a single episode of an
-        video podcast.</t>
-
-        <t>The Object type URL for the "video podcast" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/video-podcast</spanx>.</t>
-
-        <t>Video podcast is a specialized type of video, and so publishers
-        SHOULD also include the video Object type in Object entries of this
-        type. This type should only be used when the publisher can guarantee
-        that the Object is a video podcast rather than merely a generic
-        video.</t>
-
-        <t>A video podcast inherits the properties of video as defined in
-        <xref target="video"></xref>. It has no additional properties.</t>
-      </section>
-
-      <section anchor="audio" title="Audio">
-        <t>The "audio" Object type represents audio content.</t>
-
-        <t>The Object type URL for the "audio" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/audio</spanx>.</t>
-
-        <t>An audio Object has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title or short caption assigned to the
-            audio by the author. Included as the content of the atom:title
-            element. If the author has not provided a title, the publisher MAY
-            synthesize a title e.g. from the audio filename, or the publisher
-            MAY include the atom:title element with no content.</t>
-
-            <t hangText="audio stream">The URL and metadata for the audio
-            content itself. The URL is represented as the value of the href
-            attribute on an atom:link element with rel enclosure and a type
-            that matches audio/*. Publishers SHOULD include a media:duration
-            attribute on the atom:link element giving the length of the audio
-            presentation in seconds.</t>
-
-            <t hangText="audio page URL">The URL of a web page where the audio
-            and the associated metadata can be accessed. Represented as the
-            value of the href attribute on an atom:link element with a rel
-            value of alternate and a type value of text/html.</t>
-
-            <t hangText="player applet">The URL and metadata for some kind of
-            applet that will allow a user to listen to the audio. The URL is
-            represented as the value of the href attribute on an atom:link
-            element with rel alternate and an appropriate type. Publishers
-            SHOULD include media:width and media:height attributes on the
-            atom:link element describing the ideal dimensions of the linked
-            applet. If both an audio page and player applet are included,
-            publishers SHOULD include the audio page link element first in
-            document order for compatibility with legacy, non-activity feed
-            consumers.</t>
-
-            <t hangText="description">The description or long caption assigned
-            to the audio by the author. Included as the content of the
-            atom:summary element as described in [AtomMedia]. If the author
-            has not provided a description, this element SHOULD be
-            omitted.</t>
-          </list></t>
-      </section>
-
-      <section title="Audio Podcast">
-        <t>The "audio podcast" Object type represents a single episode of an
-        audio-only podcast.</t>
-
-        <t>The Object type URL for the "audio podcast" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/audio-podcast</spanx>.</t>
-
-        <t>Audio podcast is a specialized type of audio, and so publishers
-        SHOULD also include the audio Object type in Object entries of this
-        type. This type should only be used when the publisher can guarantee
-        that the Object is an audio podcast rather than merely a generic audio
-        stream.</t>
-
-        <t>An audio podcast inherits the properties of audio as defined in
-        <xref target="audio"></xref>. It has no additional properties.</t>
-      </section>
-
-      <section title="Bookmark">
-        <t>The "bookmark" Object type represents a pointer to some URL --
-        typically a web page. In most cases, a bookmark is specific to a given
-        user and contains metadata chosen by that user. Bookmark Objects are
-        similar in principle to the concept of bookmarks or favorites in a web
-        browser. A bookmark represents a pointer to the URL, not the URL or
-        the associated resource itself.</t>
-
-        <t>When dealing with bookmarks it is important to note the distinction
-        between the title, description, and URL of the bookmark itself and the
-        title, content, and URL of the resource that is the target of the
-        bookmark. In some implementations these MAY be the same, but bookmark
-        managers often allow a user to edit the title and description of his
-        or her own bookmarks to differ from the metadata on the target
-        itself.</t>
-
-        <t>Some implementations refer to this Object type as a "link". This
-        specification uses the term "bookmark" to avoid confusion with the
-        general concept of hyperlinks which apply to all Object types.</t>
-
-        <t>Since bookmarks are often specific to a particular user, even
-        though multiple users might have bookmarks pointing at the same
-        resource, it is appropriate to use the "post" Verb to describe the
-        publication of such a bookmark. The "mark as favorite" Verb SHOULD be
-        used when a user flags another user's bookmark as being a favorite
-        without creating his own bookmark, or when a user flags his own
-        bookmark as being a favorite as a special classification within his
-        own bookmark collection.</t>
-
-        <t>The Object type URL for the "bookmark" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/bookmark</spanx>.</t>
-
-        <t>A bookmark has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="title">The title of the bookmark, as entered by the
-            user who created the bookmark. Included as the content of the
-            atom:title element. Publishers MAY use the title of the target
-            resource as a default for this property where a user hasn't
-            entered a customized value.</t>
-
-            <t hangText="description">The description of the bookmark, as
-            entered by the user who created the bookmark. Included as the
-            content of the atom:summary element. If no description has been
-            provided, publishers SHOULD omit this element.</t>
-
-            <t hangText="target URL">The URL of the item that is the target of
-            the bookmark. Represented as the value of the href attribute on an
-            atom:link element with rel "related". An entry with this Object
-            type MUST NOT include related links except for the purpose of
-            representing the target URL.</t>
-
-            <t hangText="bookmark page URL">The URL of a page that describes
-            the bookmark. This URL is often specific to the user that
-            published the bookmark. Represented as the value of the href
-            attribute on an atom:link element with a rel value of alternate
-            and a type value of text/html.</t>
-
-            <t hangText="target title">The title of the item that is the
-            target of the bookmark. Represented as the value of the title
-            attribute on the atom:link element from which the target URL was
-            obtained.</t>
-
-            <t hangText="thumbnail">The URL and metadata for a thumbnail
-            version of the page. The URL is represented as the value of the
-            href attribute on an atom:link element with rel preview and a type
-            of either image/jpeg, image/png or image/gif. Publishers SHOULD
-            include media:width and media:height attributes on the atom:link
-            element describing the dimensions of the linked image. Processors
-            MAY ignore thumbnails that are of an inappropriate size for their
-            user interface.</t>
-          </list></t>
-
-        <t>Publishers SHOULD include an atom:content element containing
-        content that will present the bookmark to the user of a processor that
-        does not have special support for bookmarks. Bookmark-aware processors
-        SHOULD prefer the specific properties given above, but MAY use the
-        content in preference in cases where the properties above are
-        incomplete or unsuitable.</t>
-      </section>
-
-      <section title="Person">
-        <t>The "person" Object type represents a human person, whether real or
-        ficticious, or some other anthropomorphised ficticious character.</t>
-
-        <t>The Object type URL for the "person" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
-
-        <t>Where a particular person is referred to across multiple sources,
-        the same value for <spanx style="verb">atom:id</spanx> SHOULD be used
-        whereever possible. Two person Objects in the same feed document with
-        the same <spanx style="verb">atom:id</spanx> value can be considered
-        by processors to be the same person. Processors MAY use other
-        information to determine when two person Objects refer to the same
-        person. A processor MUST NOT assume that two person Objects with
-        different values for <spanx style="verb">atom:id</spanx> refer to
-        different people; different publishers may use different id values for
-        the same person.</t>
-
-        <t>A person has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="display name">A name that can be used for the user in
-            the user interface. This is often a name by which the person has
-            chosen to be known in a given context; no restriction is placed on
-            what kind of name may be used here. Included as the content of the
-            atom:title element.</t>
-
-            <t hangText="avatar">The URL and metadata for an image that
-            represents this user. The URL is represented as the value of the
-            href attribute on an atom:link element with rel avatar and a type
-            of either image/jpeg, image/png or image/gif. Publishers SHOULD
-            include media:width and media:height attributes on the atom:link
-            element describing the dimensions of the linked image. Processors
-            MAY ignore avatars that are of an inappropriate size for their
-            user interface. Publishers MAY include several images of different
-            sizes.</t>
-          </list></t>
-
-        <t>TODO: Include in here additional properties from the
-        PortableContacts specification. However, the details for this would
-        ideally be in a separate specification for representing people in
-        Atom. The above properties ought to be sufficient for activities
-        describing the creation of friendship connections and so forth.</t>
-
-        <t>TODO: Figure out how to handle the common activity aggregator case
-        where a user claims a particular feed and the activity aggregator then
-        needs to be able to figure out the atom:id value that is used to
-        describe that user. This might manifest as the concept of the "owner"
-        of a particular feed, which is itself an Object and will usually be a
-        person.</t>
-      </section>
-
-      <section anchor="group" title="Group">
-        <t>The "group" Object type represents a social networking group. A
-        group is a collection of people which people can join and leave.</t>
-
-        <t>The Object type URL for the "group" Object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/group</spanx>.</t>
-
-        <t>A group has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="display name">A name that can be used for the group
-            in the user interface. This is often a name chosen by the creator
-            of the group. Included as the content of the atom:title
-            element.</t>
-
-            <t hangText="avatar">The URL and metadata for an image that
-            represents this group. The URL is represented as the value of the
-            href attribute on an atom:link element with rel avatar and a type
-            of either image/jpeg, image/png or image/gif. Publishers SHOULD
-            include media:width and media:height attributes on the atom:link
-            element describing the dimensions of the linked image. Processors
-            MAY ignore avatars that are of an inappropriate size for their
-            user interface. Publishers MAY include several images of different
-            sizes.</t>
-          </list></t>
-      </section>
-
-      <section anchor="event" title="Event">
-        <t>The "event" object type represents an event that occurs in a
-        certain place during a particular interval of time.</t>
-
-        <t>The object type URL for the "event" object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/event</spanx>.</t>
-
-        <t>An event has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="name">The name of the event as provided by its
-            organiser. Included as the content of the atom:title element.</t>
-
-            <t hangText="start date and time">The date and time that the event
-            begins. Included via a cal:dtstart element as defined in xCal.</t>
-
-            <t hangText="end date and time">The date and time that the event
-            ends. Included via a cal:dtend element as defined in xCal.</t>
-
-            <t hangText="summary">A short description of the event as provided
-            by its organiser. Included as the content of the atom:summary
-            element.</t>
-          </list></t>
-
-        <t>TODO: Include a real reference to xCal, or some other similar spec.
-        xCal is currently only an IETF Internet-Draft.</t>
-
-        <t>TODO: Find a way to represent location that allows locations to be
-        specified as full addresses, geo coordinates, natural-language strings
-        (e.g. "Julie's House") and full-blown "venue" objects when such a
-        thing exists.</t>
-
-        <t>TODO: Find a way to represent the host of an event?</t>
-      </section>
-
-      <section title="Place">
-        <t>The "place" object type represents a location on Earth.</t>
-
-        <t>The object type URL for the "place" object type is <spanx
-        style="verb">http://activitystrea.ms/schema/1.0/place/</spanx>.</t>
-
-        <t>A place has the following properties:</t>
-
-        <t><list style="hanging">
-            <t hangText="name">The name of the place. Included as the content
-            of the atom:title element.</t>
-
-            <t hangText="geographic coordinates">The latitude and longitude of
-            the place as a point on Earth. Included via the <spanx
-            style="verb">geo:point</spanx> element.</t>
-          </list></t>
+      <section title="Base Activity Context Elements">
+        <t>This specification defines an initial set of activity context
+        elements that can be used with all activity entries. These provide
+        orthogonal context information that can apply to all activities.</t>
+
+        <section title="Location">
+          <t>Location context describes the location where the user was at the
+          time the activity was performed. This may be an accurate geographic
+          coordinate, a street address, a free-form location name or a
+          combination of these.</t>
+
+          <t>Geographic coordinates can be included as a <spanx style="verb">geo:point</spanx>
+          element as a direct child of the activity entry, as described by the
+          GeoRSS specification.</t>
+
+          <t>Addresses can be included using a <spanx style="verb">pc:address</spanx>
+          element. TODO: Write some more about this.</t>
+
+          <t>TODO: Figure out how to include freeform string locations.</t>
+        </section>
+
+        <section title="Mood">
+          <t>Mood describes the mood of the user when the activity was
+          performed. This is usually collected via an extra field in the user
+          interface used to perform the activity. For the purpose of this
+          schema, a mood is a freeform, short mood keyword or phrase along
+          with an optional mood icon image.</t>
+
+          <t>Moods are included via a mood element in the namespace <spanx
+          style="verb">http://activitystrea.ms/context/</spanx>. TODO: Write a
+          spec for this?</t>
+
+          <t>The content of the mood element is the mood keyword or
+          phrase.</t>
+
+          <t>The mood element may have an optional <spanx style="verb">icon</spanx>
+          attribute which contains the URL of a mood icon image. The mood icon
+          image SHOULD be small and appropriate to be displayed alongside the
+          mood keyword at a normal text size.</t>
+        </section>
       </section>
     </section>
 
-    <section title="Comments and Responses">
-      <t>Most social applications have a concept of "comments", "replies" or
-      "responses" to social Objects. In many cases these are simple text
-      messages, but any Object can in practice be a reply.</t>
+    <section title="Event Schema">
+      <t>The event schema provides a vocabulary that is useful in applications
+      that use real-world events and meetings as social objects.</t>
 
-      <t>This specification does not define an Object type for a comment nor a
-      Verb for posting a comment. This is because an item being in response to
-      another item is orthogonal to its type, and "posting a comment" is of
-      course simply a "post" action.</t>
+      <section title="Event Verbs">
+        <section anchor="rsvp-yes" title="Positive RSVP">
+          <t>The "positive RSVP" verb indicates that the actor has made a
+          positive RSVP for the object. This specification only defines the
+          meaning of this verb when its object is an event (see <xref
+          target="event"></xref>), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications.</t>
 
-      <t>Therefore replies SHOULD be represented using the <spanx
-      style="verb">thr:in-reply-to</spanx> element defined by <xref
-      target="RFC4685"></xref>. Publishers SHOULD also, if available, include
-      metadata about the item being replied to using the mechanisms defined in
-      <xref target="atomcommentmeta-00"></xref>.</t>
+          <t>The use of this Verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</t>
 
-      <t>The act of posting a comment is represented by the post Verb as with
-      "top-level" Objects.</t>
+          <t>The verb URI for the "positive RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-yes</spanx>.</t>
+        </section>
 
-      <t>A simple text comment should in most cases not have an Object type.
-      If the reply is in fact an Object such as a video, it SHOULD be
-      annotated with an appropriate Object type.</t>
+        <section anchor="rsvp-maybe" title="Possible RSVP">
+          <t>The "possible RSVP" verb indicates that the actor has made a
+          possible RSVP for the object. This specification only defines the
+          meaning of this verb when its object is an event (see <xref
+          target="event"></xref>), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications.</t>
 
-      <t>Many systems do not have the concept of a title or subject for a
-      comment; such systems MUST include an atom:title element with no text
-      content. Processors SHOULD refer to such comments as simply being "a
-      comment" if they are to be described in a sentence.</t>
+          <t>The use of this Verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</t>
 
-      <t><spanx style="strong">FIXME:</spanx> Must figure out how Trackback
-      and friends are represented. An entry that "tracks back" to another is
-      effectively a reply, but there are questions about who publishes this
-      relationship (the responder or the original poster -- or indeed both)
-      and how exactly the entry metadata is represented in a feed.</t>
-    </section>
+          <t>The verb URI for the "possible RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-maybe</spanx>.</t>
+        </section>
 
-    <section title="Base Activity Context Elements">
-      <t>This specification defines an initial set of activity context
-      elements that can be used with all activity entries. These provide
-      orthogonal context information that can apply to all activities.</t>
+        <section anchor="rsvp-no" title="Negative RSVP">
+          <t>The "negative RSVP" verb indicates that the actor has made a
+          negative RSVP for the object. This specification only defines the
+          meaning of this verb when its object is an event (see <xref
+          target="event"></xref>), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications.</t>
 
-      <section title="Location">
-        <t>Location context describes the location where the user was at the
-        time the activity was performed. This may be an accurate geographic
-        coordinate, a street address, a free-form location name or a
-        combination of these.</t>
+          <t>The use of this Verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</t>
 
-        <t>Geographic coordinates can be included as a <spanx style="verb">geo:point</spanx>
-        element as a direct child of the activity entry, as described by the
-        GeoRSS specification.</t>
-
-        <t>Addresses can be included using a <spanx style="verb">pc:address</spanx>
-        element. TODO: Write some more about this.</t>
-
-        <t>TODO: Figure out how to include freeform string locations.</t>
+          <t>The verb URI for the "negative RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-no</spanx>.</t>
+        </section>
       </section>
 
-      <section title="Mood">
-        <t>Mood describes the mood of the user when the activity was
-        performed. This is usually collected via an extra field in the user
-        interface used to perform the activity. For the purpose of this
-        schema, a mood is a freeform, short mood keyword or phrase along with
-        an optional mood icon image.</t>
+      <section title="Event Object Types">
+        <section anchor="event" title="Event">
+          <t>The "event" object type represents an event that occurs in a
+          certain place during a particular interval of time.</t>
 
-        <t>Moods are included via a mood element in the namespace <spanx
-        style="verb">http://activitystrea.ms/context/</spanx>. TODO: Write a
-        spec for this?</t>
+          <t>The object type URL for the "event" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/event</spanx>.</t>
 
-        <t>The content of the mood element is the mood keyword or phrase.</t>
+          <t>An event has the following properties:</t>
 
-        <t>The mood element may have an optional <spanx style="verb">icon</spanx>
-        attribute which contains the URL of a mood icon image. The mood icon
-        image SHOULD be small and appropriate to be displayed alongside the
-        mood keyword at a normal text size.</t>
+          <t><list style="hanging">
+              <t hangText="name">The name of the event as provided by its
+              organiser. Included as the content of the atom:title
+              element.</t>
+
+              <t hangText="start date and time">The date and time that the
+              event begins. Included via a cal:dtstart element as defined in
+              xCal.</t>
+
+              <t hangText="end date and time">The date and time that the event
+              ends. Included via a cal:dtend element as defined in xCal.</t>
+
+              <t hangText="summary">A short description of the event as
+              provided by its organiser. Included as the content of the
+              atom:summary element.</t>
+            </list></t>
+
+          <t>TODO: Include a real reference to xCal, or some other similar
+          spec. xCal is currently only an IETF Internet-Draft.</t>
+
+          <t>TODO: Find a way to represent location that allows locations to
+          be specified as full addresses, geo coordinates, natural-language
+          strings (e.g. "Julie's House") and full-blown "venue" objects when
+          such a thing exists.</t>
+
+          <t>TODO: Find a way to represent the host of an event?</t>
+        </section>
+      </section>
+    </section>
+
+    <section title="Music Schema">
+      <t>The music schema provides a vocabulary that is useful in applications
+      that use music, musicians and albums as social objects.</t>
+
+      <section title="Music Object Types">
+        <section title="Music Album">
+          <t>The "music album" object type represents a set of musical
+          recordings placed into a compilation, usually to be sold together as
+          a single set.</t>
+
+          <t>The object type URL for the "music album" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/music-album</spanx>.</t>
+
+          <t>The music album object type has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title or short caption assigned to the
+              album by the author. Included as the content of the atom:title
+              element.</t>
+
+              <t hangText="thumbnail">The URL and metadata for a preview image
+              for the album. The URL is represented as the value of the href
+              attribute on an atom:link element with rel preview and a type of
+              either image/jpeg, image/png or image/gif. Publishers SHOULD
+              include media:width and media:height attributes on the atom:link
+              element describing the dimensions of the linked image.
+              Processors MAY ignore thumbnails that are of an inappropriate
+              size for their user interface.</t>
+
+              <t hangText="album page URL">The URL of a web page where the
+              album can be viewed. Represented as the value of the href
+              attribute on an atom:link element with a rel value of alternate
+              and a type value of text/html.</t>
+            </list></t>
+        </section>
+
+        <section title="Song">
+          <t>The "tv episode" Object type represents a song or a recording of
+          a song.</t>
+
+          <t>Objects of type Song might contain information about the song or
+          recording, or they might contain some representation of the
+          recording itself. In the latter case, the song SHOULD also be
+          annotated with the "audio" object type as described in <xref
+          target="audio"></xref> and use its properties. This type should only
+          be used when the publisher can guarantee that the object is a song
+          rather than merely a generic audio stream.</t>
+
+          <t>The Object type URL for the "song" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/song</spanx>.</t>
+
+          <t>A song has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title of the movie. Included as the
+              content of the atom:title element.</t>
+            </list></t>
+
+          <t>TODO: Include a way to indicate the artist associated with the
+          song, the album a particular recording is from, etc. Recording
+          artist could potentially be added as an Object type in its own right
+          to allow for this.</t>
+        </section>
+      </section>
+    </section>
+
+    <section title="Podcasting Schema">
+      <t>The music schema provides a vocabulary that is useful in applications
+      that produce or consume audio and video podcasts.</t>
+
+      <section title="Podcasting Object Types">
+        <section title="Audio Podcast">
+          <t>The "audio podcast" Object type represents a single episode of an
+          audio-only podcast.</t>
+
+          <t>The Object type URL for the "audio podcast" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/audio-podcast</spanx>.</t>
+
+          <t>Audio podcast is a specialized type of audio, and so publishers
+          SHOULD also include the audio Object type in Object entries of this
+          type. This type should only be used when the publisher can guarantee
+          that the Object is an audio podcast rather than merely a generic
+          audio stream.</t>
+
+          <t>An audio podcast inherits the properties of audio as defined in
+          <xref target="audio"></xref>. It has no additional properties.</t>
+        </section>
+
+        <section title="Video Podcast">
+          <t>The "video podcast" Object type represents a single episode of an
+          video podcast.</t>
+
+          <t>The Object type URL for the "video podcast" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/video-podcast</spanx>.</t>
+
+          <t>Video podcast is a specialized type of video, and so publishers
+          SHOULD also include the video Object type in Object entries of this
+          type. This type should only be used when the publisher can guarantee
+          that the Object is a video podcast rather than merely a generic
+          video.</t>
+
+          <t>A video podcast inherits the properties of video as defined in
+          <xref target="video"></xref>. It has no additional properties.</t>
+        </section>
       </section>
     </section>
 
