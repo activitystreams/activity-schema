@@ -241,39 +241,10 @@
           sufficient to determine (A), (B), or (C) above.</t>
         </section>
 
-        <section anchor="make-contact" title="Add as a Contact">
-          <t>The "add as a contact" Verb indicates that the Subject has added
-          the Object as a contact, friend, or other similar social relation.
-          This specification only defines the meaning of this Verb when its
-          Object is a person, though implementors SHOULD be prepared to accept
-          other Object types as meaning MAY be provided by extension
-          specifications.</t>
-
-          <t>The verb URI for the "add as a contact" Verb is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/make-contact</spanx>.</t>
-
-          <t>Publishers MAY use the "add as a contact" Verb to express that
-          the Subject has expressed interest in forming a connection, but that
-          the connection cannot be formed until the Object reciprocates. See
-          <xref target="confirm-connection"></xref>.</t>
-
-          <t>Publishers SHOULD NOT publish multiple "make contact" activities
-          with identical Subjects and Objects unless (A) the Publisher
-          published an intervening corresponding "break contact" activity
-          (<xref target="break-contact"></xref>); or (B), the Verb's
-          attributes differ to indicate a different "degree" or "style" of
-          contact.</t>
-
-          <t>Processors MAY ignore (silently drop) successive identical "make
-          contact" activities regardless of whether they maintain state
-          sufficient to determine (A) or (B) above.</t>
-        </section>
-
-        <section anchor="confirm-connection" title="Confirm a Connection">
-          <t>The "confirm a connection" Verb indicates the creation of a
-          contact relationship as described in <xref
-          target="make-contact"></xref> that is reciprocated by the
-          Object.</t>
+        <section anchor="make-friend" title="Make Friend">
+          <t>The "make friend" Verb indicates the creation of a following
+          relationship as described in <xref target="follow"></xref> that is
+          reciprocated by the Object.</t>
 
           <t>Since this Verb implies an activity on the part of its Object,
           processors MUST NOT accept activities with this Verb unless they are
@@ -282,35 +253,7 @@
           a guarantee from a particular publisher that the publisher will only
           use this Verb in cases where a reciprocal relationship exists.</t>
 
-          <t>Publishers SHOULD also include a corresponding "add as a contact"
-          Verb in all activities carrying this Verb, as a fallback for
-          processors that are unable to trust the Create a Connection Verb for
-          a given feed.</t>
-
-          <t>The verb URI for the "confirm a connection" Verb is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/confirm-connection</spanx>.</t>
-        </section>
-
-        <section anchor="break-contact" title="Remove as a Contact">
-          <t>The "break contact" Verb indicates that the Subject has removed
-          the Object as a contact, friend, or other similar social relation.
-          This specification only defines the meaning of this Verb when its
-          Object is a person, though implementors SHOULD be prepared to accept
-          other Object types as meaning MAY be provided by extension
-          specifications.</t>
-
-          <t>Publishers SHOULD NOT publish multiple "break contact" activities
-          with identical Subjects and Objects unless (A) the Publisher
-          published an intervening corresponding "make contact" activity
-          (<xref target="make-contact"></xref>); or (B), the Verb's attributes
-          differ to indicate a different "degree" or "style" of contact.</t>
-
-          <t>Processors MAY ignore (silently drop) successive identical "break
-          contact" activities regardless of whether they maintain state
-          sufficient to determine (A) or (B) above.</t>
-
-          <t>The verb URI for the "remove as a contact" Verb is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/break-contact</spanx>.</t>
+          <t>The verb URI for the "make friend" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/make-friend</spanx>.</t>
         </section>
 
         <section anchor="join" title="Join">
