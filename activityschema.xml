@@ -1006,6 +1006,14 @@
           image SHOULD be small and appropriate to be displayed alongside the
           mood keyword at a normal text size.</t>
         </section>
+
+        <section title="Annotation">
+          <t>The annotation is an extra text-based note added to an activity
+          by the user.</t>
+
+          <t>Annotations are included ... TODO: Figure out how to mark this
+          up.</t>
+        </section>
       </section>
     </section>
 
