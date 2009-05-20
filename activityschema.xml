@@ -1111,6 +1111,28 @@
       </section>
     </section>
 
+    <section title="Products and Services Schema">
+      <t>The products and services schema provides a vocabulary that is useful
+      in applications that use products and services, along with reviews and
+      ratings of products and services, as social objects.</t>
+
+      <section title="Product and Service Object Types">
+        <section title="Review">
+          <t>The "review" object type represents a user's review of an
+          object.</t>
+
+          <t>The object type URL for the "review" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/review</spanx>.</t>
+
+          <t>A review object MUST include a thr:in-reply-to element that
+          identifies the object that is being reviewed.</t>
+
+          <t>A review object MAY include a rating. TODO: Figure out how to
+          mark up ratings.</t>
+        </section>
+      </section>
+    </section>
+
     <section title="Music Schema">
       <t>The music schema provides a vocabulary that is useful in applications
       that use music, musicians and albums as social objects.</t>
