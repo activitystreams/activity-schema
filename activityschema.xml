@@ -311,6 +311,19 @@
 
           <t>The verb URI for the "invite" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/invite</spanx>.</t>
         </section>
+
+        <section title="Tag">
+          <t>The "tag" verb indicates that the actor has identified the
+          presence of a target inside another object. For example, the actor
+          may have specified that a particular person appears in a photo.</t>
+
+          <t>The verb URI for the "tag" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/invite</spanx>.</t>
+
+          <t>The target of the "tag" verb gives the object in which the tag
+          has been added. For example, if a person appears in a photo, the
+          activity:object is the person and the activity:target is the
+          photo.</t>
+        </section>
       </section>
 
       <section title="Base Object Types">
