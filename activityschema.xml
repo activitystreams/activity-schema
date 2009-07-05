@@ -916,7 +916,7 @@
           <t>The "place" object type represents a location on Earth.</t>
 
           <t>The object type URL for the "place" object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/place/</spanx>.</t>
+          style="verb">http://activitystrea.ms/schema/1.0/place</spanx>.</t>
 
           <t>A place has the following properties:</t>
 
@@ -929,41 +929,49 @@
               style="verb">geo:point</spanx> element.</t>
             </list></t>
         </section>
-      </section>
 
-      <section title="Comments and Responses">
-        <t>Most social applications have a concept of "comments", "replies" or
-        "responses" to social Objects. In many cases these are simple text
-        messages, but any Object can in practice be a reply.</t>
+        <section anchor="comment" title="Comment">
+          <t>The "comment" object type represents a textual response to
+          another object.</t>
 
-        <t>This specification does not define an Object type for a comment nor
-        a Verb for posting a comment. This is because an item being in
-        response to another item is orthogonal to its type, and "posting a
-        comment" is of course simply a "post" action.</t>
+          <t>The comment object type MUST NOT be used for other kinds of
+          replies, such as video replies or reviews.</t>
 
-        <t>Therefore replies SHOULD be represented using the <spanx
-        style="verb">thr:in-reply-to</spanx> element defined by <xref
-        target="RFC4685"></xref>. Publishers SHOULD also, if available,
-        include metadata about the item being replied to using the mechanisms
-        defined in <xref target="atomcommentmeta-00"></xref>.</t>
+          <t>If an object has no explicit type but the object element has a
+          <spanx style="verb">thr:in-reply-to</spanx> element a consumer
+          SHOULD consider that object to be a comment.</t>
 
-        <t>The act of posting a comment is represented by the post Verb as
-        with "top-level" Objects.</t>
+          <t>The object type URL for the "comment" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/comment</spanx>.</t>
 
-        <t>A simple text comment should in most cases not have an Object type.
-        If the reply is in fact an Object such as a video, it SHOULD be
-        annotated with an appropriate Object type.</t>
+          <t>A comment has the following properties:</t>
 
-        <t>Many systems do not have the concept of a title or subject for a
-        comment; such systems MUST include an atom:title element with no text
-        content. Processors SHOULD refer to such comments as simply being "a
-        comment" if they are to be described in a sentence.</t>
+          <t><list style="hanging">
+              <t hangText="subject">The subject of the comment. Included as
+              the content of the atom:title element. Many systems do not have
+              the concept of a title or subject for a comment; such systems
+              MUST include an atom:title element with no text content.
+              Processors SHOULD refer to such comments as simply being "a
+              comment", with appropriate localization, if they are to be
+              described in a sentence.</t>
 
-        <t><spanx style="strong">FIXME:</spanx> Must figure out how Trackback
-        and friends are represented. An entry that "tracks back" to another is
-        effectively a reply, but there are questions about who publishes this
-        relationship (the responder or the original poster -- or indeed both)
-        and how exactly the entry metadata is represented in a feed.</t>
+              <t hangText="content">The content of the comment. Included as
+              the content of the atom:content element. Publishers SHOULD
+              include any markup necessary to achieve a similar presentation
+              to that on the publisher's own HTML pages, including any links
+              that the service automatically adds. Processors MAY remove the
+              markup and consider the comment to be plain text.</t>
+
+              <t hangText="permalink">The canonical URL for the comment.
+              Represented as the value of the <spanx style="verb">href</spanx>
+              attribute on an <spanx style="verb">atom:link</spanx> element
+              with a <spanx style="verb">rel</spanx> value of <spanx
+              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
+              value of <spanx style="verb">text/html</spanx>. This URL may be
+              the URL of the parent object with a fragment identifier
+              appended, or a completely distinct URL.</t>
+            </list></t>
+        </section>
       </section>
 
       <section title="Base Activity Context Elements">
@@ -1014,6 +1022,26 @@
           <t>Annotations are included ... TODO: Figure out how to mark this
           up.</t>
         </section>
+      </section>
+
+      <section title="Replies">
+        <t>Most social applications have a concept of "comments", "replies" or
+        "responses" to social Objects. In many cases these are simple text
+        messages, but any Object can in practice be a reply.</t>
+
+        <t>A text-only reply SHOULD be represented using the comment object
+        type as described in <xref target="comment"></xref>. Replies of other
+        types MUST carry the appropriate type and MUST NOT carry the comment
+        object type.</t>
+
+        <t>Replies, regardless of object type, SHOULD be represented using the
+        <spanx style="verb">thr:in-reply-to</spanx> element defined by <xref
+        target="RFC4685"></xref>. Publishers SHOULD also, if available,
+        include metadata about the item being replied to using the mechanisms
+        defined in <xref target="atomcommentmeta-00"></xref>.</t>
+
+        <t>The act of posting a reply is represented by the post Verb as with
+        "top-level" Objects.</t>
       </section>
     </section>
 
