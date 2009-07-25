@@ -187,14 +187,12 @@
           style="verb">http://activitystrea.ms/schema/1.0/favorite</spanx>.</t>
         </section>
 
-        <section anchor="view" title="View">
-          <t>The "view" Verb indicates that the Subject viewed the Object in
-          some way. This might include reading an article, watching a video or
-          listening to a song. Although "view" connotes a visual experience,
-          this Verb can equally be used to describe other consumer experiences
-          as appropriate for the type of Object used.</t>
+        <section anchor="play" title="Play">
+          <t>The "play" verb indicates that the subject spent some time
+          enjoying the object. For example, if the object is a video this
+          indicates that the subject watched all or part of the video.</t>
 
-          <t>The verb URI for the "view" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/view/</spanx>.</t>
+          <t>The verb URI for the "play" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/play</spanx>.</t>
         </section>
 
         <section anchor="follow" title="Start Following">
