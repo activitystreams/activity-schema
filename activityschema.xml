@@ -206,37 +206,7 @@
           <t>The verb URI for the "start following" Verb is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/follow</spanx>.</t>
 
-          <t>Publishers SHOULD NOT publish multiple "start following"
-          activities with identical Subjects and Objects unless (A) the
-          Publisher published an intervening corresponding "stop following"
-          activity (<xref target="unfollow"></xref>); (B), the Verb's
-          attributes differ to indicate a different "degree" of following; or
-          (C), the Object's attributes differ to indicate a different "aspect"
-          of following.</t>
-
           <t>Processors MAY ignore (silently drop) successive identical "start
-          following" activities regardless of whether they maintain state
-          sufficient to determine (A), (B), or (C) above.</t>
-        </section>
-
-        <section anchor="unfollow" title="Stop Following">
-          <t>The "stop following" Verb indicates that the Subject ceased
-          following the activity of the Object. In most cases, the Object of
-          this Verb will be a person, but it can potentially be of any type
-          that can sensibly generate activity.</t>
-
-          <t>The verb URI for the "stop following" Verb is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/unfollow</spanx>.</t>
-
-          <t>Publishers SHOULD NOT publish multiple "stop following"
-          activities with identical Subjects and Objects unless (A) the
-          Publisher published an intervening corresponding "start following"
-          activity (<xref target="follow"></xref>); (B), the Verb's attributes
-          differ to indicate a different "degree" of following; or (C), the
-          Object's attributes differ to indicate a different "aspect" of
-          following.</t>
-
-          <t>Processors MAY ignore (silently drop) successive identical "stop
           following" activities regardless of whether they maintain state
           sufficient to determine (A), (B), or (C) above.</t>
         </section>
@@ -264,42 +234,11 @@
           to handle other Object types as meaning MAY be provided by extension
           specifications.</t>
 
-          <t>Publishers SHOULD NOT publish multiple "join" activities with
-          identical Subjects and Objects unless (A) the Publisher published
-          and intervening corresponding "leave" activity (<xref
-          target="leave"></xref>); or (B) the Verb's attributes differ to
-          indicate a different membership role.</t>
-
           <t>Processors MAY ignore (silently drop) successive identical "join"
           activities regardless of whether they maintain state sufficient to
           determine (A) or (B) above.</t>
 
           <t>The verb URI for the "join" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join</spanx>.</t>
-        </section>
-
-        <section anchor="leave" title="Leave">
-          <t>The "leave" Verb indicates that the actor is no longer a member
-          of the Object, and that this is a result of an explicit action by
-          the actor. This specification only defines the meaning of this Verb
-          when its Object is a group, though implementors SHOULD be prepared
-          to handle other Object types as meaning MAY be provided by extension
-          specifications.</t>
-
-          <t>The use of this Verb is not appropriate when a user has been
-          ejected from the group by its administrators or any other situation
-          where the actor did not explicitly choose to leave the group.</t>
-
-          <t>Publishers SHOULD NOT publish multiple "leave" activities with
-          identical Subjects and Objects unless (A) the Publisher published
-          and intervening corresponding "join" activity (<xref
-          target="join"></xref>); or (B) the Verb's attributes differ to
-          indicate a different membership role.</t>
-
-          <t>Processors MAY ignore (silently drop) successive identical
-          "leave" activities regardless of whether they maintain state
-          sufficient to determine (A) or (B) above.</t>
-
-          <t>The verb URI for the "leave" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/leave</spanx>.</t>
         </section>
 
         <section anchor="invite" title="Invite">
@@ -657,51 +596,6 @@
           processors SHOULD prefer the specific properties given above, but
           MAY use the content in preference in cases where the properties
           above are incomplete or unsuitable.</t>
-        </section>
-
-        <section title="TV Episode">
-          <t>The "tv episode" Object type represents a single television
-          episode.</t>
-
-          <t>Objects of type TV Episode might contain information about the TV
-          Episode, or they might contain some representation of the TV episode
-          content itself. In the latter case, the TV Episode SHOULD also be
-          annotated with the "video" Object type and use its properties as
-          described in <xref target="video"></xref>. This type SHOULD be used
-          only when the publisher can guarantee that the Object is a TV
-          episode rather than merely a generic video.</t>
-
-          <t>The Object type URL for the "tv episode" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/tv-episode</spanx>.</t>
-
-          <t>TODO: Perhaps define a way to describe the series title, episode
-          title, season number and episode number in a machine-readable
-          way.</t>
-        </section>
-
-        <section title="Movie">
-          <t>The "movie" Object type represents a cinematic presentation.</t>
-
-          <t>Objects of type Movie might contain information about the Movie,
-          or they might contain some representation of the Movie content
-          itself. In the latter case, the Movie SHOULD also be annotated with
-          the "video" Object type and use its properties as described in <xref
-          target="video"></xref>. This type should only be uesd when the
-          publisher can guarantee that the Object is a Movie rather than
-          merely a generic video.</t>
-
-          <t>The Object type URL for the "movie" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/movie</spanx>.</t>
-
-          <t>A movie has the following properties:</t>
-
-          <t><list style="hanging">
-              <t hangText="title">The title of the movie. Included as the
-              content of the atom:title element.</t>
-
-              <t hangText="summary">A brief summary of the plot of the movie.
-              Included as the content of the atom:summary element.</t>
-            </list></t>
         </section>
 
         <section anchor="audio" title="Audio">
@@ -1139,64 +1033,11 @@
       </section>
     </section>
 
-    <section title="Products and Services Schema">
-      <t>The products and services schema provides a vocabulary that is useful
-      in applications that use products and services, along with reviews and
-      ratings of products and services, as social objects.</t>
-
-      <section title="Product and Service Object Types">
-        <section title="Review">
-          <t>The "review" object type represents a user's review of an
-          object.</t>
-
-          <t>The object type URL for the "review" object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/review</spanx>.</t>
-
-          <t>A review object MUST include a thr:in-reply-to element that
-          identifies the object that is being reviewed.</t>
-
-          <t>A review object MAY include a rating. TODO: Figure out how to
-          mark up ratings.</t>
-        </section>
-      </section>
-    </section>
-
     <section title="Music Schema">
       <t>The music schema provides a vocabulary that is useful in applications
       that use music, musicians and albums as social objects.</t>
 
       <section title="Music Object Types">
-        <section title="Music Album">
-          <t>The "music album" object type represents a set of musical
-          recordings placed into a compilation, usually to be sold together as
-          a single set.</t>
-
-          <t>The object type URL for the "music album" object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/music-album</spanx>.</t>
-
-          <t>The music album object type has the following properties:</t>
-
-          <t><list style="hanging">
-              <t hangText="title">The title or short caption assigned to the
-              album by the author. Included as the content of the atom:title
-              element.</t>
-
-              <t hangText="thumbnail">The URL and metadata for a preview image
-              for the album. The URL is represented as the value of the href
-              attribute on an atom:link element with rel preview and a type of
-              either image/jpeg, image/png or image/gif. Publishers SHOULD
-              include media:width and media:height attributes on the atom:link
-              element describing the dimensions of the linked image.
-              Processors MAY ignore thumbnails that are of an inappropriate
-              size for their user interface.</t>
-
-              <t hangText="album page URL">The URL of a web page where the
-              album can be viewed. Represented as the value of the href
-              attribute on an atom:link element with a rel value of alternate
-              and a type value of text/html.</t>
-            </list></t>
-        </section>
-
         <section title="Song">
           <t>The "tv episode" Object type represents a song or a recording of
           a song.</t>
@@ -1223,47 +1064,6 @@
           song, the album a particular recording is from, etc. Recording
           artist could potentially be added as an Object type in its own right
           to allow for this.</t>
-        </section>
-      </section>
-    </section>
-
-    <section title="Podcasting Schema">
-      <t>The music schema provides a vocabulary that is useful in applications
-      that produce or consume audio and video podcasts.</t>
-
-      <section title="Podcasting Object Types">
-        <section title="Audio Podcast">
-          <t>The "audio podcast" Object type represents a single episode of an
-          audio-only podcast.</t>
-
-          <t>The Object type URL for the "audio podcast" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/audio-podcast</spanx>.</t>
-
-          <t>Audio podcast is a specialized type of audio, and so publishers
-          SHOULD also include the audio Object type in Object entries of this
-          type. This type should only be used when the publisher can guarantee
-          that the Object is an audio podcast rather than merely a generic
-          audio stream.</t>
-
-          <t>An audio podcast inherits the properties of audio as defined in
-          <xref target="audio"></xref>. It has no additional properties.</t>
-        </section>
-
-        <section title="Video Podcast">
-          <t>The "video podcast" Object type represents a single episode of an
-          video podcast.</t>
-
-          <t>The Object type URL for the "video podcast" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/video-podcast</spanx>.</t>
-
-          <t>Video podcast is a specialized type of video, and so publishers
-          SHOULD also include the video Object type in Object entries of this
-          type. This type should only be used when the publisher can guarantee
-          that the Object is a video podcast rather than merely a generic
-          video.</t>
-
-          <t>A video podcast inherits the properties of video as defined in
-          <xref target="video"></xref>. It has no additional properties.</t>
         </section>
       </section>
     </section>
