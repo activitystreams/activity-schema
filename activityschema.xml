@@ -237,16 +237,6 @@
           <t>The verb URI for the "join" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join</spanx>.</t>
         </section>
 
-        <section anchor="invite" title="Invite">
-          <t>The "invite" verb indicates that the actor has invited the object
-          to take part in or join the target. This specification only defines
-          the meaning of this verb when its target is either an event (see
-          <xref target="event"></xref>) or a group (see <xref
-          target="group"></xref>).</t>
-
-          <t>The verb URI for the "invite" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/invite</spanx>.</t>
-        </section>
-
         <section title="Tag">
           <t>The "tag" verb indicates that the actor has identified the
           presence of a target inside another object. For example, the actor
