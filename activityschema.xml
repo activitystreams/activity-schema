@@ -953,16 +953,6 @@
               provided by its organiser. Included as the content of the
               atom:summary element.</t>
             </list></t>
-
-          <t>TODO: Include a real reference to xCal, or some other similar
-          spec. xCal is currently only an IETF Internet-Draft.</t>
-
-          <t>TODO: Find a way to represent location that allows locations to
-          be specified as full addresses, geo coordinates, natural-language
-          strings (e.g. "Julie's House") and full-blown "venue" objects when
-          such a thing exists.</t>
-
-          <t>TODO: Find a way to represent the host of an event?</t>
         </section>
       </section>
     </section>
