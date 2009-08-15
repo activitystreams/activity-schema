@@ -424,7 +424,7 @@
           images.</t>
 
           <t>The object type URL for the "photo album" object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/photo-album/</spanx>.</t>
+          style="verb">http://activitystrea.ms/schema/1.0/photo-album</spanx>.</t>
 
           <t>The photo album object type has the following properties:</t>
 
@@ -454,7 +454,7 @@
           time-based media items, such as video and audio objects.</t>
 
           <t>The object type URL for the "playlist" object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/playlist/</spanx>.</t>
+          style="verb">http://activitystrea.ms/schema/1.0/playlist</spanx>.</t>
 
           <t>The playlist object type has the following properties:</t>
 
