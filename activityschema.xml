@@ -366,24 +366,24 @@
             </list></t>
         </section>
 
-        <section anchor="image" title="Image">
-          <t>The "image" Object type represents a graphical still image.</t>
+        <section anchor="photo" title="Photo">
+          <t>The "photo" object type represents a graphical still image.</t>
 
-          <t>The Object type URL for the "image" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/image</spanx>.</t>
+          <t>The object type URL for the "photo" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/photo</spanx>.</t>
 
           <t>A photo has the following properties:</t>
 
           <t><list style="hanging">
               <t hangText="title">The title or short caption assigned to the
-              image by the author. Included as the content of the atom:title
+              photo by the author. Included as the content of the atom:title
               element. If the author has not provided a title, the publisher
               MAY synthesize a title e.g. from the image filename, or the
               publisher MAY include the atom:title element with no
               content.</t>
 
               <t hangText="thumbnail">The URL and metadata for a thumbnail
-              version of the image. The URL is represented as the value of the
+              version of the photo. The URL is represented as the value of the
               href attribute on an atom:link element with rel preview and a
               type of either image/jpeg, image/png or image/gif. Publishers
               SHOULD include media:width and media:height attributes on the
@@ -392,7 +392,7 @@
               size for their user interface.</t>
 
               <t hangText="larger image">The URL and metadata for a larger,
-              ideally full-size version of the image intended for standalone
+              ideally full-size version of the photo intended for standalone
               viewing. The URL is represented as the value of the href
               attribute on an atom:link element with rel enclosure and a type
               of either image/jpeg, image/png or image/gif. Publishers SHOULD
@@ -400,7 +400,7 @@
               element describing the dimensions of the linked image.</t>
 
               <t hangText="image page URL">The URL of a web page where the
-              image and the associated metadata can be viewed. Represented as
+              photo and the associated metadata can be viewed. Represented as
               the value of the href attribute on an atom:link element with a
               rel value of alternate and a type value of text/html.</t>
 
@@ -425,31 +425,6 @@
           processors SHOULD prefer the specific properties given above, but
           MAY use the content in preference in cases where the properties
           above are incomplete or unsuitable.</t>
-        </section>
-
-        <section title="Photo">
-          <t>The "photo" Object type represents a digitized photograph.
-          "photo" is a specialized type of "image" that SHOULD be used when
-          the publisher can guarantee that the associated image is a
-          photograph as opposed to another kind of image such as an
-          illustration or screenshot.</t>
-
-          <t>The Object type URL for the "photo" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/photo</spanx>.</t>
-
-          <t>The photo Object type inherits all of the properties defined for
-          image in <xref target="image"></xref>, but also has the following
-          additional properties:</t>
-
-          <t><list style="hanging">
-              <t hangText="time and date the photo was taken">The time and
-              date when the photo was taken, as opposed to when it was posted.
-              This information is often determined automatically by the
-              photographer's camera, but MAY be inaccurate due to an incorrect
-              clock in the camera. <spanx style="strong">TODO:</spanx> Figure
-              out how to publish this. There doesn't seem to be any
-              well-deployed standard.</t>
-            </list></t>
         </section>
 
         <section title="Photo Album">
