@@ -210,11 +210,10 @@
         </section>
 
         <section anchor="make-friend" title="Make Friend">
-          <t>The "make connection" Verb indicates the creation of a following
-          relationship as described in <xref target="follow"></xref> that is
-          reciprocated by the Object.</t>
+          <t>The "make friend" Verb indicates the creation of a friendship
+          that is reciprocated by the object.</t>
 
-          <t>Since this Verb implies an activity on the part of its Object,
+          <t>Since this verb implies an activity on the part of its object,
           processors MUST NOT accept activities with this Verb unless they are
           able to verify through some external means that there is in fact a
           reciprocated connection. For example, a processor MAY have received
