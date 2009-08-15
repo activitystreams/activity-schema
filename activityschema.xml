@@ -711,19 +711,6 @@
               for their user interface. Publishers MAY include several images
               of different sizes.</t>
             </list></t>
-
-          <t>TODO: Include in here additional properties from the
-          PortableContacts specification. However, the details for this would
-          ideally be in a separate specification for representing people in
-          Atom. The above properties ought to be sufficient for activities
-          describing the creation of friendship connections and so forth.</t>
-
-          <t>TODO: Figure out how to handle the common activity aggregator
-          case where a user claims a particular feed and the activity
-          aggregator then needs to be able to figure out the atom:id value
-          that is used to describe that user. This might manifest as the
-          concept of the "owner" of a particular feed, which is itself an
-          Object and will usually be a person.</t>
         </section>
 
         <section anchor="group" title="Group">
