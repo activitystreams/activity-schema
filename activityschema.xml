@@ -337,12 +337,6 @@
               style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
               value of <spanx style="verb">text/html</spanx>.</t>
             </list></t>
-
-          <t><spanx style="strong">TODO:</spanx> Figure out how to handle the
-          notes published by Facebook and Plaxo that are full sentences that
-          always start with the name of the actor. Also check out
-          internationalization issues: subjects don't always come at the start
-          of sentences, even in Facebook.</t>
         </section>
 
         <section title="File">
