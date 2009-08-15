@@ -404,14 +404,6 @@
               the value of the href attribute on an atom:link element with a
               rel value of alternate and a type value of text/html.</t>
 
-              <t hangText="time and date the photo was taken">The time and
-              date when the photo was taken, as opposed to when it was posted.
-              This information is often determined automatically by the
-              photographer's camera, but MAY be inaccurate due to an incorrect
-              clock in the camera. <spanx style="strong">TODO:</spanx> Figure
-              out how to publish this. There doesn't seem to be any
-              well-deployed standard.</t>
-
               <t hangText="description">The description or long caption
               assigned to the photo by the author. Included as the content of
               the media:description element as described in [AtomMedia]. If
