@@ -209,7 +209,7 @@
           sufficient to determine (A), (B), or (C) above.</t>
         </section>
 
-        <section anchor="confirm-connection" title="Confirm Connection">
+        <section anchor="make-friend" title="Make Friend">
           <t>The "make connection" Verb indicates the creation of a following
           relationship as described in <xref target="follow"></xref> that is
           reciprocated by the Object.</t>
@@ -221,8 +221,7 @@
           a guarantee from a particular publisher that the publisher will only
           use this Verb in cases where a reciprocal relationship exists.</t>
 
-          <t>The verb URI for the "confirm connection" Verb is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/confirm-connection</spanx>.</t>
+          <t>The verb URI for the "make friend" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/make-friend</spanx>.</t>
         </section>
 
         <section anchor="join" title="Join">
