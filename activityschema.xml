@@ -288,14 +288,14 @@
             </list></t>
         </section>
 
-        <section title="Weblog Entry">
-          <t>The "weblog entry" Object type indicates that the Object is an
-          entry in a weblog or some other similar construct.</t>
+        <section title="Blog Entry">
+          <t>The "blog entry" object type indicates that the Object is an
+          entry in a blog or some other similar construct.</t>
 
-          <t>The "weblog entry" Object type is a specialization of the
-          "article" Object type, so publishers SHOULD also include the Object
-          type URL for the "article" Object type when publishing Object
-          entries of this type.</t>
+          <t>The "blog entry" object type is a specialization of the "article"
+          object type, so publishers SHOULD also include the object type URL
+          for the "article" object type when publishing object entries of this
+          type.</t>
 
           <t>The Object type URL for the "weblog entry" Object type is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/blog-entry</spanx>.</t>
