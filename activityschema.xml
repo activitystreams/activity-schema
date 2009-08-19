@@ -673,30 +673,30 @@
           above are incomplete or unsuitable.</t>
         </section>
 
-        <section title="Person">
-          <t>The "person" Object type represents a human person, whether real
-          or ficticious, or some other anthropomorphised ficticious
-          character.</t>
+        <section title="User">
+          <t>The "user" Object type represents a user account. This is often a
+          person, but might also be a company or ficticious character that is
+          being represented by a user account.</t>
 
-          <t>The Object type URL for the "person" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
+          <t>The object type URL for the "user" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/user</spanx>.</t>
 
-          <t>Where a particular person is referred to across multiple sources,
+          <t>Where a particular user is referred to across multiple sources,
           the same value for <spanx style="verb">atom:id</spanx> SHOULD be
-          used whereever possible. Two person Objects in the same feed
+          used whereever possible. Two person objects in the same feed
           document with the same <spanx style="verb">atom:id</spanx> value can
-          be considered by processors to be the same person. Processors MAY
-          use other information to determine when two person Objects refer to
-          the same person. A processor MUST NOT assume that two person Objects
-          with different values for <spanx style="verb">atom:id</spanx> refer
-          to different people; different publishers may use different id
-          values for the same person.</t>
+          be considered by processors to be the same user. Processors MAY use
+          other information to determine when two user objects refer to the
+          same user. A processor MUST NOT assume that two user objects with
+          different values for <spanx style="verb">atom:id</spanx> refer to
+          different users; different publishers may use different id values
+          for the same user.</t>
 
-          <t>A person has the following properties:</t>
+          <t>A user has the following properties:</t>
 
           <t><list style="hanging">
               <t hangText="display name">A name that can be used for the user
-              in the user interface. This is often a name by which the person
+              in the user interface. This is often a name by which the user
               has chosen to be known in a given context; no restriction is
               placed on what kind of name may be used here. Included as the
               content of the atom:title element.</t>
