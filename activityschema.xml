@@ -198,8 +198,8 @@
         <section anchor="follow" title="Start Following">
           <t>The "start following" Verb indicates that the Subject began
           following the activity of the Object. In most cases, the Object of
-          this Verb will be a person, but it can potentially be of any type
-          that can sensibly generate activity.</t>
+          this Verb will be a user, but it can potentially be of any type that
+          can sensibly generate activity.</t>
 
           <t>The verb URI for the "start following" Verb is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/follow</spanx>.</t>
@@ -240,13 +240,13 @@
         <section title="Tag">
           <t>The "tag" verb indicates that the actor has identified the
           presence of a target inside another object. For example, the actor
-          may have specified that a particular person appears in a photo.</t>
+          may have specified that a particular user appears in a photo.</t>
 
           <t>The verb URI for the "tag" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/tag</spanx>.</t>
 
           <t>The target of the "tag" verb gives the object in which the tag
-          has been added. For example, if a person appears in a photo, the
-          activity:object is the person and the activity:target is the
+          has been added. For example, if a user appears in a photo, the
+          activity:object is the user and the activity:target is the
           photo.</t>
         </section>
       </section>
@@ -683,9 +683,9 @@
 
           <t>Where a particular user is referred to across multiple sources,
           the same value for <spanx style="verb">atom:id</spanx> SHOULD be
-          used whereever possible. Two person objects in the same feed
-          document with the same <spanx style="verb">atom:id</spanx> value can
-          be considered by processors to be the same user. Processors MAY use
+          used whereever possible. Two user objects in the same feed document
+          with the same <spanx style="verb">atom:id</spanx> value can be
+          considered by processors to be the same user. Processors MAY use
           other information to determine when two user objects refer to the
           same user. A processor MUST NOT assume that two user objects with
           different values for <spanx style="verb">atom:id</spanx> refer to
