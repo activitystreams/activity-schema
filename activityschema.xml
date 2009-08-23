@@ -673,13 +673,13 @@
           above are incomplete or unsuitable.</t>
         </section>
 
-        <section title="User">
-          <t>The "user" Object type represents a user account. This is often a
-          person, but might also be a company or ficticious character that is
-          being represented by a user account.</t>
+        <section title="Person">
+          <t>The "person" Object type represents a user account. This is often
+          a person, but might also be a company or ficticious character that
+          is being represented by a user account.</t>
 
           <t>The object type URL for the "user" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/user</spanx>.</t>
+          style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
 
           <t>Where a particular user is referred to across multiple sources,
           the same value for <spanx style="verb">atom:id</spanx> SHOULD be
