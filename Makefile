@@ -1,5 +1,5 @@
 
-all: atomactivity.html atomactivity.txt activityschema.html activityschema.txt serviceprovidermeta.html serviceprovidermeta.txt commentmeta.html commentmeta.txt activitypush.html
+all: atomactivity.html atomactivity.txt activityschema.html activityschema.txt serviceprovidermeta.html serviceprovidermeta.txt commentmeta.html commentmeta.txt activitypush.html jsonactivity.html
 
 clean:
 	rm -rf build
@@ -33,4 +33,8 @@ commentmeta.txt: prepare commentmeta.xml
 
 activitypush.html: prepare activitypush.xml
 	xml2rfc activitypush.xml build/activitypush.html
+
+jsonactivity.html: prepare jsonactivity.xml
+	xml2rfc jsonactivity.xml build/jsonactivity.html
+
 
