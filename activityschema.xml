@@ -994,8 +994,8 @@
 
       <section title="Music Object Types">
         <section title="Song">
-          <t>The "tv episode" Object type represents a song or a recording of
-          a song.</t>
+          <t>The "song" Object type represents a song or a recording of a
+          song.</t>
 
           <t>Objects of type Song might contain information about the song or
           recording, or they might contain some representation of the
@@ -1011,14 +1011,9 @@
           <t>A song has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title of the movie. Included as the
+              <t hangText="title">The title of the song. Included as the
               content of the atom:title element.</t>
             </list></t>
-
-          <t>TODO: Include a way to indicate the artist associated with the
-          song, the album a particular recording is from, etc. Recording
-          artist could potentially be added as an Object type in its own right
-          to allow for this.</t>
         </section>
       </section>
     </section>
