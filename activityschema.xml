@@ -310,18 +310,19 @@
         </section>
 
         <section title="Note">
-          <t>The "note" Object type represents short notes or status updates.
-          This Object type is intended for use in "micro-blogging" and in
-          systems where users are invited to publish a timestamped
-          "status".</t>
+          <t>The "note" Object type represents short-form text messages. This
+          Object type is intended for use in "micro-blogging" and in systems
+          where users are invited to publish short, often plain-text messages
+          whose useful lifespan is generally shorter than that of an article
+          or weblog entry.</t>
 
-          <t>A note is similar in structure to a weblog entry, but it does not
+          <t>A note is similar in structure to an article, but it does not
           have a title and its body tends to be shorter. Applications will
           often display the entire content of a note in an activity stream UI,
           whereas they MAY display only the title or the title and summary for
           a weblog entry.</t>
 
-          <t>The Object type URL for the "note" Object type is <spanx
+          <t>The object type URL for the "note" Object type is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/note</spanx>.</t>
 
           <t>A note has the following properties:</t>
@@ -335,6 +336,41 @@
               consider the note to be plain text.</t>
 
               <t hangText="permalink">The canonical URL for the note.
+              Represented as the value of the <spanx style="verb">href</spanx>
+              attribute on an <spanx style="verb">atom:link</spanx> element
+              with a <spanx style="verb">rel</spanx> value of <spanx
+              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
+              value of <spanx style="verb">text/html</spanx>.</t>
+            </list></t>
+        </section>
+
+        <section title="Status">
+          <t>The "status" Object type represents a human-readable update of
+          the author's situation, mood, location or other status.</t>
+
+          <t>A status is similar in structure to a note, but carries the
+          additional meaning that the content is primarily describing
+          something its author is doing, feeling or experiencing.</t>
+
+          <t>A consumers MAY consider the content of the most recent status
+          object it encountered to be the user's current status, unless the
+          most recent status update is old. When a status becomes too old is
+          not defined by this specification.</t>
+
+          <t>The object type URL for the "status" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/status</spanx>.</t>
+
+          <t>A note has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="content">The content of the status update. Included
+              as the content of the atom:content element. Publishers SHOULD
+              include any markup necessary to achieve a similar presentation
+              to that on the publisher's own HTML pages, including any links
+              that the service automatically adds. Processors MAY remove the
+              markup and consider the note to be plain text.</t>
+
+              <t hangText="permalink">The canonical URL for the status update.
               Represented as the value of the <spanx style="verb">href</spanx>
               attribute on an <spanx style="verb">atom:link</spanx> element
               with a <spanx style="verb">rel</spanx> value of <spanx
@@ -835,8 +871,7 @@
           with an optional mood icon image.</t>
 
           <t>Moods are included via a mood element in the namespace <spanx
-          style="verb">http://activitystrea.ms/context/</spanx>. TODO: Write a
-          spec for this?</t>
+          style="verb">http://activitystrea.ms/context/</spanx>.</t>
 
           <t>The content of the mood element is the mood keyword or
           phrase.</t>
@@ -845,14 +880,6 @@
           attribute which contains the URL of a mood icon image. The mood icon
           image SHOULD be small and appropriate to be displayed alongside the
           mood keyword at a normal text size.</t>
-        </section>
-
-        <section title="Annotation">
-          <t>The annotation is an extra text-based note added to an activity
-          by the user.</t>
-
-          <t>Annotations are included ... TODO: Figure out how to mark this
-          up.</t>
         </section>
       </section>
 
@@ -967,8 +994,8 @@
 
       <section title="Music Object Types">
         <section title="Song">
-          <t>The "tv episode" Object type represents a song or a recording of
-          a song.</t>
+          <t>The "song" Object type represents a song or a recording of a
+          song.</t>
 
           <t>Objects of type Song might contain information about the song or
           recording, or they might contain some representation of the
@@ -984,14 +1011,9 @@
           <t>A song has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title of the movie. Included as the
+              <t hangText="title">The title of the song. Included as the
               content of the atom:title element.</t>
             </list></t>
-
-          <t>TODO: Include a way to indicate the artist associated with the
-          song, the album a particular recording is from, etc. Recording
-          artist could potentially be added as an Object type in its own right
-          to allow for this.</t>
         </section>
       </section>
     </section>
