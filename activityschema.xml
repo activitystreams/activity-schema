@@ -190,6 +190,13 @@
           style="verb">http://activitystrea.ms/schema/1.0/favorite</spanx>.</t>
         </section>
 
+        <section anchor="like" title="Mark as Liked">
+          <t>The "mark as liked" verb indicates that the actor indicated that
+          it likes the object.</t>
+
+          <t>The verb URI for the "mark as liked" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/like</spanx>.</t>
+        </section>
+
         <section anchor="play" title="Play">
           <t>The "play" verb indicates that the subject spent some time
           enjoying the object. For example, if the object is a video this
