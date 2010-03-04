@@ -846,6 +846,45 @@
               appended, or a completely distinct URL.</t>
             </list></t>
         </section>
+
+        <section anchor="review" title="Review">
+          <t>The "review" object type represents a primarily prose-based
+          commentary on another object.</t>
+
+          <t>The object type URL for the "review" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/review</spanx>.</t>
+
+          <t>A comment has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title of the review. Included as the
+              content of the atom:title element. Systems which produce reviews
+              that do not have titles MUST include an atom:title element with
+              no text content. Processors SHOULD refer to such comments as
+              simply being "a review", with appropriate localization, if they
+              are to be described in a sentence.</t>
+
+              <t hangText="content">The content of the review. Included as the
+              content of the atom:content element. Publishers SHOULD include
+              any markup necessary to achieve a similar presentation to that
+              on the publisher's own HTML pages, including any links that the
+              service automatically adds</t>
+
+              <t hangText="permalink">The canonical URL for the review.
+              Represented as the value of the <spanx style="verb">href</spanx>
+              attribute on an <spanx style="verb">atom:link</spanx> element
+              with a <spanx style="verb">rel</spanx> value of <spanx
+              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
+              value of <spanx style="verb">text/html</spanx>. This URL may be
+              the URL of the reviewed object with a fragment identifier
+              appended, or a completely distinct URL.</t>
+
+              <t hangText="reviewed object">The object that this review
+              applies to. Included via a <spanx style="verb">thr:in-reply-to</spanx>
+              element that refers to the <spanx style="verb">atom:id</spanx>
+              value of the reviewed object.</t>
+            </list></t>
+        </section>
       </section>
 
       <section title="Base Activity Context Elements">
