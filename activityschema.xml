@@ -298,7 +298,7 @@
             </list></t>
         </section>
 
-        <section title="Blog Entry">
+        <section anchor="blog-entry" title="Blog Entry">
           <t>The "blog entry" object type indicates that the Object is an
           entry in a blog or some other similar construct.</t>
 
@@ -315,7 +315,7 @@
           properties.</t>
         </section>
 
-        <section title="Note">
+        <section anchor="note" title="Note">
           <t>The "note" Object type represents short-form text messages. This
           Object type is intended for use in "micro-blogging" and in systems
           where users are invited to publish short, often plain-text messages
@@ -350,7 +350,7 @@
             </list></t>
         </section>
 
-        <section title="Status">
+        <section anchor="status" title="Status">
           <t>The "status" Object type represents a human-readable update of
           the author's situation, mood, location or other status.</t>
 
@@ -385,7 +385,7 @@
             </list></t>
         </section>
 
-        <section title="File">
+        <section anchor="file" title="File">
           <t>The "file" Object type represents some document or other file
           with no additional machine-readable semantics.</t>
 
@@ -465,7 +465,7 @@
           above are incomplete or unsuitable.</t>
         </section>
 
-        <section title="Photo Album">
+        <section anchor="photo-album" title="Photo Album">
           <t>The "photo album" object type represents a collection of
           images.</t>
 
@@ -638,7 +638,7 @@
             </list></t>
         </section>
 
-        <section title="Bookmark">
+        <section anchor="bookmark" title="Bookmark">
           <t>The "bookmark" Object type represents a pointer to some URL --
           typically a web page. In most cases, a bookmark is specific to a
           given user and contains metadata chosen by that user. Bookmark
@@ -786,7 +786,7 @@
             </list></t>
         </section>
 
-        <section title="Place">
+        <section anchor="place" title="Place">
           <t>The "place" object type represents a location on Earth.</t>
 
           <t>The object type URL for the "place" object type is <spanx
@@ -892,7 +892,7 @@
         elements that can be used with all activity entries. These provide
         orthogonal context information that can apply to all activities.</t>
 
-        <section title="Location">
+        <section anchor="location" title="Location">
           <t>Location context describes the location where the user was at the
           time the activity was performed. This may be an accurate geographic
           coordinate, a street address, a free-form location name or a
@@ -908,7 +908,7 @@
           <t>TODO: Figure out how to include freeform string locations.</t>
         </section>
 
-        <section title="Mood">
+        <section anchor="mood" title="Mood">
           <t>Mood describes the mood of the user when the activity was
           performed. This is usually collected via an extra field in the user
           interface used to perform the activity. For the purpose of this
@@ -928,7 +928,7 @@
         </section>
       </section>
 
-      <section title="Replies">
+      <section anchor="replies" title="Replies">
         <t>Most social applications have a concept of "comments", "replies" or
         "responses" to social Objects. In many cases these are simple text
         messages, but any Object can in practice be a reply.</t>
@@ -1038,7 +1038,7 @@
       that use music, musicians and albums as social objects.</t>
 
       <section title="Music Object Types">
-        <section title="Song">
+        <section anchor="song" title="Song">
           <t>The "song" Object type represents a song or a recording of a
           song.</t>
 
