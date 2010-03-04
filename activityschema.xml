@@ -13,8 +13,7 @@
 <?rfc private="Draft"?>
 <rfc category="exp" docName="atomactivity-00" ipr="none">
   <front>
-    <title abbrev="AtomActivitySchema">Atom Activity Base Schema
-    (Draft)</title>
+    <title abbrev="ActivitySchema">Atom Activity Base Schema (Draft)</title>
 
     <author fullname="Martin Atkins" initials="M." surname="Atkins">
       <organization>Six Apart</organization>
