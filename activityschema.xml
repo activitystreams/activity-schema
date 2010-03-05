@@ -447,6 +447,54 @@
 
         </section>
 
+        <section anchor="product" title="Product">
+          <t>The "product" object type represents a commercial good or service.</t>
+
+          <t>The object type URL for the "product" object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/product</spanx>.</t>
+
+          <t>A product has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="title">The title of the product. Included as
+              the content of the atom:title element.</t>
+
+              <t hangText="thumbnail">The URL and metadata for a thumbnail
+              photo of the product. The URL is represented as the value of the
+              href attribute on an <spanx style="verb">atom:link</spanx> 
+              element with rel preview and a type of either image/jpeg, 
+              image/png or image/gif. Publishers
+              SHOULD include <spanx style="verb">media:width</spanx> and 
+              <spanx style="verb">media:height</spanx> attributes on the
+              <spanx style="verb">atom:link</spanx> element describing the 
+              dimensions of the linked image. Processors MAY ignore thumbnails 
+              that are of an inappropriate size for their user interface.</t>
+
+              <t hangText="larger image">The URL and metadata for a larger,
+              ideally full-size version of a photo of the product intended
+              for standalone viewing. The URL is represented as the value of
+              the href attribute on an <spanx style="verb">atom:link</spanx> element 
+              with rel enclosure and a type of either image/jpeg, image/png or image/gif. 
+              Publishers SHOULD include <spanx style="verb">media:width</spanx> and 
+              <spanx style="verb">media:height</spanx> attributes on the 
+              <spanx style="verb">atom:link</spanx> element describing the dimensions
+              of the linked image.</t>
+
+              <t hangText="product page URL">The URL of a web page where the
+              photo and the associated metadata can be viewed. Represented as
+              the value of the href attribute on an <spanx style="verb">atom:link</spanx> 
+              element with a rel value of alternate and a type value of text/html.</t>
+
+              <t hangText="description">A textural description of the product
+              either from the author or part of the product's metadata may be
+              included in this element. If the full text is included, use
+              the <spanx style="verb">atom:content</spanx> element. If only a 
+              snippet of the content is included, use the <spanx style="verb">
+              atom:summary</spanx> element.</t>
+            </list></t>
+
+        </section>
+
 
         <section anchor="photo" title="Photo">
           <t>The "photo" object type represents a graphical still image.</t>
