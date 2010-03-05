@@ -854,7 +854,7 @@
           <t>The object type URL for the "review" object type is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/review</spanx>.</t>
 
-          <t>A comment has the following properties:</t>
+          <t>A review has the following properties:</t>
 
           <t><list style="hanging">
               <t hangText="title">The title of the review. Included as the
