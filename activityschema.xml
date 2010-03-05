@@ -893,19 +893,60 @@
         orthogonal context information that can apply to all activities.</t>
 
         <section anchor="location" title="Location">
-          <t>Location context describes the location where the user was at the
-          time the activity was performed. This may be an accurate geographic
-          coordinate, a street address, a free-form location name or a
-          combination of these.</t>
+          <t>Location is a concept which can be used inside the atom:entry
+          level, atom:author and activity:object. Location can be specified
+          via geographic coordinates, a street address, a free-form location
+          name or a combination of these. Geographic coordinates should be
+          included as a geo:point element as described by the GeoRSS
+          specification. Addresses should be included using a poco:address
+          element defined at Portable Contacts specification. The entry level
+          location represents the location of the author at the time the
+          activity was performed. The author level location represents the
+          primary location of the author. Finally, the location within other
+          objects represents the physical location of those objects. All
+          location fields are optional. For free form addresses use the
+          poco:formatted field.</t>
 
-          <t>Geographic coordinates can be included as a <spanx style="verb">geo:point</spanx>
-          element as a direct child of the activity entry, as described by the
-          GeoRSS specification.</t>
+          <t><xref target="location-poco"></xref></t>
 
-          <t>Addresses can be included using a <spanx style="verb">pc:address</spanx>
-          element. TODO: Write some more about this.</t>
+          <t><figure anchor="location-poco" suppress-title="true"
+              title="Location Example">
+              <artwork><![CDATA[<entry>
+  <id>tag:world:activity:1212121212121</id>
+  <title>Rob liked Goldeberg's Deli</title>
+  <author>
+    <name>Rob Dolin</name>
+    <id>tag:world:person:1212121212121</id>
+    <link rel="alternate" type="text/html" href="http://robdolin.com" />
+    <poco:address>
+      <poco:locality>Marina del Rey</poco:locality> 
+      <poco:region>CA</poco:region> 
+      <poco:postalCode>90292</poco:postalCode> 
+      <poco:country>US</poco:country> 
+    </poco:address>
+  </author>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/place</object-type>
+    <id>tag:world:place:1212121212121</id>
+    <title>Goldberg's Deli</title>
+    <link rel="alternate" type="text/html" href="http://www.deli.com" />
+    <geo:point>33.9777 -118.4351</geo:point>
+    <poco:address>
+      <poco:streetAddress>14016 Bora Bora Way</poco:streetAddress>
+      <poco:locality>Marina del Rey</poco:locality> 
+      <poco:region>CA</poco:region>       
+      <poco:postalCode>90292</poco:postalCode> 
+      <poco:country>US</poco:country> 
+    </poco:address>
+  </activity:object>
+  <geo:point>33.9777 -119.4351</geo:point>
+  <activity:verb>http://activitystrea.ms/schema/1.0/like</activity:verb>
+</entry>]]></artwork>
+            </figure></t>
+        </section>
 
-          <t>TODO: Figure out how to include freeform string locations.</t>
+        <section title="new section">
+          <t></t>
         </section>
 
         <section anchor="mood" title="Mood">
