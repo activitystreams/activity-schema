@@ -175,6 +175,19 @@
           <t>The verb URI for the "save" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save</spanx>.</t>
         </section>
 
+    		<section anchor="update" title="Update">
+          <t>The "update" Verb indicates that the Subject has modified the
+          referenced Object.</t>
+
+          <t>Implementors SHOULD use verbs such as <xref target="post"></xref>
+          where the Subject is adding new items to a <xref target="list"></xref>
+          or similar. Update is reserved for modifications to existing Objects or 
+          data such as changing a user's profile information.</t>
+
+          <t>The verb URI for the "update" Verb is 
+          <spanx style="verb">http://activitystrea.ms/schema/1.0/update</spanx>.</t>
+        </section>
+
         <section anchor="favorite" title="Mark as Favorite">
           <t>The "mark as favorite" Verb indicates that the Subject marked the
           Object as an item of special interest. Objects so marked often
