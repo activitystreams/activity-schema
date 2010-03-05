@@ -868,7 +868,7 @@
               content of the atom:content element. Publishers SHOULD include
               any markup necessary to achieve a similar presentation to that
               on the publisher's own HTML pages, including any links that the
-              service automatically adds</t>
+              service automatically adds.</t>
 
               <t hangText="permalink">The canonical URL for the review.
               Represented as the value of the <spanx style="verb">href</spanx>
@@ -880,9 +880,17 @@
               appended, or a completely distinct URL.</t>
 
               <t hangText="reviewed object">The object that this review
-              applies to. Included via a <spanx style="verb">thr:in-reply-to</spanx>
+              applies to. Included with a <spanx style="verb">thr:in-reply-to</spanx>
               element that refers to the <spanx style="verb">atom:id</spanx>
               value of the reviewed object.</t>
+
+              <t hangText="rating">A rating attribute of the reviewed object.
+              The rating is an optional field and is modeled after the rating
+              attribute from the hReview microformat. Specifically, the rating
+              may be defined as a fixed point integer [1.0-5.0] (with optional 
+              alternate worst (default:1.0) and/or best (default:5.0)), fixed 
+              point integers, or an explicit value.</t>
+
             </list></t>
         </section>
       </section>
@@ -1125,6 +1133,19 @@
           <date />
         </front>
       </reference>
+
+      <reference anchor="hreview">
+        <front>
+          <title>The hReview Microformat</title>
+
+          <author>
+            <organization>microformats community</organization>
+          </author>
+
+          <date />
+        </front>
+      </reference>
+
     </references>
 
     <section title="Acknowledgements">
