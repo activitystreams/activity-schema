@@ -194,7 +194,7 @@
           <t>The "mark as liked" verb indicates that the actor indicated that
           it likes the object.</t>
 
-          <t>The verb URI for the "mark as liked" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/like</spanx>.</t>
+          <t>The verb URI for the "mark as liked" Verb is <spanx  style="verb">http://activitystrea.ms/schema/1.0/like</spanx>.</t>
         </section>
 
         <section anchor="play" title="Play">
@@ -760,6 +760,53 @@
             </list></t>
         </section>
 
+        <section title="Service">
+          <t>The "service" Object type represents a website, business, brand, or 
+            other entity that performs some kind of work for other entities, 
+            people, or services.</t>
+
+          <t>The object type URL for the "service" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/service</spanx>.</t>
+
+          <t>Where a particular service is referred to across multiple sources,
+          the same value for <spanx style="verb">atom:id</spanx> SHOULD be
+          used wherever possible. Two service objects in the same feed document
+          with the same <spanx style="verb">atom:id</spanx> value can be
+          considered by processors to be the same service. Processors MAY use
+          other information to determine when two service objects refer to the
+          same service. A processor MUST NOT assume that two service objects with
+          different values for <spanx style="verb">atom:id</spanx> refer to
+          different services; different publishers may use different id values
+          for the same service.</t>
+
+          <t>A service has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="display name">A name that can be used for a service
+              in the user interface. This is often a name by which the 
+              service is commonly known; no restriction is placed on what kind 
+              of name may be used here. Included as the content of the 
+              atom:title element.</t>
+
+              <t hangText="icon">A small image with an aspect ratio of one 
+              (horizontal) to one (vertical) which SHOULD be suitable for 
+              presentation at a small size SHOULD be provided to represent
+              the service.</t>
+
+              <t hangText="photo">The URL and metadata for an image that
+              represents this service. The URL is represented as the value of the
+              href attribute on an <spanx style="verb">atom:link</spanx> 
+              element with rel photo and a type of either image/jpeg, 
+              image/png, or image/gif. Publishers SHOULD include 
+              <spanx style="verb">media:width</spanx> and 
+              <spanx style="verb">media:height</spanx> attributes on the
+              <spanx style="verb">atom:link</spanx> element describing the 
+              dimensions of the linked image. Processors MAY ignore photos 
+              that are of an inappropriate size for their user interface. 
+              Publishers MAY include several images of different sizes.</t>
+            </list></t>
+        </section>
+
         <section anchor="group" title="Group">
           <t>The "group" Object type represents a social networking group. A
           group is a collection of people which people can join and leave.</t>
@@ -775,13 +822,13 @@
               creator of the group. Included as the content of the atom:title
               element.</t>
 
-              <t hangText="avatar">The URL and metadata for an image that
+              <t hangText="photo">The URL and metadata for an image that
               represents this group. The URL is represented as the value of
-              the href attribute on an atom:link element with rel avatar and a
+              the href attribute on an atom:link element with rel photo and a
               type of either image/jpeg, image/png or image/gif. Publishers
               SHOULD include media:width and media:height attributes on the
               atom:link element describing the dimensions of the linked image.
-              Processors MAY ignore avatars that are of an inappropriate size
+              Processors MAY ignore photos that are of an inappropriate size
               for their user interface. Publishers MAY include several images
               of different sizes.</t>
             </list></t>
