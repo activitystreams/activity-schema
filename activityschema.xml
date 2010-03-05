@@ -426,14 +426,12 @@
           style="verb">atom:title</spanx> element. This element MUST 
           be present for all folder objects. It is acceptable for a folder
           title attribute to be empty.</t>
-          </list></t>
 
           <t hangText="folder page URL">The URL of a web page where the
           folder can be viewed. Represented as the value of the href
           attribute on an <spanx style="verb">atom:link</spanx> element 
           with a rel value of alternate and a type value of text/html. 
           This element should be present for folder objects</t>
-          </list></t>
 
           <t hangText="thumbnail">The URL and metadata for a preview image
           for the folder. The URL is represented as the value of the href
@@ -838,10 +836,10 @@
               the meaning is undefined for the service Object type and consumers
               MAY choose to present only the first of each supported type.</t>
 
-              <t hangText="icon">A small image with an aspect ratio of one 
-              (horizontal) to one (vertical) which SHOULD be suitable for 
-              presentation at a small size SHOULD be provided to represent
-              the service.</t>
+              <t hangText="icon">A small image with an aspect ratio of one
+              (horizontal) to one (vertical) which SHOULD be suitable for
+              presentation at a small size SHOULD be provided to represent the
+              service.</t>
 
               <t hangText="photo">The URL and metadata for an image that
               represents this service. The URL is represented as the value of
