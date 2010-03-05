@@ -983,9 +983,12 @@
               <t hangText="rating">A rating attribute of the reviewed object.
               The rating is an optional field and is modeled after the rating
               attribute from the hReview microformat. Specifically, the rating
-              may be defined as a fixed point integer [1.0-5.0] (with optional
-              alternate worst (default:1.0) and/or best (default:5.0)), fixed
-              point integers, or an explicit value.</t>
+              is defined as a fixed point integer value [1.0-5.0] indicating a 
+              rating for the item, higher indicating a better rating by default. 
+              Optionally a different integral "worst" value (default:1.0) and/or
+              "best" value (default:5.0) may be specified to indicate a different 
+              range (e.g. 6 from 0-10). The "best" value may be numerically smaller 
+              than the "worst" value to indicate a descending range.</t>
             </list></t>
         </section>
 
