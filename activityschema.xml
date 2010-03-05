@@ -309,23 +309,8 @@
               style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
               value of <spanx style="verb">text/html</spanx>.</t>
             </list></t>
-        </section>
-
-        <section anchor="blog-entry" title="Blog Entry">
-          <t>The "blog entry" object type indicates that the Object is an
-          entry in a blog or some other similar construct.</t>
-
-          <t>The "blog entry" object type is a specialization of the "article"
-          object type, so publishers SHOULD also include the object type URL
-          for the "article" object type when publishing object entries of this
-          type.</t>
-
-          <t>The Object type URL for the "weblog entry" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/blog-entry</spanx>.</t>
-
-          <t>A weblog entry has all of the properties of an article as defined
-          in <xref target="article"></xref>, and has no additional
-          properties.</t>
+            
+            <t>An article is equivalent to a blog entry.</t>
         </section>
 
         <section anchor="note" title="Note">
@@ -415,7 +400,7 @@
           <t><list style="hanging">
               <t hangText="associated file URL">The URL of the file described
               by this Object entry. The URL is represented as the value of the
-              href attribute on an atom:link element with rel enclosure.
+              href attribute on an <spanx style="verb">atom:link</spanx> element with rel enclosure.
               Should there be multiple links with rel enclosure with different
               type attribute value, they are considered to be alternate
               representations of the file. Should there be multiple links with
@@ -424,6 +409,46 @@
               MAY choose to present only the first of each supported type.</t>
             </list></t>
         </section>
+
+        <section anchor="folder" title="Folder">
+          <t>The "folder" object type represents a collection of files or media
+            objects similar to the "photo album" object type, which more specifically 
+            represents a collection of "photos."</t>
+
+          <t>The object type URL for the "folder" object type is 
+          <spanx style="verb">http://activitystrea.ms/schema/1.0/folder</spanx>.</t>
+
+          <t>A folder has the following properties:</t>
+
+          <t><list style="hanging">
+          <t hangText="title">The title or short caption assigned to the
+          folder by the author. Included as the text of the <spanx
+          style="verb">atom:title</spanx> element. This element MUST 
+          be present for all folder objects. It is acceptable for a folder
+          title attribute to be empty.</t>
+          </list></t>
+
+          <t hangText="folder page URL">The URL of a web page where the
+          folder can be viewed. Represented as the value of the href
+          attribute on an <spanx style="verb">atom:link</spanx> element 
+          with a rel value of alternate and a type value of text/html. 
+          This element should be present for folder objects</t>
+          </list></t>
+
+          <t hangText="thumbnail">The URL and metadata for a preview image
+          for the folder. The URL is represented as the value of the href
+          attribute on an <spanx style="verb">atom:link</spanx> element with 
+          rel preview and a type of either image/jpeg, image/png or image/gif. 
+          Publishers SHOULD include <spanx style="verb">media:width</spanx> and 
+          <spanx style="verb">media:height</spanx> attributes on the <spanx
+          style="verb">atom:link</spanx> element describing the dimensions of 
+          the linked image. Processors MAY ignore thumbnails that are of an 
+          inappropriate size for their user interface. This element may be 
+          present for folder objects.</t>
+          </list></t>
+
+        </section>
+
 
         <section anchor="photo" title="Photo">
           <t>The "photo" object type represents a graphical still image.</t>
@@ -443,24 +468,24 @@
 
               <t hangText="thumbnail">The URL and metadata for a thumbnail
               version of the photo. The URL is represented as the value of the
-              href attribute on an atom:link element with rel preview and a
+              href attribute on an <spanx style="verb">atom:link</spanx> element with rel preview and a
               type of either image/jpeg, image/png or image/gif. Publishers
               SHOULD include media:width and media:height attributes on the
-              atom:link element describing the dimensions of the linked image.
+              <spanx style="verb">atom:link</spanx> element describing the dimensions of the linked image.
               Processors MAY ignore thumbnails that are of an inappropriate
               size for their user interface.</t>
 
               <t hangText="larger image">The URL and metadata for a larger,
               ideally full-size version of the photo intended for standalone
               viewing. The URL is represented as the value of the href
-              attribute on an atom:link element with rel enclosure and a type
+              attribute on an <spanx style="verb">atom:link</spanx> element with rel enclosure and a type
               of either image/jpeg, image/png or image/gif. Publishers SHOULD
               include media:width and media:height attributes on the atom:link
               element describing the dimensions of the linked image.</t>
 
               <t hangText="image page URL">The URL of a web page where the
               photo and the associated metadata can be viewed. Represented as
-              the value of the href attribute on an atom:link element with a
+              the value of the href attribute on an <spanx style="verb">atom:link</spanx> element with a
               rel value of alternate and a type value of text/html.</t>
 
               <t hangText="description">The description or long caption
@@ -494,7 +519,7 @@
 
               <t hangText="thumbnail">The URL and metadata for a preview image
               for the album. The URL is represented as the value of the href
-              attribute on an atom:link element with rel preview and a type of
+              attribute on an <spanx style="verb">atom:link</spanx> element with rel preview and a type of
               either image/jpeg, image/png or image/gif. Publishers SHOULD
               include media:width and media:height attributes on the atom:link
               element describing the dimensions of the linked image.
@@ -503,7 +528,7 @@
 
               <t hangText="album page URL">The URL of a web page where the
               photo album can be viewed. Represented as the value of the href
-              attribute on an atom:link element with a rel value of alternate
+              attribute on an <spanx style="verb">atom:link</spanx> element with a rel value of alternate
               and a type value of text/html.</t>
             </list></t>
         </section>
@@ -524,16 +549,16 @@
 
               <t hangText="thumbnail">The URL and metadata for a preview image
               for the playlist. The URL is represented as the value of the
-              href attribute on an atom:link element with rel preview and a
+              href attribute on an <spanx style="verb">atom:link</spanx> element with rel preview and a
               type of either image/jpeg, image/png or image/gif. Publishers
               SHOULD include media:width and media:height attributes on the
-              atom:link element describing the dimensions of the linked image.
+              <spanx style="verb">atom:link</spanx> element describing the dimensions of the linked image.
               Processors MAY ignore thumbnails that are of an inappropriate
               size for their user interface.</t>
 
               <t hangText="playlist page URL">The URL of a web page where the
               playlist can be viewed. Represented as the value of the href
-              attribute on an atom:link element with a rel value of alternate
+              attribute on an <spanx style="verb">atom:link</spanx> element with a rel value of alternate
               and a type value of text/html.</t>
             </list></t>
         </section>
@@ -560,22 +585,22 @@
               represented as the value of the href attribute on an atom:link
               element with rel preview and a type of either image/jpeg,
               image/png or image/gif. Publishers SHOULD include media:width
-              and media:height attributes on the atom:link element describing
+              and media:height attributes on the <spanx style="verb">atom:link</spanx> element describing
               the dimensions of the linked image. Processors MAY ignore
               thumbnails that are of an inappropriate size for their user
               interface.</t>
 
               <t hangText="video stream">The URL and metadata for the video
               content itself. The URL is represented as the value of the href
-              attribute on an atom:link element with rel enclosure and a type
+              attribute on an <spanx style="verb">atom:link</spanx> element with rel enclosure and a type
               that matches video/*. Publishers SHOULD include media:width and
-              media:height attributes on the atom:link element describing the
+              media:height attributes on the <spanx style="verb">atom:link</spanx> element describing the
               dimensions of the linked video, and SHOULD include a
               media:duration attribute giving the length of the video.</t>
 
               <t hangText="video page URL">The URL of a web page where the
               video and the associated metadata can be viewed. Represented as
-              the value of the href attribute on an atom:link element with a
+              the value of the href attribute on an <spanx style="verb">atom:link</spanx> element with a
               rel value of alternate and a type value of text/html.</t>
 
               <t hangText="player applet">The URL and metadata for some kind
@@ -583,7 +608,7 @@
               represented as the value of the href attribute on an atom:link
               element with rel alternate and an appropriate type. Publishers
               SHOULD include media:width and media:height attributes on the
-              atom:link element describing the ideal dimensions of the linked
+              <spanx style="verb">atom:link</spanx> element describing the ideal dimensions of the linked
               applet. If both a video page and player applet are included,
               publishers SHOULD include the video page link element first in
               document order for compatibility with legacy, non-activity feed
@@ -622,22 +647,22 @@
 
               <t hangText="audio stream">The URL and metadata for the audio
               content itself. The URL is represented as the value of the href
-              attribute on an atom:link element with rel enclosure and a type
+              attribute on an <spanx style="verb">atom:link</spanx> element with rel enclosure and a type
               that matches audio/*. Publishers SHOULD include a media:duration
-              attribute on the atom:link element giving the length of the
+              attribute on the <spanx style="verb">atom:link</spanx> element giving the length of the
               audio presentation in seconds.</t>
 
               <t hangText="audio page URL">The URL of a web page where the
               audio and the associated metadata can be accessed. Represented
-              as the value of the href attribute on an atom:link element with
+              as the value of the href attribute on an <spanx style="verb">atom:link</spanx> element with
               a rel value of alternate and a type value of text/html.</t>
 
               <t hangText="player applet">The URL and metadata for some kind
               of applet that will allow a user to listen to the audio. The URL
               is represented as the value of the href attribute on an
-              atom:link element with rel alternate and an appropriate type.
+              <spanx style="verb">atom:link</spanx> element with rel alternate and an appropriate type.
               Publishers SHOULD include media:width and media:height
-              attributes on the atom:link element describing the ideal
+              attributes on the <spanx style="verb">atom:link</spanx> element describing the ideal
               dimensions of the linked applet. If both an audio page and
               player applet are included, publishers SHOULD include the audio
               page link element first in document order for compatibility with
@@ -699,27 +724,27 @@
 
               <t hangText="target URL">The URL of the item that is the target
               of the bookmark. Represented as the value of the href attribute
-              on an atom:link element with rel "related". An entry with this
+              on an <spanx style="verb">atom:link</spanx> element with rel "related". An entry with this
               Object type MUST NOT include related links except for the
               purpose of representing the target URL.</t>
 
               <t hangText="bookmark page URL">The URL of a page that describes
               the bookmark. This URL is often specific to the user that
               published the bookmark. Represented as the value of the href
-              attribute on an atom:link element with a rel value of alternate
+              attribute on an <spanx style="verb">atom:link</spanx> element with a rel value of alternate
               and a type value of text/html.</t>
 
               <t hangText="target title">The title of the item that is the
               target of the bookmark. Represented as the value of the title
-              attribute on the atom:link element from which the target URL was
+              attribute on the <spanx style="verb">atom:link</spanx> element from which the target URL was
               obtained.</t>
 
               <t hangText="thumbnail">The URL and metadata for a thumbnail
               version of the page. The URL is represented as the value of the
-              href attribute on an atom:link element with rel preview and a
+              href attribute on an <spanx style="verb">atom:link</spanx> element with rel preview and a
               type of either image/jpeg, image/png or image/gif. Publishers
               SHOULD include media:width and media:height attributes on the
-              atom:link element describing the dimensions of the linked image.
+              <spanx style="verb">atom:link</spanx> element describing the dimensions of the linked image.
               Processors MAY ignore thumbnails that are of an inappropriate
               size for their user interface.</t>
             </list></t>
@@ -762,7 +787,7 @@
 
               <t hangText="photo">The URL and metadata for an image that
               represents this user. The URL is represented as the value of the
-              href attribute on an atom:link element with rel photo and a
+              href attribute on an <spanx style="verb">atom:link</spanx> element with rel photo and a
               type of either image/jpeg, image/png, or image/gif. Publishers
               SHOULD include <spanx style="verb">media:width</spanx> and 
               <spanx style="verb">media:height</spanx> attributes on the
@@ -774,9 +799,10 @@
         </section>
 
         <section title="Service">
-          <t>The "service" Object type represents a website, business, brand, or 
-            other entity that performs some kind of work for other entities, 
-            people, or services.</t>
+          <t>The "service" Object type represents a website, personal website 
+            or blog, business, brand, or other entity that performs some 
+            kind of work for other entities, people, or services, or acts as 
+            kind of container for other objects.</t>
 
           <t>The object type URL for the "service" Object type is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/service</spanx>.</t>
@@ -800,6 +826,17 @@
               service is commonly known; no restriction is placed on what kind 
               of name may be used here. Included as the content of the 
               atom:title element.</t>
+
+              <t hangText="URI">The URI of the service described
+              by this Object entry. The URI is represented as the value of the
+              href attribute on an <spanx style="verb">atom:link</spanx> element 
+              with rel alternate and type of text/html.
+              Should there be multiple links with rel alternate with different
+              type attribute value, they are considered to be alternate
+              representations of the service. Should there be multiple links with
+              rel alternate and with the <spanx>same</spanx> attribute value,
+              the meaning is undefined for the service Object type and consumers
+              MAY choose to present only the first of each supported type.</t>
 
               <t hangText="icon">A small image with an aspect ratio of one 
               (horizontal) to one (vertical) which SHOULD be suitable for 
@@ -837,10 +874,10 @@
 
               <t hangText="photo">The URL and metadata for an image that
               represents this group. The URL is represented as the value of
-              the href attribute on an atom:link element with rel photo and a
+              the href attribute on an <spanx style="verb">atom:link</spanx> element with rel photo and a
               type of either image/jpeg, image/png or image/gif. Publishers
               SHOULD include media:width and media:height attributes on the
-              atom:link element describing the dimensions of the linked image.
+              <spanx style="verb">atom:link</spanx> element describing the dimensions of the linked image.
               Processors MAY ignore photos that are of an inappropriate size
               for their user interface. Publishers MAY include several images
               of different sizes.</t>
