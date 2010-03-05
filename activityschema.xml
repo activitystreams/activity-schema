@@ -20,15 +20,15 @@
     </author>
 
     <author fullname="David Recordon" initials="D." surname="Recordon">
-      <organization>Six Apart</organization>
+      <organization>Six Apart, Facebook</organization>
     </author>
 
     <author fullname="Chris Messina" initials="C." surname="Messina">
-      <organization>Diso Project</organization>
+      <organization>Citizen Agency, Google</organization>
     </author>
 
     <author fullname="Monica Keller" initials="M." surname="Keller">
-      <organization>Facebook</organization>
+      <organization>MySpace, Facebook</organization>
     </author>
 
     <author fullname="Ari Steinberg" initials="A." surname="Steinberg">
@@ -175,6 +175,19 @@
           <t>The verb URI for the "save" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save</spanx>.</t>
         </section>
 
+    		<section anchor="update" title="Update">
+          <t>The "update" Verb indicates that the Subject has modified the
+          referenced Object.</t>
+
+          <t>Implementors SHOULD use verbs such as <xref target="post"></xref>
+          where the Subject is adding new items to a <xref target="list"></xref>
+          or similar. Update is reserved for modifications to existing Objects or 
+          data such as changing a user's profile information.</t>
+
+          <t>The verb URI for the "update" Verb is 
+          <spanx style="verb">http://activitystrea.ms/schema/1.0/update</spanx>.</t>
+        </section>
+
         <section anchor="favorite" title="Mark as Favorite">
           <t>The "mark as favorite" Verb indicates that the Subject marked the
           Object as an item of special interest. Objects so marked often
@@ -194,7 +207,7 @@
           <t>The "mark as liked" verb indicates that the actor indicated that
           it likes the object.</t>
 
-          <t>The verb URI for the "mark as liked" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/like</spanx>.</t>
+          <t>The verb URI for the "mark as liked" Verb is <spanx  style="verb">http://activitystrea.ms/schema/1.0/like</spanx>.</t>
         </section>
 
         <section anchor="play" title="Play">
@@ -721,41 +734,89 @@
 
         <section title="Person">
           <t>The "person" Object type represents a user account. This is often
-          a person, but might also be a company or ficticious character that
+          a person, but might also be a company or fictitious character that
           is being represented by a user account.</t>
 
-          <t>The object type URL for the "user" Object type is <spanx
+          <t>The object type URL for the "person" Object type is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
 
-          <t>Where a particular user is referred to across multiple sources,
+          <t>Where a particular person is referred to across multiple sources,
           the same value for <spanx style="verb">atom:id</spanx> SHOULD be
-          used whereever possible. Two user objects in the same feed document
+          used wherever possible. Two person objects in the same feed document
           with the same <spanx style="verb">atom:id</spanx> value can be
-          considered by processors to be the same user. Processors MAY use
-          other information to determine when two user objects refer to the
-          same user. A processor MUST NOT assume that two user objects with
+          considered by processors to be the same person. Processors MAY use
+          other information to determine when two person objects refer to the
+          same individual. A processor MUST NOT assume that two person objects with
           different values for <spanx style="verb">atom:id</spanx> refer to
-          different users; different publishers may use different id values
-          for the same user.</t>
+          different people; different publishers may use different id values
+          for the same individual.</t>
 
-          <t>A user has the following properties:</t>
+          <t>A person has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="display name">A name that can be used for the user
-              in the user interface. This is often a name by which the user
-              has chosen to be known in a given context; no restriction is
+              <t hangText="display name">A name that can be used for a person
+              in the user interface. This is often a name by which the 
+              individual is known in a given context; no restriction is
               placed on what kind of name may be used here. Included as the
               content of the atom:title element.</t>
 
-              <t hangText="avatar">The URL and metadata for an image that
+              <t hangText="photo">The URL and metadata for an image that
               represents this user. The URL is represented as the value of the
-              href attribute on an atom:link element with rel avatar and a
-              type of either image/jpeg, image/png or image/gif. Publishers
-              SHOULD include media:width and media:height attributes on the
-              atom:link element describing the dimensions of the linked image.
-              Processors MAY ignore avatars that are of an inappropriate size
-              for their user interface. Publishers MAY include several images
-              of different sizes.</t>
+              href attribute on an atom:link element with rel photo and a
+              type of either image/jpeg, image/png, or image/gif. Publishers
+              SHOULD include <spanx style="verb">media:width</spanx> and 
+              <spanx style="verb">media:height</spanx> attributes on the
+              <spanx style="verb">atom:link</spanx> element describing the 
+              dimensions of the linked image. Processors MAY ignore photos 
+              that are of an inappropriate size for their user interface. 
+              Publishers MAY include several images of different sizes.</t>
+            </list></t>
+        </section>
+
+        <section title="Service">
+          <t>The "service" Object type represents a website, business, brand, or 
+            other entity that performs some kind of work for other entities, 
+            people, or services.</t>
+
+          <t>The object type URL for the "service" Object type is <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/service</spanx>.</t>
+
+          <t>Where a particular service is referred to across multiple sources,
+          the same value for <spanx style="verb">atom:id</spanx> SHOULD be
+          used wherever possible. Two service objects in the same feed document
+          with the same <spanx style="verb">atom:id</spanx> value can be
+          considered by processors to be the same service. Processors MAY use
+          other information to determine when two service objects refer to the
+          same service. A processor MUST NOT assume that two service objects with
+          different values for <spanx style="verb">atom:id</spanx> refer to
+          different services; different publishers may use different id values
+          for the same service.</t>
+
+          <t>A service has the following properties:</t>
+
+          <t><list style="hanging">
+              <t hangText="display name">A name that can be used for a service
+              in the user interface. This is often a name by which the 
+              service is commonly known; no restriction is placed on what kind 
+              of name may be used here. Included as the content of the 
+              atom:title element.</t>
+
+              <t hangText="icon">A small image with an aspect ratio of one 
+              (horizontal) to one (vertical) which SHOULD be suitable for 
+              presentation at a small size SHOULD be provided to represent
+              the service.</t>
+
+              <t hangText="photo">The URL and metadata for an image that
+              represents this service. The URL is represented as the value of the
+              href attribute on an <spanx style="verb">atom:link</spanx> 
+              element with rel photo and a type of either image/jpeg, 
+              image/png, or image/gif. Publishers SHOULD include 
+              <spanx style="verb">media:width</spanx> and 
+              <spanx style="verb">media:height</spanx> attributes on the
+              <spanx style="verb">atom:link</spanx> element describing the 
+              dimensions of the linked image. Processors MAY ignore photos 
+              that are of an inappropriate size for their user interface. 
+              Publishers MAY include several images of different sizes.</t>
             </list></t>
         </section>
 
@@ -774,13 +835,13 @@
               creator of the group. Included as the content of the atom:title
               element.</t>
 
-              <t hangText="avatar">The URL and metadata for an image that
+              <t hangText="photo">The URL and metadata for an image that
               represents this group. The URL is represented as the value of
-              the href attribute on an atom:link element with rel avatar and a
+              the href attribute on an atom:link element with rel photo and a
               type of either image/jpeg, image/png or image/gif. Publishers
               SHOULD include media:width and media:height attributes on the
               atom:link element describing the dimensions of the linked image.
-              Processors MAY ignore avatars that are of an inappropriate size
+              Processors MAY ignore photos that are of an inappropriate size
               for their user interface. Publishers MAY include several images
               of different sizes.</t>
             </list></t>
@@ -868,7 +929,7 @@
               content of the atom:content element. Publishers SHOULD include
               any markup necessary to achieve a similar presentation to that
               on the publisher's own HTML pages, including any links that the
-              service automatically adds</t>
+              service automatically adds.</t>
 
               <t hangText="permalink">The canonical URL for the review.
               Represented as the value of the <spanx style="verb">href</spanx>
@@ -880,9 +941,17 @@
               appended, or a completely distinct URL.</t>
 
               <t hangText="reviewed object">The object that this review
-              applies to. Included via a <spanx style="verb">thr:in-reply-to</spanx>
+              applies to. Included with a <spanx style="verb">thr:in-reply-to</spanx>
               element that refers to the <spanx style="verb">atom:id</spanx>
               value of the reviewed object.</t>
+
+              <t hangText="rating">A rating attribute of the reviewed object.
+              The rating is an optional field and is modeled after the rating
+              attribute from the hReview microformat. Specifically, the rating
+              may be defined as a fixed point integer [1.0-5.0] (with optional 
+              alternate worst (default:1.0) and/or best (default:5.0)), fixed 
+              point integers, or an explicit value.</t>
+
             </list></t>
         </section>
       </section>
@@ -893,19 +962,60 @@
         orthogonal context information that can apply to all activities.</t>
 
         <section anchor="location" title="Location">
-          <t>Location context describes the location where the user was at the
-          time the activity was performed. This may be an accurate geographic
-          coordinate, a street address, a free-form location name or a
-          combination of these.</t>
+          <t>Location is a concept which can be used inside the atom:entry
+          level, atom:author and activity:object. Location can be specified
+          via geographic coordinates, a street address, a free-form location
+          name or a combination of these. Geographic coordinates should be
+          included as a geo:point element as described by the GeoRSS
+          specification. Addresses should be included using a poco:address
+          element defined at Portable Contacts specification. The entry level
+          location represents the location of the author at the time the
+          activity was performed. The author level location represents the
+          primary location of the author. Finally, the location within other
+          objects represents the physical location of those objects. All
+          location fields are optional. For free form addresses use the
+          poco:formatted field.</t>
 
-          <t>Geographic coordinates can be included as a <spanx style="verb">geo:point</spanx>
-          element as a direct child of the activity entry, as described by the
-          GeoRSS specification.</t>
+          <t><xref target="location-poco"></xref></t>
 
-          <t>Addresses can be included using a <spanx style="verb">pc:address</spanx>
-          element. TODO: Write some more about this.</t>
+          <t><figure anchor="location-poco" suppress-title="true"
+              title="Location Example">
+              <artwork><![CDATA[<entry>
+  <id>tag:world:activity:1212121212121</id>
+  <title>Rob liked Goldeberg's Deli</title>
+  <author>
+    <name>Rob Dolin</name>
+    <id>tag:world:person:1212121212121</id>
+    <link rel="alternate" type="text/html" href="http://robdolin.com" />
+    <poco:address>
+      <poco:locality>Marina del Rey</poco:locality> 
+      <poco:region>CA</poco:region> 
+      <poco:postalCode>90292</poco:postalCode> 
+      <poco:country>US</poco:country> 
+    </poco:address>
+  </author>
+  <activity:object>
+    <activity:object-type>http://activitystrea.ms/schema/1.0/place</object-type>
+    <id>tag:world:place:1212121212121</id>
+    <title>Goldberg's Deli</title>
+    <link rel="alternate" type="text/html" href="http://www.deli.com" />
+    <geo:point>33.9777 -118.4351</geo:point>
+    <poco:address>
+      <poco:streetAddress>14016 Bora Bora Way</poco:streetAddress>
+      <poco:locality>Marina del Rey</poco:locality> 
+      <poco:region>CA</poco:region>       
+      <poco:postalCode>90292</poco:postalCode> 
+      <poco:country>US</poco:country> 
+    </poco:address>
+  </activity:object>
+  <geo:point>33.9777 -119.4351</geo:point>
+  <activity:verb>http://activitystrea.ms/schema/1.0/like</activity:verb>
+</entry>]]></artwork>
+            </figure></t>
+        </section>
 
-          <t>TODO: Figure out how to include freeform string locations.</t>
+        <section title="new section">
+          <t></t>
         </section>
 
         <section anchor="mood" title="Mood">
@@ -1125,6 +1235,19 @@
           <date />
         </front>
       </reference>
+
+      <reference anchor="hreview">
+        <front>
+          <title>The hReview Microformat</title>
+
+          <author>
+            <organization>microformats community</organization>
+          </author>
+
+          <date />
+        </front>
+      </reference>
+
     </references>
 
     <section title="Acknowledgements">
