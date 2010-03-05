@@ -733,30 +733,30 @@
           with the same <spanx style="verb">atom:id</spanx> value can be
           considered by processors to be the same person. Processors MAY use
           other information to determine when two person objects refer to the
-          same individual. A processor MUST NOT assume that two person objects with
-          different values for <spanx style="verb">atom:id</spanx> refer to
-          different people; different publishers may use different id values
-          for the same individual.</t>
+          same individual. A processor MUST NOT assume that two person objects
+          with different values for <spanx style="verb">atom:id</spanx> refer
+          to different people; different publishers may use different id
+          values for the same individual.</t>
 
           <t>A person has the following properties:</t>
 
           <t><list style="hanging">
               <t hangText="display name">A name that can be used for a person
-              in the user interface. This is often a name by which the 
-              individual is known in a given context; no restriction is
-              placed on what kind of name may be used here. Included as the
-              content of the atom:title element.</t>
+              in the user interface. This is often a name by which the
+              individual is known in a given context; no restriction is placed
+              on what kind of name may be used here. Included as the content
+              of the atom:title element.</t>
 
               <t hangText="photo">The URL and metadata for an image that
               represents this user. The URL is represented as the value of the
-              href attribute on an atom:link element with rel photo and a
-              type of either image/jpeg, image/png, or image/gif. Publishers
-              SHOULD include <spanx style="verb">media:width</spanx> and 
-              <spanx style="verb">media:height</spanx> attributes on the
-              <spanx style="verb">atom:link</spanx> element describing the 
-              dimensions of the linked image. Processors MAY ignore photos 
-              that are of an inappropriate size for their user interface. 
-              Publishers MAY include several images of different sizes.</t>
+              href attribute on an atom:link element with rel photo and a type
+              of either image/jpeg, image/png, or image/gif. Publishers SHOULD
+              include <spanx style="verb">media:width</spanx> and <spanx
+              style="verb">media:height</spanx> attributes on the <spanx
+              style="verb">atom:link</spanx> element describing the dimensions
+              of the linked image. Processors MAY ignore photos that are of an
+              inappropriate size for their user interface. Publishers MAY
+              include several images of different sizes.</t>
             </list></t>
         </section>
 
@@ -888,11 +888,21 @@
               <t hangText="rating">A rating attribute of the reviewed object.
               The rating is an optional field and is modeled after the rating
               attribute from the hReview microformat. Specifically, the rating
-              may be defined as a fixed point integer [1.0-5.0] (with optional 
-              alternate worst (default:1.0) and/or best (default:5.0)), fixed 
+              may be defined as a fixed point integer [1.0-5.0] (with optional
+              alternate worst (default:1.0) and/or best (default:5.0)), fixed
               point integers, or an explicit value.</t>
-
             </list></t>
+        </section>
+
+        <section anchor="list" title="List">
+          <t><list counter="5" style="hanging">
+              <t hangText="title">The name of the list. Included as the
+              content of the atom:title element. Systems which produce lists
+              that do not have titles MUST include an atom:title element with
+              no text content. </t>
+            </list></t>
+
+          <t></t>
         </section>
       </section>
 
@@ -1187,7 +1197,6 @@
           <date />
         </front>
       </reference>
-
     </references>
 
     <section title="Acknowledgements">
