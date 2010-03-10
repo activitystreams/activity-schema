@@ -10,7 +10,6 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<?rfc private="Draft"?>
 <rfc category="exp" docName="activity-schema-01" ipr="none">
   <front>
     <title abbrev="ActivitySchema">Atom Activity Base Schema (Draft)</title>
