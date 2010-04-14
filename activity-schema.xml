@@ -151,27 +151,27 @@
 
       <section title="Base Verbs">
         <section anchor="favorite" title="Mark as Favorite">
-          <t>The "mark as favorite" Verb indicates that the Subject marked the
+          <t>The "mark as favorite" Verb indicates that the Actor marked the
           Object as an item of special interest. Objects so marked often
-          appear in a collection of such Objects which MAY be published as a
+          appear in a collection of such Objects which may be published as a
           feed of entries annotated with this Verb.</t>
 
           <t>If a particular service uses favorites as a mechanism by which a
-          user can recall items that were earlier marked, it MAY be
+          user can recall items that were earlier marked, it may be
           appropriate to also mark activities of this type with the "save"
           Verb as described in <xref target="save"></xref>.</t>
 
-          <t>The verb URI for the "mark as favorite" Verb is <spanx
+          <t>The "mark as favorite" Verb is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/favorite</spanx>.</t>
         </section>
 
         <section anchor="follow" title="Start Following">
-          <t>The "start following" Verb indicates that the Subject began
+          <t>The "start following" Verb indicates that the Actor began
           following the activity of the Object. In most cases, the Object of
-          this Verb will be a user, but it can potentially be of any type that
+          this Verb will be a <xref target="person">Person</xref>, but it can potentially be of any type that
           can sensibly generate activity.</t>
 
-          <t>The verb URI for the "start following" Verb is <spanx
+          <t>The "start following" Verb is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/follow</spanx>.</t>
 
           <t>Processors MAY ignore (silently drop) successive identical "start
@@ -180,10 +180,10 @@
         </section>
 
         <section anchor="like" title="Mark as Liked">
-          <t>The "mark as liked" verb indicates that the actor indicated that
-          it likes the object.</t>
+          <t>The "mark as liked" verb indicates that the Actor indicated that
+          it likes the Object.</t>
 
-          <t>The verb URI for the "mark as liked" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/like</spanx>.</t>
+          <t>The "mark as liked" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/like</spanx>.</t>
         </section>
 
         <section anchor="make-friend" title="Make Friend">
@@ -193,17 +193,17 @@
           <t>Since this verb implies an activity on the part of its object,
           processors MUST NOT accept activities with this Verb unless they are
           able to verify through some external means that there is in fact a
-          reciprocated connection. For example, a processor MAY have received
+          reciprocated connection. For example, a processor may have received
           a guarantee from a particular publisher that the publisher will only
           use this Verb in cases where a reciprocal relationship exists.</t>
 
-          <t>The verb URI for the "make friend" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/make-friend</spanx>.</t>
+          <t>The "make friend" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/make-friend</spanx>.</t>
         </section>
 
         <section anchor="join" title="Join">
           <t>The "join" Verb indicates that the actor has become a member of
           the Object. This specification only defines the meaning of this Verb
-          when its Object is a group, though implementors SHOULD be prepared
+          when its Object is a <xref target="group">Group</xref>, though implementors SHOULD be prepared
           to handle other Object types as meaning MAY be provided by extension
           specifications.</t>
 
@@ -211,7 +211,7 @@
           activities regardless of whether they maintain state sufficient to
           determine (A) or (B) above.</t>
 
-          <t>The verb URI for the "join" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/join</spanx>.</t>
+          <t>The "join" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/join</spanx>.</t>
         </section>
 
         <section anchor="play" title="Play">
@@ -219,7 +219,7 @@
           enjoying the object. For example, if the object is a video this
           indicates that the subject watched all or part of the video.</t>
 
-          <t>The verb URI for the "play" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/play</spanx>.</t>
+          <t>The "play" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/play</spanx>.</t>
         </section>
 
         <section anchor="post" title="Post">
@@ -235,7 +235,7 @@
           than to show it to others as would be indicated by the "share" Verb
           (<xref target="share"></xref>).</t>
 
-          <t>The verb URI for the "save" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/save</spanx>.</t>
+          <t>The "save" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/save</spanx>.</t>
         </section>
 
         <section anchor="share" title="Share">
@@ -243,7 +243,7 @@
           Object to readers. In most cases, the actor did not create the
           Object being shared, but is instead drawing attention to it.</t>
 
-          <t>The verb URI for the "share" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/share</spanx>.</t>
+          <t>The "share" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/share</spanx>.</t>
         </section>
 
         <section anchor="tag" title="Tag">
@@ -251,7 +251,7 @@
           presence of a target inside another object. For example, the actor
           may have specified that a particular user appears in a photo.</t>
 
-          <t>The verb URI for the "tag" verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/tag</spanx>.</t>
+          <t>The "tag" verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/tag</spanx>.</t>
 
           <t>The target of the "tag" verb gives the object in which the tag
           has been added. For example, if a user appears in a photo, the
@@ -268,7 +268,7 @@
           or similar. Update is reserved for modifications to existing Objects or 
           data such as changing a user's profile information.</t>
 
-          <t>The verb URI for the "update" Verb is 
+          <t>The "update" Verb is identified by the URI
           <spanx style="verb">http://activitystrea.ms/schema/1.0/update</spanx>.</t>
         </section>
 
@@ -285,7 +285,7 @@
           incorporating embedded media such as photos and inline hyperlinks to
           other resources.</t>
 
-          <t>The Object type URL for the "Article" Object type is <spanx
+          <t>The "Article" Object type is identified by the URL <spanx
           style="verb">http://activitystrea.ms/schema/1.0/article</spanx>.</t>
 
           <t>An article has the following properties:</t>
@@ -317,7 +317,7 @@
         <section anchor="audio" title="Audio">
           <t>The "audio" Object type represents audio content.</t>
 
-          <t>The Object type URL for the "audio" Object type is <spanx
+          <t>The "audio" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/audio</spanx>.</t>
 
           <t>An audio Object has the following properties:</t>
@@ -390,7 +390,7 @@
           own bookmark as being a favorite as a special classification within
           his own bookmark collection.</t>
 
-          <t>The Object type URL for the "bookmark" Object type is <spanx
+          <t>The "bookmark" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/bookmark</spanx>.</t>
 
           <t>A bookmark has the following properties:</t>
@@ -453,7 +453,7 @@
           <spanx style="verb">thr:in-reply-to</spanx> element a consumer
           SHOULD consider that object to be a comment.</t>
 
-          <t>The object type URL for the "comment" object type is <spanx
+          <t>The "comment" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/comment</spanx>.</t>
 
           <t>A comment has the following properties:</t>
@@ -494,7 +494,7 @@
           added while providing a fallback ability for clients that do not
           support the more specific Object type.</t>
 
-          <t>The Object type URL for the "file" Object type is <spanx
+          <t>The "file" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/file</spanx>.</t>
 
           <t>A file has the following properties:</t>
@@ -517,7 +517,7 @@
             objects similar to the "photo album" object type, which more specifically 
             represents a collection of "photos."</t>
 
-          <t>The object type URL for the "folder" object type is 
+          <t>The "folder" object type is identified by the URI
           <spanx style="verb">http://activitystrea.ms/schema/1.0/folder</spanx>.</t>
 
           <t>A folder has the following properties:</t>
@@ -553,7 +553,7 @@
           <t>The "group" Object type represents a social networking group. A
           group is a collection of people which people can join and leave.</t>
 
-          <t>The Object type URL for the "group" Object type is <spanx
+          <t>The "group" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/group</spanx>.</t>
 
           <t>A group has the following properties:</t>
@@ -611,7 +611,7 @@
           whereas they MAY display only the title or the title and summary for
           a weblog entry.</t>
 
-          <t>The object type URL for the "note" Object type is <spanx
+          <t>The "note" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/note</spanx>.</t>
 
           <t>A note has the following properties:</t>
@@ -638,7 +638,7 @@
           a person, but might also be a company or fictitious character that
           is being represented by a user account.</t>
 
-          <t>The object type URL for the "person" Object type is <spanx
+          <t>The "person" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
 
           <t>Where a particular person is referred to across multiple sources,
@@ -677,7 +677,7 @@
         <section anchor="photo" title="Photo">
           <t>The "photo" object type represents a graphical still image.</t>
 
-          <t>The object type URL for the "photo" Object type is <spanx
+          <t>The "photo" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/photo</spanx>.</t>
 
           <t>A photo has the following properties:</t>
@@ -731,7 +731,7 @@
           <t>The "photo album" object type represents a collection of
           images.</t>
 
-          <t>The object type URL for the "photo album" object type is <spanx
+          <t>The "photo album" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/photo-album</spanx>.</t>
 
           <t>The photo album object type has the following properties:</t>
@@ -760,7 +760,7 @@
         <section anchor="place" title="Place">
           <t>The "place" object type represents a location on Earth.</t>
 
-          <t>The object type URL for the "place" object type is <spanx
+          <t>The "place" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/place</spanx>.</t>
 
           <t>A place has the following properties:</t>
@@ -779,7 +779,7 @@
           <t>The "playlist" object type represents an ordered list of
           time-based media items, such as video and audio objects.</t>
 
-          <t>The object type URL for the "playlist" object type is <spanx
+          <t>The "playlist" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/playlist</spanx>.</t>
 
           <t>The playlist object type has the following properties:</t>
@@ -808,7 +808,7 @@
         <section anchor="product" title="Product">
           <t>The "product" object type represents a commercial good or service.</t>
 
-          <t>The object type URL for the "product" object type is <spanx
+          <t>The "product" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/product</spanx>.</t>
 
           <t>A product has the following properties:</t>
@@ -857,7 +857,7 @@
           <t>The "review" object type represents a primarily prose-based
           commentary on another object.</t>
 
-          <t>The object type URL for the "review" object type is <spanx
+          <t>The "review" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/review</spanx>.</t>
 
           <t>A review has the following properties:</t>
@@ -908,7 +908,7 @@
             kind of work for other entities, people, or services, or acts as 
             kind of container for other objects.</t>
 
-          <t>The object type URL for the "service" Object type is <spanx
+          <t>The "service" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/service</spanx>.</t>
 
           <t>Where a particular service is referred to across multiple
@@ -974,7 +974,7 @@
           most recent status update is old. When a status becomes too old is
           not defined by this specification.</t>
 
-          <t>The object type URL for the "status" object type is <spanx
+          <t>The "status" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/status</spanx>.</t>
 
           <t>A note has the following properties:</t>
@@ -1000,7 +1000,7 @@
           <t>The "video" Object type represents video content, which usually
           consists of a motion picture track and an audio track.</t>
 
-          <t>The Object type URL for the "video" Object type is <spanx
+          <t>The "video" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/video</spanx>.</t>
 
           <t>A video has the following properties:</t>
