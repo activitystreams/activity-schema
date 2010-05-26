@@ -61,87 +61,15 @@
     </section>
 
     <section title="Notational Conventions">
-      <t>In this document, the following namespace prefixes are used for the
-      given namespace URI from the referenced specification:</t>
-
-      <texttable>
-        <ttcol>Alias</ttcol>
-
-        <ttcol>Namespace URI</ttcol>
-
-        <ttcol>Specification</ttcol>
-
-        <c><spanx style="verb">atom:</spanx></c>
-
-        <c><spanx style="verb">http://www.w3.org/2005/Atom</spanx></c>
-
-        <c><xref target="RFC4287">The Atom Syndication Format</xref></c>
-
-        <c><spanx style="verb">thr:</spanx></c>
-
-        <c><spanx style="verb">http://purl.org/syndication/thread/1.0</spanx></c>
-
-        <c><xref target="RFC4685">Atom Threading Extensions</xref></c>
-
-        <c><spanx style="verb">activity:</spanx></c>
-
-        <c><spanx style="verb">http://activitystrea.ms/spec/1.0/</spanx></c>
-
-        <c>Atom Activity Extensions</c>
-
-        <c><spanx style="verb">media:</spanx></c>
-
-        <c><spanx style="verb">http://purl.org/syndication/atommedia</spanx></c>
-
-        <c>Atom Media Extensions</c>
-
-        <c><spanx style="verb">cal:</spanx></c>
-
-        <c><spanx style="verb">urn:ietf:params:xml:ns:xcal</spanx></c>
-
-        <c>xCal</c>
-
-        <c><spanx style="verb">pc:</spanx></c>
-
-        <c><spanx style="verb">http://portablecontacts.net/schema/1.0</spanx></c>
-
-        <c>PortableContacts</c>
-
-        <c><spanx style="verb">geo:</spanx></c>
-
-        <c><spanx style="verb">http://www.georss.org/georss</spanx></c>
-
-        <c>GeoRSS</c>
-      </texttable>
-
-      <t>The choices of namespace prefix are arbitrary and not semantically
-      significant.</t>
-
-      <t>This specification uses a shorthand form of terms from the XML
-      Infoset [W3C.REC-xml-infoset-20040204]. The phrase "Information Item" is
-      omitted when naming Element and Attribute Information Items. Therefore,
-      when this specification uses the term "element," it is referring to an
-      Element Information Item in Infoset terms. Likewise, when this
-      specification uses the term "attribute," it is referring to an Attribute
-      Information Item.</t>
-
       <t>This specification allows the use of IRIs [RFC3987]. Every URI
       [RFC3986] is also an IRI, so a URI MAY be used wherever an IRI is named.
       When an IRI that is not also a URI is given for dereferencing, it MUST
       be mapped to a URI using the steps in Section 3.1 of [RFC3987]. When an
       IRI is serving as an identifier, it MUST NOT be so mapped.</t>
 
-      <t>Some sections of this specification are illustrated with a non-
-      normative RELAX NG Compact schema [RELAXNG]. In those sections, this
-      specification uses the atomCommonAttributes, atomMediaType, and atomURI
-      patterns, defined in [RFC4287].</t>
-
-      <t>However, the text of this specification provides the sole definition
-      of conformance.</t>
-
       <t>This specification uses "the Atom specification" to refer to <xref
-      target="RFC4287"></xref>, and "the AtomActivity specification" to refer
-      to [insert xref here].</t>
+      target="RFC4287"></xref>, and "the Activity Streams specification" to
+      refer to <xref target="activitystreams"></xref>.</t>
     </section>
 
     <section title="Base Schema">
@@ -1348,6 +1276,18 @@
 
           <author>
             <organization>microformats community</organization>
+          </author>
+
+          <date />
+        </front>
+      </reference>
+
+      <reference anchor="activitystreams">
+        <front>
+          <title>Activity Streams Concepts and Representations</title>
+
+          <author>
+            <organization></organization>
           </author>
 
           <date />
