@@ -217,27 +217,16 @@
           <t>The "Article" Object type is identified by the URL <spanx
           style="verb">http://activitystrea.ms/schema/1.0/article</spanx>.</t>
 
-          <t>An article has the following properties:</t>
+          <t>An article has the following additional components:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title of the entry. Included as the
-              content of the atom:title element. This element MUST be included
-              with empty content if the entry does not have a title.</t>
+              <t hangText="Name">The title of the article. Represented by the
+              Name component of the base Object Construct.</t>
 
-              <t hangText="summary">A short excerpt of the body content that
-              gives an introduction to or a summary of the full content. This
-              element SHOULD be omitted if the entry does not have a
-              summary.</t>
-
-              <t hangText="content">The main body content of the entry.
-              Included as the content of the atom:content element.</t>
-
-              <t hangText="permalink">The canonical URL for the entry.
-              Represented as the value of the <spanx style="verb">href</spanx>
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a <spanx style="verb">rel</spanx> value of <spanx
-              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
-              value of <spanx style="verb">text/html</spanx>.</t>
+              <t hangText="Content">The main body content of the article.
+              Represented as a property called <spanx style="verb">content</spanx>
+              whose value is a JSON string containing a fragment of HTML that
+              represents the content.</t>
             </list></t>
 
           <t>An article is equivalent to a blog entry.</t>
@@ -252,44 +241,17 @@
           <t>An audio Object has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title or short caption assigned to the
-              audio by the author. Included as the content of the atom:title
-              element. If the author has not provided a title, the publisher
-              MAY synthesize a title e.g. from the audio filename, or the
-              publisher MAY include the atom:title element with no
-              content.</t>
+              <t hangText="Audio Stream Link">A Media Link Construct linking
+              to the audio content itself. Represented as a property called
+              <spanx style="verb">stream</spanx> whose value is a JSON object
+              with properties as defined in [TODO: xref the JSON serialization
+              of a Media Link Construct]</t>
 
-              <t hangText="audio stream">The URL and metadata for the audio
-              content itself. The URL is represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with rel enclosure and a type that matches audio/*. Publishers
-              SHOULD include a media:duration attribute on the <spanx
-              style="verb">atom:link</spanx> element giving the length of the
-              audio presentation in seconds.</t>
-
-              <t hangText="audio page URL">The URL of a web page where the
-              audio and the associated metadata can be accessed. Represented
-              as the value of the href attribute on an <spanx style="verb">atom:link</spanx>
-              element with a rel value of alternate and a type value of
-              text/html.</t>
-
-              <t hangText="player applet">The URL and metadata for some kind
-              of applet that will allow a user to listen to the audio. The URL
-              is represented as the value of the href attribute on an <spanx
-              style="verb">atom:link</spanx> element with rel alternate and an
-              appropriate type. Publishers SHOULD include media:width and
-              media:height attributes on the <spanx style="verb">atom:link</spanx>
-              element describing the ideal dimensions of the linked applet. If
-              both an audio page and player applet are included, publishers
-              SHOULD include the audio page link element first in document
-              order for compatibility with legacy, non-activity feed
-              consumers.</t>
-
-              <t hangText="description">The description or long caption
-              assigned to the audio by the author. Included as the content of
-              the atom:summary element as described in [AtomMedia]. If the
-              author has not provided a description, this element SHOULD be
-              omitted.</t>
+              <t hangText="Embed Code">An HTML fragment that, when embedded in
+              an HTML page, will provide an interactive player UI for the
+              audio stream. Represented as a property called <spanx
+              style="verb">embedCode</spanx> whose value is a JSON string
+              containing the fragment of HTML.</t>
             </list></t>
         </section>
 
@@ -328,52 +290,23 @@
           <t>A bookmark has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title of the bookmark, as entered by the
-              user who created the bookmark. Included as the content of the
-              atom:title element. Publishers MAY use the title of the target
-              resource as a default for this property where a user hasn't
-              entered a customized value.</t>
+              <t hangText="Title">The title of the bookmark, as entered by the
+              user who created the bookmark. Represented by the Name component
+              of the base Object Construct. Publishers MAY use the title of
+              the target resource as a default for this property where a user
+              hasn't entered a customized value.</t>
 
-              <t hangText="description">The description of the bookmark, as
-              entered by the user who created the bookmark. Included as the
-              content of the atom:summary element. If no description has been
-              provided, publishers SHOULD omit this element.</t>
+              <t hangText="Target URL">The URL of the item that is the target
+              of the bookmark. Represented by a property called <spanx
+              style="verb">targetUrl</spanx> whose value is a JSON string
+              containing the target URL.</t>
 
-              <t hangText="target URL">The URL of the item that is the target
-              of the bookmark. Represented as the value of the href attribute
-              on an <spanx style="verb">atom:link</spanx> element with rel
-              "related". An entry with this Object type MUST NOT include
-              related links except for the purpose of representing the target
-              URL.</t>
-
-              <t hangText="bookmark page URL">The URL of a page that describes
-              the bookmark. This URL is often specific to the user that
-              published the bookmark. Represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a rel value of alternate and a type value of text/html.</t>
-
-              <t hangText="target title">The title of the item that is the
-              target of the bookmark. Represented as the value of the title
-              attribute on the <spanx style="verb">atom:link</spanx> element
-              from which the target URL was obtained.</t>
-
-              <t hangText="thumbnail">The URL and metadata for a thumbnail
-              version of the page. The URL is represented as the value of the
-              href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel preview and a type of either image/jpeg,
-              image/png or image/gif. Publishers SHOULD include media:width
-              and media:height attributes on the <spanx style="verb">atom:link</spanx>
-              element describing the dimensions of the linked image.
-              Processors MAY ignore thumbnails that are of an inappropriate
-              size for their user interface.</t>
+              <t hangText="Thumbnail">The URL and metadata for a thumbnail
+              version of the page. Represented by the Representative Image
+              component of the base Object Construct. Processors MAY ignore
+              thumbnails that are of an inappropriate size for their user
+              interface.</t>
             </list></t>
-
-          <t>Publishers SHOULD include an atom:content element containing
-          content that will present the bookmark to the user of a processor
-          that does not have special support for bookmarks. Bookmark-aware
-          processors SHOULD prefer the specific properties given above, but
-          MAY use the content in preference in cases where the properties
-          above are incomplete or unsuitable.</t>
         </section>
 
         <section anchor="comment" title="Comment">
@@ -383,39 +316,27 @@
           <t>The comment object type MUST NOT be used for other kinds of
           replies, such as video replies or reviews.</t>
 
-          <t>If an object has no explicit type but the object element has a
-          <spanx style="verb">thr:in-reply-to</spanx> element a consumer
-          SHOULD consider that object to be a comment.</t>
-
           <t>The "comment" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/comment</spanx>.</t>
 
           <t>A comment has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="subject">The subject of the comment. Included as
-              the content of the atom:title element. Many systems do not have
-              the concept of a title or subject for a comment; such systems
-              MUST include an atom:title element with no text content.
-              Processors SHOULD refer to such comments as simply being "a
-              comment", with appropriate localization, if they are to be
-              described in a sentence.</t>
+              <t hangText="Subject">The subject of the comment. Represented by
+              the Name component of the base Object Construct. Many systems do
+              not have the concept of a title or subject for a comment; such
+              systems MUST omit the Name component. Processors SHOULD refer to
+              such comments as simply being "a comment", with appropriate
+              localization, if they are to be described in a sentence.</t>
 
-              <t hangText="content">The content of the comment. Included as
-              the content of the atom:content element. Publishers SHOULD
-              include any markup necessary to achieve a similar presentation
-              to that on the publisher's own HTML pages, including any links
-              that the service automatically adds. Processors MAY remove the
-              markup and consider the comment to be plain text.</t>
-
-              <t hangText="permalink">The canonical URL for the comment.
-              Represented as the value of the <spanx style="verb">href</spanx>
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a <spanx style="verb">rel</spanx> value of <spanx
-              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
-              value of <spanx style="verb">text/html</spanx>. This URL may be
-              the URL of the parent object with a fragment identifier
-              appended, or a completely distinct URL.</t>
+              <t hangText="Content">The content of the comment. Represented as
+              a property called <spanx style="verb">content</spanx> whose
+              value is a JSON string containing a fragment of HTML that
+              represents the content. Publishers SHOULD include any markup
+              necessary to achieve a similar presentation to that on the
+              publisher's own HTML pages, including any links that the service
+              automatically adds. Processors MAY remove all HTML markup and
+              consider the comment to be plain text.</t>
             </list></t>
         </section>
 
@@ -434,23 +355,22 @@
           <t>A file has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="associated file URL">The URL of the file described
-              by this Object entry. The URL is represented as the value of the
-              href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel enclosure. Should there be multiple links with
-              rel enclosure with different type attribute value, they are
-              considered to be alternate representations of the file. Should
-              there be multiple links with rel enclosure and with the <spanx>same</spanx>
-              attribute value, the meaning is undefined for the file Object
-              type and consumers MAY choose to present only the first of each
-              supported type.</t>
+              <t hangText="Associated File URL">The URL of the file described
+              by this Object Construct. Represented by a property called
+              <spanx style="verb">fileUrl</spanx> whose value is a JSON string
+              containing the URL.</t>
+
+              <t hangText="File MIME Type">The MIME type of the file described
+              by this Object Construct. Represented by a property called
+              <spanx style="verb">mimeType</spanx> whose value is a JSON
+              string containing the MIME type.</t>
             </list></t>
         </section>
 
         <section anchor="folder" title="Folder">
           <t>The "folder" object type represents a collection of files or
-          media objects similar to the "photo album" object type, which more
-          specifically represents a collection of "photos."</t>
+          media objects. This is similar to the "photo album" object type, but
+          not specifically representing a collection of "photos."</t>
 
           <t>The "folder" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/folder</spanx>.</t>
@@ -458,28 +378,11 @@
           <t>A folder has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title or short caption assigned to the
-              folder by the author. Included as the text of the <spanx
-              style="verb">atom:title</spanx> element. This element MUST be
-              present for all folder objects. It is acceptable for a folder
-              title attribute to be empty.</t>
-
-              <t hangText="folder page URL">The URL of a web page where the
-              folder can be viewed. Represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a rel value of alternate and a type value of text/html.
-              This element should be present for folder objects</t>
-
-              <t hangText="thumbnail">The URL and metadata for a preview image
-              for the folder. The URL is represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with rel preview and a type of either image/jpeg, image/png or
-              image/gif. Publishers SHOULD include <spanx style="verb">media:width</spanx>
-              and <spanx style="verb">media:height</spanx> attributes on the
-              <spanx style="verb">atom:link</spanx> element describing the
-              dimensions of the linked image. Processors MAY ignore thumbnails
-              that are of an inappropriate size for their user interface. This
-              element may be present for folder objects.</t>
+              <t hangText="Preview Image Link">A Media Link Construct
+              describing an image file that can be used as a preview image for
+              the folder. Represented by the Representative Image component of
+              the base Object Construct. Processors MAY ignore thumbnails that
+              are of an inappropriate size for their user interface.</t>
             </list></t>
         </section>
 
@@ -490,47 +393,17 @@
           <t>The "group" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/group</spanx>.</t>
 
-          <t>A group has the following properties:</t>
-
-          <t><list style="hanging">
-              <t hangText="display name">A name that can be used for the group
-              in the user interface. This is often a name chosen by the
-              creator of the group. Included as the content of the atom:title
-              element.</t>
-
-              <t hangText="photo">The URL and metadata for an image that
-              represents this group. The URL is represented as the value of
-              the href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel photo and a type of either image/jpeg,
-              image/png or image/gif. Publishers SHOULD include media:width
-              and media:height attributes on the <spanx style="verb">atom:link</spanx>
-              element describing the dimensions of the linked image.
-              Processors MAY ignore photos that are of an inappropriate size
-              for their user interface. Publishers MAY include several images
-              of different sizes.</t>
-            </list></t>
+          <t>A group has no additional properties.</t>
         </section>
 
         <section anchor="list" title="List">
-          <t>The list object type represents a collection of related
-          objects.<list style="hanging">
-              <t hangText="title">The name of the list. Included as the
-              content of the atom:title element. Systems which produce lists
-              that do not have titles MUST include an atom:title element with
-              no text content.</t>
+          <t>The "list" object type represents a collection of related
+          objects.</t>
 
-              <t hangText="summary">The description of the list. This
-              description CAN be included.</t>
+          <t>The "list" object type is identified by the URI <spanx
+          style="verb">http://activitystrea.ms/schema/1.0/list</spanx>.</t>
 
-              <t hangText="permaLink">The canonical URL for the list.
-              Represented as the value of the <spanx style="verb">href</spanx>
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a <spanx style="verb">rel</spanx> value of <spanx
-              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
-              value of <spanx style="verb">text/html</spanx>.</t>
-            </list></t>
-
-          <t></t>
+          <t>A list has no additional properties.</t>
         </section>
 
         <section anchor="note" title="Note">
@@ -552,61 +425,37 @@
           <t>A note has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="content">The content of the note. Included as the
-              content of the atom:content element. Publishers SHOULD include
-              any markup necessary to achieve a similar presentation to that
-              on the publisher's own HTML pages, including any links that the
-              service automatically adds. Processors MAY remove the markup and
-              consider the note to be plain text.</t>
-
-              <t hangText="permalink">The canonical URL for the note.
-              Represented as the value of the <spanx style="verb">href</spanx>
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a <spanx style="verb">rel</spanx> value of <spanx
-              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
-              value of <spanx style="verb">text/html</spanx>.</t>
+              <t hangText="Content">The content of the comment. Represented as
+              a property called <spanx style="verb">content</spanx> whose
+              value is a JSON string containing a fragment of HTML that
+              represents the content. Publishers SHOULD include any markup
+              necessary to achieve a similar presentation to that on the
+              publisher's own HTML pages, including any links that the service
+              automatically adds. Processors MAY remove all HTML markup and
+              consider the comment to be plain text.</t>
             </list></t>
         </section>
 
         <section anchor="person" title="Person">
           <t>The "person" Object type represents a user account. This is often
-          a person, but might also be a company or fictitious character that
-          is being represented by a user account.</t>
+          represents a person, but might also be a company or fictitious
+          character that is being represented by a user account.</t>
 
           <t>The "person" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
 
-          <t>Where a particular person is referred to across multiple sources,
-          the same value for <spanx style="verb">atom:id</spanx> SHOULD be
-          used wherever possible. Two person objects in the same feed document
-          with the same <spanx style="verb">atom:id</spanx> value can be
-          considered by processors to be the same person. Processors MAY use
-          other information to determine when two person objects refer to the
-          same individual. A processor MUST NOT assume that two person objects
-          with different values for <spanx style="verb">atom:id</spanx> refer
-          to different people; different publishers may use different id
-          values for the same individual.</t>
-
           <t>A person has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="display name">A name that can be used for a person
-              in the user interface. This is often a name by which the
+              <t hangText="Display Name">A name that can be used for the
+              person in the user interface. This is often a name by which the
               individual is known in a given context; no restriction is placed
-              on what kind of name may be used here. Included as the content
-              of the atom:title element.</t>
+              on what kind of name may be used here. Represented by the Name
+              component of the base Object Construct.</t>
 
-              <t hangText="photo">The URL and metadata for an image that
-              represents this user. The URL is represented as the value of the
-              href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel photo and a type of either image/jpeg,
-              image/png, or image/gif. Publishers SHOULD include <spanx
-              style="verb">media:width</spanx> and <spanx style="verb">media:height</spanx>
-              attributes on the <spanx style="verb">atom:link</spanx> element
-              describing the dimensions of the linked image. Processors MAY
-              ignore photos that are of an inappropriate size for their user
-              interface. Publishers MAY include several images of different
-              sizes.</t>
+              <t hangText="Avatar">A link to an "avatar" or "userpic" image
+              for the user. Represented by the Representative Image component
+              of the base Object Construct.</t>
             </list></t>
         </section>
 
@@ -619,51 +468,18 @@
           <t>A photo has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title or short caption assigned to the
-              photo by the author. Included as the content of the atom:title
-              element. If the author has not provided a title, the publisher
-              MAY synthesize a title e.g. from the image filename, or the
-              publisher MAY include the atom:title element with no
-              content.</t>
+              <t hangText="Thumbnail">A link to a thumbnail version of the
+              image. Represented by the Representative Image component of the
+              base Object Construct. Processors MAY ignore thumbnails that are
+              of an inappropriate size for their user interface.</t>
 
-              <t hangText="thumbnail">The URL and metadata for a thumbnail
-              version of the photo. The URL is represented as the value of the
-              href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel preview and a type of either image/jpeg,
-              image/png or image/gif. Publishers SHOULD include media:width
-              and media:height attributes on the <spanx style="verb">atom:link</spanx>
-              element describing the dimensions of the linked image.
-              Processors MAY ignore thumbnails that are of an inappropriate
-              size for their user interface.</t>
-
-              <t hangText="larger image">The URL and metadata for a larger,
-              ideally full-size version of the photo intended for standalone
-              viewing. The URL is represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with rel enclosure and a type of either image/jpeg, image/png or
-              image/gif. Publishers SHOULD include media:width and
-              media:height attributes on the atom:link element describing the
-              dimensions of the linked image.</t>
-
-              <t hangText="image page URL">The URL of a web page where the
-              photo and the associated metadata can be viewed. Represented as
-              the value of the href attribute on an <spanx style="verb">atom:link</spanx>
-              element with a rel value of alternate and a type value of
-              text/html.</t>
-
-              <t hangText="description">The description or long caption
-              assigned to the photo by the author. Included as the content of
-              the media:description element as described in [AtomMedia]. If
-              the author has not provided a description, this element SHOULD
-              be omitted.</t>
+              <t hangText="Larger Image">A Media Link Construct linking to a
+              larger -- ideally, full-size -- version of the photo intended
+              for standalone viewing. Represented as a property named <spanx
+              style="verb">fullImage</spanx> whose value is a JSON object with
+              properties as defined in [TODO: xref the JSON serialization of a
+              Media Link Construct].</t>
             </list></t>
-
-          <t>Publishers SHOULD include an atom:content element containing
-          content that will present the photo and any necessary metadata to
-          the user of a processor that is not media-aware. Media-aware
-          processors SHOULD prefer the specific properties given above, but
-          MAY use the content in preference in cases where the properties
-          above are incomplete or unsuitable.</t>
         </section>
 
         <section anchor="photo-album" title="Photo Album">
@@ -676,23 +492,11 @@
           <t>The photo album object type has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title or short caption assigned to the
-              album by the author. Included as the content of the atom:title
-              element.</t>
-
-              <t hangText="thumbnail">The URL and metadata for a preview image
-              for the album. The URL is represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with rel preview and a type of either image/jpeg, image/png or
-              image/gif. Publishers SHOULD include media:width and
-              media:height attributes on the atom:link element describing the
-              dimensions of the linked image. Processors MAY ignore thumbnails
-              that are of an inappropriate size for their user interface.</t>
-
-              <t hangText="album page URL">The URL of a web page where the
-              photo album can be viewed. Represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a rel value of alternate and a type value of text/html.</t>
+              <t hangText="Preview Image Link">A Media Link Construct
+              describing an image file that can be used as a preview image for
+              the album. Represented by the Representative Image component of
+              the base Object Construct. Processors MAY ignore thumbnails that
+              are of an inappropriate size for their user interface.</t>
             </list></t>
         </section>
 
@@ -705,12 +509,15 @@
           <t>A place has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="name">The name of the place. Included as the
-              content of the atom:title element.</t>
+              <t hangText="Latitude">The latitude of the place as a point on
+              Earth. Included as a property named <spanx style="verb">latitude</spanx>
+              whose value is a JSON number containing a decimal representation
+              of the latitude in degrees.</t>
 
-              <t hangText="geographic coordinates">The latitude and longitude
-              of the place as a point on Earth. Included via the <spanx
-              style="verb">geo:point</spanx> element.</t>
+              <t hangText="Longitude">The longitude of the place as a point on
+              Earth. Included as a property named <spanx style="verb">longitude</spanx>
+              whose value is a JSON number containing a decimal representation
+              of the longitude in degrees.</t>
             </list></t>
         </section>
 
@@ -720,29 +527,6 @@
 
           <t>The "playlist" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/playlist</spanx>.</t>
-
-          <t>The playlist object type has the following properties:</t>
-
-          <t><list style="hanging">
-              <t hangText="title">The title or short caption assigned to the
-              playlist by the author. Included as the content of the
-              atom:title element.</t>
-
-              <t hangText="thumbnail">The URL and metadata for a preview image
-              for the playlist. The URL is represented as the value of the
-              href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel preview and a type of either image/jpeg,
-              image/png or image/gif. Publishers SHOULD include media:width
-              and media:height attributes on the <spanx style="verb">atom:link</spanx>
-              element describing the dimensions of the linked image.
-              Processors MAY ignore thumbnails that are of an inappropriate
-              size for their user interface.</t>
-
-              <t hangText="playlist page URL">The URL of a web page where the
-              playlist can be viewed. Represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a rel value of alternate and a type value of text/html.</t>
-            </list></t>
         </section>
 
         <section anchor="product" title="Product">
@@ -755,42 +539,18 @@
           <t>A product has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title of the product. Included as the
-              content of the atom:title element.</t>
+              <t hangText="Thumbnail">A link to a thumbnail-sized image that
+              contains a photo of the product. Represented by the
+              Representative Image component of the base Object Construct.
+              Processors MAY ignore thumbnails that are of an inappropriate
+              size for their user interface.</t>
 
-              <t hangText="thumbnail">The URL and metadata for a thumbnail
-              photo of the product. The URL is represented as the value of the
-              href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel preview and a type of either image/jpeg,
-              image/png or image/gif. Publishers SHOULD include <spanx
-              style="verb">media:width</spanx> and <spanx style="verb">media:height</spanx>
-              attributes on the <spanx style="verb">atom:link</spanx> element
-              describing the dimensions of the linked image. Processors MAY
-              ignore thumbnails that are of an inappropriate size for their
-              user interface.</t>
-
-              <t hangText="larger image">The URL and metadata for a larger,
-              ideally full-size version of a photo of the product intended for
-              standalone viewing. The URL is represented as the value of the
-              href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel enclosure and a type of either image/jpeg,
-              image/png or image/gif. Publishers SHOULD include <spanx
-              style="verb">media:width</spanx> and <spanx style="verb">media:height</spanx>
-              attributes on the <spanx style="verb">atom:link</spanx> element
-              describing the dimensions of the linked image.</t>
-
-              <t hangText="product page URL">The URL of a web page where the
-              photo and the associated metadata can be viewed. Represented as
-              the value of the href attribute on an <spanx style="verb">atom:link</spanx>
-              element with a rel value of alternate and a type value of
-              text/html.</t>
-
-              <t hangText="description">A textural description of the product
-              either from the author or part of the product's metadata may be
-              included in this element. If the full text is included, use the
-              <spanx style="verb">atom:content</spanx> element. If only a
-              snippet of the content is included, use the <spanx style="verb">
-              atom:summary</spanx> element.</t>
+              <t hangText="Larger Image">A Media Link Construct linking to a
+              larger -- ideally, full-size -- version of the photo of the
+              product. Represented as a property named <spanx style="verb">fullImage</spanx>
+              whose value is a JSON object with properties as defined in
+              [TODO: xref the JSON serialization of a Media Link
+              Construct].</t>
             </list></t>
         </section>
 
@@ -804,43 +564,30 @@
           <t>A review has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title of the review. Included as the
-              content of the atom:title element. Systems which produce reviews
-              that do not have titles MUST include an atom:title element with
-              no text content. Processors SHOULD refer to such comments as
+              <t hangText="Title">The title of the review. Represented by the
+              Name component of the base Object Construct. Many systems do not
+              have the concept of a title for a review; such systems MUST omit
+              the Name component. Processors SHOULD refer to such reviews as
               simply being "a review", with appropriate localization, if they
               are to be described in a sentence.</t>
 
-              <t hangText="content">The content of the review. Included as the
-              content of the atom:content element. Publishers SHOULD include
-              any markup necessary to achieve a similar presentation to that
-              on the publisher's own HTML pages, including any links that the
-              service automatically adds.</t>
+              <t hangText="Content">The content of the comment. Represented as
+              a property called <spanx style="verb">content</spanx> whose
+              value is a JSON string containing a fragment of HTML that
+              represents the content. Publishers SHOULD include any markup
+              necessary to achieve a similar presentation to that on the
+              publisher's own HTML pages, including any links that the service
+              automatically adds. Processors MAY remove all HTML markup and
+              consider the comment to be plain text.</t>
 
-              <t hangText="permalink">The canonical URL for the review.
-              Represented as the value of the <spanx style="verb">href</spanx>
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a <spanx style="verb">rel</spanx> value of <spanx
-              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
-              value of <spanx style="verb">text/html</spanx>. This URL may be
-              the URL of the reviewed object with a fragment identifier
-              appended, or a completely distinct URL.</t>
+              <t hangText="Reviewed Object">The Object Construct representing
+              the item that this review applies to. Represented as the In
+              Reply To Object component of the base Object Construct.</t>
 
-              <t hangText="reviewed object">The object that this review
-              applies to. Included with a <spanx style="verb">thr:in-reply-to</spanx>
-              element that refers to the <spanx style="verb">atom:id</spanx>
-              value of the reviewed object.</t>
-
-              <t hangText="rating">A rating attribute of the reviewed object.
-              The rating is an optional field and is modeled after the rating
-              attribute from the hReview microformat. Specifically, the rating
-              is defined as a fixed point integer value [1.0-5.0] indicating a
-              rating for the item, higher indicating a better rating by
-              default. Optionally a different integral "worst" value
-              (default:1.0) and/or "best" value (default:5.0) may be specified
-              to indicate a different range (e.g. 6 from 0-10). The "best"
-              value may be numerically smaller than the "worst" value to
-              indicate a descending range.</t>
+              <t hangText="rating">A rating attribute of the reviewed item.
+              Represented as a property called <spanx style="verb">rating</spanx>
+              whose value is a JSON number whose value is between 1.0 and 5.0
+              inclusive and has only one decimal place of precision.</t>
             </list></t>
         </section>
 
@@ -853,53 +600,16 @@
           <t>The "service" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/service</spanx>.</t>
 
-          <t>Where a particular service is referred to across multiple
-          sources, the same value for <spanx style="verb">atom:id</spanx>
-          SHOULD be used wherever possible. Two service objects in the same
-          feed document with the same <spanx style="verb">atom:id</spanx>
-          value can be considered by processors to be the same service.
-          Processors MAY use other information to determine when two service
-          objects refer to the same service. A processor MUST NOT assume that
-          two service objects with different values for <spanx style="verb">atom:id</spanx>
-          refer to different services; different publishers may use different
-          id values for the same service.</t>
-
           <t>A service has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="display name">A name that can be used for a service
-              in the user interface. This is often a name by which the service
-              is commonly known; no restriction is placed on what kind of name
-              may be used here. Included as the content of the atom:title
-              element.</t>
-
-              <t hangText="URI">The URI of the service described by this
-              Object entry. The URI is represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with rel alternate and type of text/html. Should there be
-              multiple links with rel alternate with different type attribute
-              value, they are considered to be alternate representations of
-              the service. Should there be multiple links with rel alternate
-              and with the <spanx>same</spanx> attribute value, the meaning is
-              undefined for the service Object type and consumers MAY choose
-              to present only the first of each supported type.</t>
-
-              <t hangText="icon">A small image with an aspect ratio of one
-              (horizontal) to one (vertical) which SHOULD be suitable for
-              presentation at a small size SHOULD be provided to represent the
-              service.</t>
-
-              <t hangText="photo">The URL and metadata for an image that
-              represents this service. The URL is represented as the value of
-              the href attribute on an <spanx style="verb">atom:link</spanx>
-              element with rel photo and a type of either image/jpeg,
-              image/png, or image/gif. Publishers SHOULD include <spanx
-              style="verb">media:width</spanx> and <spanx style="verb">media:height</spanx>
-              attributes on the <spanx style="verb">atom:link</spanx> element
-              describing the dimensions of the linked image. Processors MAY
-              ignore photos that are of an inappropriate size for their user
-              interface. Publishers MAY include several images of different
-              sizes.</t>
+              <t hangText="icon">A Media Link Construct representing a link to
+              a small image representing the service. Represented as a
+              property named <spanx style="verb">icon</spanx> whose value is a
+              JSON object with properties as defined in [TODO: xref the JSON
+              serialization of a Media Link Construct]. The linked image MUST
+              have an aspect ratio of one (horizontal) to one (vertical) and
+              SHOULD be suitable for presentation at a small size.</t>
             </list></t>
         </section>
 
@@ -919,23 +629,7 @@
           <t>The "status" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/status</spanx>.</t>
 
-          <t>A note has the following properties:</t>
-
-          <t><list style="hanging">
-              <t hangText="content">The content of the status update. Included
-              as the content of the atom:content element. Publishers SHOULD
-              include any markup necessary to achieve a similar presentation
-              to that on the publisher's own HTML pages, including any links
-              that the service automatically adds. Processors MAY remove the
-              markup and consider the note to be plain text.</t>
-
-              <t hangText="permalink">The canonical URL for the status update.
-              Represented as the value of the <spanx style="verb">href</spanx>
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with a <spanx style="verb">rel</spanx> value of <spanx
-              style="verb">alternate</spanx> and a <spanx style="verb">type</spanx>
-              value of <spanx style="verb">text/html</spanx>.</t>
-            </list></t>
+          <t>A status has the same components as a note.</t>
         </section>
 
         <section anchor="video" title="Video">
@@ -948,69 +642,27 @@
           <t>A video has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="title">The title or short caption assigned to the
-              video by the author. Included as the content of the atom:title
-              element. If the author has not provided a title, the publisher
-              MAY synthesize a title e.g. from the video filename, or the
-              publisher MAY include the atom:title element with no
-              content.</t>
+              <t hangText="Video Stream Link">A Media Link Construct linking
+              to the video content itself. Represented as a property called
+              <spanx style="verb">stream</spanx> whose value is a JSON object
+              with properties as defined in [TODO: xref the JSON serialization
+              of a Media Link Construct]</t>
 
-              <t hangText="thumbnail">The URL and metadata for a thumbnail
-              version of a representative frame of the video. The URL is
-              represented as the value of the href attribute on an atom:link
-              element with rel preview and a type of either image/jpeg,
-              image/png or image/gif. Publishers SHOULD include media:width
-              and media:height attributes on the <spanx style="verb">atom:link</spanx>
-              element describing the dimensions of the linked image.
-              Processors MAY ignore thumbnails that are of an inappropriate
-              size for their user interface.</t>
-
-              <t hangText="video stream">The URL and metadata for the video
-              content itself. The URL is represented as the value of the href
-              attribute on an <spanx style="verb">atom:link</spanx> element
-              with rel enclosure and a type that matches video/*. Publishers
-              SHOULD include media:width and media:height attributes on the
-              <spanx style="verb">atom:link</spanx> element describing the
-              dimensions of the linked video, and SHOULD include a
-              media:duration attribute giving the length of the video.</t>
-
-              <t hangText="video page URL">The URL of a web page where the
-              video and the associated metadata can be viewed. Represented as
-              the value of the href attribute on an <spanx style="verb">atom:link</spanx>
-              element with a rel value of alternate and a type value of
-              text/html.</t>
-
-              <t hangText="player applet">The URL and metadata for some kind
-              of applet that will allow a user to view the video. The URL is
-              represented as the value of the href attribute on an atom:link
-              element with rel alternate and an appropriate type. Publishers
-              SHOULD include media:width and media:height attributes on the
-              <spanx style="verb">atom:link</spanx> element describing the
-              ideal dimensions of the linked applet. If both a video page and
-              player applet are included, publishers SHOULD include the video
-              page link element first in document order for compatibility with
-              legacy, non-activity feed consumers.</t>
-
-              <t hangText="description">The description or long caption
-              assigned to the video by the author. Included as the content of
-              the atom:summary element as described in [AtomMedia]. If the
-              author has not provided a description, this element SHOULD be
-              omitted.</t>
+              <t hangText="Embed Code">An HTML fragment that, when embedded in
+              an HTML page, will provide an interactive player UI for the
+              video stream. Represented as a property called <spanx
+              style="verb">embedCode</spanx> whose value is a JSON string
+              containing the fragment of HTML.</t>
             </list></t>
-
-          <t>Publishers SHOULD include an atom:content element containing
-          content that will present the video and any necessary metadata to
-          the user of a processor that is not media-aware. Media-aware
-          processors SHOULD prefer the specific properties given above, but
-          MAY use the content in preference in cases where the properties
-          above are incomplete or unsuitable.</t>
         </section>
       </section>
 
       <section title="Base Activity Context Elements">
         <t>This specification defines an initial set of activity context
         elements that can be used with all activity entries. These provide
-        orthogonal context information that can apply to all activities.</t>
+        orthogonal context information that can apply to all activities.
+        [TODO: Figure out what to do with this stuff in our JSON
+        serialization.]</t>
 
         <section anchor="location" title="Location">
           <t>Location is a concept which can be used inside the atom:entry
@@ -1095,11 +747,9 @@
         types MUST carry the appropriate type and MUST NOT carry the comment
         object type.</t>
 
-        <t>Replies, regardless of object type, SHOULD be represented using the
-        <spanx style="verb">thr:in-reply-to</spanx> element defined by <xref
-        target="RFC4685"></xref>. Publishers SHOULD also, if available,
-        include metadata about the item being replied to using the mechanisms
-        defined in <xref target="atomcommentmeta-00"></xref>.</t>
+        <t>Replies, regardless of object type, SHOULD be published with an In
+        Reply To Object component describing the Object Construct they are in
+        reply to.</t>
 
         <t>The act of posting a reply is represented by the post Verb as with
         "top-level" Objects.</t>
@@ -1171,20 +821,17 @@
           <t>An event has the following properties:</t>
 
           <t><list style="hanging">
-              <t hangText="name">The name of the event as provided by its
-              organiser. Included as the content of the atom:title
-              element.</t>
+              <t hangText="Start Date and Time">The date and time that the
+              event begins. Represented as a property called startTime whose
+              value is JSON string containing a W3CDTF timestamp. [TODO:
+              Reference W3CDTF spec.] [TODO: Include prose describing how to
+              represent just a date vs. a date and time.]</t>
 
-              <t hangText="start date and time">The date and time that the
-              event begins. Included via a cal:dtstart element as defined in
-              xCal.</t>
-
-              <t hangText="end date and time">The date and time that the event
-              ends. Included via a cal:dtend element as defined in xCal.</t>
-
-              <t hangText="summary">A short description of the event as
-              provided by its organiser. Included as the content of the
-              atom:summary element.</t>
+              <t hangText="End Date and Time">The date and time that the event
+              ends. Represented as a property called startTime whose value is
+              JSON string containing a W3CDTF timestamp. [TODO: Reference
+              W3CDTF spec.] [TODO: Include prose describing how to represent
+              just a date vs. a date and time.]</t>
             </list></t>
         </section>
       </section>
@@ -1210,12 +857,7 @@
           <t>The Object type URL for the "song" Object type is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/song</spanx>.</t>
 
-          <t>A song has the following properties:</t>
-
-          <t><list style="hanging">
-              <t hangText="title">The title of the song. Included as the
-              content of the atom:title element.</t>
-            </list></t>
+          <t>A song has no additional properties.</t>
         </section>
       </section>
     </section>
