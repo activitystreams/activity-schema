@@ -238,7 +238,7 @@
           <t>The "audio" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/audio</spanx>.</t>
 
-          <t>An audio Object has the following properties:</t>
+          <t>An audio has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Audio Stream Link">A Media Link Construct linking
@@ -287,7 +287,7 @@
           <t>The "bookmark" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/bookmark</spanx>.</t>
 
-          <t>A bookmark has the following properties:</t>
+          <t>A bookmark has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Title">The title of the bookmark, as entered by the
@@ -319,7 +319,7 @@
           <t>The "comment" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/comment</spanx>.</t>
 
-          <t>A comment has the following properties:</t>
+          <t>A comment has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Subject">The subject of the comment. Represented by
@@ -352,7 +352,7 @@
           <t>The "file" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/file</spanx>.</t>
 
-          <t>A file has the following properties:</t>
+          <t>A file has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Associated File URL">The URL of the file described
@@ -375,7 +375,7 @@
           <t>The "folder" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/folder</spanx>.</t>
 
-          <t>A folder has the following properties:</t>
+          <t>A folder has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Preview Image Link">A Media Link Construct
@@ -393,7 +393,7 @@
           <t>The "group" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/group</spanx>.</t>
 
-          <t>A group has no additional properties.</t>
+          <t>A group has no additional components.</t>
         </section>
 
         <section anchor="list" title="List">
@@ -403,7 +403,7 @@
           <t>The "list" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/list</spanx>.</t>
 
-          <t>A list has no additional properties.</t>
+          <t>A list has no additional components.</t>
         </section>
 
         <section anchor="note" title="Note">
@@ -422,7 +422,7 @@
           <t>The "note" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/note</spanx>.</t>
 
-          <t>A note has the following properties:</t>
+          <t>A note has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Content">The content of the comment. Represented in
@@ -444,7 +444,7 @@
           <t>The "person" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
 
-          <t>A person has the following properties:</t>
+          <t>A person has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Display Name">A name that can be used for the
@@ -465,7 +465,7 @@
           <t>The "photo" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/photo</spanx>.</t>
 
-          <t>A photo has the following properties:</t>
+          <t>A photo has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Thumbnail">A link to a thumbnail version of the
@@ -489,7 +489,7 @@
           <t>The "photo album" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/photo-album</spanx>.</t>
 
-          <t>The photo album object type has the following properties:</t>
+          <t>The photo album has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Preview Image Link">A Media Link Construct
@@ -506,7 +506,7 @@
           <t>The "place" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/place</spanx>.</t>
 
-          <t>A place has the following properties:</t>
+          <t>A place has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Latitude">The latitude of the place as a point on
@@ -529,6 +529,8 @@
 
           <t>The "playlist" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/playlist</spanx>.</t>
+
+          <t>A playlist has no additional components.</t>
         </section>
 
         <section anchor="product" title="Product">
@@ -538,7 +540,7 @@
           <t>The "product" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/product</spanx>.</t>
 
-          <t>A product has the following properties:</t>
+          <t>A product has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Thumbnail">A link to a thumbnail-sized image that
@@ -563,7 +565,7 @@
           <t>The "review" object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/review</spanx>.</t>
 
-          <t>A review has the following properties:</t>
+          <t>A review has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Title">The title of the review. Represented by the
@@ -603,7 +605,7 @@
           <t>The "service" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/service</spanx>.</t>
 
-          <t>A service has the following properties:</t>
+          <t>A service has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="icon">A Media Link Construct representing a link to
@@ -642,7 +644,7 @@
           <t>The "video" Object type is identified by the URI <spanx
           style="verb">http://activitystrea.ms/schema/1.0/video</spanx>.</t>
 
-          <t>A video has the following properties:</t>
+          <t>A video has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Video Stream Link">A Media Link Construct linking
@@ -821,7 +823,7 @@
           <t>The object type URL for the "event" object type is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/event</spanx>.</t>
 
-          <t>An event has the following properties:</t>
+          <t>An event has the following additional components:</t>
 
           <t><list style="hanging">
               <t hangText="Start Date and Time">The date and time that the
@@ -862,7 +864,7 @@
           <t>The Object type URL for the "song" Object type is <spanx
           style="verb">http://activitystrea.ms/schema/1.0/song</spanx>.</t>
 
-          <t>A song has no additional properties.</t>
+          <t>A song has no additional components.</t>
         </section>
       </section>
     </section>
