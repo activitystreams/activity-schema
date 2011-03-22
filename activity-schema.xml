@@ -13,7 +13,11 @@
 <?rfc subcompact="no"?>
 <rfc category="exp" docName="activity-schema-01" ipr="none">
   <front>
-    <title abbrev="ActivitySchema">Atom Activity Base Schema (Draft)</title>
+    <title abbrev="ActivitySchema">Activity Base Schema (Draft)</title>
+
+    <author fullname="James M Snell" initials="J.M." surname="Snell">
+      <organization>IBM</organization>
+    </author>
 
     <author fullname="Martin Atkins" initials="M." surname="Atkins">
       <organization>SAY Media</organization>
@@ -43,7 +47,7 @@
 
     <abstract>
       <t>This document presents a base set of Object types and Verbs for use
-      with Atom Activity Extensions.</t>
+      with Activity Streams.</t>
     </abstract>
 
     <note title="Requirements Language">
@@ -56,8 +60,8 @@
 
   <middle>
     <section title="Introduction">
-      <t>This document presents a base set of Object types and Verbs for use
-      with Atom Activity Extensions.</t>
+      <t>This document presents a base set of object types and verbs for use
+      with Activity Streams.</t>
     </section>
 
     <section title="Notational Conventions">
@@ -66,197 +70,239 @@
       When an IRI that is not also a URI is given for dereferencing, it MUST
       be mapped to a URI using the steps in Section 3.1 of [RFC3987]. When an
       IRI is serving as an identifier, it MUST NOT be so mapped.</t>
-
-      <t>This specification uses "the Atom specification" to refer to <xref
-      target="RFC4287"></xref>, and "the Activity Streams specification" to
-      refer to <xref target="activitystreams"></xref>.</t>
     </section>
 
-    <section title="Base Schema">
-      <t>The base schema provides generic terms that all activity consumers
-      SHOULD support. The other, more specific sections that follow use
-      specializations of this base vocabulary to provide additional terms that
-      may only be useful in certain applications.</t>
+      <section anchor="verbs" title="Verbs">
+      
+        <texttable>
+          <ttcol align="left" width="15%">Verb</ttcol>
+          <ttcol align="left">Description</ttcol>
+      
+          <c><spanx style="verb">favorite</spanx></c>
+          <c>Indicates that the actor marked the object as an item of 
+          special interest.</c>
 
-      <section title="Base Verbs">
-        <section anchor="favorite" title="Mark as Favorite">
-          <t>The "mark as favorite" Verb indicates that the Actor marked the
-          Object as an item of special interest. Objects so marked often
-          appear in a collection of such Objects which may be published as a
-          feed of entries annotated with this Verb.</t>
+          <c><spanx style="verb">follow</spanx></c>
+          <c>Indicates that the actor began following the activity of the 
+          object. In most cases, the object will be a 
+          <xref target="person">Person</xref>, but it can
+          potentially be of any type that can sensibly generate activity.
+          Processors MAY ignore (silently drop) successive identical "follow" 
+          activities.</c>
+        
+          <c><spanx style="verb">join</spanx></c>
+          <c>Indicates that the actor has become a member of the object. This 
+          specification only defines the meaning of this verb
+          when its object is a <xref target="group">group</xref>, though
+          implementors SHOULD be prepared to handle other Object types as
+          meaning MAY be provided by extension specifications. Processors 
+          MAY ignore (silently drop) successive identical "join" activities.</c>
 
-          <t>If a particular service uses favorites as a mechanism by which a
-          user can recall items that were earlier marked, it may be
-          appropriate to also mark activities of this type with the "save"
-          Verb as described in <xref target="save"></xref>.</t>
+          <c><spanx style="verb">like</spanx></c>
+          <c>Indicates that the actor marked the object as an item of special 
+          interest. The "like" verb is considered to be an alias of "favorite". 
+          The two verb are semantically identical.</c>
 
-          <t>The "mark as favorite" Verb is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/favorite</spanx>.</t>
-        </section>
-
-        <section anchor="follow" title="Start Following">
-          <t>The "start following" Verb indicates that the Actor began
-          following the activity of the Object. In most cases, the Object of
-          this Verb will be a <xref target="person">Person</xref>, but it can
-          potentially be of any type that can sensibly generate activity.</t>
-
-          <t>The "start following" Verb is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/follow</spanx>.</t>
-
-          <t>Processors MAY ignore (silently drop) successive identical "start
-          following" activities regardless of whether they maintain state
-          sufficient to determine (A), (B), or (C) above.</t>
-        </section>
-
-        <section anchor="like" title="Mark as Liked">
-          <t>The "mark as liked" verb indicates that the Actor indicated that
-          it likes the Object.</t>
-
-          <t>The "mark as liked" Verb is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/like</spanx>.</t>
-        </section>
-
-        <section anchor="make-friend" title="Make Friend">
-          <t>The "make friend" Verb indicates the creation of a friendship
-          that is reciprocated by the object.</t>
-
-          <t>Since this verb implies an activity on the part of its object,
-          processors MUST NOT accept activities with this Verb unless they are
+          <c><spanx style="verb">make-friend</spanx></c>
+          <c>Indicates the creation of a friendship that is reciprocated by 
+          the object. Since this verb implies an activity on the part of its object,
+          processors MUST NOT accept activities with this verb unless they are
           able to verify through some external means that there is in fact a
           reciprocated connection. For example, a processor may have received
           a guarantee from a particular publisher that the publisher will only
-          use this Verb in cases where a reciprocal relationship exists.</t>
+          use this Verb in cases where a reciprocal relationship exists.</c>
 
-          <t>The "make friend" Verb is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/make-friend</spanx>.</t>
-        </section>
+          <c><spanx style="verb">play</spanx></c>
+          <c>Indicates that the actor spent some time enjoying the object. 
+          For example, if the object is a video this indicates that the subject 
+          watched all or part of the video.</c>
 
-        <section anchor="join" title="Join">
-          <t>The "join" Verb indicates that the actor has become a member of
-          the Object. This specification only defines the meaning of this Verb
-          when its Object is a <xref target="group">Group</xref>, though
-          implementors SHOULD be prepared to handle other Object types as
-          meaning MAY be provided by extension specifications.</t>
+          <c><spanx style="verb">request-friend</spanx></c>
+          <c>Indicates the creation of a friendship that has not yet been reciprocated by 
+          the object.</c>
 
-          <t>Processors MAY ignore (silently drop) successive identical "join"
-          activities regardless of whether they maintain state sufficient to
-          determine (A) or (B) above.</t>
+          <c><spanx style="verb">rsvp-maybe</spanx></c> 
+          <c>The "possible RSVP" verb indicates that the actor has made a
+          possible RSVP for the object. This specification only defines the
+          meaning of this verb when its object is an event (see <xref
+          target="event"></xref>), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications. The use of this verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</c>
 
-          <t>The "join" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/join</spanx>.</t>
-        </section>
+          <c><spanx style="verb">rsvp-no</spanx></c>
+          <c>The "negative RSVP" verb indicates that the actor has made a
+          negative RSVP for the object. This specification only defines the
+          meaning of this verb when its object is an event (see <xref
+          target="event"></xref>), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications. The use of this verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</c>
 
-        <section anchor="play" title="Play">
-          <t>The "play" verb indicates that the subject spent some time
-          enjoying the object. For example, if the object is a video this
-          indicates that the subject watched all or part of the video.</t>
+          <c><spanx style="verb">rsvp-yes</spanx></c>
+          <c>The "positive RSVP" verb indicates that the actor has made a
+          positive RSVP for an object. This specification only defines the
+          meaning of this verb when its object is an event (see <xref
+          target="event" />), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications. The use of this verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</c>
+          
+          <c><spanx style="verb">save</spanx></c>
+          <c>Indicates that the actor has called out the object as being of 
+          interest primarily to him- or herself. Though this action MAY be 
+          shared publicly, the implication is that the object has been saved 
+          primarily for the actor's own benefit rather than to show it to 
+          others as would be indicated by the "share" verb.</c>
 
-          <t>The "play" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/play</spanx>.</t>
-        </section>
+          <c><spanx style="verb">share</spanx></c>
+          <c>Indicates that the actor has called out the object to readers. 
+          In most cases, the actor did not create the object being shared, 
+          but is instead drawing attention to it.</c>
 
-        <section anchor="post" title="Post">
-          <t>The "Post" Verb is described in section 8 of the AtomActivity
-          specification. It is only referenced here for completeness.</t>
-        </section>
+          <c><spanx style="verb">tag</spanx></c>
+          <c>Indicates that the actor has identified the presence of a target 
+          inside another object. For example, the actor may have specified that 
+          a particular user appears in a photo. The target of the "tag" verb 
+          gives the object in which the tag has been added. For example, if a 
+          user appears in a photo, the <spanx style="verb">object</spanx> 
+          is the user and the <spanx style="verb">target</spanx> is the photo.</c>
 
-        <section anchor="save" title="Save">
-          <t>The "save" Verb indicates that the Subject has called out the
-          Object as being of interest primarily to him- or herself. Though
-          this action MAY be shared publicly, the implication is that the
-          Object has been saved primarily for the actor's own benefit rather
-          than to show it to others as would be indicated by the "share" Verb
-          (<xref target="share"></xref>).</t>
+          <c><spanx style="verb">update</spanx></c>
+          <c>The "update" verb indicates that the actor has modified the
+          object. Implementors SHOULD use verbs such as <spanx style="verb">post</spanx>
+          where the actor is adding new items to a <xref target="list">list</xref> or 
+          similar. Update is reserved for modifications to existing objects 
+          or data such as changing a user's profile information.</c>
+        </texttable>
 
-          <t>The "save" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/save</spanx>.</t>
-        </section>
-
-        <section anchor="share" title="Share">
-          <t>The "share" Verb indicates that the Subject has called out the
-          Object to readers. In most cases, the actor did not create the
-          Object being shared, but is instead drawing attention to it.</t>
-
-          <t>The "share" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/share</spanx>.</t>
-        </section>
-
-        <section anchor="tag" title="Tag">
-          <t>The "tag" verb indicates that the actor has identified the
-          presence of a target inside another object. For example, the actor
-          may have specified that a particular user appears in a photo.</t>
-
-          <t>The "tag" verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/tag</spanx>.</t>
-
-          <t>The target of the "tag" verb gives the object in which the tag
-          has been added. For example, if a user appears in a photo, the
-          activity:object is the user and the activity:target is the
-          photo.</t>
-        </section>
-
-        <section anchor="update" title="Update">
-          <t>The "update" Verb indicates that the Subject has modified the
-          referenced Object.</t>
-
-          <t>Implementors SHOULD use verbs such as <xref target="post"></xref>
-          where the Subject is adding new items to a <xref
-          target="list"></xref> or similar. Update is reserved for
-          modifications to existing Objects or data such as changing a user's
-          profile information.</t>
-
-          <t>The "update" Verb is identified by the URI <spanx style="verb">http://activitystrea.ms/schema/1.0/update</spanx>.</t>
-        </section>
       </section>
 
-      <section title="Base Object Types">
+      <section anchor="object-types" title="Object Types">
         <section anchor="article" title="Article">
-          <t>The "article" Object type indicates that the Object is an
+          <t>The "article" object type indicates that the object is an
           article, such as a news article, a knowledge base entry, or other
-          similar construct.</t>
+          similar construct. Such objects generally consist of paragraphs 
+          of text, in some cases incorporating embedded media such as photos 
+          and inline hyperlinks to other resources.</t>
 
-          <t>Articles generally consist of paragraphs of text, in some cases
-          incorporating embedded media such as photos and inline hyperlinks to
-          other resources.</t>
+          <t>At a minimum, an article object has the following properties:</t>
 
-          <t>The "Article" Object type is identified by the URL <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/article</spanx>.</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the article. If the article 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> of the article
+          is the <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
 
-          <t>An article has the following additional components:</t>
+          <c><spanx style="verb">content</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional main body content represented as a fragment of HTML. </c>
+                              
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          article.HTML markup MUST NOT be included</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the article.</c>
+                    
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the article was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+         
+          <c><spanx style="verb">summary</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional short, natural-language, human-readable snippet or summary of
+          the article represented as a fragment of HTML.</c>
+                    
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the article was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the article's HTML representation.</c>
+          
+          </texttable>
 
-          <t><list style="hanging">
-              <t hangText="Name">The title of the article. Represented by the
-              Name component of the base Object Construct.</t>
-
-              <t hangText="Content">The main body content of the article.
-              Represented in JSON as a property called <spanx style="verb">content</spanx>
-              whose value is a JSON string containing a fragment of HTML that
-              represents the content.</t>
-            </list></t>
-
-          <t>An article is equivalent to a blog entry.</t>
         </section>
 
         <section anchor="audio" title="Audio">
-          <t>The "audio" Object type represents audio content.</t>
+          <t>The "audio" object type represents audio content.</t>
 
-          <t>The "audio" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/audio</spanx>.</t>
+          <t>At a minimum, an audio object has the following properties:</t>
 
-          <t>An audio has the following additional components:</t>
-
-          <t><list style="hanging">
-              <t hangText="Audio Stream Link">A Media Link Construct linking
-              to the audio content itself. Represented in JSON as a property
-              called <spanx style="verb">stream</spanx> whose value is a JSON
-              object with properties as defined in [TODO: xref the JSON
-              serialization of a Media Link Construct]</t>
-
-              <t hangText="Embed Code">An HTML fragment that, when embedded in
-              an HTML page, will provide an interactive player UI for the
-              audio stream. Represented in JSON as a property called <spanx
-              style="verb">embedCode</spanx> whose value is a JSON string
-              containing the fragment of HTML.</t>
-            </list></t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the audio stream. If the audio 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+                    
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title for the 
+          audio stream. HTML markup MUST NOT be included</c>
+          
+          <c><spanx style="verb">embedCode</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>An optional HTML fragment that, when embedded in an HTML page, will
+          provide an interactive player UI for the audio stream.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the audio object.</c>
+ 
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the audio object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">stream</spanx></c>
+          <c>Media Link [TODO: Link to JSON-Activity Media Link]</c>
+          <c>A link to the audio content itself. Represented in JSON as a 
+          media link as defined in [TODO: Link to JSON-Activity Media Link].</c>
+          
+          <c><spanx style="verb">summary</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional short, natural-language, human-readable snippet or summary of
+          the audio stream represented as a fragment of HTML.</c>
+                    
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the audio object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          </texttable>
         </section>
 
         <section anchor="bookmark" title="Bookmark">
-          <t>The "bookmark" Object type represents a pointer to some URL --
+        
+          <t>The "bookmark" object type represents a pointer to some URL --
           typically a web page. In most cases, a bookmark is specific to a
           given user and contains metadata chosen by that user. Bookmark
           Objects are similar in principle to the concept of bookmarks or
@@ -271,77 +317,216 @@
           description of his or her own bookmarks to differ from the metadata
           on the target itself.</t>
 
-          <t>Some implementations refer to this Object type as a "link". This
+          <t>Some implementations refer to this object type as a "link". This
           specification uses the term "bookmark" to avoid confusion with the
-          general concept of hyperlinks which apply to all Object types.</t>
+          general concept of hyperlinks which apply to all object types.</t>
 
           <t>Since bookmarks are often specific to a particular user, even
           though multiple users might have bookmarks pointing at the same
-          resource, it is appropriate to use the "post" Verb to describe the
-          publication of such a bookmark. The "mark as favorite" Verb SHOULD
+          resource, it is appropriate to use the <spanx style="verb">post</spanx> verb to describe the
+          publication of such a bookmark. The <spanx style="verb">favorite</spanx> verb SHOULD
           be used when a user flags another user's bookmark as being a
           favorite without creating his own bookmark, or when a user flags his
           own bookmark as being a favorite as a special classification within
           his own bookmark collection.</t>
 
-          <t>The "bookmark" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/bookmark</spanx>.</t>
+          <t>At a minimum, a bookmark object has the following properties:</t>
 
-          <t>A bookmark has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the bookmark. If the bookmark 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          bookmark as entered by the user who created it. HTML markup MUST NOT 
+          be included. Publishers MAY user the title of the target resource
+          as a default for this peroperty where a user has not entered a 
+          customized value</c>
 
-          <t><list style="hanging">
-              <t hangText="Title">The title of the bookmark, as entered by the
-              user who created the bookmark. Represented by the Name component
-              of the base Object Construct. Publishers MAY use the title of
-              the target resource as a default for this property where a user
-              hasn't entered a customized value.</t>
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the bookmark object.</c>
+           
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link [TODO: Reference media link spec]</c>
+          <c>An optional link to an image resource providing a visual representation
+          of the bookmarked resource. Processors MAY ignore thumbnails
+          that are of an inappropriate size for their user interface.</c>
+                    
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the bookmark object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
 
-              <t hangText="Target URL">The URL of the item that is the target
-              of the bookmark. Represented in JSON by a property called <spanx
-              style="verb">targetUrl</spanx> whose value is a JSON string
-              containing the target URL.</t>
+          <c><spanx style="verb">targetUrl</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The IRI of the item that is the target of the bookmark.</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the bookmark object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          </texttable>
 
-              <t hangText="Thumbnail">The URL and metadata for a thumbnail
-              version of the page. Represented by the Representative Image
-              component of the base Object Construct. Processors MAY ignore
-              thumbnails that are of an inappropriate size for their user
-              interface.</t>
-            </list></t>
         </section>
 
         <section anchor="comment" title="Comment">
           <t>The "comment" object type represents a textual response to
-          another object.</t>
+          another object. The comment object type MUST NOT be used for other 
+          kinds of responses, such as video replies or reviews.</t>
 
-          <t>The comment object type MUST NOT be used for other kinds of
-          replies, such as video replies or reviews.</t>
+          <t>At a minimum, the comment object has the following properties:</t>
 
-          <t>The "comment" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/comment</spanx>.</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the comment. If the comment 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">content</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The main body content represented as a fragment of HTML. Publishers
+          SHOULD include any markup necessary to achieve a similar presentation to
+          that on the publisher's own HTML pages. Processors MAY remove all HTML
+          markup and consider the comment to be plain text.</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional, natural-language, human-readable and plain-text subject of the 
+          comment. Many systems do not have the concept of a title or subject
+          for a comment; such systems MUST omit the <spanx style="verb">displayName</spanx>
+          property. Processors SHOULD refer to such comments as simply being 
+          "a comment", with appropriate localization, if they are to be described
+          in a sentence.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the comment object.</c>
+          
+          <c><spanx style="verb">inReplyTo</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Array of Objects</c>
+          <c>A listing of one or more objects for which this object is a 
+          response.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the comment object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the comment object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          </texttable>
+        </section>
 
-          <t>A comment has the following additional components:</t>
+        <section anchor="event" title="Event">
+          <t>The "event" object type represents an event that occurs in a
+          certain place during a particular interval of time.</t>
 
-          <t><list style="hanging">
-              <t hangText="Subject">The subject of the comment. Represented by
-              the Name component of the base Object Construct. Many systems do
-              not have the concept of a title or subject for a comment; such
-              systems MUST omit the Name component. Processors SHOULD refer to
-              such comments as simply being "a comment", with appropriate
-              localization, if they are to be described in a sentence.</t>
+          <t>At a minimum, the event object has the following properties:</t>
 
-              <t hangText="Content">The content of the comment. Represented in
-              JSON as a property called <spanx style="verb">content</spanx>
-              whose value is a JSON string containing a fragment of HTML that
-              represents the content. Publishers SHOULD include any markup
-              necessary to achieve a similar presentation to that on the
-              publisher's own HTML pages, including any links that the service
-              automatically adds. Processors MAY remove all HTML markup and
-              consider the comment to be plain text.</t>
-            </list></t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">attending</spanx></c>
+          <c><xref target="stream">Stream</xref> object</c>
+          <c>An optional link to a Stream providing information about
+          actors who have responded to the event object using the
+          <spanx style="verb">rsvp-yes</spanx> verb as described in 
+          <xref target="stream"/>.</c>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the event. If the event 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          event.</c>
+          
+          <c><spanx style="verb">endTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The date and time that the event ends represented as a JSON
+          String conforming to the "date-time" production in 
+          <xref target="RFC3339"/></c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the event object.</c>
+          
+          <c><spanx style="verb">location</spanx></c>
+          <c><xref target="location">Place</xref> object</c>
+          <c>The optional, location or venue for the event expressed as a place 
+          object as described in <xref target="location"/>.</c>
+
+          <c><spanx style="verb">maybeAttending</spanx></c>
+          <c><xref target="stream">Stream</xref> object</c>
+          <c>An optional link to a Stream providing information about
+          actors who have responded to the event object using the
+          <spanx style="verb">rsvp-maybe</spanx> verb as described in 
+          <xref target="stream"/>.</c>
+          
+          <c><spanx style="verb">notAttending</spanx></c>
+          <c><xref target="stream">Stream</xref> object</c>
+          <c>An optional link to a Stream providing information about
+          actors who have responded to the event object using the
+          <spanx style="verb">rsvp-no</spanx> verb as described in 
+          <xref target="stream"/>.</c>
+
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the event object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">startTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The date and time that the event begins represented as a JSON
+          String conforming to the "date-time" production in 
+          <xref target="RFC3339"/></c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the event object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the event's HTML representation.</c>
+ 
+          </texttable>
         </section>
 
         <section anchor="file" title="File">
-          <t>The "file" Object type represents some document or other file
+          <t>The "file" object type represents some document or other file
           with no additional machine-readable semantics.</t>
 
           <t>It is intended that this type be used as a base type for other
@@ -349,22 +534,53 @@
           added while providing a fallback ability for clients that do not
           support the more specific Object type.</t>
 
-          <t>The "file" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/file</spanx>.</t>
+          <t>At a minimum, the file object has the following properties:</t>
 
-          <t>A file has the following additional components:</t>
-
-          <t><list style="hanging">
-              <t hangText="Associated File URL">The URL of the file described
-              by this Object Construct. Represented in JSON by a property
-              called <spanx style="verb">fileUrl</spanx> whose value is a JSON
-              string containing the URL.</t>
-
-              <t hangText="File MIME Type">The MIME type of the file described
-              by this Object Construct. Represented in JSON by a property
-              called <spanx style="verb">mimeType</spanx> whose value is a
-              JSON string containing the MIME type.</t>
-            </list></t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the file. If the file 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          file.</c>
+          
+          <c><spanx style="verb">fileUrl</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The IRI of the file described by this object.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the file object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the file object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">mimeType</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The MIME type of the file described by the object.</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the file object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the file's HTML representation.</c>
+          </texttable>
         </section>
 
         <section anchor="folder" title="Folder">
@@ -372,43 +588,178 @@
           media objects. This is similar to the "photo album" object type, but
           not specifically representing a collection of "photos."</t>
 
-          <t>The "folder" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/folder</spanx>.</t>
+          <t>At a minimum, the folder object has the following properties:</t>
 
-          <t>A folder has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the folder. If the folder 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          folder.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the folder object.</c>
+          
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>A link to an image resource that can be used as a preview image
+          for the folder. Processors MAY ignore images that are of an 
+          inappropriate size for their user interface.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the folder object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the folder object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the folder's HTML representation.</c>
+          
+          </texttable>
 
-          <t><list style="hanging">
-              <t hangText="Preview Image Link">A Media Link Construct
-              describing an image file that can be used as a preview image for
-              the folder. Represented by the Representative Image component of
-              the base Object Construct. Processors MAY ignore thumbnails that
-              are of an inappropriate size for their user interface.</t>
-            </list></t>
         </section>
 
         <section anchor="group" title="Group">
-          <t>The "group" Object type represents a social networking group. A
-          group is a collection of people which people can join and leave.</t>
+          <t>The "group" object type represents a grouping of objects in which
+          member objects can join or leave.</t>
 
-          <t>The "group" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/group</spanx>.</t>
+          <t>At a minimum, the group object has the following properties:</t>
 
-          <t>A group has no additional components.</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the group. If the group 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          group.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the group object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the group object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the group object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the group's HTML representation.</c>
+          
+          </texttable>
         </section>
 
         <section anchor="list" title="List">
           <t>The "list" object type represents a collection of related
           objects.</t>
 
-          <t>The "list" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/list</spanx>.</t>
+          <t>At a minimum, the list object has the following properties:</t>
 
-          <t>A list has no additional components.</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the list. If the list 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          list.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the list object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the list object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the list object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the list's HTML representation.</c>
+          
+          </texttable>
+        </section>
+
+        <section anchor="mood" title="Mood">
+          <t>The "mood" object type represents the mood, or emotional state,
+          of an individual.</t>
+          
+          <t>At a minimum, the mood object has the following properties:</t>
+          
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text keyword or 
+          phrase describing the mood. HTML markup MUST NOT be included</c>
+
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the mood object.</c>
+          
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>An optional image that provides a visual representation of the mood.</c>
+                    
+          </texttable>
+          
         </section>
 
         <section anchor="note" title="Note">
-          <t>The "note" Object type represents short-form text messages. This
-          Object type is intended for use in "micro-blogging" and in systems
+          <t>The "note" object type represents short-form text messages. This
+          object type is intended for use in "micro-blogging" and in systems
           where users are invited to publish short, often plain-text messages
           whose useful lifespan is generally shorter than that of an article
           or weblog entry.</t>
@@ -419,207 +770,515 @@
           whereas they MAY display only the title or the title and summary for
           a weblog entry.</t>
 
-          <t>The "note" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/note</spanx>.</t>
+          <t>At a minimum, a note object has the following properties:</t>
 
-          <t>A note has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the note. If the note 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
 
-          <t><list style="hanging">
-              <t hangText="Content">The content of the comment. Represented in
-              JSON as a property called <spanx style="verb">content</spanx>
-              whose value is a JSON string containing a fragment of HTML that
-              represents the content. Publishers SHOULD include any markup
-              necessary to achieve a similar presentation to that on the
-              publisher's own HTML pages, including any links that the service
-              automatically adds. Processors MAY remove all HTML markup and
-              consider the comment to be plain text.</t>
-            </list></t>
+          <c><spanx style="verb">content</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The content of the note. Publishers SHOULD include any markup 
+          necessary to achieve a similar presentation to that on the 
+          publisher's own HTML pages, including any links that the service
+          automatically adds. Processors MAY remove all HTML markup and 
+          consider the comment to be plain text.</c>
+
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the note object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the note object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the note object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the note's HTML representation.</c>
+          
+          </texttable>
         </section>
 
         <section anchor="person" title="Person">
-          <t>The "person" Object type represents a user account. This is often
+          <t>The "person" object type represents a user account. This is often
           represents a person, but might also be a company or fictitious
           character that is being represented by a user account.</t>
 
-          <t>The "person" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/person</spanx>.</t>
+          <t>At a minimum, the person object has the following properties:</t>
 
-          <t>A person has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>A name that can be used for the person in the user interface. This
+          is often a name by which the individual is known in a given context;
+          no restriction is placed on what kind of name may be used here.</c>
 
-          <t><list style="hanging">
-              <t hangText="Display Name">A name that can be used for the
-              person in the user interface. This is often a name by which the
-              individual is known in a given context; no restriction is placed
-              on what kind of name may be used here. Represented by the Name
-              component of the base Object Construct.</t>
-
-              <t hangText="Avatar">A link to an "avatar" or "userpic" image
-              for the user. Represented by the Representative Image component
-              of the base Object Construct.</t>
-            </list></t>
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>A link to an image representing the person. Processors MAY ignore
+          thumbnails that are of an inappropriate size for their user interface.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the person object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the person object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the person object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the person's HTML representation.</c>
+          
+          </texttable>
+          
         </section>
 
         <section anchor="photo" title="Photo">
           <t>The "photo" object type represents a graphical still image.</t>
 
-          <t>The "photo" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/photo</spanx>.</t>
+          <t>At a minimum, the photo object has the following properties:</t>
 
-          <t>A photo has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the photo. If the photo 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional natural-language and plain-text caption for the photo. 
+          HTML Markup MUST NOT be used.</c>
+          
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>A link to a thumbnail version of the image. Processors MAY ignore
+          thumbnails that are of an inappropriate size for their user interface.</c>
+          
+          <c><spanx style="verb">fullImage</spanx></c>
+          <c>Media Link</c>
+          <c>A link to a larger -- ideally, full-size -- version of the photo
+          intended for standalone viewing.</c>
 
-          <t><list style="hanging">
-              <t hangText="Thumbnail">A link to a thumbnail version of the
-              image. Represented by the Representative Image component of the
-              base Object Construct. Processors MAY ignore thumbnails that are
-              of an inappropriate size for their user interface.</t>
-
-              <t hangText="Larger Image">A Media Link Construct linking to a
-              larger -- ideally, full-size -- version of the photo intended
-              for standalone viewing. Represented in JSON as a property named
-              <spanx style="verb">fullImage</spanx> whose value is a JSON
-              object with properties as defined in [TODO: xref the JSON
-              serialization of a Media Link Construct].</t>
-            </list></t>
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the photo object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the photo object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">summary</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional, natural-language description of the image in the form
+          of a fragment of HTML.</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the photo object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the photo's HTML representation.</c>
+          
+          </texttable>
         </section>
 
         <section anchor="photo-album" title="Photo Album">
-          <t>The "photo album" object type represents a collection of
+          <t>The "photo-album" object type represents a collection of
           images.</t>
 
-          <t>The "photo album" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/photo-album</spanx>.</t>
+          <t>At a minimum, the photo album object has the following properties:</t>
 
-          <t>The photo album has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the photo album. If the photo album
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional natural-language and plain-text name for the photo album. 
+          HTML Markup MUST NOT be used.</c>
+          
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>A link to a thumbnail image representing the album. Processors MAY ignore
+          thumbnails that are of an inappropriate size for their user interface.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the photo album object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the photo album object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the photo album object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the photo album's HTML representation.</c>
 
-          <t><list style="hanging">
-              <t hangText="Preview Image Link">A Media Link Construct
-              describing an image file that can be used as a preview image for
-              the album. Represented by the Representative Image component of
-              the base Object Construct. Processors MAY ignore thumbnails that
-              are of an inappropriate size for their user interface.</t>
-            </list></t>
+          </texttable>
         </section>
 
         <section anchor="place" title="Place">
-          <t>The "place" object type represents a location on Earth.</t>
+          <t>The "place" object type represents a location on Earth. Locations
+          can be represented using geographic coordinates, a physical address,
+          a free-form location name, or any combination of these.</t>
 
-          <t>The "place" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/place</spanx>.</t>
+          <t>At a minimum, the place object has the following properties:</t>
 
-          <t>A place has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>An optional natural-language, human-readable and plain-text name of the 
+          place. HTML markup MUST NOT be included</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the place object.</c>
+          
+          <c><spanx style="verb">position</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional latitude, longitude and altitude of the place as a point
+          on Earth. Represented as an ISO 6709 compliant string. For instance
+          <spanx style="verb">"position":"+27.5916+086.5640+8850/"</spanx>.</c>
+          
+          <c><spanx style="verb">address</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Object</c>
+          <c>A optional physical address represented as a JSON object with the properties
+          defined in the table below.</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the place's HTML representation.</c>
+          
+          </texttable>
 
-          <t><list style="hanging">
-              <t hangText="Latitude">The latitude of the place as a point on
-              Earth. Represented in JSON as a property named <spanx
-              style="verb">latitude</spanx> whose value is a JSON number
-              containing a decimal representation of the latitude in
-              degrees.</t>
+          <t>The properties for the <spanx style="verb">address</spanx>
+          property are:</t>
 
-              <t hangText="Longitude">The longitude of the place as a point on
-              Earth. Represented in JSON as a property named <spanx
-              style="verb">longitude</spanx> whose value is a JSON number
-              containing a decimal representation of the longitude in
-              degrees.</t>
-            </list></t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+
+          <c><spanx style="verb">formatted</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The full mailing address formatted for display or use with 
+          a mailing label.</c>
+          
+          <c><spanx style="verb">streetAddress</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The street address including house number, street name, P.O. Box, 
+          and extended multi-line address information.</c>
+          
+          <c><spanx style="verb">locality</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The city or locality.</c>
+     
+          <c><spanx style="verb">region</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The state or region.</c>
+          
+          <c><spanx style="verb">postalCode</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The zip or postal code.</c>
+          
+          <c><spanx style="verb">country</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The country name component.</c>
+          
+          </texttable>
         </section>
 
         <section anchor="playlist" title="Playlist">
           <t>The "playlist" object type represents an ordered list of
           time-based media items, such as video and audio objects.</t>
 
-          <t>The "playlist" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/playlist</spanx>.</t>
+          <t>At a minimum, the playlist object has the following properties:</t>
 
-          <t>A playlist has no additional components.</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the playlist. If the playlist
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional natural-language and plain-text name for the playlist. 
+          HTML Markup MUST NOT be used.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the playlist object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the playlist object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the playlist object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the playlist's HTML representation.</c>
+
+          </texttable>
         </section>
 
         <section anchor="product" title="Product">
           <t>The "product" object type represents a commercial good or
           service.</t>
 
-          <t>The "product" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/product</spanx>.</t>
+          <t>At a minimum, the product object has the following properties:</t>
 
-          <t>A product has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the product. If the product
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional natural-language and plain-text name for the product. 
+          HTML Markup MUST NOT be used.</c>
 
-          <t><list style="hanging">
-              <t hangText="Thumbnail">A link to a thumbnail-sized image that
-              contains a photo of the product. Represented by the
-              Representative Image component of the base Object Construct.
-              Processors MAY ignore thumbnails that are of an inappropriate
-              size for their user interface.</t>
-
-              <t hangText="Larger Image">A Media Link Construct linking to a
-              larger -- ideally, full-size -- version of the photo of the
-              product. Represented in JSON as a property named <spanx
-              style="verb">fullImage</spanx> whose value is a JSON object with
-              properties as defined in [TODO: xref the JSON serialization of a
-              Media Link Construct].</t>
-            </list></t>
+          <c><spanx style="verb">fullImage</spanx></c>
+          <c>Media Link</c>
+          <c>A link to a larger -- ideally, full-size -- version of the image 
+          of the product.</c>
+          
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>A link to a thumbnail-sized image of the product. Processors MAY ignore
+          thumbnails that are of an inappropriate size for their user interface.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the product object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the product object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the product object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the product's HTML representation.</c>
+          
+          </texttable>
         </section>
 
         <section anchor="review" title="Review">
           <t>The "review" object type represents a primarily prose-based
           commentary on another object.</t>
 
-          <t>The "review" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/review</spanx>.</t>
+          <t>At a minimum, a review object has the following properties:</t>
 
-          <t>A review has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
 
-          <t><list style="hanging">
-              <t hangText="Title">The title of the review. Represented by the
-              Name component of the base Object Construct. Many systems do not
-              have the concept of a title for a review; such systems MUST omit
-              the Name component. Processors SHOULD refer to such reviews as
-              simply being "a review", with appropriate localization, if they
-              are to be described in a sentence.</t>
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the review. If the review
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
 
-              <t hangText="Content">The content of the comment. Represented in
-              JSON as a property called <spanx style="verb">content</spanx>
-              whose value is a JSON string containing a fragment of HTML that
-              represents the content. Publishers SHOULD include any markup
-              necessary to achieve a similar presentation to that on the
-              publisher's own HTML pages, including any links that the service
-              automatically adds. Processors MAY remove all HTML markup and
-              consider the comment to be plain text.</t>
+          <c><spanx style="verb">content</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The content of the review in the form of a fragment of HTML. 
+          Publishers SHOULD include any markup necessary to achieve a similar
+          presentation to that on the publisher's own HTML pages, including
+          any links that the service automatically adds. Processors MAY remove
+          all HTML markup and consider the content to be plain text.</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The title of the review. Many systems do not have the concept
+          of a title for a review; such systems MUST omit the <spanx style="verb">displayName</spanx>
+          property. Processors SHOULD refer to such reviews as simply being "a review",
+          with appropriate localization, if they are to be described in a sentence.</c>
+                    
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the review object.</c>
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the review object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">rating</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Number</c>
+          <c>A rating for the object given as a number between 1.0 and 
+          5.0 inclusive with one decimal place of precision.</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the review object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the review's HTML representation.</c>
 
-              <t hangText="Reviewed Object">The Object Construct representing
-              the item that this review applies to. Represented as the In
-              Reply To Object component of the base Object Construct.</t>
-
-              <t hangText="Rating">A rating for the item, given as a number
-              between 1.0 and 5.0 inclusive with one decimal place of
-              precision. Represented in JSON as a property called <spanx
-              style="verb">rating</spanx> whose value is a JSON number giving
-              the rating.</t>
-            </list></t>
+          </texttable>
         </section>
 
         <section anchor="service" title="Service">
-          <t>The "service" Object type represents a website, personal website
+          <t>The "service" object type represents a website, personal website
           or blog, business, brand, or other entity that performs some kind of
           work for other entities, people, or services, or acts as kind of
           container for other objects.</t>
 
-          <t>The "service" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/service</spanx>.</t>
+          <t>At a minimum, the service object has the following properties:</t>
 
-          <t>A service has the following additional components:</t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
 
-          <t><list style="hanging">
-              <t hangText="icon">A Media Link Construct representing a link to
-              a small image representing the service. Represented in JSON as a
-              property named <spanx style="verb">icon</spanx> whose value is a
-              JSON object with properties as defined in [TODO: xref the JSON
-              serialization of a Media Link Construct]. The linked image MUST
-              have an aspect ratio of one (horizontal) to one (vertical) and
-              SHOULD be suitable for presentation at a small size.</t>
-            </list></t>
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, plain-text name of the service. HTML markup
+          MUST NOT be used.</c>
+                    
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the service object.</c>
+
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>A link to a small image representing the service.</c>          
+          
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the service object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">summary</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>A description of the service in the form of a fragment of HTML. 
+          Publishers SHOULD include any markup necessary to achieve a similar
+          presentation to that on the publisher's own HTML pages, including
+          any links that the service automatically adds. Processors MAY remove
+          all HTML markup and consider the content to be plain text.</c>
+          
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the service object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the service's HTML representation.</c>
+
+          </texttable>
+
+        </section>
+
+        <section anchor="song" title="Song">
+          <t>The "song" object type represents a song or a recording of a
+          song.</t>
+
+          <t>Song objects might contain information about the song or
+          recording, or they might contain some representation of the
+          recording itself. This type should only
+          be used when the publisher can guarantee that the object is a song
+          rather than merely a generic audio stream. In the case of the 
+          latter, the "audio" object type SHOULD be used instead.</t>
+ 
+          <t>A song has the same properties as the "audio" object type. 
+          Consumers MAY treat the "song" object type as an alias of the 
+          "audio" object type.</t>
         </section>
 
         <section anchor="status" title="Status">
-          <t>The "status" Object type represents a human-readable update of
+          <t>The "status" object type represents a human-readable update of
           the author's situation, mood, location or other status.</t>
 
           <t>A status is similar in structure to a note, but carries the
@@ -631,243 +1290,384 @@
           most recent status update is old. When a status becomes too old is
           not defined by this specification.</t>
 
-          <t>The "status" object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/status</spanx>.</t>
-
-          <t>A status has the same components as a note.</t>
+          <t>A status has the same properties as a note.</t>
         </section>
 
         <section anchor="video" title="Video">
-          <t>The "video" Object type represents video content, which usually
+          <t>The "video" object type represents video content, which usually
           consists of a motion picture track and an audio track.</t>
 
-          <t>The "video" Object type is identified by the URI <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/video</spanx>.</t>
+          <t>At a minimum, the video object has the following properties:</t>
 
-          <t>A video has the following additional components:</t>
-
-          <t><list style="hanging">
-              <t hangText="Video Stream Link">A Media Link Construct linking
-              to the video content itself. Represented in JSON as a property
-              called <spanx style="verb">stream</spanx> whose value is a JSON
-              object with properties as defined in [TODO: xref the JSON
-              serialization of a Media Link Construct]</t>
-
-              <t hangText="Embed Code">An HTML fragment that, when embedded in
-              an HTML page, will provide an interactive player UI for the
-              video stream. Represented in JSON as a property called <spanx
-              style="verb">embedCode</spanx> whose value is a JSON string
-              containing the fragment of HTML.</t>
-            </list></t>
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the video stream. If the video 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+                    
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title for the 
+          video stream. HTML markup MUST NOT be included</c>
+          
+          <c><spanx style="verb">embedCode</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>An optional HTML fragment that, when embedded in an HTML page, will
+          provide an interactive player UI for the video stream.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the video object.</c>
+ 
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the video object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">stream</spanx></c>
+          <c>Media Link [TODO: Link to JSON-Activity Media Link]</c>
+          <c>A link to the video content itself. Represented in JSON as a 
+          media link as defined in [TODO: Link to JSON-Activity Media Link].</c>
+          
+          <c><spanx style="verb">summary</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional short, natural-language, human-readable snippet or summary of
+          the video stream represented as a fragment of HTML.</c>
+                    
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the video object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          </texttable>
         </section>
       </section>
 
-      <section title="Base Activity Context Elements">
-        <t>This specification defines an initial set of activity context
-        elements that can be used with all activity entries. These provide
-        orthogonal context information that can apply to all activities.
-        [TODO: Figure out what to do with this stuff in our JSON
-        serialization.]</t>
+      <section title="Base Extension Properties">
+        <t>This specification defines an initial set of extension properties
+        that can be used with all activities or objects.</t>
 
         <section anchor="location" title="Location">
-          <t>Location is a concept which can be used inside the atom:entry
-          level, atom:author and activity:object. Location can be specified
-          via geographic coordinates, a street address, a free-form location
-          name or a combination of these. Geographic coordinates should be
-          included as a geo:point element as described by the GeoRSS
-          specification. Addresses should be included using a poco:address
-          element defined at Portable Contacts specification. The entry level
-          location represents the location of the author at the time the
-          activity was performed. The author level location represents the
-          primary location of the author. Finally, the location within other
-          objects represents the physical location of those objects. All
-          location fields are optional. For free form addresses use the
-          poco:formatted field.</t>
-
-          <t><xref target="location-poco"></xref></t>
-
-          <t><figure anchor="location-poco" suppress-title="true"
-              title="Location Example">
-              <artwork><![CDATA[<entry>
-  <id>tag:world:activity:1212121212121</id>
-  <title>Rob liked Goldeberg's Deli</title>
-  <author>
-    <name>Rob Dolin</name>
-    <id>tag:world:person:1212121212121</id>
-    <link rel="alternate" type="text/html" href="http://robdolin.com" />
-    <poco:address>
-      <poco:locality>Marina del Rey</poco:locality> 
-      <poco:region>CA</poco:region> 
-      <poco:postalCode>90292</poco:postalCode> 
-      <poco:country>US</poco:country> 
-    </poco:address>
-  </author>
-  <activity:object>
-    <activity:object-type>http://activitystrea.ms/schema/1.0/place</object-type>
-    <id>tag:world:place:1212121212121</id>
-    <title>Goldberg's Deli</title>
-    <link rel="alternate" type="text/html" href="http://www.deli.com" />
-    <geo:point>33.9777 -118.4351</geo:point>
-    <poco:address>
-      <poco:streetAddress>14016 Bora Bora Way</poco:streetAddress>
-      <poco:locality>Marina del Rey</poco:locality> 
-      <poco:region>CA</poco:region>       
-      <poco:postalCode>90292</poco:postalCode> 
-      <poco:country>US</poco:country> 
-    </poco:address>
-  </activity:object>
-  <geo:point>33.9777 -119.4351</geo:point>
-  <activity:verb>http://activitystrea.ms/schema/1.0/like</activity:verb>
-</entry>]]></artwork>
-            </figure></t>
+          <t>Location data can be added to any object type or activity. Location 
+          can be specified via geographic coordinates, a street address, 
+          a free-form location name or any combination of these.</t>
+          
+          <t>Within a JSON-serialized Activity Stream, the Location is represented
+          using a property named <spanx style="verb">location</spanx> whose 
+          value is a <xref target="place">Place</xref> object. The objectType
+          property of this object MAY be omitted.</t>
+          
+          <t>When appearing within an activity, the location data indicates
+          the location where the activity occurred. When appearing within an
+          object, the location data indicates the location of that
+          object at the time the activity occurred.</t>
+          
+          <t>For example:</t>
+<figure><artwork><![CDATA[
+  {
+    "objectType": "person",
+    "displayName": "John Doe",
+    "location": {
+      "displayName": "Mount Everest",
+      "position": "+27.5916+086.5640+8850/"
+    }
+  }
+]]></artwork></figure>
+          
         </section>
 
-        <section anchor="mood" title="Mood">
+        <section anchor="mood-property" title="Mood">
           <t>Mood describes the mood of the user when the activity was
           performed. This is usually collected via an extra field in the user
           interface used to perform the activity. For the purpose of this
           schema, a mood is a freeform, short mood keyword or phrase along
           with an optional mood icon image.</t>
 
-          <t>Moods are included via a mood element in the namespace <spanx
-          style="verb">http://activitystrea.ms/context/</spanx>.</t>
-
-          <t>The content of the mood element is the mood keyword or
-          phrase.</t>
-
-          <t>The mood element may have an optional <spanx style="verb">icon</spanx>
-          attribute which contains the URL of a mood icon image. The mood icon
-          image SHOULD be small and appropriate to be displayed alongside the
-          mood keyword at a normal text size.</t>
+          <t>In JSON, Moods are included within an object or activity using
+          a property named <spanx style="verb">mood</spanx> whose value is a
+          <xref target="mood">Mood</xref> object. The 
+          <spanx style="verb">objectType</spanx> property of the mood object
+          MAY be omitted.</t>
+          
+          <t>For example:</t>
+<figure><artwork><![CDATA[
+  {
+    "objectType": "status",
+    "content": "Working on the activity streams spec",
+    "mood": {
+      "displayName": "Optimistic",
+      "image": "http://example.org/moods/optimistic.png"
+    }
+  }
+]]></artwork></figure>
+          
         </section>
+        
+        <section anchor="rating-property" title="Rating">
+          <t>A rating given as a number between 1.0 and 5.0 inclusive with 
+          one decimal place of precision. Represented in JSON as a property 
+          called <spanx style="verb">rating</spanx> whose value is a JSON 
+          number giving the rating.</t>
+          
+          <t>Ratings are generally most useful only for particular types 
+          of objects, such as audio, video, photos and places.</t>
+          
+          <t>For example:</t>
+<figure><artwork><![CDATA[
+  {
+    "objectType": "review",
+    "content": "This is a great product",
+    "rating": 3.5
+  }
+]]></artwork></figure>
+          
+        </section>
+        
+        <section anchor="source" title="Source Property">
+    
+          <t>The <spanx style="verb">source</spanx> property provides a link
+          to the original source of an object or activity. The value of the 
+          <spanx style="verb">source</spanx> property is an Object of any 
+          object type.</t>
+          
+          <t>For example:</t>
+<figure><artwork><![CDATA[
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Joe"
+    },
+    "verb": "post",
+    "object": {
+      "objectType": "status",
+      "content": "Working on the specification"
+    },
+    "source": {
+      "objectType": "activity",
+      "displayName": "Joe's Status"
+    }
+  }
+]]></artwork></figure>
+    
+        </section>
+        
+        <section anchor="tags-property" title="Tags">
+          <t>A listing of the objects that have been associated with a 
+          particular object using the <spanx style="verb">tag</spanx> verb. 
+          Represented in JSON using a property named <spanx style="verb">tags</spanx>
+          whose value is  an Array of objects.</t>
+        </section>
+        
+        <t>For example:</t>
+<figure><artwork><![CDATA[
+  {
+    "objectType": "photo",
+    "image": "http://example.org/photos/fluffycat.jpg",
+    "tags": [
+      {
+        "objectType": "person",
+        "displayName": "John"
+      },
+      {
+        "objectType": "person",
+        "displayName": "Jane"
+      }
+    ]
+  }
+]]></artwork></figure>
+        
       </section>
 
-      <section anchor="replies" title="Replies">
-        <t>Most social applications have a concept of "comments", "replies" or
-        "responses" to social Objects. In many cases these are simple text
-        messages, but any Object can in practice be a reply.</t>
-
-        <t>A text-only reply SHOULD be represented using the comment object
-        type as described in <xref target="comment"></xref>. Replies of other
-        types MUST carry the appropriate type and MUST NOT carry the comment
-        object type.</t>
-
-        <t>Replies, regardless of object type, SHOULD be published with an In
-        Reply To Object component describing the Object Construct they are in
-        reply to.</t>
-
-        <t>The act of posting a reply is represented by the post Verb as with
-        "top-level" Objects.</t>
-      </section>
+    
+    <section anchor="stream" title="Responses and Activity Summaries">
+    
+      <t>It is common practice to provide summary information on the number 
+      and types of activities that have occurred with respect to a given 
+      object. For instance, a "note" object may have been the target of 
+      any number of comment, like, or share activities. This summary information 
+      MAY be expressed in the JSON serialization of an object by using a property
+      name descriptive of the data being summarized and using the Stream
+      object as defined by the JSON Activity Streams document.</t>
+      
+      <t>The following properties MAY be used on any object type for each of the 
+      specified situations:</t>
+      
+      <texttable>
+        <ttcol align="left" width="15%">Property</ttcol>
+        <ttcol align="left">Description</ttcol>
+        
+        <c><spanx style="verb">attending</spanx></c>
+        <c>Used to provide information about the collection of actors that 
+        have responded to an <xref target="event">event</xref> using the 
+        <spanx style="verb">rsvp-yes</spanx> verb.</c>
+        
+        <c><spanx style="verb">followers</spanx></c>
+        <c>Used to provide information about the collection of objects (typically
+        person objects) that are "following" the containing object. The stream
+        of activities associated with this property will use the <spanx style="verb">follow</spanx>
+        verb and have an implied <spanx style="verb">object</spanx> property value
+        equal to the object containing the <spanx style="verb">followers</spanx>
+        property.</c>
+        
+        <c><spanx style="verb">following</spanx></c>
+        <c>Used to provide information about the collection of objects that this 
+        object is "following". The stream of activities associated with this 
+        property will use the <spanx style="verb">follow</spanx> verb and have an implied 
+        <spanx style="verb">actor</spanx> property value equal to the object 
+        containing the <spanx style="verb">followers</spanx> property.</c>
+        
+        <c><spanx style="verb">friends</spanx></c>
+        <c>Used to provide information about the collection of objects with which
+        a "friendship" relationship has been established using the <spanx style="verb">make-friend</spanx>
+        verb. This property will typically only be relevant for the <spanx style="verb">person</spanx> object type.</c>
+        
+        <c><spanx style="verb">friend-requests</spanx></c>
+        <c>Used to provide information about the collection of objects with which
+        a "friendship" relationship is being requested using the <spanx style="verb">request-friend</spanx>
+        verb. This property will typically only be relevant for the <spanx style="verb">person</spanx> object type.</c>
+        
+        <c><spanx style="verb">likes</spanx></c>
+        <c>Used to provide information about the actors (typically person 
+        objects) that have favorited or liked the containing object. The 
+        stream of activities associated with this property will typically use
+        either the <spanx style="verb">favorite</spanx> or <spanx style="verb">like</spanx> verb
+        and have an implied <spanx style="verb">object</spanx> property value
+        equal to the object containing the <spanx style="verb">likes</spanx>
+        property. The stream object can also include a <spanx style="verb">actors</spanx>
+        property whose value is a JSON Array of actor objects appearing in the 
+        stream.</c>
+        
+        <c><spanx style="verb">notAttending</spanx></c>
+        <c>Used to provide information about the collection of actors that 
+        have responded to an <xref target="event">event</xref> using the 
+        <spanx style="verb">rsvp-no</spanx> verb.</c>
+        
+        <c><spanx style="verb">maybeAttending</spanx></c>
+        <c>Used to provide information about the collection of actors that 
+        have responded to an <xref target="event">event</xref> using the 
+        <spanx style="verb">rsvp-maybe</spanx> verb.</c>
+        
+        <c><spanx style="verb">members</spanx></c>
+        <c>Used to provide information about the actors (typically person 
+        objects) that have "joined" the containing object. This is typically
+        only useful for object types that represent groups. The 
+        stream of activities associated with this property will typically use
+        the <spanx style="verb">join</spanx> verb and have an implied 
+        <spanx style="verb">object</spanx> property value
+        equal to the object containing the <spanx style="verb">members</spanx>
+        property. The stream object can also include a <spanx style="verb">actors</spanx>
+        property whose value is a JSON Array of actor objects appearing in the 
+        stream.</c>
+        
+        <c><spanx style="verb">replies</spanx></c>
+        <c>Used to provide information about the thread of discussion associated
+        with a given object. Typically, the stream of activities associated 
+        with this property will use the "post" verb and have objects with an 
+        implied <spanx style="verb">inReplyTo</spanx> property value equal to
+        the object containing the <spanx style="verb">replies</spanx> property.</c>
+        
+        <c><spanx style="verb">reviews</spanx></c>
+        <c>Used to provide information about the actors (typically person 
+        objects) that have posted reviews of the containing object. The 
+        stream of activities associated with this property will typically use
+        the <spanx style="verb">post</spanx> verb and contain <xref target="review"/> objects
+        with an implied <spanx style="verb">inReplyTo</spanx> property value 
+        equal to the object containing the <spanx style="verb">replies</spanx>
+        property. The stream object can also include a <spanx style="verb">actors</spanx>
+        property whose value is a JSON Array of actor objects appearing in the 
+        stream.</c>
+        
+        <c><spanx style="verb">saves</spanx></c>
+        <c>Used to provide information about the actors (typically person 
+        objects) that have "saved" the containing object. The 
+        stream of activities associated with this property will typically use
+        the <spanx style="verb">save</spanx> verb and have an implied 
+        <spanx style="verb">object</spanx> property value
+        equal to the object containing the <spanx style="verb">saves</spanx>
+        property. The stream object can also include a <spanx style="verb">actors</spanx>
+        property whose value is a JSON Array of actor objects appearing in the 
+        stream.</c>
+        
+        <c><spanx style="verb">shares</spanx></c>
+        <c>Used to provide information about the actors (typically person 
+        objects) that have "shared" the containing object. The 
+        stream of activities associated with this property will typically use
+        the <spanx style="verb">share</spanx> verb and have an implied 
+        <spanx style="verb">object</spanx> property value
+        equal to the object containing the <spanx style="verb">shares</spanx>
+        property. The stream object can also include a <spanx style="verb">actors</spanx>
+        property whose value is a JSON Array of actor objects appearing in the 
+        stream.</c>      
+      </texttable>
+    
+      <t>The following example illustrates the use of these 
+      properties. Specific implementations MAY vary depending on their 
+      use of the Stream object's <spanx style="verb">url</spanx>, 
+      <spanx style="verb">items</spanx> and <spanx style="verb">actors</spanx>
+      properties. Note that the value of the <spanx style="verb">count</spanx>
+      property indicates the total number of activities in the associated 
+      stream and may not match the actual number of activities or actors 
+      actually included within the Stream object. For instance, in the example
+      below, for the <spanx style="verb">likes</spanx> property, the 
+      <spanx style="verb">count</spanx> property specifies the value 120 but
+      includes only a single actor. This SHOULD be interpreted along the 
+      lines of "John and 119 other users like this note".</t>
+      
+<figure><artwork><![CDATA[
+  {
+    "objectType": "note",
+    "displayName": "A Simple Note",
+    "content": "<p>This is a simple note</p>",
+    "replies": {
+      "count": 10,
+      "url": "http://example.org/comments-stream",
+    },
+    "followers": {
+      "count": 15,
+      "url": "http://example.org/followers-stream",
+      "actors": [
+        {
+          "objectType": "person",
+          "displayName": "Jane"
+        }
+      ]
+    },
+    "likes": {
+      "count": 120,
+      "actors": [
+        "objectType": "person",
+        "displayName": "John"
+      ]
+    },
+    "reviews": {
+      "count": 1,
+      "items": [
+        {
+          "actor": {
+            "displayName": "Joe",
+            "objectType": "person"
+          },
+          "verb": "post",
+          "object": {
+            "objectType": "review",
+            "rating": 4.5
+          }
+        }
+      ]
+    }
+  }
+]]></artwork></figure>
+    
     </section>
-
-    <section title="Event Schema">
-      <t>The event schema provides a vocabulary that is useful in applications
-      that use real-world events and meetings as social objects.</t>
-
-      <section title="Event Verbs">
-        <section anchor="rsvp-yes" title="Positive RSVP">
-          <t>The "positive RSVP" verb indicates that the actor has made a
-          positive RSVP for the object. This specification only defines the
-          meaning of this verb when its object is an event (see <xref
-          target="event"></xref>), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications.</t>
-
-          <t>The use of this Verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</t>
-
-          <t>The verb URI for the "positive RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-yes</spanx>.</t>
-        </section>
-
-        <section anchor="rsvp-maybe" title="Possible RSVP">
-          <t>The "possible RSVP" verb indicates that the actor has made a
-          possible RSVP for the object. This specification only defines the
-          meaning of this verb when its object is an event (see <xref
-          target="event"></xref>), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications.</t>
-
-          <t>The use of this Verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</t>
-
-          <t>The verb URI for the "possible RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-maybe</spanx>.</t>
-        </section>
-
-        <section anchor="rsvp-no" title="Negative RSVP">
-          <t>The "negative RSVP" verb indicates that the actor has made a
-          negative RSVP for the object. This specification only defines the
-          meaning of this verb when its object is an event (see <xref
-          target="event"></xref>), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications.</t>
-
-          <t>The use of this Verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</t>
-
-          <t>The verb URI for the "negative RSVP" Verb is <spanx style="verb">http://activitystrea.ms/schema/1.0/rsvp-no</spanx>.</t>
-        </section>
-      </section>
-
-      <section title="Event Object Types">
-        <section anchor="event" title="Event">
-          <t>The "event" object type represents an event that occurs in a
-          certain place during a particular interval of time.</t>
-
-          <t>The object type URL for the "event" object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/event</spanx>.</t>
-
-          <t>An event has the following additional components:</t>
-
-          <t><list style="hanging">
-              <t hangText="Start Date and Time">The date and time that the
-              event begins. Represented in JSON as a property called <spanx
-              style="verb">startTime</spanx> whose value is JSON string
-              containing a W3CDTF timestamp. [TODO: Reference W3CDTF spec.]
-              [TODO: Include prose describing how to represent just a date vs.
-              a date and time.]</t>
-
-              <t hangText="End Date and Time">The date and time that the event
-              ends. Represented in JSON as a property called <spanx
-              style="verb">endTime</spanx> whose value is JSON string
-              containing a W3CDTF timestamp. [TODO: Reference W3CDTF spec.]
-              [TODO: Include prose describing how to represent just a date vs.
-              a date and time.]</t>
-            </list></t>
-        </section>
-      </section>
-    </section>
-
-    <section title="Music Schema">
-      <t>The music schema provides a vocabulary that is useful in applications
-      that use music, musicians and albums as social objects.</t>
-
-      <section title="Music Object Types">
-        <section anchor="song" title="Song">
-          <t>The "song" Object type represents a song or a recording of a
-          song.</t>
-
-          <t>Objects of type Song might contain information about the song or
-          recording, or they might contain some representation of the
-          recording itself. In the latter case, the song SHOULD also be
-          annotated with the "audio" object type as described in <xref
-          target="audio"></xref> and use its properties. This type should only
-          be used when the publisher can guarantee that the object is a song
-          rather than merely a generic audio stream.</t>
-
-          <t>The Object type URL for the "song" Object type is <spanx
-          style="verb">http://activitystrea.ms/schema/1.0/song</spanx>.</t>
-
-          <t>A song has no additional components.</t>
-        </section>
-      </section>
-    </section>
+    
   </middle>
 
   <back>
@@ -917,6 +1717,32 @@
           </author>
 
           <date month="September" year="2006" />
+        </front>
+      </reference>
+
+<reference anchor="RFC4627">
+        <front>
+          <title>The application/json Media Type for JavaScript Object
+          Notation (JSON)</title>
+
+          <author fullname="Douglas Crockford" initials="D."
+                  surname="Crockford">
+            <organization>JSON.org</organization>
+          </author>
+
+          <date month="July" year="2006" />
+        </front>
+      </reference>
+
+<reference anchor="RFC3339">
+        <front>
+          <title>Date and Time on the Internet: Timestamps</title>
+
+          <author fullname="Graham Klyne" initials="G." surname="Klyne">
+            <organization></organization>
+          </author>
+
+          <date month="July" year="2002" />
         </front>
       </reference>
 
