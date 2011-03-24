@@ -90,6 +90,13 @@
           Processors MAY ignore (silently drop) successive identical "follow" 
           activities.</c>
         
+          <c><spanx style="verb">give</spanx></c>
+          <c>Indicates that the actor is giving an object to the target.
+          Examples include one person giving a <spanx style="verb">badge</spanx>
+          object to another person. The <spanx style="verb">object</spanx>
+          identifies the object being given. The <spanx style="verb">target</spanx>
+          identifies the receiver.</c>
+        
           <c><spanx style="verb">join</spanx></c>
           <c>Indicates that the actor has become a member of the object. This 
           specification only defines the meaning of this verb
@@ -116,6 +123,12 @@
           <c>Indicates that the actor spent some time enjoying the object. 
           For example, if the object is a video this indicates that the subject 
           watched all or part of the video.</c>
+
+          <c><spanx style="verb">receive</spanx></c>
+          <c>Indicates that the actor is receiving an object.
+          Examples include a person receiving a <spanx style="verb">badge</spanx>
+          object. The <spanx style="verb">object</spanx>
+          identifies the object being received.</c>
 
           <c><spanx style="verb">request-friend</spanx></c>
           <c>Indicates the creation of a friendship that has not yet been reciprocated by 
@@ -296,6 +309,63 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the audio object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
+          
+          </texttable>
+        </section>
+
+        <section anchor="badge" title="Badge">
+          <t>The "badge" object type represents a Badge or Award granted to 
+          an object (typically a person).</t>
+
+          <t>At a minimum, an badge object has the following properties:</t>
+
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the badge. If the badge 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+                    
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title for the 
+          badge. HTML markup MUST NOT be included</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the badge object.</c>
+ 
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link [TODO: Reference media link spec]</c>
+          <c>An optional link to an image resource providing a visual representation
+          of the badge. Processors MAY ignore thumbnails
+          that are of an inappropriate size for their user interface.</c>
+ 
+          <c><spanx style="verb">postedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the badge object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">summary</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional short, natural-language, human-readable description of
+          the badge represented as a fragment of HTML.</c>
+                    
+          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the badge object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the badge's HTML representation.</c>
           
           </texttable>
         </section>
