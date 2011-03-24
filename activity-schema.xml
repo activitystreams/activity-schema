@@ -97,6 +97,12 @@
           identifies the object being given. The <spanx style="verb">target</spanx>
           identifies the receiver.</c>
         
+          <c><spanx style="verb">invite</spanx></c>
+          <c>Indicates that the actor has invited the object, typically a 
+          person object, to join or participate in the object described by
+          the <spanx style="verb">target</spanx>. The target could, for instance,
+          be an event, group or a service.</c>
+        
           <c><spanx style="verb">join</spanx></c>
           <c>Indicates that the actor has become a member of the object. This 
           specification only defines the meaning of this verb
