@@ -1573,8 +1573,8 @@
       name descriptive of the data being summarized and using the Stream
       object as defined by the JSON Activity Streams document.</t>
       
-      <t>The following properties MAY be used on any object type for each of the 
-      specified situations:</t>
+      <t>The following properties MAY be used on any object type or activity 
+      for each of the specified situations:</t>
       
       <texttable>
         <ttcol align="left" width="15%">Property</ttcol>
