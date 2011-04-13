@@ -529,11 +529,10 @@
           <ttcol align="left">Description</ttcol>
           
           <c><spanx style="verb">attending</spanx></c>
-          <c><xref target="stream">Stream</xref> object</c>
-          <c>An optional link to a Stream providing information about
+          <c>Collection object</c>
+          <c>An optional link to a collection providing information about
           actors who have responded to the event object using the
-          <spanx style="verb">rsvp-yes</spanx> verb as described in 
-          <xref target="stream"/>.</c>
+          <spanx style="verb">rsvp-yes</spanx> verb.</c>
           
           <c><spanx style="verb">author</spanx></c>
           <c>Activity Object</c>
@@ -565,18 +564,16 @@
           object as described in <xref target="location"/>.</c>
 
           <c><spanx style="verb">maybeAttending</spanx></c>
-          <c><xref target="stream">Stream</xref> object</c>
-          <c>An optional link to a Stream providing information about
+          <c>Collection object</c>
+          <c>An optional link to a collection providing information about
           actors who have responded to the event object using the
-          <spanx style="verb">rsvp-maybe</spanx> verb as described in 
-          <xref target="stream"/>.</c>
+          <spanx style="verb">rsvp-maybe</spanx> verb.</c>
           
           <c><spanx style="verb">notAttending</spanx></c>
-          <c><xref target="stream">Stream</xref> object</c>
-          <c>An optional link to a Stream providing information about
+          <c>Collection object</c>
+          <c>An optional link to a collection providing information about
           actors who have responded to the event object using the
-          <spanx style="verb">rsvp-no</spanx> verb as described in 
-          <xref target="stream"/>.</c>
+          <spanx style="verb">rsvp-no</spanx> verb.</c>
 
           <c><spanx style="verb">postedTime</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
