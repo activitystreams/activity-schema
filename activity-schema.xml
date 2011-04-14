@@ -240,7 +240,7 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the article.</c>
                     
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the article was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -250,7 +250,7 @@
           <c>Optional short, natural-language, human-readable snippet or summary of
           the article represented as a fragment of HTML.</c>
                     
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the article was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -296,7 +296,7 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the audio object.</c>
  
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the audio object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -311,7 +311,7 @@
           <c>Optional short, natural-language, human-readable snippet or summary of
           the audio stream represented as a fragment of HTML.</c>
                     
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the audio object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -354,7 +354,7 @@
           of the badge. Processors MAY ignore thumbnails
           that are of an inappropriate size for their user interface.</c>
  
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the badge object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -364,7 +364,7 @@
           <c>Optional short, natural-language, human-readable description of
           the badge represented as a fragment of HTML.</c>
                     
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the badge object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -440,7 +440,7 @@
           of the bookmarked resource. Processors MAY ignore thumbnails
           that are of an inappropriate size for their user interface.</c>
                     
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the bookmark object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -449,7 +449,7 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The IRI of the item that is the target of the bookmark.</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the bookmark object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -504,12 +504,12 @@
           <c>A listing of one or more objects for which this object is a 
           response.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the comment object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the comment object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -575,7 +575,7 @@
           actors who have responded to the event object using the
           <spanx style="verb">rsvp-no</spanx> verb.</c>
 
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the event object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -586,7 +586,7 @@
           String conforming to the "date-time" production in 
           <xref target="RFC3339"/></c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the event object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -636,7 +636,7 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the file object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the file object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -645,7 +645,7 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The MIME type of the file described by the object.</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the file object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -692,12 +692,12 @@
           for the folder. Processors MAY ignore images that are of an 
           inappropriate size for their user interface.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the folder object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the folder object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -739,12 +739,12 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the group object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the group object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the group object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -785,12 +785,12 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the list object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the list object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the list object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -871,12 +871,12 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the note object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the note object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the note object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -915,12 +915,12 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the person object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the person object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the person object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -971,7 +971,7 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the photo object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the photo object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -981,7 +981,7 @@
           <c>Optional, natural-language description of the image in the form
           of a fragment of HTML.</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the photo object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1027,12 +1027,12 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the photo album object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the photo album object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the photo album object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1148,12 +1148,12 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the playlist object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the playlist object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the playlist object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1204,12 +1204,12 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the product object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the product object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the product object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1260,7 +1260,7 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the review object.</c>
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the review object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1270,7 +1270,7 @@
           <c>A rating for the object given as a number between 1.0 and 
           5.0 inclusive with one decimal place of precision.</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the review object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1308,7 +1308,7 @@
           <c>Media Link</c>
           <c>A link to a small image representing the service.</c>          
           
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the service object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1321,7 +1321,7 @@
           any links that the service automatically adds. Processors MAY remove
           all HTML markup and consider the content to be plain text.</c>
           
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the service object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1400,7 +1400,7 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the video object.</c>
  
-          <c><spanx style="verb">postedTime</spanx></c>
+          <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the video object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
@@ -1415,7 +1415,7 @@
           <c>Optional short, natural-language, human-readable snippet or summary of
           the video stream represented as a fragment of HTML.</c>
                     
-          <c><spanx style="verb">updatedTime</spanx></c>
+          <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The optional time the video object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
