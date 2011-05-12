@@ -78,6 +78,19 @@
           <ttcol align="left" width="15%">Verb</ttcol>
           <ttcol align="left">Description</ttcol>
       
+          <c><spanx style="verb">add</spanx></c>
+          <c>Indicates that the actor has added the object to the target. 
+          For instance, adding a photo to an album.</c>
+          
+          <c><spanx style="verb">cancel</spanx></c>
+          <c>Indicates that the actor has canceled the object. For 
+          instance, canceling a calendar event.</c>
+          
+          <c><spanx style="verb">delete</spanx></c>
+          <c>Indicates that the actor has deleted the object. This 
+          implies, but does not require, the permanent destruction of the 
+          object.</c>
+      
           <c><spanx style="verb">favorite</spanx></c>
           <c>Indicates that the actor marked the object as an item of 
           special interest.</c>
@@ -89,13 +102,19 @@
           potentially be of any type that can sensibly generate activity.
           Processors MAY ignore (silently drop) successive identical "follow" 
           activities.</c>
-        
+                
           <c><spanx style="verb">give</spanx></c>
           <c>Indicates that the actor is giving an object to the target.
           Examples include one person giving a <spanx style="verb">badge</spanx>
           object to another person. The <spanx style="verb">object</spanx>
           identifies the object being given. The <spanx style="verb">target</spanx>
           identifies the receiver.</c>
+        
+          <c><spanx style="verb">ignore</spanx></c>
+          <c>Indicates that the actor has ignored the object. For instance, 
+          this verb may be used when an actor has ignored a friend request, 
+          in which case the object may be the <spanx style="verb">request-friend</spanx>
+          activity.</c>
         
           <c><spanx style="verb">invite</spanx></c>
           <c>Indicates that the actor has invited the object, typically a 
@@ -110,6 +129,10 @@
           implementors SHOULD be prepared to handle other Object types as
           meaning MAY be provided by extension specifications. Processors 
           MAY ignore (silently drop) successive identical "join" activities.</c>
+
+          <c><spanx style="verb">leave</spanx></c>
+          <c>Indicates that the actor has left the object. For instance, 
+          a Person leaving a Group or checking-out of a Place.</c>
 
           <c><spanx style="verb">like</spanx></c>
           <c>Indicates that the actor marked the object as an item of special 
@@ -135,6 +158,9 @@
           Examples include a person receiving a <spanx style="verb">badge</spanx>
           object. The <spanx style="verb">object</spanx>
           identifies the object being received.</c>
+
+          <c><spanx style="verb">remove</spanx></c>
+          <c>Indicates that the actor has removed the object from the target.</c>
 
           <c><spanx style="verb">request-friend</spanx></c>
           <c>Indicates the creation of a friendship that has not yet been reciprocated by 
@@ -185,6 +211,9 @@
           In most cases, the actor did not create the object being shared, 
           but is instead drawing attention to it.</c>
 
+          <c><spanx style="verb">stop-following</spanx></c>
+          <c>Indicates that the actor has stopped following the object.</c>
+
           <c><spanx style="verb">tag</spanx></c>
           <c>Indicates that the actor has identified the presence of a target 
           inside another object. For example, the actor may have specified that 
@@ -192,6 +221,22 @@
           gives the object in which the tag has been added. For example, if a 
           user appears in a photo, the <spanx style="verb">object</spanx> 
           is the user and the <spanx style="verb">target</spanx> is the photo.</c>
+
+          <c><spanx style="verb">unfavorite</spanx></c>
+          <c>Indicates that the actor has removed the object from the collection
+          of favorited items.</c>
+          
+          <c><spanx style="verb">unfriend</spanx></c>
+          <c>Indicates that the actor has removed the object from the collection
+          of friends.</c>
+          
+          <c><spanx style="verb">unlike</spanx></c>
+          <c>Indicates that the actor has removed the object from the collection
+          of liked items.</c>
+          
+          <c><spanx style="verb">unsave</spanx></c>
+          <c>Indicates that the actor has removed the object from the collection
+          of saved items.</c>
 
           <c><spanx style="verb">update</spanx></c>
           <c>The "update" verb indicates that the actor has modified the
