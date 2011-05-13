@@ -503,6 +503,66 @@
 
         </section>
 
+        <section anchor="collection" title="Collection">
+          <t>The "collection" object type represents a collection of objects 
+          of any type. This object type can be used, for instance, to represent
+          a collection of files like a folder, a collection of photos like 
+          an album, and so forth.</t>
+
+          <t>At a minimum, the collection object has the following properties:</t>
+
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the collection. If the collection 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          collection.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the collection object.</c>
+          
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>A link to an image resource that can be used as a preview image
+          for the collection. Processors MAY ignore images that are of an 
+          inappropriate size for their user interface.</c>
+          
+          <c><spanx style="verb">objectTypes</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Array of Strings</c>
+          <c>An optional array of JSON strings identifying the member 
+          object types for the collection.</c>
+          
+          <c><spanx style="verb">published</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the collection object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updated</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the collection object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the collection's HTML representation.</c>
+          
+          </texttable>
+
+        </section>
+
         <section anchor="comment" title="Comment">
           <t>The "comment" object type represents a textual response to
           another object. The comment object type MUST NOT be used for other 
@@ -699,66 +759,6 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The permanent IRI of the file's HTML representation.</c>
           </texttable>
-        </section>
-
-        <section anchor="collection" title="Collection">
-          <t>The "collection" object type represents a collection of objects 
-          of any type. This object type can be used, for instance, to represent
-          a collection of files like a folder, a collection of photos like 
-          an album, and so forth.</t>
-
-          <t>At a minimum, the collection object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the collection. If the collection 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          collection.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the collection object.</c>
-          
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>A link to an image resource that can be used as a preview image
-          for the collection. Processors MAY ignore images that are of an 
-          inappropriate size for their user interface.</c>
-          
-          <c><spanx style="verb">objectTypes</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> Array of Strings</c>
-          <c>An optional array of JSON strings identifying the member 
-          object types for the collection.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the collection object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the collection object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the collection's HTML representation.</c>
-          
-          </texttable>
-
         </section>
 
         <section anchor="group" title="Group">
