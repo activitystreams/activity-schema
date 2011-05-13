@@ -241,7 +241,7 @@
           <c><spanx style="verb">update</spanx></c>
           <c>The "update" verb indicates that the actor has modified the
           object. Implementors SHOULD use verbs such as <spanx style="verb">post</spanx>
-          where the actor is adding new items to a <xref target="list">list</xref> or 
+          where the actor is adding new items to a <xref target="collection">collection</xref> or 
           similar. Update is reserved for modifications to existing objects 
           or data such as changing a user's profile information.</c>
         </texttable>
