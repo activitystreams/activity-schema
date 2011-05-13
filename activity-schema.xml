@@ -162,6 +162,10 @@
           <c><spanx style="verb">remove</spanx></c>
           <c>Indicates that the actor has removed the object from the target.</c>
 
+          <c><spanx style="verb">remove-friend</spanx></c>
+          <c>Indicates that the actor has removed the object from the collection
+          of friends.</c>
+
           <c><spanx style="verb">request-friend</spanx></c>
           <c>Indicates the creation of a friendship that has not yet been reciprocated by 
           the object.</c>
@@ -225,10 +229,6 @@
           <c><spanx style="verb">unfavorite</spanx></c>
           <c>Indicates that the actor has removed the object from the collection
           of favorited items.</c>
-          
-          <c><spanx style="verb">unfriend</spanx></c>
-          <c>Indicates that the actor has removed the object from the collection
-          of friends.</c>
           
           <c><spanx style="verb">unlike</spanx></c>
           <c>Indicates that the actor has removed the object from the collection
@@ -701,12 +701,13 @@
           </texttable>
         </section>
 
-        <section anchor="folder" title="Folder">
-          <t>The "folder" object type represents a collection of files or
-          media objects. This is similar to the "photo album" object type, but
-          not specifically representing a collection of "photos."</t>
+        <section anchor="collection" title="Collection">
+          <t>The "collection" object type represents a collection of objects 
+          of any type. This object type can be used, for instance, to represent
+          a collection of files like a folder, a collection of photos like 
+          an album, and so forth.</t>
 
-          <t>At a minimum, the folder object has the following properties:</t>
+          <t>At a minimum, the collection object has the following properties:</t>
 
           <texttable>
           <ttcol align="left" width="15%">Property</ttcol>
@@ -716,7 +717,7 @@
           <c><spanx style="verb">author</spanx></c>
           <c>Activity Object</c>
           <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the folder. If the folder 
+          responsible for the creation of the collection. If the collection 
           object appears within an activity, and the 
           <spanx style="verb">author</spanx> is the 
           <spanx style="verb">actor</spanx> for the activity, the 
@@ -725,31 +726,36 @@
           <c><spanx style="verb">displayName</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The natural-language, human-readable and plain-text title of the 
-          folder.</c>
+          collection.</c>
           
           <c><spanx style="verb">id</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the folder object.</c>
+          <c>The unique identifier for the collection object.</c>
           
           <c><spanx style="verb">image</spanx></c>
           <c>Media Link</c>
           <c>A link to an image resource that can be used as a preview image
-          for the folder. Processors MAY ignore images that are of an 
+          for the collection. Processors MAY ignore images that are of an 
           inappropriate size for their user interface.</c>
+          
+          <c><spanx style="verb">objectTypes</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Array of Strings</c>
+          <c>An optional array of JSON strings identifying the member 
+          object types for the collection.</c>
           
           <c><spanx style="verb">published</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the folder object was created in the form of an 
+          <c>The optional time the collection object was created in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
           <c><spanx style="verb">updated</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the folder object was last updated in the form of an 
+          <c>The optional time the collection object was last updated in the form of an 
           <xref target="RFC3339"/> "date-time".</c>
           
           <c><spanx style="verb">url</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the folder's HTML representation.</c>
+          <c>The permanent IRI of the collection's HTML representation.</c>
           
           </texttable>
 
@@ -797,52 +803,6 @@
           <c><spanx style="verb">url</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The permanent IRI of the group's HTML representation.</c>
-          
-          </texttable>
-        </section>
-
-        <section anchor="list" title="List">
-          <t>The "list" object type represents a collection of related
-          objects.</t>
-
-          <t>At a minimum, the list object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the list. If the list 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          list.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the list object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the list object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the list object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the list's HTML representation.</c>
           
           </texttable>
         </section>
@@ -1010,57 +970,6 @@
           </texttable>
         </section>
 
-        <section anchor="photo-album" title="Photo Album">
-          <t>The "photo-album" object type represents a collection of
-          images.</t>
-
-          <t>At a minimum, the photo album object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the photo album. If the photo album
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional natural-language and plain-text name for the photo album. 
-          HTML Markup MUST NOT be used.</c>
-          
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>A link to a thumbnail image representing the album. Processors MAY ignore
-          thumbnails that are of an inappropriate size for their user interface.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the photo album object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the photo album object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the photo album object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the photo album's HTML representation.</c>
-
-          </texttable>
-        </section>
-
         <section anchor="place" title="Place">
           <t>The "place" object type represents a location on Earth. Locations
           can be represented using geographic coordinates, a physical address,
@@ -1133,52 +1042,6 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The country name component.</c>
           
-          </texttable>
-        </section>
-
-        <section anchor="playlist" title="Playlist">
-          <t>The "playlist" object type represents an ordered list of
-          time-based media items, such as video and audio objects.</t>
-
-          <t>At a minimum, the playlist object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the playlist. If the playlist
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional natural-language and plain-text name for the playlist. 
-          HTML Markup MUST NOT be used.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the playlist object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the playlist object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the playlist object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the playlist's HTML representation.</c>
-
           </texttable>
         </section>
 
@@ -1414,38 +1277,6 @@
 
         </section>
 
-        <section anchor="song" title="Song">
-          <t>The "song" object type represents a song or a recording of a
-          song.</t>
-
-          <t>Song objects might contain information about the song or
-          recording, or they might contain some representation of the
-          recording itself. This type should only
-          be used when the publisher can guarantee that the object is a song
-          rather than merely a generic audio stream. In the case of the 
-          latter, the "audio" object type SHOULD be used instead.</t>
- 
-          <t>A song has the same properties as the "audio" object type. 
-          Consumers MAY treat the "song" object type as an alias of the 
-          "audio" object type.</t>
-        </section>
-
-        <section anchor="status" title="Status">
-          <t>The "status" object type represents a human-readable update of
-          the author's situation, mood, location or other status.</t>
-
-          <t>A status is similar in structure to a note, but carries the
-          additional meaning that the content is primarily describing
-          something its author is doing, feeling or experiencing.</t>
-
-          <t>A consumers MAY consider the content of the most recent status
-          object it encountered to be the user's current status, unless the
-          most recent status update is old. When a status becomes too old is
-          not defined by this specification.</t>
-
-          <t>A status has the same properties as a note.</t>
-        </section>
-
         <section anchor="video" title="Video">
           <t>The "video" object type represents video content, which usually
           consists of a motion picture track and an audio track.</t>
@@ -1567,7 +1398,7 @@
           <t>For example:</t>
 <figure><artwork><![CDATA[
   {
-    "objectType": "status",
+    "objectType": "note",
     "content": "Working on the activity streams spec",
     "mood": {
       "displayName": "Optimistic",
@@ -1600,10 +1431,16 @@
         
         <section anchor="source" title="Source Property">
     
-          <t>The <spanx style="verb">source</spanx> property provides a link
+          <t>The <spanx style="verb">source</spanx> property provides a reference
           to the original source of an object or activity. The value of the 
           <spanx style="verb">source</spanx> property is an Object of any 
           object type.</t>
+          
+          <t>The <spanx style="verb">source</spanx> property is closely related to the 
+          <spanx style="verb">generator</spanx> and <spanx style="verb">provider</spanx>
+          properties but serves the distinct purpose of identifying where the 
+          activity or object was originally published as opposed to identifying 
+          the applications that generated or published it.</t>
           
           <t>For example:</t>
 <figure><artwork><![CDATA[
@@ -1614,12 +1451,13 @@
     },
     "verb": "post",
     "object": {
-      "objectType": "status",
-      "content": "Working on the specification"
+      "objectType": "photo",
+      "image": "http://example.org/photos/fluffycat.jpg"
     },
     "source": {
-      "objectType": "activity",
-      "displayName": "Joe's Status"
+      "objectType": "collection",
+      "displayName": "Joe's Photo's",
+      "url": "http://example.org/joes/photos"
     }
   }
 ]]></artwork></figure>
