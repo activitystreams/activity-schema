@@ -847,34 +847,6 @@
           </texttable>
         </section>
 
-        <section anchor="mood" title="Mood">
-          <t>The "mood" object type represents the mood, or emotional state,
-          of an individual.</t>
-          
-          <t>At a minimum, the mood object has the following properties:</t>
-          
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text keyword or 
-          phrase describing the mood. HTML markup MUST NOT be included</c>
-
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the mood object.</c>
-          
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>An optional image that provides a visual representation of the mood.</c>
-                    
-          </texttable>
-          
-        </section>
-
         <section anchor="note" title="Note">
           <t>The "note" object type represents short-form text messages. This
           object type is intended for use in "micro-blogging" and in systems
@@ -1266,6 +1238,69 @@
           </texttable>
         </section>
 
+        <section anchor="question" title="Question">
+          <t>The "question" object type represents a question or poll.</t>
+          
+          <t>At a minimum, a question object has the following properties:</t>
+          
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the question. If the review
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+
+          <c><spanx style="verb">content</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The content of the question in the form of a fragment of HTML. 
+          Publishers SHOULD include any markup necessary to achieve a similar
+          presentation to that on the publisher's own HTML pages, including
+          any links that the service automatically adds. Processors MAY remove
+          all HTML markup and consider the content to be plain text.</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The title of the question. Some systems do not have the concept
+          of a title for a question; such systems MUST omit the <spanx style="verb">displayName</spanx>
+          property. Processors SHOULD refer to such questions as simply being "a question",
+          with appropriate localization, if they are to be described in a sentence.</c>
+                    
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the question object.</c>
+          
+          <c><spanx style="verb">options</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Array of Objects</c>
+          <c>An optional listing of possible answers for the question. These
+          may be of any <spanx style="verb">objectType</spanx> and SHOULD 
+          contain an <spanx style="verb">id</spanx> property distinctly 
+          identifying each possible answer.</c>
+          
+          <c><spanx style="verb">published</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the question object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">updated</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the question object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the question's HTML representation.</c>
+          
+          </texttable>
+          
+        </section>
+
         <section anchor="review" title="Review">
           <t>The "review" object type represents a primarily prose-based
           commentary on another object.</t>
@@ -1510,10 +1545,28 @@
           with an optional mood icon image.</t>
 
           <t>In JSON, Moods are included within an object or activity using
-          a property named <spanx style="verb">mood</spanx> whose value is a
-          <xref target="mood">Mood</xref> object. The 
-          <spanx style="verb">objectType</spanx> property of the mood object
-          MAY be omitted.</t>
+          a property named <spanx style="verb">mood</spanx> whose value 
+          is a JSON object with the following properties:</t>
+
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text keyword or 
+          phrase describing the mood. HTML markup MUST NOT be included</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the mood object.</c>
+          
+          <c><spanx style="verb">image</spanx></c>
+          <c>Media Link</c>
+          <c>An optional image that provides a visual representation of the mood.</c>
+          
+          </texttable>     
           
           <t>For example:</t>
 <figure><artwork><![CDATA[
