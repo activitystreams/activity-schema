@@ -1558,10 +1558,6 @@
           <c>The natural-language, human-readable and plain-text keyword or 
           phrase describing the mood. HTML markup MUST NOT be included</c>
           
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the mood object.</c>
-          
           <c><spanx style="verb">image</spanx></c>
           <c>Media Link</c>
           <c>An optional image that provides a visual representation of the mood.</c>
