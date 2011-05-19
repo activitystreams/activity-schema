@@ -86,6 +86,10 @@
           <c>Indicates that the actor has canceled the object. For 
           instance, canceling a calendar event.</c>
           
+          <c><spanx style="verb">checkin</spanx></c>
+          <c>Indicates that the actor has checked-in to the object. For 
+          instance, a person checking-in to a Place.</c>
+          
           <c><spanx style="verb">delete</spanx></c>
           <c>Indicates that the actor has deleted the object. This 
           implies, but does not require, the permanent destruction of the 
@@ -1505,17 +1509,6 @@
 
   <back>
     <references title="Normative References">
-      <reference anchor="RFC4287">
-        <front>
-          <title>The Atom Syndication Format</title>
-
-          <author>
-            <organization></organization>
-          </author>
-
-          <date />
-        </front>
-      </reference>
 
       <reference anchor="RFC2119">
         <front>
@@ -1541,18 +1534,6 @@
         </front>
       </reference>
 
-      <reference anchor="RFC4685">
-        <front>
-          <title>Atom Threading Extensions</title>
-
-          <author fullname="James M. Snell" initials="J. M." surname="Snell">
-            <organization></organization>
-          </author>
-
-          <date month="September" year="2006" />
-        </front>
-      </reference>
-
 <reference anchor="RFC4627">
         <front>
           <title>The application/json Media Type for JavaScript Object
@@ -1567,7 +1548,7 @@
         </front>
       </reference>
 
-<reference anchor="RFC3339">
+      <reference anchor="RFC3339">
         <front>
           <title>Date and Time on the Internet: Timestamps</title>
 
@@ -1579,39 +1560,35 @@
         </front>
       </reference>
 
-      <reference anchor="atomcommentmeta-00">
-        <front>
-          <title>Atom Comment Metadata Extensions</title>
-
-          <author fullname="Martin Atkins" initials="M." surname="Atkins">
-            <organization></organization>
-          </author>
-
-          <date />
-        </front>
-      </reference>
-
-      <reference anchor="hreview">
-        <front>
-          <title>The hReview Microformat</title>
-
-          <author>
-            <organization>microformats community</organization>
-          </author>
-
-          <date />
-        </front>
-      </reference>
-
       <reference anchor="activitystreams">
         <front>
-          <title>Activity Streams Concepts and Representations</title>
+          <title>JSON Activity Streams 1.0</title>
 
-          <author>
-            <organization></organization>
-          </author>
+    <author fullname="James M Snell" initials="J.M." surname="Snell">
+      <organization>IBM</organization>
+    </author>
 
-          <date />
+    <author fullname="Martin Atkins" initials="M." surname="Atkins">
+      <organization>SAY Media</organization>
+    </author>
+
+    <author fullname="Will Norris" initials="W." surname="Norris">
+      <organization>Google</organization>
+    </author>
+
+    <author fullname="Chris Messina" initials="C." surname="Messina">
+      <organization>Citizen Agency, Google</organization>
+    </author>
+
+    <author fullname="Monica Wilkinson" initials="M." surname="Wilkinson">
+      <organization>MySpace, Facebook, Socialcast</organization>
+    </author>
+
+    <author fullname="Rob Dolin" initials="R." surname="Dolin">
+      <organization>Microsoft</organization>
+    </author>
+
+          <date month="May" year="2011" />
         </front>
       </reference>
     </references>
