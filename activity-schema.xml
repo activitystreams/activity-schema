@@ -508,7 +508,7 @@
         </section>
 
         <section anchor="collection" title="Collection">
-          <t>The "collection" object type represents a collection of objects 
+          <t>The "collection" object type represents a generic collection of objects 
           of any type. This object type can be used, for instance, to represent
           a collection of files like a folder, a collection of photos like 
           an album, and so forth.</t>
@@ -564,6 +564,14 @@
           <c>The permanent IRI of the collection's HTML representation.</c>
           
           </texttable>
+
+          <p>Previous version of this specification defined specific object 
+          types for "folder", "photo-album", "playlist", and "list", each 
+          of which can be represented as "collection" objects with specific 
+          types of member objects, e.g. the "photo-album" can be represented as 
+          a "collection" of "image" objects. These more specific object types
+          SHOULD be handled as deprecated aliases of the "collection" object
+          type.</p>
 
         </section>
 
@@ -818,6 +826,10 @@
 
         <section anchor="image" title="Image">
           <t>The "image" object type represents a graphical image.</t>
+          
+          <t>Previous versions of this specification had defined a "photo" 
+          object type which SHOULD be treated as a deprecated alias of 
+          "image".</t>
 
           <t>At a minimum, the image object has the following properties:</t>
 
@@ -932,6 +944,17 @@
           <c>The permanent IRI of the note's HTML representation.</c>
           
           </texttable>
+          
+          <t>It is expected that the "note" object type can be used for a 
+          broad range of purposes, including the representation of a human-readable 
+          description of what the author is doing, feeling or experiencing.
+          Older versions of this specification had defined a "status" object type
+          for that purpose. There are deployed implementations that currently
+          still use "status". The "status" object type SHOULD be treated as a
+          deprecated alias of the "note" object type. The determination of 
+          whether or not a "note" object represents a person's current status
+          is based on the context in which the "note" is used.</t>
+          
         </section>
 
         <section anchor="person" title="Person">
