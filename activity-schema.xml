@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <?xml-stylesheet type='text/xsl' href='./rfc2629.xslt' ?>
-<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+  <!ENTITY rfc2119 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml'> 
+  <!ENTITY rfc1951 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1951.xml'>
+  <!ENTITY rfc1952 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1952.xml'>
+  <!ENTITY rfc3339 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml'>
+  <!ENTITY rfc4627 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4627.xml'>
+]>
 <?rfc toc="yes"?>
 <?rfc tocompact="yes"?>
 <?rfc tocdepth="3"?>
@@ -11,7 +17,8 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="exp" docName="activity-schema-01" ipr="none">
+<?rfc private="Activity Streams Working Group"?>
+<rfc>
   <front>
     <title abbrev="ActivitySchema">Activity Base Schema (Draft)</title>
 
@@ -838,7 +845,7 @@
           <spanx style="verb">actor</spanx> for the activity, the 
           <spanx style="verb">author</spanx> property MAY be omitted</c>
           
-          <c><span style="verb">compression</span></c>
+          <c><spanx style="verb">compression</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>A comma-separated list of compression algorithms applied to the
           binary data prior to Base64-encoding. Possible algorithms are 
@@ -868,12 +875,12 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The unique identifier for the object.</c>
           
-          <c><span style="verb">length</span></c>
+          <c><spanx style="verb">length</spanx></c>
           <c><xref target="RFC4627">JSON</xref> Number</c>
           <c>The total number of unencoded, uncompressed octets contained 
           within the "data" field represented as a non-negative integer value.</c>
           
-          <c><span style="verb">md5</span></c>
+          <c><spanx style="verb">md5</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>An optional MD5 checksum calculated over the unencoded, uncompressed
           octets contained with the "data" field.</c>
@@ -1039,13 +1046,13 @@
           
           </texttable>
 
-          <p>Previous version of this specification defined specific object 
+          <t>Previous version of this specification defined specific object 
           types for "folder", "photo-album", "playlist", and "list", each 
           of which can be represented as "collection" objects with specific 
           types of member objects, e.g. the "photo-album" can be represented as 
           a "collection" of "image" objects. These more specific object types
           SHOULD be handled as deprecated aliases of the "collection" object
-          type.</p>
+          type.</t>
 
         </section>
 
@@ -2257,9 +2264,8 @@
           particular object using the <spanx style="verb">tag</spanx> verb. 
           Represented in JSON using a property named <spanx style="verb">tags</spanx>
           whose value is  an Array of objects.</t>
-        </section>
-        
-        <t>For example:</t>
+
+          <t>For example:</t>        
 <figure><artwork><![CDATA[
   {
     "objectType": "photo",
@@ -2275,65 +2281,19 @@
       }
     ]
   }
-]]></artwork></figure>
-        
+]]></artwork></figure>     
       </section>
+    </section>
     
   </middle>
 
   <back>
     <references title="Normative References">
-
-      <reference anchor="RFC2119">
-        <front>
-          <title>RFC 2119</title>
-
-          <author>
-            <organization></organization>
-          </author>
-
-          <date />
-        </front>
-      </reference>
-
-      <reference anchor="RFC3987">
-        <front>
-          <title>Internationalized Resource Identifiers (IRIs)</title>
-
-          <author>
-            <organization></organization>
-          </author>
-
-          <date />
-        </front>
-      </reference>
-
-<reference anchor="RFC4627">
-        <front>
-          <title>The application/json Media Type for JavaScript Object
-          Notation (JSON)</title>
-
-          <author fullname="Douglas Crockford" initials="D."
-                  surname="Crockford">
-            <organization>JSON.org</organization>
-          </author>
-
-          <date month="July" year="2006" />
-        </front>
-      </reference>
-
-      <reference anchor="RFC3339">
-        <front>
-          <title>Date and Time on the Internet: Timestamps</title>
-
-          <author fullname="Graham Klyne" initials="G." surname="Klyne">
-            <organization></organization>
-          </author>
-
-          <date month="July" year="2002" />
-        </front>
-      </reference>
-
+  &rfc2119;
+  &rfc1951;
+  &rfc1952;
+  &rfc3339;
+  &rfc4627;
       <reference anchor="activitystreams">
         <front>
           <title>JSON Activity Streams 1.0</title>

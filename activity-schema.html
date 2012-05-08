@@ -1,0 +1,2863 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Activity Streams Working Group: Activity Base Schema (Draft)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Activity Base Schema (Draft)">
+<meta name="generator" content="xml2rfc v1.36 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Activity Streams Working Group</td><td class="header">J. Snell</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">IBM</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">M. Atkins</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">SAY Media</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">D. Recordon</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Six Apart, Facebook</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">C. Messina</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Citizen Agency, Google</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">M. Keller</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">MySpace, Facebook</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">A. Steinberg</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Facebook</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">R. Dolin</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">Microsoft</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">May 8, 2012</td></tr>
+</table></td></tr></table>
+<h1><br />Activity Base Schema (Draft)</h1>
+
+<h3>Abstract</h3>
+
+<p>This document presents a base set of Object types and Verbs for use
+      with Activity Streams.
+</p>
+<h3>Requirements Language</h3>
+
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <a class='info' href='#RFC2119'>RFC 2119<span> (</span><span class='info'>Bradner, S., &ldquo;Key words for use in RFCs to Indicate Requirement Levels,&rdquo; March&nbsp;1997.</span><span>)</span></a> [RFC2119].
+</p><a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Introduction<br />
+<a href="#anchor2">2.</a>&nbsp;
+Notational Conventions<br />
+<a href="#verbs">3.</a>&nbsp;
+Verbs<br />
+<a href="#object-types">4.</a>&nbsp;
+Object Types<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#alert">4.1.</a>&nbsp;
+Alert<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#application">4.2.</a>&nbsp;
+Application<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#article">4.3.</a>&nbsp;
+Article<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#audio">4.4.</a>&nbsp;
+Audio<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#badge">4.5.</a>&nbsp;
+Badge<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#binary">4.6.</a>&nbsp;
+Binary<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#bookmark">4.7.</a>&nbsp;
+Bookmark<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#collection">4.8.</a>&nbsp;
+Collection<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#comment">4.9.</a>&nbsp;
+Comment<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#device">4.10.</a>&nbsp;
+Device<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#event">4.11.</a>&nbsp;
+Event<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#file">4.12.</a>&nbsp;
+File<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#game">4.13.</a>&nbsp;
+Game<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#group">4.14.</a>&nbsp;
+Group<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#image">4.15.</a>&nbsp;
+Image<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#job">4.16.</a>&nbsp;
+Job<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#note">4.17.</a>&nbsp;
+Note<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#offer">4.18.</a>&nbsp;
+Offer<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#person">4.19.</a>&nbsp;
+Person<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#place">4.20.</a>&nbsp;
+Place<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#process">4.21.</a>&nbsp;
+Process<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#product">4.22.</a>&nbsp;
+Product<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#question">4.23.</a>&nbsp;
+Question<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#review">4.24.</a>&nbsp;
+Review<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#service">4.25.</a>&nbsp;
+Service<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#task">4.26.</a>&nbsp;
+Task<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#video">4.27.</a>&nbsp;
+Video<br />
+<a href="#anchor3">5.</a>&nbsp;
+Base Extension Properties<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#location">5.1.</a>&nbsp;
+Location<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#mood-property">5.2.</a>&nbsp;
+Mood<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rating-property">5.3.</a>&nbsp;
+Rating<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#source">5.4.</a>&nbsp;
+Source<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tags-property">5.5.</a>&nbsp;
+Tags<br />
+<a href="#rfc.references1">6.</a>&nbsp;
+Normative References<br />
+<a href="#anchor5">Appendix&nbsp;A.</a>&nbsp;
+Acknowledgements<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Authors' Addresses<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Introduction</h3>
+
+<p>This document presents a base set of object types and verbs for use
+      with Activity Streams.
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+Notational Conventions</h3>
+
+<p>This specification allows the use of IRIs [RFC3987]. Every URI
+      [RFC3986] is also an IRI, so a URI MAY be used wherever an IRI is named.
+      When an IRI that is not also a URI is given for dereferencing, it MUST
+      be mapped to a URI using the steps in Section 3.1 of [RFC3987]. When an
+      IRI is serving as an identifier, it MUST NOT be so mapped.
+</p>
+<a name="verbs"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Verbs</h3>
+<table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left">
+<tr><th align="left">Verb</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>accept</tt>&nbsp;</td>
+<td align="left">Indicates that that the actor has accepted the object. For 
+          instance, a person accepting an award, or accepting an assignment.</td>
+</tr>
+<tr>
+<td align="left"><tt>access</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has gained access to the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>acknowledge</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has acknowledged the object. This 
+          effectively signals that the actor is aware of the objects
+          existence.</td>
+</tr>
+<tr>
+<td align="left"><tt>add</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has added the object to the target. 
+          For instance, adding a photo to an album.</td>
+</tr>
+<tr>
+<td align="left"><tt>agree</tt>&nbsp;</td>
+<td align="left">Indicates that the actor agrees with the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>append</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has appended the object to the target.
+          For instance, a person appending a new record to a database.</td>
+</tr>
+<tr>
+<td align="left"><tt>approve</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has approved the object. For instance,
+          a manager might approve a travel request.</td>
+</tr>
+<tr>
+<td align="left"><tt>archive</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has archived the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>assign</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has assigned the object to the target.</td>
+</tr>
+<tr>
+<td align="left"><tt>at</tt>&nbsp;</td>
+<td align="left">Indicates that the actor is currently located at the object. For 
+          instance, a person being at a specific physical location.</td>
+</tr>
+<tr>
+<td align="left"><tt>attach</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has attached the object to the target.
+          For instance, a person attaching a file to a wiki page or an email.</td>
+</tr>
+<tr>
+<td align="left"><tt>attend</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has attended the object. For instance,
+          a person attending a meeting.</td>
+</tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has authored the object. Note that this
+          is a more specific form of the verb "create".</td>
+</tr>
+<tr>
+<td align="left"><tt>authorize</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has authorized the object. If a target
+          is specified, it means that the authorization is specifically in 
+          regards to the target. For instance, a service can authorize a 
+          person to access a given application; in which case the actor is the
+          service, the object is the person, and the target is the application.
+          In contrast, a person can authorize a request; in which case the 
+          actor is the person and the object is the request and there might be 
+          no explicit target.</td>
+</tr>
+<tr>
+<td align="left"><tt>borrow</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has borrowed the object. If a target
+          is specified, it identifies the entity from which the object was 
+          borrowed. For instance, if a person borrows a book from a library,
+          the person is the actor, the book is the object and the library 
+          is the target.</td>
+</tr>
+<tr>
+<td align="left"><tt>build</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has built the object. For example, 
+          if a person builds a model or compiles code.</td>
+</tr>
+<tr>
+<td align="left"><tt>cancel</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has canceled the object. For 
+          instance, canceling a calendar event.</td>
+</tr>
+<tr>
+<td align="left"><tt>close</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has closed the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>complete</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has completed the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>confirm</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has confirmed or agrees with the object.
+          For instance, a software developer might confirm an issue reported
+          against a product.</td>
+</tr>
+<tr>
+<td align="left"><tt>consume</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has consumed the object. The 
+          specific meaning is dependent largely on the object's type.
+          For instance, an actor may "consume" an audio object, indicating
+          that the actor has listened to it; or an actor may "consume"
+          a book, indicating that the book has been read. As such, the 
+          "consume" verb is a more generic form of other more specific 
+          verbs such as "read" and "play".</td>
+</tr>
+<tr>
+<td align="left"><tt>checkin</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has checked-in to the object. For 
+          instance, a person checking-in to a Place.</td>
+</tr>
+<tr>
+<td align="left"><tt>close</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has closed the object. For instance,
+          the object could represent a ticket being tracked in an issue
+          management system.</td>
+</tr>
+<tr>
+<td align="left"><tt>create</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has created the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>delete</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has deleted the object. This 
+          implies, but does not require, the permanent destruction of the 
+          object.</td>
+</tr>
+<tr>
+<td align="left"><tt>deliver</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has delivered the object. For example,
+          delivering a package.</td>
+</tr>
+<tr>
+<td align="left"><tt>deny</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has denied the object. For example,
+          a manager may deny a travel request.</td>
+</tr>
+<tr>
+<td align="left"><tt>disagree</tt>&nbsp;</td>
+<td align="left">Indicates that the actor disagrees with the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>dislike</tt>&nbsp;</td>
+<td align="left">Indicates that the actor dislikes the object. Note that the 
+          "dislike" verb is distinct from the "unlike" verb which connotates
+          that the object had been previously "liked".</td>
+</tr>
+<tr>
+<td align="left"><tt>experience</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has experienced the object in some 
+          manner. Note that, depending on the specific object types used 
+          for both the actor and object, the meaning of this verb can 
+          overlap that of the "consume" and "play" verbs. For instance, 
+          a person might "experience" a movie; or "play" the movie; or "consume"
+          the movie. The "experience" verb SHOULD be considered a more generic
+          form of other more specific verbs as "consume", "play", "watch", 
+          "listen", and "read"</td>
+</tr>
+<tr>
+<td align="left"><tt>favorite</tt>&nbsp;</td>
+<td align="left">Indicates that the actor marked the object as an item of 
+          special interest.</td>
+</tr>
+<tr>
+<td align="left"><tt>find</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has found the object. If a target is 
+          specified, it SHOULD indicate where the object was found.</td>
+</tr>
+<tr>
+<td align="left"><tt>follow</tt>&nbsp;</td>
+<td align="left">Indicates that the actor began following the activity of the 
+          object. In most cases, the object will be a 
+          <a class='info' href='#person'>Person<span> (</span><span class='info'>Person</span><span>)</span></a>, but it can
+          potentially be of any type that can sensibly generate activity.
+          Processors MAY ignore (silently drop) successive identical "follow" 
+          activities.</td>
+</tr>
+<tr>
+<td align="left"><tt>give</tt>&nbsp;</td>
+<td align="left">Indicates that the actor is giving an object to the target.
+          Examples include one person giving a <tt>badge</tt>
+          object to another person. The <tt>object</tt>
+          identifies the object being given. The <tt>target</tt>
+          identifies the receiver.</td>
+</tr>
+<tr>
+<td align="left"><tt>host</tt>&nbsp;</td>
+<td align="left">Indicates that the actor is hosting the object. As in hosting 
+          an event, or hosting a service.</td>
+</tr>
+<tr>
+<td align="left"><tt>ignore</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has ignored the object. For instance, 
+          this verb may be used when an actor has ignored a friend request, 
+          in which case the object may be the <tt>request-friend</tt>
+          activity.</td>
+</tr>
+<tr>
+<td align="left"><tt>insert</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has inserted the object into the target.</td>
+</tr>
+<tr>
+<td align="left"><tt>install</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has installed the object, as in 
+          installing an application.</td>
+</tr>
+<tr>
+<td align="left"><tt>interact</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has interacted with the object. For instance,
+          when one person interacts with another.</td>
+</tr>
+<tr>
+<td align="left"><tt>invite</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has invited the object, typically a 
+          person object, to join or participate in the object described by
+          the <tt>target</tt>. The target could, for instance,
+          be an event, group or a service.</td>
+</tr>
+<tr>
+<td align="left"><tt>join</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has become a member of the object. This 
+          specification only defines the meaning of this verb
+          when its object is a <a class='info' href='#group'>group<span> (</span><span class='info'>Group</span><span>)</span></a>, though
+          implementors SHOULD be prepared to handle other Object types as
+          meaning MAY be provided by extension specifications. Processors 
+          MAY ignore (silently drop) successive identical "join" activities.</td>
+</tr>
+<tr>
+<td align="left"><tt>leave</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has left the object. For instance, 
+          a Person leaving a Group or checking-out of a Place.</td>
+</tr>
+<tr>
+<td align="left"><tt>like</tt>&nbsp;</td>
+<td align="left">Indicates that the actor marked the object as an item of special 
+          interest. The "like" verb is considered to be an alias of "favorite". 
+          The two verb are semantically identical.</td>
+</tr>
+<tr>
+<td align="left"><tt>listen</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has listened to the object. This is typically
+          only applicable for objects representing audio content, such as music,
+          and audio-book, or a radio broadcast. The "listen" verb is a more specific
+          form of the "consume", "experience" and "play" verbs.</td>
+</tr>
+<tr>
+<td align="left"><tt>lose</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has lost the object. For instance, if a 
+          person loses a game.</td>
+</tr>
+<tr>
+<td align="left"><tt>make-friend</tt>&nbsp;</td>
+<td align="left">Indicates the creation of a friendship that is reciprocated by 
+          the object. Since this verb implies an activity on the part of its object,
+          processors MUST NOT accept activities with this verb unless they are
+          able to verify through some external means that there is in fact a
+          reciprocated connection. For example, a processor may have received
+          a guarantee from a particular publisher that the publisher will only
+          use this Verb in cases where a reciprocal relationship exists.</td>
+</tr>
+<tr>
+<td align="left"><tt>open</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has opened the object. For instance,
+          the object could represent a ticket being tracked in an issue
+          management system.</td>
+</tr>
+<tr>
+<td align="left"><tt>play</tt>&nbsp;</td>
+<td align="left">Indicates that the actor spent some time enjoying the object. 
+          For example, if the object is a video this indicates that the subject 
+          watched all or part of the video. The "play" verb is a more specific 
+          form of the "consume" verb.</td>
+</tr>
+<tr>
+<td align="left"><tt>present</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has presented the object. For instance,
+          when a person gives a presentation at a conference.</td>
+</tr>
+<tr>
+<td align="left"><tt>purchase</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has purchased the object. If a target is
+          specified, in indicates the entity from which the object was purchased.</td>
+</tr>
+<tr>
+<td align="left"><tt>qualify</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has qualified for the object. If a target
+          is specified, it indicates the context within which the qualification
+          applies.</td>
+</tr>
+<tr>
+<td align="left"><tt>read</tt>&nbsp;</td>
+<td align="left">Indicates that the actor read the object. This is typically only
+          applicable for objects representing printed or written content, such 
+          as a book, a message or a comment. The "read" verb is a more specific
+          form of the "consume", "experience" and "play" verbs.</td>
+</tr>
+<tr>
+<td align="left"><tt>receive</tt>&nbsp;</td>
+<td align="left">Indicates that the actor is receiving an object.
+          Examples include a person receiving a <tt>badge</tt>
+          object. The <tt>object</tt>
+          identifies the object being received.</td>
+</tr>
+<tr>
+<td align="left"><tt>reject</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has rejected the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>remove</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has removed the object from the target.</td>
+</tr>
+<tr>
+<td align="left"><tt>remove-friend</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has removed the object from the collection
+          of friends.</td>
+</tr>
+<tr>
+<td align="left"><tt>replace</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has replaced the target with the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>request</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has requested the object. If a target is
+          specified, it indicates the entity from which the object is being 
+          requested.</td>
+</tr>
+<tr>
+<td align="left"><tt>request-friend</tt>&nbsp;</td>
+<td align="left">Indicates the creation of a friendship that has not yet been reciprocated by 
+          the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>resolve</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has resolved the object. For instance,
+          the object could represent a ticket being tracked in an issue
+          management system.</td>
+</tr>
+<tr>
+<td align="left"><tt>return</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has returned the object. If a target is
+          specified, it indicates the entity to which the object was returned.</td>
+</tr>
+<tr>
+<td align="left"><tt>retract</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has retracted the object. For instance,
+          if an actor wishes to retract a previously published activity, 
+          the object would be the previously published activity that is being
+          retracted.</td>
+</tr>
+<tr>
+<td align="left"><tt>rsvp-maybe</tt>&nbsp;</td>
+<td align="left">The "possible RSVP" verb indicates that the actor has made a
+          possible RSVP for the object. This specification only defines the
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;4.11<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications. The use of this verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</td>
+</tr>
+<tr>
+<td align="left"><tt>rsvp-no</tt>&nbsp;</td>
+<td align="left">The "negative RSVP" verb indicates that the actor has made a
+          negative RSVP for the object. This specification only defines the
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;4.11<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications. The use of this verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</td>
+</tr>
+<tr>
+<td align="left"><tt>rsvp-yes</tt>&nbsp;</td>
+<td align="left">The "positive RSVP" verb indicates that the actor has made a
+          positive RSVP for an object. This specification only defines the
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;4.11<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
+          handle other object types as meaning MAY be provided by extension
+          specifications. The use of this verb is only appropriate when the RSVP was
+          created by an explicit action by the actor. It is not appropriate to
+          use this verb when a user has been added as an attendee by an event
+          organiser or administrator.</td>
+</tr>
+<tr>
+<td align="left"><tt>satisfy</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has satisfied the object. If a target 
+          is specified, it indicate the context within which the object was 
+          satisfied. For instance, if a person satisfies the requirements for
+          a particular challenge, the person is the actor; the requirement is
+          the object; and the challenge is the target.</td>
+</tr>
+<tr>
+<td align="left"><tt>save</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has called out the object as being of 
+          interest primarily to him- or herself. Though this action MAY be 
+          shared publicly, the implication is that the object has been saved 
+          primarily for the actor's own benefit rather than to show it to 
+          others as would be indicated by the "share" verb.</td>
+</tr>
+<tr>
+<td align="left"><tt>schedule</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has scheduled the object. For instance,
+          scheduling a meeting.</td>
+</tr>
+<tr>
+<td align="left"><tt>search</tt>&nbsp;</td>
+<td align="left">Indicates that the actor is or has searched for the object. If
+          a target is specified, it indicates the context within which the 
+          search is or has been conducted.</td>
+</tr>
+<tr>
+<td align="left"><tt>sell</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has sold the object. If a target is 
+          specified, it indicates the entity to which the object was sold.</td>
+</tr>
+<tr>
+<td align="left"><tt>send</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has sent the object. If a target is 
+          specified, it indicates the entity to which the object was sent.</td>
+</tr>
+<tr>
+<td align="left"><tt>share</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has called out the object to readers. 
+          In most cases, the actor did not create the object being shared, 
+          but is instead drawing attention to it.</td>
+</tr>
+<tr>
+<td align="left"><tt>sponsor</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has sponsored the object. If a target
+          is specified, it indicates the context within which the sponsorship
+          is offered. For instance, a company can sponsor an event; or an 
+          individual can sponsor a project; etc.</td>
+</tr>
+<tr>
+<td align="left"><tt>start</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has started the object. For instance, 
+          when a person starts a project.</td>
+</tr>
+<tr>
+<td align="left"><tt>stop-following</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has stopped following the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>submit</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has submitted the object. If a target
+          is specified, it indicates the entity to which the object was submitted.</td>
+</tr>
+<tr>
+<td align="left"><tt>tag</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has associated the object with the target.
+          For example, if the actor specifies that a particular user 
+          appears in a photo. the object is the user and the target is the photo.</td>
+</tr>
+<tr>
+<td align="left"><tt>terminate</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has terminated the object. </td>
+</tr>
+<tr>
+<td align="left"><tt>tie</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has neither won or lost the object. This
+          verb is generally only applicable when the object represents some form
+          of competition, such as a game.</td>
+</tr>
+<tr>
+<td align="left"><tt>unfavorite</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has removed the object from the collection
+          of favorited items.</td>
+</tr>
+<tr>
+<td align="left"><tt>unlike</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has removed the object from the collection
+          of liked items.</td>
+</tr>
+<tr>
+<td align="left"><tt>unsatisfy</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has not satisfied the object. If a target
+          is specified, it indicates the context within which the object was not
+          satisfied. For instance, if a person fails to satisfy the requirements 
+          of some particular challenge, the person is the actor; the requirement 
+          is the object and the challenge is the target.</td>
+</tr>
+<tr>
+<td align="left"><tt>unsave</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has removed the object from the collection
+          of saved items.</td>
+</tr>
+<tr>
+<td align="left"><tt>unshare</tt>&nbsp;</td>
+<td align="left">Indicates that the actor is no longer sharing the object. If a 
+          target is specified, it indicates the entity with whom the object is
+          no longer being shared.</td>
+</tr>
+<tr>
+<td align="left"><tt>update</tt>&nbsp;</td>
+<td align="left">The "update" verb indicates that the actor has modified the
+          object. Implementors SHOULD use verbs such as <tt>post</tt>
+          where the actor is adding new items to a <a class='info' href='#collection'>collection<span> (</span><span class='info'>Collection</span><span>)</span></a> or 
+          similar. Update is reserved for modifications to existing objects 
+          or data such as changing a user's profile information.</td>
+</tr>
+<tr>
+<td align="left"><tt>use</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has used the object in some manner.</td>
+</tr>
+<tr>
+<td align="left"><tt>watch</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has watched the object. This verb is 
+          typically applicable only when the object represents dynamic, visible
+          content such as a movie, a television show or a public performance.
+          This verb is a more specific form of the verbs "experience", "play"
+          and "consume".</td>
+</tr>
+<tr>
+<td align="left"><tt>won</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has won the object. This verb is typically
+          applicable only when the object represents some form of competition, 
+          such as a game.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="object-types"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Object Types</h3>
+
+<a name="alert"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
+Alert</h3>
+
+<p>The "alert" object type indicates that the object represents 
+          a significant notification of some kind, such as a severe weather
+          alert, amber alert, system malfunction, or any other type of event.
+</p>
+<p>At a minumum, an alert object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the alert. If the alert 
+          object appears within an activity, and the 
+          <tt>author</tt> of the alert
+          is the <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>content</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional main body content represented as a fragment of HTML. </td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+          alert. HTML markup MUST NOT be included</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the alert.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the alert was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional short, natural-language, human-readable snippet or summary of
+          the alert represented as a fragment of HTML.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the alert was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the alert's HTML representation.</td>
+</tr>
+<tr>
+<td align="left"><tt>severity</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Number</td>
+<td align="left">An optional, non-negative integer value in the range 0-100 
+          indicating the expected or actual severity of the event identified
+          by the alert, with a value of 1 indicating the highest possible 
+          severity and 100 indicating the lowest. A value of 0 explicitly 
+          indicates that no severity value has been assigned to the event.</td>
+</tr>
+<tr>
+<td align="left"><tt>urgency</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Number</td>
+<td align="left">An optional, non-negative integer value in the range 0-100 
+          indicating the expected or actual urgency of the event identified
+          by the alert, with a value of 1 indicating the highest possible 
+          urgency and 100 indicating the lowest. A value of 0 explicitly 
+          indicates that no urgency value has been assigned to the event.</td>
+</tr>
+<tr>
+<td align="left"><tt>certainty</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Number</td>
+<td align="left">An optional, non-negative decimal value in the range 0.00-1.00
+          indicating the expected or actual certainty of the event identified
+          by the alert, with a value of 0.00 indicating the least possible 
+          certainty and 1.00 indicating the highest.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="application"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.2"></a><h3>4.2.&nbsp;
+Application</h3>
+
+<p>The "application" object type represents a software application 
+          of any sort.
+</p>
+<p>At a minimum, the application object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+            application.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the application object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the application object was created in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the application object was last updated in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the application's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="article"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.3"></a><h3>4.3.&nbsp;
+Article</h3>
+
+<p>The "article" object type indicates that the object is an
+          article, such as a news article, a knowledge base entry, or other
+          similar construct. Such objects generally consist of paragraphs 
+          of text, in some cases incorporating embedded media such as photos 
+          and inline hyperlinks to other resources.
+</p>
+<p>At a minimum, an article object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the article. If the article 
+          object appears within an activity, and the 
+          <tt>author</tt> of the article
+          is the <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>content</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional main body content represented as a fragment of HTML. </td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+          article.HTML markup MUST NOT be included</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the article.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the article was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional short, natural-language, human-readable snippet or summary of
+          the article represented as a fragment of HTML.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the article was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the article's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="audio"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.4"></a><h3>4.4.&nbsp;
+Audio</h3>
+
+<p>The "audio" object type represents audio content.
+</p>
+<p>At a minimum, an audio object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the audio stream. If the audio 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title for the 
+          audio stream. HTML markup MUST NOT be included</td>
+</tr>
+<tr>
+<td align="left"><tt>embedCode</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">An optional HTML fragment that, when embedded in an HTML page, will
+          provide an interactive player UI for the audio stream.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the audio object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the audio object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>stream</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to the audio content itself. Represented in JSON as a 
+          media link as defined in JSON Activity Streams 1.0.</td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional short, natural-language, human-readable snippet or summary of
+          the audio stream represented as a fragment of HTML.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the audio object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="badge"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.5"></a><h3>4.5.&nbsp;
+Badge</h3>
+
+<p>The "badge" object type represents a Badge or Award granted to 
+          an object (typically a person).
+</p>
+<p>At a minimum, an badge object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the badge. If the badge 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title for the 
+          badge. HTML markup MUST NOT be included</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the badge object.</td>
+</tr>
+<tr>
+<td align="left"><tt>image</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">An optional link to an image resource providing a visual representation
+          of the badge. Processors MAY ignore images
+          that are of an inappropriate size for their user interface.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the badge object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional short, natural-language, human-readable description of
+          the badge represented as a fragment of HTML.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the badge object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the badge's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="binary"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.6"></a><h3>4.6.&nbsp;
+Binary</h3>
+
+<p>The "binary" object type is used to carry arbitrary Base64-encoded
+          binary data within an Activity Stream object. It is primarily
+          intended to attach binary data to other object types through the
+          use of the "attachments" property.
+</p>
+<p>At a minimum, the binary object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the object. If the object 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>compression</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">A comma-separated list of compression algorithms applied to the
+          binary data prior to Base64-encoding. Possible algorithms are 
+          "deflate" and "gzip", respectively indicating the use of the 
+          compression mechanisms defined by <a class='info' href='#RFC1951'>[RFC1951]<span> (</span><span class='info'>Deutsch, P., &ldquo;DEFLATE Compressed Data Format Specification version 1.3,&rdquo; May&nbsp;1996.</span><span>)</span></a> and
+          <a class='info' href='#RFC1952'>[RFC1952]<span> (</span><span class='info'>Deutsch, P., Gailly, J-L., Adler, M., Deutsch, L., and G. Randers-Pehrson, &ldquo;GZIP file format specification version 4.3,&rdquo; May&nbsp;1996.</span><span>)</span></a>. Additional compression algorithsm MAY
+          be used. If multiple compression algorithms are
+          applied, they must be listed in the order they were applied to 
+          the data. For instance, if the data was first compressed with 
+          deflate and then again using gzip, the value would be 
+          "compression":"deflate, gzip"</td>
+</tr>
+<tr>
+<td align="left"><tt>data</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The URL-Safe Base64-encoded representation of the binary data.</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+          object.</td>
+</tr>
+<tr>
+<td align="left"><tt>fileUrl</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The IRI of the object described by this object.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>length</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Number</td>
+<td align="left">The total number of unencoded, uncompressed octets contained 
+          within the "data" field represented as a non-negative integer value.</td>
+</tr>
+<tr>
+<td align="left"><tt>md5</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">An optional MD5 checksum calculated over the unencoded, uncompressed
+          octets contained with the "data" field.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>mimeType</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The MIME type of the object described by the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the object's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="bookmark"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.7"></a><h3>4.7.&nbsp;
+Bookmark</h3>
+
+<p>The "bookmark" object type represents a pointer to some URL --
+          typically a web page. In most cases, a bookmark is specific to a
+          given user and contains metadata chosen by that user. Bookmark
+          Objects are similar in principle to the concept of bookmarks or
+          favorites in a web browser. A bookmark represents a pointer to the
+          URL, not the URL or the associated resource itself.
+</p>
+<p>When dealing with bookmarks it is important to note the
+          distinction between the title, description, and URL of the bookmark
+          itself and the title, content, and URL of the resource that is the
+          target of the bookmark. In some implementations these MAY be the
+          same, but bookmark managers often allow a user to edit the title and
+          description of his or her own bookmarks to differ from the metadata
+          on the target itself.
+</p>
+<p>Some implementations refer to this object type as a "link". This
+          specification uses the term "bookmark" to avoid confusion with the
+          general concept of hyperlinks which apply to all object types.
+</p>
+<p>Since bookmarks are often specific to a particular user, even
+          though multiple users might have bookmarks pointing at the same
+          resource, it is appropriate to use the <tt>post</tt> verb to describe the
+          publication of such a bookmark. The <tt>favorite</tt> verb SHOULD
+          be used when a user flags another user's bookmark as being a
+          favorite without creating his own bookmark, or when a user flags his
+          own bookmark as being a favorite as a special classification within
+          his own bookmark collection.
+</p>
+<p>At a minimum, a bookmark object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the bookmark. If the bookmark 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+          bookmark as entered by the user who created it. HTML markup MUST NOT 
+          be included. Publishers MAY user the title of the target resource
+          as a default for this peroperty where a user has not entered a 
+          customized value</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the bookmark object.</td>
+</tr>
+<tr>
+<td align="left"><tt>image</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">An optional link to an image resource providing a visual representation
+          of the bookmarked resource. Processors MAY ignore thumbnails
+          that are of an inappropriate size for their user interface.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the bookmark object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>targetUrl</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The IRI of the item that is the target of the bookmark.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the bookmark object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="collection"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.8"></a><h3>4.8.&nbsp;
+Collection</h3>
+
+<p>The "collection" object type represents a generic collection of objects 
+          of any type. This object type can be used, for instance, to represent
+          a collection of files like a folder, a collection of photos like 
+          an album, and so forth.
+</p>
+<p>At a minimum, the collection object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the collection. If the collection 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+          collection.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the collection object.</td>
+</tr>
+<tr>
+<td align="left"><tt>image</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to an image resource that can be used as a preview image
+          for the collection. Processors MAY ignore images that are of an 
+          inappropriate size for their user interface.</td>
+</tr>
+<tr>
+<td align="left"><tt>objectTypes</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Array of Strings</td>
+<td align="left">An optional array of JSON strings identifying the member 
+          object types for the collection.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the collection object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the collection object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the collection's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>Previous version of this specification defined specific object 
+          types for "folder", "photo-album", "playlist", and "list", each 
+          of which can be represented as "collection" objects with specific 
+          types of member objects, e.g. the "photo-album" can be represented as 
+          a "collection" of "image" objects. These more specific object types
+          SHOULD be handled as deprecated aliases of the "collection" object
+          type.
+</p>
+<a name="comment"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.9"></a><h3>4.9.&nbsp;
+Comment</h3>
+
+<p>The "comment" object type represents a textual response to
+          another object. The comment object type MUST NOT be used for other 
+          kinds of responses, such as video replies or reviews.
+</p>
+<p>At a minimum, the comment object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the comment. If the comment 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>content</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The main body content represented as a fragment of HTML. Publishers
+          SHOULD include any markup necessary to achieve a similar presentation to
+          that on the publisher's own HTML pages. Processors MAY remove all HTML
+          markup and consider the comment to be plain text.</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional, natural-language, human-readable and plain-text subject of the 
+          comment. Many systems do not have the concept of a title or subject
+          for a comment; such systems MUST omit the <tt>displayName</tt>
+          property. Processors SHOULD refer to such comments as simply being 
+          "a comment", with appropriate localization, if they are to be described
+          in a sentence.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the comment object.</td>
+</tr>
+<tr>
+<td align="left"><tt>inReplyTo</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Array of Objects</td>
+<td align="left">A listing of one or more objects for which this object is a 
+          response.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the comment object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the comment object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="device"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.10"></a><h3>4.10.&nbsp;
+Device</h3>
+
+<p>The "device" object type represents a device of any sort.
+</p>
+<p>At a minimum, the device object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+            device.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the device object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the device object was created in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the device object was last updated in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the device's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="event"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.11"></a><h3>4.11.&nbsp;
+Event</h3>
+
+<p>The "event" object type represents an event that occurs in a
+          certain place during a particular interval of time.
+</p>
+<p>At a minimum, the event object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>attending</tt>&nbsp;</td>
+<td align="left">Collection object</td>
+<td align="left">An optional link to a collection providing information about
+          actors who have responded to the event object using the
+          <tt>rsvp-yes</tt> verb.</td>
+</tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the event. If the event 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+          event.</td>
+</tr>
+<tr>
+<td align="left"><tt>endTime</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The date and time that the event ends represented as a JSON
+          String conforming to the "date-time" production in 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a></td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the event object.</td>
+</tr>
+<tr>
+<td align="left"><tt>location</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#location'>Place<span> (</span><span class='info'>Location</span><span>)</span></a> object</td>
+<td align="left">The optional, location or venue for the event expressed as a place 
+          object as described in <a class='info' href='#location'>Section&nbsp;5.1<span> (</span><span class='info'>Location</span><span>)</span></a>.</td>
+</tr>
+<tr>
+<td align="left"><tt>maybeAttending</tt>&nbsp;</td>
+<td align="left">Collection object</td>
+<td align="left">An optional link to a collection providing information about
+          actors who have responded to the event object using the
+          <tt>rsvp-maybe</tt> verb.</td>
+</tr>
+<tr>
+<td align="left"><tt>notAttending</tt>&nbsp;</td>
+<td align="left">Collection object</td>
+<td align="left">An optional link to a collection providing information about
+          actors who have responded to the event object using the
+          <tt>rsvp-no</tt> verb.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the event object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>startTime</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The date and time that the event begins represented as a JSON
+          String conforming to the "date-time" production in 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a></td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional short, natural-language, human-readable description of
+          the event represented as a fragment of HTML.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the event object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the event's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="file"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.12"></a><h3>4.12.&nbsp;
+File</h3>
+
+<p>The "file" object type represents some document or other file
+          with no additional machine-readable semantics.
+</p>
+<p>It is intended that this type be used as a base type for other
+          Objects that manifest as files, so that additional semantics can be
+          added while providing a fallback ability for clients that do not
+          support the more specific Object type.
+</p>
+<p>At a minimum, the file object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the file. If the file 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+          file.</td>
+</tr>
+<tr>
+<td align="left"><tt>fileUrl</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The IRI of the file described by this object.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the file object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the file object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>mimeType</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The MIME type of the file described by the object.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the file object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the file's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="game"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.13"></a><h3>4.13.&nbsp;
+Game</h3>
+
+<p>The "game" object type represents a game or competition of any 
+          sort.
+</p>
+<p>At a minimum, the game object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+            game.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the game object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the game object was created in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the game object was last updated in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the game's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="group"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.14"></a><h3>4.14.&nbsp;
+Group</h3>
+
+<p>The "group" object type represents a grouping of objects in which
+          member objects can join or leave.
+</p>
+<p>At a minimum, the group object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the group. If the group 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+          group.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the group object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the group object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the group object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the group's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="image"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.15"></a><h3>4.15.&nbsp;
+Image</h3>
+
+<p>The "image" object type represents a graphical image.
+</p>
+<p>Previous versions of this specification had defined a "photo" 
+          object type which SHOULD be treated as a deprecated alias of 
+          "image".
+</p>
+<p>At a minimum, the image object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the image. If the image 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional natural-language and plain-text caption for the image. 
+          HTML Markup MUST NOT be used.</td>
+</tr>
+<tr>
+<td align="left"><tt>image</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to a thumbnail version of the image. Processors MAY ignore
+          thumbnails that are of an inappropriate size for their user interface.</td>
+</tr>
+<tr>
+<td align="left"><tt>fullImage</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to a larger -- ideally, full-size -- version of the image
+          intended for standalone viewing.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the image object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the image object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional, natural-language description of the image in the form
+          of a fragment of HTML.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the image object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the image's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="job"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.16"></a><h3>4.16.&nbsp;
+Job</h3>
+
+<p>The "job" object type represents information about a job or 
+          a job posting.
+</p>
+<p>At a minimum, the job object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+            job.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the job object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the job object was created in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the job object was last updated in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the job's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="note"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.17"></a><h3>4.17.&nbsp;
+Note</h3>
+
+<p>The "note" object type represents short-form text messages. This
+          object type is intended for use in "micro-blogging" and in systems
+          where users are invited to publish short, often plain-text messages
+          whose useful lifespan is generally shorter than that of an article
+          or weblog entry.
+</p>
+<p>A note is similar in structure to an article, but it does not
+          have a title and its body tends to be shorter. Applications will
+          often display the entire content of a note in an activity stream UI,
+          whereas they MAY display only the title or the title and summary for
+          a weblog entry.
+</p>
+<p>At a minimum, a note object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the note. If the note 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>content</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The content of the note. Publishers SHOULD include any markup 
+          necessary to achieve a similar presentation to that on the 
+          publisher's own HTML pages, including any links that the service
+          automatically adds. Processors MAY remove all HTML markup and 
+          consider the comment to be plain text.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the note object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the note object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the note object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the note's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>It is expected that the "note" object type can be used for a 
+          broad range of purposes, including the representation of a human-readable 
+          description of what the author is doing, feeling or experiencing.
+          Older versions of this specification had defined a "status" object type
+          for that purpose. There are deployed implementations that currently
+          still use "status". The "status" object type SHOULD be treated as a
+          deprecated alias of the "note" object type. The determination of 
+          whether or not a "note" object represents a person's current status
+          is based on the context in which the "note" is used.
+</p>
+<a name="offer"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.18"></a><h3>4.18.&nbsp;
+Offer</h3>
+
+<p>The "offer" object type represents an offer of some form. For 
+          instance, an offer to sell a particular item.
+</p>
+<p>At a minimum, the object object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>availability</tt>&nbsp;</td>
+<td align="left">Object</td>
+<td align="left">An Activity Streams object that provides information about the
+            availability of the offer.</td>
+</tr>
+<tr>
+<td align="left"><tt>condition</tt>&nbsp;</td>
+<td align="left">Object</td>
+<td align="left">An Activity Streams object that provides information about the 
+            condition of the item being offered.</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+            offer.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the offer object.</td>
+</tr>
+<tr>
+<td align="left"><tt>item</tt>&nbsp;</td>
+<td align="left">Object</td>
+<td align="left">An Activity Streams object that provides information about the 
+            item or items being offered.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the offer object was created in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>terms</tt>&nbsp;</td>
+<td align="left">Object</td>
+<td align="left">An Activity Streams object that provides information about 
+            the relevant terms and restrictions on the offer.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the offer object was last updated in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the offer's HTML representation.</td>
+</tr>
+<tr>
+<td align="left"><tt>validFrom</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional date and time at which the offer becomes valid specified 
+            as an <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>validUntil</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional date and time after which the offer is no longer valid 
+            specified as an <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="person"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.19"></a><h3>4.19.&nbsp;
+Person</h3>
+
+<p>The "person" object type represents a user account. This is often
+          represents a person, but might also be a company or fictitious
+          character that is being represented by a user account.
+</p>
+<p>At a minimum, the person object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">A name that can be used for the person in the user interface. This
+          is often a name by which the individual is known in a given context;
+          no restriction is placed on what kind of name may be used here.</td>
+</tr>
+<tr>
+<td align="left"><tt>image</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to an image representing the person. Processors MAY ignore
+          thumbnails that are of an inappropriate size for their user interface.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the person object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the person object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the person object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the person's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="place"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.20"></a><h3>4.20.&nbsp;
+Place</h3>
+
+<p>The "place" object type represents a location on Earth. Locations
+          can be represented using geographic coordinates, a physical address,
+          a free-form location name, or any combination of these.
+</p>
+<p>At a minimum, the place object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">An optional natural-language, human-readable and plain-text name of the 
+          place. HTML markup MUST NOT be included</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the place object.</td>
+</tr>
+<tr>
+<td align="left"><tt>position</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional latitude, longitude and altitude of the place as a point
+          on Earth. Represented as an ISO 6709 compliant string. For instance
+          <tt>"position":"+27.5916+086.5640+8850/"</tt>.</td>
+</tr>
+<tr>
+<td align="left"><tt>address</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Object</td>
+<td align="left">A optional physical address represented as a JSON object with the properties
+          defined in the table below.</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the place's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>The properties for the <tt>address</tt>
+          property are:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>formatted</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The full mailing address formatted for display or use with 
+          a mailing label.</td>
+</tr>
+<tr>
+<td align="left"><tt>streetAddress</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The street address including house number, street name, P.O. Box, 
+          and extended multi-line address information.</td>
+</tr>
+<tr>
+<td align="left"><tt>locality</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The city or locality.</td>
+</tr>
+<tr>
+<td align="left"><tt>region</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The state or region.</td>
+</tr>
+<tr>
+<td align="left"><tt>postalCode</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The zip or postal code.</td>
+</tr>
+<tr>
+<td align="left"><tt>country</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The country name component.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="process"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.21"></a><h3>4.21.&nbsp;
+Process</h3>
+
+<p>The "process" object type represents a process of some sort.
+</p>
+<p>At a minimum, the process object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title of the 
+            process.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the process object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the process object was created in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the process object was last updated in the form of an 
+            <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the process' HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="product"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.22"></a><h3>4.22.&nbsp;
+Product</h3>
+
+<p>The "product" object type represents a commercial good or
+          service.
+</p>
+<p>At a minimum, the product object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the product. If the product
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional natural-language and plain-text name for the product. 
+          HTML Markup MUST NOT be used.</td>
+</tr>
+<tr>
+<td align="left"><tt>fullImage</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to a larger -- ideally, full-size -- version of the image 
+          of the product.</td>
+</tr>
+<tr>
+<td align="left"><tt>image</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to a thumbnail-sized image of the product. Processors MAY ignore
+          thumbnails that are of an inappropriate size for their user interface.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the product object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the product object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional, natural-language description of the product in the form
+          of a fragment of HTML.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the product object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the product's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="question"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.23"></a><h3>4.23.&nbsp;
+Question</h3>
+
+<p>The "question" object type represents a question or poll.
+</p>
+<p>At a minimum, a question object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the question. If the review
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>content</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The content of the question in the form of a fragment of HTML. 
+          Publishers SHOULD include any markup necessary to achieve a similar
+          presentation to that on the publisher's own HTML pages, including
+          any links that the service automatically adds. Processors MAY remove
+          all HTML markup and consider the content to be plain text.</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The title of the question. Some systems do not have the concept
+          of a title for a question; such systems MUST omit the <tt>displayName</tt>
+          property. Processors SHOULD refer to such questions as simply being "a question",
+          with appropriate localization, if they are to be described in a sentence.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the question object.</td>
+</tr>
+<tr>
+<td align="left"><tt>options</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Array of Objects</td>
+<td align="left">An optional listing of possible answers for the question. These
+          may be of any <tt>objectType</tt> and SHOULD 
+          contain an <tt>id</tt> property distinctly 
+          identifying each possible answer.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the question object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the question object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the question's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="review"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.24"></a><h3>4.24.&nbsp;
+Review</h3>
+
+<p>The "review" object type represents a primarily prose-based
+          commentary on another object.
+</p>
+<p>At a minimum, a review object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the review. If the review
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>content</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The content of the review in the form of a fragment of HTML. 
+          Publishers SHOULD include any markup necessary to achieve a similar
+          presentation to that on the publisher's own HTML pages, including
+          any links that the service automatically adds. Processors MAY remove
+          all HTML markup and consider the content to be plain text.</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The title of the review. Many systems do not have the concept
+          of a title for a review; such systems MUST omit the <tt>displayName</tt>
+          property. Processors SHOULD refer to such reviews as simply being "a review",
+          with appropriate localization, if they are to be described in a sentence.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the review object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the review object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>rating</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Number</td>
+<td align="left">A rating for the object given as a number between 1.0 and 
+          5.0 inclusive with one decimal place of precision.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the review object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the review's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="service"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.25"></a><h3>4.25.&nbsp;
+Service</h3>
+
+<p>The "service" object type represents a website, personal website
+          or blog, business, brand, or other entity that performs some kind of
+          work for other entities, people, or services, or acts as kind of
+          container for other objects.
+</p>
+<p>At a minimum, the service object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, plain-text name of the service. HTML markup
+          MUST NOT be used.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the service object.</td>
+</tr>
+<tr>
+<td align="left"><tt>image</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to a small image representing the service.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the service object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">A description of the service in the form of a fragment of HTML. 
+          Publishers SHOULD include any markup necessary to achieve a similar
+          presentation to that on the publisher's own HTML pages, including
+          any links that the service automatically adds. Processors MAY remove
+          all HTML markup and consider the content to be plain text.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the service object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>url</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The permanent IRI of the service's HTML representation.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="task"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.26"></a><h3>4.26.&nbsp;
+Task</h3>
+
+<p>The "task" object type represents an activity that has yet to 
+          be completed.
+</p>
+<p>At a minimum, the task object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>actor</tt>&nbsp;</td>
+<td align="left">Object</td>
+<td align="left">An optional Activity Streams object that provides information 
+            about the actor that is expected to complete the task.</td>
+</tr>
+<tr>
+<td align="left"><tt>by</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">An optional <a class='info' href='#RFC3339'>"date-time"<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> [RFC3339] specifying
+            the date and time by which the task is to be completed.</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title for the 
+            task.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the task object.</td>
+</tr>
+<tr>
+<td align="left"><tt>object</tt>&nbsp;</td>
+<td align="left">Object</td>
+<td align="left">An Activity Streams object describing the object of the task.</td>
+</tr>
+<tr>
+<td align="left"><tt>prerequisites</tt>&nbsp;</td>
+<td align="left">Array of Tasks</td>
+<td align="left">An optional Array of other "task" objects to be completed before this
+            task can be completed.</td>
+</tr>
+<tr>
+<td align="left"><tt>required</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Boolean</td>
+<td align="left">A boolean value indicating whether completion of the task is
+            considered to be mandatory or not.</td>
+</tr>
+<tr>
+<td align="left"><tt>supersedes</tt>&nbsp;</td>
+<td align="left">Array of Tasks</td>
+<td align="left">An optional Array of other "task" objects superseded by this 
+            this task object.</td>
+</tr>
+<tr>
+<td align="left"><tt>verb</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">A String indicating the verb of this task.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="video"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.27"></a><h3>4.27.&nbsp;
+Video</h3>
+
+<p>The "video" object type represents video content, which usually
+          consists of a motion picture track and an audio track.
+</p>
+<p>At a minimum, the video object has the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>author</tt>&nbsp;</td>
+<td align="left">Activity Object</td>
+<td align="left">Activity Object, typically using the "person" object type, 
+          responsible for the creation of the video stream. If the video 
+          object appears within an activity, and the 
+          <tt>author</tt> is the 
+          <tt>actor</tt> for the activity, the 
+          <tt>author</tt> property MAY be omitted</td>
+</tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text title for the 
+          video stream. HTML markup MUST NOT be included</td>
+</tr>
+<tr>
+<td align="left"><tt>embedCode</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">An optional HTML fragment that, when embedded in an HTML page, will
+          provide an interactive player UI for the video stream.</td>
+</tr>
+<tr>
+<td align="left"><tt>id</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The unique identifier for the video object.</td>
+</tr>
+<tr>
+<td align="left"><tt>published</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the video object was created in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+<tr>
+<td align="left"><tt>stream</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">A link to the video content itself. Represented in JSON as a 
+          media link as defined in JSON Activity Streams 1.0.</td>
+</tr>
+<tr>
+<td align="left"><tt>summary</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">Optional short, natural-language, human-readable snippet or summary of
+          the video stream represented as a fragment of HTML.</td>
+</tr>
+<tr>
+<td align="left"><tt>updated</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The optional time the video object was last updated in the form of an 
+          <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a> "date-time".</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Base Extension Properties</h3>
+
+<p>This specification defines an initial set of extension properties
+        that can be used with all activities or objects.
+</p>
+<a name="location"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+Location</h3>
+
+<p>Location data can be added to any object type or activity. Location 
+          can be specified via geographic coordinates, a street address, 
+          a free-form location name or any combination of these.
+</p>
+<p>Within a JSON-serialized Activity Stream, the Location is represented
+          using a property named <tt>location</tt> whose 
+          value is a <a class='info' href='#place'>Place<span> (</span><span class='info'>Place</span><span>)</span></a> object. The objectType
+          property of this object MAY be omitted.
+</p>
+<p>When appearing within an activity, the location data indicates
+          the location where the activity occurred. When appearing within an
+          object, the location data indicates the location of that
+          object at the time the activity occurred.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "person",
+    "displayName": "John Doe",
+    "location": {
+      "displayName": "Mount Everest",
+      "position": "+27.5916+086.5640+8850/"
+    }
+  }
+</pre></div>
+<a name="mood-property"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
+Mood</h3>
+
+<p>Mood describes the mood of the user when the activity was
+          performed. This is usually collected via an extra field in the user
+          interface used to perform the activity. For the purpose of this
+          schema, a mood is a freeform, short mood keyword or phrase along
+          with an optional mood icon image.
+</p>
+<p>In JSON, Moods are included within an object or activity using
+          a property named <tt>mood</tt> whose value 
+          is a JSON object with the following properties:
+</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>displayName</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">The natural-language, human-readable and plain-text keyword or 
+          phrase describing the mood. HTML markup MUST NOT be included</td>
+</tr>
+<tr>
+<td align="left"><tt>image</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">An optional image that provides a visual representation of the mood.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "note",
+    "content": "Working on the activity streams spec",
+    "mood": {
+      "displayName": "Optimistic",
+      "image": "http://example.org/moods/optimistic.png"
+    }
+  }
+</pre></div>
+<a name="rating-property"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3"></a><h3>5.3.&nbsp;
+Rating</h3>
+
+<p>A rating given as a number between 1.0 and 5.0 inclusive with 
+          one decimal place of precision. Represented in JSON as a property 
+          called <tt>rating</tt> whose value is a JSON 
+          number giving the rating.
+</p>
+<p>Ratings are generally most useful only for particular types 
+          of objects, such as audio, video, photos and places.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "review",
+    "content": "This is a great product",
+    "rating": 3.5
+  }
+</pre></div>
+<a name="source"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.4"></a><h3>5.4.&nbsp;
+Source</h3>
+
+<p>The <tt>source</tt> property provides a reference
+          to the original source of an object or activity. The value of the 
+          <tt>source</tt> property is an Object of any 
+          object type.
+</p>
+<p>The <tt>source</tt> property is closely related to the 
+          <tt>generator</tt> and <tt>provider</tt>
+          properties but serves the distinct purpose of identifying where the 
+          activity or object was originally published as opposed to identifying 
+          the applications that generated or published it.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Joe"
+    },
+    "verb": "post",
+    "object": {
+      "objectType": "photo",
+      "image": "http://example.org/photos/fluffycat.jpg"
+    },
+    "source": {
+      "objectType": "collection",
+      "displayName": "Joe's Photo's",
+      "url": "http://example.org/joes/photos"
+    }
+  }
+</pre></div>
+<a name="tags-property"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.5"></a><h3>5.5.&nbsp;
+Tags</h3>
+
+<p>A listing of the objects that have been associated with a 
+          particular object using the <tt>tag</tt> verb. 
+          Represented in JSON using a property named <tt>tags</tt>
+          whose value is  an Array of objects.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "photo",
+    "image": "http://example.org/photos/fluffycat.jpg",
+    "tags": [
+      {
+        "objectType": "person",
+        "displayName": "John"
+      },
+      {
+        "objectType": "person",
+        "displayName": "Jane"
+      }
+    ]
+  }
+</pre></div>
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>6.&nbsp;Normative References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="RFC1951">[RFC1951]</a></td>
+<td class="author-text"><a href="mailto:ghost@aladdin.com">Deutsch, P.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc1951">DEFLATE Compressed Data Format Specification version 1.3</a>,&rdquo; RFC&nbsp;1951, May&nbsp;1996 (<a href="http://www.rfc-editor.org/rfc/rfc1951.txt">TXT</a>, <a href="http://www.rfc-editor.org/rfc/rfc1951.ps">PS</a>, <a href="http://www.rfc-editor.org/rfc/rfc1951.pdf">PDF</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC1952">[RFC1952]</a></td>
+<td class="author-text"><a href="mailto:ghost@aladdin.com">Deutsch, P.</a>, <a href="mailto:gzip@prep.ai.mit.edu">Gailly, J-L.</a>, <a href="mailto:madler@alumni.caltech.edu">Adler, M.</a>, <a href="mailto:ghost@aladdin.com">Deutsch, L.</a>, and <a href="mailto:randeg@alumni.rpi.edu">G. Randers-Pehrson</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc1952">GZIP file format specification version 4.3</a>,&rdquo; RFC&nbsp;1952, May&nbsp;1996 (<a href="http://www.rfc-editor.org/rfc/rfc1952.txt">TXT</a>, <a href="http://www.rfc-editor.org/rfc/rfc1952.ps">PS</a>, <a href="http://www.rfc-editor.org/rfc/rfc1952.pdf">PDF</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC2119">[RFC2119]</a></td>
+<td class="author-text"><a href="mailto:sob@harvard.edu">Bradner, S.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>,&rdquo; BCP&nbsp;14, RFC&nbsp;2119, March&nbsp;1997 (<a href="http://www.rfc-editor.org/rfc/rfc2119.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc2119.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc2119.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC3339">[RFC3339]</a></td>
+<td class="author-text"><a href="mailto:GK@ACM.ORG">Klyne, G., Ed.</a> and <a href="mailto:chris.newman@sun.com">C. Newman</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc3339">Date and Time on the Internet: Timestamps</a>,&rdquo; RFC&nbsp;3339, July&nbsp;2002 (<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc3339.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc3339.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC4627">[RFC4627]</a></td>
+<td class="author-text">Crockford, D., &ldquo;<a href="http://tools.ietf.org/html/rfc4627">The application/json Media Type for JavaScript Object Notation (JSON)</a>,&rdquo; RFC&nbsp;4627, July&nbsp;2006 (<a href="http://www.rfc-editor.org/rfc/rfc4627.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="activitystreams">[activitystreams]</a></td>
+<td class="author-text">Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</td></tr>
+</table>
+
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Acknowledgements</h3>
+
+<p>...
+</p>
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Authors' Addresses</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">James M Snell</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">IBM</td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Martin Atkins</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">SAY Media</td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">David Recordon</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Six Apart, Facebook</td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Chris Messina</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Citizen Agency, Google</td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Monica Keller</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">MySpace, Facebook</td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Ari Steinberg</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Facebook</td></tr>
+<tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Rob Dolin</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Microsoft</td></tr>
+</table>
+</body></html>
