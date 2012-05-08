@@ -78,26 +78,150 @@
           <ttcol align="left" width="15%">Verb</ttcol>
           <ttcol align="left">Description</ttcol>
       
+          <c><spanx style="verb">accept</spanx></c>
+          <c>Indicates that that the actor has accepted the object. For 
+          instance, a person accepting an award, or accepting an assignment.</c>
+          
+          <c><spanx style="verb">access</spanx></c>
+          <c>Indicates that the actor has gained access to the object.</c>
+      
+          <c><spanx style="verb">acknowledge</spanx></c>
+          <c>Indicates that the actor has acknowledged the object. This 
+          effectively signals that the actor is aware of the objects
+          existence.</c>
+      
           <c><spanx style="verb">add</spanx></c>
           <c>Indicates that the actor has added the object to the target. 
           For instance, adding a photo to an album.</c>
           
+          <c><spanx style="verb">agree</spanx></c>
+          <c>Indicates that the actor agrees with the object.</c>
+          
+          <c><spanx style="verb">append</spanx></c>
+          <c>Indicates that the actor has appended the object to the target.
+          For instance, a person appending a new record to a database.</c>
+          
+          <c><spanx style="verb">approve</spanx></c>
+          <c>Indicates that the actor has approved the object. For instance,
+          a manager might approve a travel request.</c>
+          
+          <c><spanx style="verb">archive</spanx></c>
+          <c>Indicates that the actor has archived the object.</c>
+          
+          <c><spanx style="verb">assign</spanx></c>
+          <c>Indicates that the actor has assigned the object to the target.</c>
+          
+          <c><spanx style="verb">at</spanx></c>
+          <c>Indicates that the actor is currently located at the object. For 
+          instance, a person being at a specific physical location.</c>
+          
+          <c><spanx style="verb">attach</spanx></c>
+          <c>Indicates that the actor has attached the object to the target.
+          For instance, a person attaching a file to a wiki page or an email.</c>
+          
+          <c><spanx style="verb">attend</spanx></c>
+          <c>Indicates that the actor has attended the object. For instance,
+          a person attending a meeting.</c>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Indicates that the actor has authored the object. Note that this
+          is a more specific form of the verb "create".</c>
+          
+          <c><spanx style="verb">authorize</spanx></c>
+          <c>Indicates that the actor has authorized the object. If a target
+          is specified, it means that the authorization is specifically in 
+          regards to the target. For instance, a service can authorize a 
+          person to access a given application; in which case the actor is the
+          service, the object is the person, and the target is the application.
+          In contrast, a person can authorize a request; in which case the 
+          actor is the person and the object is the request and there might be 
+          no explicit target.</c>
+                    
+          <c><spanx style="verb">borrow</spanx></c>
+          <c>Indicates that the actor has borrowed the object. If a target
+          is specified, it identifies the entity from which the object was 
+          borrowed. For instance, if a person borrows a book from a library,
+          the person is the actor, the book is the object and the library 
+          is the target.</c>
+          
+          <c><spanx style="verb">build</spanx></c>
+          <c>Indicates that the actor has built the object. For example, 
+          if a person builds a model or compiles code.</c>
+                    
           <c><spanx style="verb">cancel</spanx></c>
           <c>Indicates that the actor has canceled the object. For 
           instance, canceling a calendar event.</c>
+          
+          <c><spanx style="verb">close</spanx></c>
+          <c>Indicates that the actor has closed the object.</c>
+          
+          <c><spanx style="verb">complete</spanx></c>
+          <c>Indicates that the actor has completed the object.</c>
+          
+          <c><spanx style="verb">confirm</spanx></c>
+          <c>Indicates that the actor has confirmed or agrees with the object.
+          For instance, a software developer might confirm an issue reported
+          against a product.</c>
+          
+          <c><spanx style="verb">consume</spanx></c>
+          <c>Indicates that the actor has consumed the object. The 
+          specific meaning is dependent largely on the object's type.
+          For instance, an actor may "consume" an audio object, indicating
+          that the actor has listened to it; or an actor may "consume"
+          a book, indicating that the book has been read. As such, the 
+          "consume" verb is a more generic form of other more specific 
+          verbs such as "read" and "play".</c>
           
           <c><spanx style="verb">checkin</spanx></c>
           <c>Indicates that the actor has checked-in to the object. For 
           instance, a person checking-in to a Place.</c>
           
+          <c><spanx style="verb">close</spanx></c>
+          <c>Indicates that the actor has closed the object. For instance,
+          the object could represent a ticket being tracked in an issue
+          management system.</c>
+          
+          <c><spanx style="verb">create</spanx></c>
+          <c>Indicates that the actor has created the object.</c>
+          
           <c><spanx style="verb">delete</spanx></c>
           <c>Indicates that the actor has deleted the object. This 
           implies, but does not require, the permanent destruction of the 
           object.</c>
+          
+          <c><spanx style="verb">deliver</spanx></c>
+          <c>Indicates that the actor has delivered the object. For example,
+          delivering a package.</c>
+          
+          <c><spanx style="verb">deny</spanx></c>
+          <c>Indicates that the actor has denied the object. For example,
+          a manager may deny a travel request.</c>
+          
+          <c><spanx style="verb">disagree</spanx></c>
+          <c>Indicates that the actor disagrees with the object.</c>
+          
+          <c><spanx style="verb">dislike</spanx></c>
+          <c>Indicates that the actor dislikes the object. Note that the 
+          "dislike" verb is distinct from the "unlike" verb which connotates
+          that the object had been previously "liked".</c>
+      
+          <c><spanx style="verb">experience</spanx></c>
+          <c>Indicates that the actor has experienced the object in some 
+          manner. Note that, depending on the specific object types used 
+          for both the actor and object, the meaning of this verb can 
+          overlap that of the "consume" and "play" verbs. For instance, 
+          a person might "experience" a movie; or "play" the movie; or "consume"
+          the movie. The "experience" verb SHOULD be considered a more generic
+          form of other more specific verbs as "consume", "play", "watch", 
+          "listen", and "read"</c>
       
           <c><spanx style="verb">favorite</spanx></c>
           <c>Indicates that the actor marked the object as an item of 
           special interest.</c>
+          
+          <c><spanx style="verb">find</spanx></c>
+          <c>Indicates that the actor has found the object. If a target is 
+          specified, it SHOULD indicate where the object was found.</c>
 
           <c><spanx style="verb">follow</spanx></c>
           <c>Indicates that the actor began following the activity of the 
@@ -114,11 +238,26 @@
           identifies the object being given. The <spanx style="verb">target</spanx>
           identifies the receiver.</c>
         
+          <c><spanx style="verb">host</spanx></c>
+          <c>Indicates that the actor is hosting the object. As in hosting 
+          an event, or hosting a service.</c>
+        
           <c><spanx style="verb">ignore</spanx></c>
           <c>Indicates that the actor has ignored the object. For instance, 
           this verb may be used when an actor has ignored a friend request, 
           in which case the object may be the <spanx style="verb">request-friend</spanx>
           activity.</c>
+          
+          <c><spanx style="verb">insert</spanx></c>
+          <c>Indicates that the actor has inserted the object into the target.</c>
+          
+          <c><spanx style="verb">install</spanx></c>
+          <c>Indicates that the actor has installed the object, as in 
+          installing an application.</c>
+          
+          <c><spanx style="verb">interact</spanx></c>
+          <c>Indicates that the actor has interacted with the object. For instance,
+          when one person interacts with another.</c>
         
           <c><spanx style="verb">invite</spanx></c>
           <c>Indicates that the actor has invited the object, typically a 
@@ -142,6 +281,16 @@
           <c>Indicates that the actor marked the object as an item of special 
           interest. The "like" verb is considered to be an alias of "favorite". 
           The two verb are semantically identical.</c>
+          
+          <c><spanx style="verb">listen</spanx></c>
+          <c>Indicates that the actor has listened to the object. This is typically
+          only applicable for objects representing audio content, such as music,
+          and audio-book, or a radio broadcast. The "listen" verb is a more specific
+          form of the "consume", "experience" and "play" verbs.</c>
+
+          <c><spanx style="verb">lose</spanx></c>
+          <c>Indicates that the actor has lost the object. For instance, if a 
+          person loses a game.</c>
 
           <c><spanx style="verb">make-friend</spanx></c>
           <c>Indicates the creation of a friendship that is reciprocated by 
@@ -152,10 +301,35 @@
           a guarantee from a particular publisher that the publisher will only
           use this Verb in cases where a reciprocal relationship exists.</c>
 
+          <c><spanx style="verb">open</spanx></c>
+          <c>Indicates that the actor has opened the object. For instance,
+          the object could represent a ticket being tracked in an issue
+          management system.</c>
+
           <c><spanx style="verb">play</spanx></c>
           <c>Indicates that the actor spent some time enjoying the object. 
           For example, if the object is a video this indicates that the subject 
-          watched all or part of the video.</c>
+          watched all or part of the video. The "play" verb is a more specific 
+          form of the "consume" verb.</c>
+
+          <c><spanx style="verb">present</spanx></c>
+          <c>Indicates that the actor has presented the object. For instance,
+          when a person gives a presentation at a conference.</c>
+
+          <c><spanx style="verb">purchase</spanx></c>
+          <c>Indicates that the actor has purchased the object. If a target is
+          specified, in indicates the entity from which the object was purchased.</c>
+          
+          <c><spanx style="verb">qualify</spanx></c>
+          <c>Indicates that the actor has qualified for the object. If a target
+          is specified, it indicates the context within which the qualification
+          applies.</c>
+
+          <c><spanx style="verb">read</spanx></c>
+          <c>Indicates that the actor read the object. This is typically only
+          applicable for objects representing printed or written content, such 
+          as a book, a message or a comment. The "read" verb is a more specific
+          form of the "consume", "experience" and "play" verbs.</c>
 
           <c><spanx style="verb">receive</spanx></c>
           <c>Indicates that the actor is receiving an object.
@@ -163,17 +337,43 @@
           object. The <spanx style="verb">object</spanx>
           identifies the object being received.</c>
 
+          <c><spanx style="verb">reject</spanx></c>
+          <c>Indicates that the actor has rejected the object.</c>
+
           <c><spanx style="verb">remove</spanx></c>
           <c>Indicates that the actor has removed the object from the target.</c>
 
           <c><spanx style="verb">remove-friend</spanx></c>
           <c>Indicates that the actor has removed the object from the collection
           of friends.</c>
+          
+          <c><spanx style="verb">replace</spanx></c>
+          <c>Indicates that the actor has replaced the target with the object.</c>
+
+          <c><spanx style="verb">request</spanx></c>
+          <c>Indicates that the actor has requested the object. If a target is
+          specified, it indicates the entity from which the object is being 
+          requested.</c>
 
           <c><spanx style="verb">request-friend</spanx></c>
           <c>Indicates the creation of a friendship that has not yet been reciprocated by 
           the object.</c>
+                    
+          <c><spanx style="verb">resolve</spanx></c>
+          <c>Indicates that the actor has resolved the object. For instance,
+          the object could represent a ticket being tracked in an issue
+          management system.</c>
+          
+          <c><spanx style="verb">return</spanx></c>
+          <c>Indicates that the actor has returned the object. If a target is
+          specified, it indicates the entity to which the object was returned.</c>
 
+          <c><spanx style="verb">retract</spanx></c>
+          <c>Indicates that the actor has retracted the object. For instance,
+          if an actor wishes to retract a previously published activity, 
+          the object would be the previously published activity that is being
+          retracted.</c>
+        
           <c><spanx style="verb">rsvp-maybe</spanx></c> 
           <c>The "possible RSVP" verb indicates that the actor has made a
           possible RSVP for the object. This specification only defines the
@@ -207,28 +407,71 @@
           use this verb when a user has been added as an attendee by an event
           organiser or administrator.</c>
           
+          <c><spanx style="verb">satisfy</spanx></c>
+          <c>Indicates that the actor has satisfied the object. If a target 
+          is specified, it indicate the context within which the object was 
+          satisfied. For instance, if a person satisfies the requirements for
+          a particular challenge, the person is the actor; the requirement is
+          the object; and the challenge is the target.</c>
+          
           <c><spanx style="verb">save</spanx></c>
           <c>Indicates that the actor has called out the object as being of 
           interest primarily to him- or herself. Though this action MAY be 
           shared publicly, the implication is that the object has been saved 
           primarily for the actor's own benefit rather than to show it to 
           others as would be indicated by the "share" verb.</c>
+          
+          <c><spanx style="verb">schedule</spanx></c>
+          <c>Indicates that the actor has scheduled the object. For instance,
+          scheduling a meeting.</c>
+          
+          <c><spanx style="verb">search</spanx></c>
+          <c>Indicates that the actor is or has searched for the object. If
+          a target is specified, it indicates the context within which the 
+          search is or has been conducted.</c>
+          
+          <c><spanx style="verb">sell</spanx></c>
+          <c>Indicates that the actor has sold the object. If a target is 
+          specified, it indicates the entity to which the object was sold.</c>
+          
+          <c><spanx style="verb">send</spanx></c>
+          <c>Indicates that the actor has sent the object. If a target is 
+          specified, it indicates the entity to which the object was sent.</c>
 
           <c><spanx style="verb">share</spanx></c>
           <c>Indicates that the actor has called out the object to readers. 
           In most cases, the actor did not create the object being shared, 
           but is instead drawing attention to it.</c>
 
+          <c><spanx style="verb">sponsor</spanx></c>
+          <c>Indicates that the actor has sponsored the object. If a target
+          is specified, it indicates the context within which the sponsorship
+          is offered. For instance, a company can sponsor an event; or an 
+          individual can sponsor a project; etc.</c>
+          
+          <c><spanx style="verb">start</spanx></c>
+          <c>Indicates that the actor has started the object. For instance, 
+          when a person starts a project.</c>
+
           <c><spanx style="verb">stop-following</spanx></c>
           <c>Indicates that the actor has stopped following the object.</c>
+          
+          <c><spanx style="verb">submit</spanx></c>
+          <c>Indicates that the actor has submitted the object. If a target
+          is specified, it indicates the entity to which the object was submitted.</c>
 
           <c><spanx style="verb">tag</spanx></c>
-          <c>Indicates that the actor has identified the presence of a target 
-          inside another object. For example, the actor may have specified that 
-          a particular user appears in a photo. The target of the "tag" verb 
-          gives the object in which the tag has been added. For example, if a 
-          user appears in a photo, the <spanx style="verb">object</spanx> 
-          is the user and the <spanx style="verb">target</spanx> is the photo.</c>
+          <c>Indicates that the actor has associated the object with the target.
+          For example, if the actor specifies that a particular user 
+          appears in a photo. the object is the user and the target is the photo.</c>
+          
+          <c><spanx style="verb">terminate</spanx></c>
+          <c>Indicates that the actor has terminated the object. </c>
+          
+          <c><spanx style="verb">tie</spanx></c>
+          <c>Indicates that the actor has neither won or lost the object. This
+          verb is generally only applicable when the object represents some form
+          of competition, such as a game.</c>
 
           <c><spanx style="verb">unfavorite</spanx></c>
           <c>Indicates that the actor has removed the object from the collection
@@ -238,9 +481,21 @@
           <c>Indicates that the actor has removed the object from the collection
           of liked items.</c>
           
+          <c><spanx style="verb">unsatisfy</spanx></c>
+          <c>Indicates that the actor has not satisfied the object. If a target
+          is specified, it indicates the context within which the object was not
+          satisfied. For instance, if a person fails to satisfy the requirements 
+          of some particular challenge, the person is the actor; the requirement 
+          is the object and the challenge is the target.</c>
+          
           <c><spanx style="verb">unsave</spanx></c>
           <c>Indicates that the actor has removed the object from the collection
           of saved items.</c>
+          
+          <c><spanx style="verb">unshare</spanx></c>
+          <c>Indicates that the actor is no longer sharing the object. If a 
+          target is specified, it indicates the entity with whom the object is
+          no longer being shared.</c>
 
           <c><spanx style="verb">update</spanx></c>
           <c>The "update" verb indicates that the actor has modified the
@@ -248,11 +503,146 @@
           where the actor is adding new items to a <xref target="collection">collection</xref> or 
           similar. Update is reserved for modifications to existing objects 
           or data such as changing a user's profile information.</c>
+          
+          <c><spanx style="verb">use</spanx></c>
+          <c>Indicates that the actor has used the object in some manner.</c>
+          
+          <c><spanx style="verb">watch</spanx></c>
+          <c>Indicates that the actor has watched the object. This verb is 
+          typically applicable only when the object represents dynamic, visible
+          content such as a movie, a television show or a public performance.
+          This verb is a more specific form of the verbs "experience", "play"
+          and "consume".</c>
+          
+          <c><spanx style="verb">won</spanx></c>
+          <c>Indicates that the actor has won the object. This verb is typically
+          applicable only when the object represents some form of competition, 
+          such as a game.</c>
+          
         </texttable>
 
       </section>
 
       <section anchor="object-types" title="Object Types">
+      
+        <section anchor="alert" title="Alert">
+          <t>The "alert" object type indicates that the object represents 
+          a significant notification of some kind, such as a severe weather
+          alert, amber alert, system malfunction, or any other type of event.</t>
+          
+          <t>At a minumum, an alert object has the following properties:</t>
+          
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the alert. If the alert 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> of the alert
+          is the <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><spanx style="verb">content</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional main body content represented as a fragment of HTML. </c>
+                              
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          alert. HTML markup MUST NOT be included</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the alert.</c>
+                    
+          <c><spanx style="verb">published</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the alert was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+         
+          <c><spanx style="verb">summary</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>Optional short, natural-language, human-readable snippet or summary of
+          the alert represented as a fragment of HTML.</c>
+                    
+          <c><spanx style="verb">updated</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the alert was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the alert's HTML representation.</c>
+          
+          <c><spanx style="verb">severity</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Number</c>
+          <c>An optional, non-negative integer value in the range 0-100 
+          indicating the expected or actual severity of the event identified
+          by the alert, with a value of 1 indicating the highest possible 
+          severity and 100 indicating the lowest. A value of 0 explicitly 
+          indicates that no severity value has been assigned to the event.</c>
+          
+          <c><spanx style="verb">urgency</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Number</c>
+          <c>An optional, non-negative integer value in the range 0-100 
+          indicating the expected or actual urgency of the event identified
+          by the alert, with a value of 1 indicating the highest possible 
+          urgency and 100 indicating the lowest. A value of 0 explicitly 
+          indicates that no urgency value has been assigned to the event.</c>
+          
+          <c><spanx style="verb">certainty</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Number</c>
+          <c>An optional, non-negative decimal value in the range 0.00-1.00
+          indicating the expected or actual certainty of the event identified
+          by the alert, with a value of 0.00 indicating the least possible 
+          certainty and 1.00 indicating the highest.</c>
+          
+          </texttable>
+          
+        </section>
+      
+        <section anchor="application" title="Application">
+        
+          <t>The "application" object type represents a software application 
+          of any sort.</t>
+          
+          <t>At a minimum, the application object has the following properties:</t>
+          
+          <texttable>
+            <ttcol align="left" width="15%">Property</ttcol>
+            <ttcol align="left" width="21%">Value</ttcol>
+            <ttcol align="left">Description</ttcol>
+            
+            <c><spanx style="verb">displayName</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The natural-language, human-readable and plain-text title of the 
+            application.</c>
+            
+            <c><spanx style="verb">id</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The unique identifier for the application object.</c>
+            
+            <c><spanx style="verb">published</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the application object was created in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">updated</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the application object was last updated in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">url</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The permanent IRI of the application's HTML representation.</c>
+          </texttable>
+        
+        </section>
+      
         <section anchor="article" title="Article">
           <t>The "article" object type indicates that the object is an
           article, such as a news article, a knowledge base entry, or other
@@ -423,6 +813,90 @@
           <c>The permanent IRI of the badge's HTML representation.</c>
           
           </texttable>
+        </section>
+
+        <section anchor="binary" title="Binary">
+        
+          <t>The "binary" object type is used to carry arbitrary Base64-encoded
+          binary data within an Activity Stream object. It is primarily
+          intended to attach binary data to other object types through the
+          use of the "attachments" property.</t>
+          
+          <t>At a minimum, the binary object has the following properties:</t>
+
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">author</spanx></c>
+          <c>Activity Object</c>
+          <c>Activity Object, typically using the "person" object type, 
+          responsible for the creation of the object. If the object 
+          object appears within an activity, and the 
+          <spanx style="verb">author</spanx> is the 
+          <spanx style="verb">actor</spanx> for the activity, the 
+          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          
+          <c><span style="verb">compression</span></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>A comma-separated list of compression algorithms applied to the
+          binary data prior to Base64-encoding. Possible algorithms are 
+          "deflate" and "gzip", respectively indicating the use of the 
+          compression mechanisms defined by <xref target="RFC1951" /> and
+          <xref target="RFC1952"/>. Additional compression algorithsm MAY
+          be used. If multiple compression algorithms are
+          applied, they must be listed in the order they were applied to 
+          the data. For instance, if the data was first compressed with 
+          deflate and then again using gzip, the value would be 
+          "compression":"deflate, gzip"</c>
+          
+          <c><spanx style="verb">data</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The URL-Safe Base64-encoded representation of the binary data.</c>
+          
+          <c><spanx style="verb">displayName</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The natural-language, human-readable and plain-text title of the 
+          object.</c>
+          
+          <c><spanx style="verb">fileUrl</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The IRI of the object described by this object.</c>
+          
+          <c><spanx style="verb">id</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The unique identifier for the object.</c>
+          
+          <c><span style="verb">length</span></c>
+          <c><xref target="RFC4627">JSON</xref> Number</c>
+          <c>The total number of unencoded, uncompressed octets contained 
+          within the "data" field represented as a non-negative integer value.</c>
+          
+          <c><span style="verb">md5</span></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>An optional MD5 checksum calculated over the unencoded, uncompressed
+          octets contained with the "data" field.</c>
+          
+          <c><spanx style="verb">published</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the object was created in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">mimeType</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The MIME type of the object described by the object.</c>
+          
+          <c><spanx style="verb">updated</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The optional time the object was last updated in the form of an 
+          <xref target="RFC3339"/> "date-time".</c>
+          
+          <c><spanx style="verb">url</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c>The permanent IRI of the object's HTML representation.</c>
+          </texttable>
+        
         </section>
 
         <section anchor="bookmark" title="Bookmark">
@@ -634,6 +1108,43 @@
           </texttable>
         </section>
 
+        <section anchor="device" title="Device">
+        
+          <t>The "device" object type represents a device of any sort.</t>
+          
+          <t>At a minimum, the device object has the following properties:</t>
+          
+          <texttable>
+            <ttcol align="left" width="15%">Property</ttcol>
+            <ttcol align="left" width="21%">Value</ttcol>
+            <ttcol align="left">Description</ttcol>
+            
+            <c><spanx style="verb">displayName</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The natural-language, human-readable and plain-text title of the 
+            device.</c>
+            
+            <c><spanx style="verb">id</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The unique identifier for the device object.</c>
+            
+            <c><spanx style="verb">published</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the device object was created in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">updated</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the device object was last updated in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">url</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The permanent IRI of the device's HTML representation.</c>
+          </texttable>
+        
+        </section>
+
         <section anchor="event" title="Event">
           <t>The "event" object type represents an event that occurs in a
           certain place during a particular interval of time.</t>
@@ -777,6 +1288,44 @@
           <c>The permanent IRI of the file's HTML representation.</c>
           </texttable>
         </section>
+        
+        <section anchor="game" title="Game">
+        
+          <t>The "game" object type represents a game or competition of any 
+          sort.</t>
+          
+          <t>At a minimum, the game object has the following properties:</t>
+          
+          <texttable>
+            <ttcol align="left" width="15%">Property</ttcol>
+            <ttcol align="left" width="21%">Value</ttcol>
+            <ttcol align="left">Description</ttcol>
+            
+            <c><spanx style="verb">displayName</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The natural-language, human-readable and plain-text title of the 
+            game.</c>
+            
+            <c><spanx style="verb">id</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The unique identifier for the game object.</c>
+            
+            <c><spanx style="verb">published</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the game object was created in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">updated</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the game object was last updated in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">url</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The permanent IRI of the game's HTML representation.</c>
+          </texttable>
+        
+        </section>
 
         <section anchor="group" title="Group">
           <t>The "group" object type represents a grouping of objects in which
@@ -887,6 +1436,44 @@
           
           </texttable>
         </section>
+        
+        <section anchor="job" title="Job">
+        
+          <t>The "job" object type represents information about a job or 
+          a job posting.</t>
+          
+          <t>At a minimum, the job object has the following properties:</t>
+          
+          <texttable>
+            <ttcol align="left" width="15%">Property</ttcol>
+            <ttcol align="left" width="21%">Value</ttcol>
+            <ttcol align="left">Description</ttcol>
+            
+            <c><spanx style="verb">displayName</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The natural-language, human-readable and plain-text title of the 
+            job.</c>
+            
+            <c><spanx style="verb">id</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The unique identifier for the job object.</c>
+            
+            <c><spanx style="verb">published</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the job object was created in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">updated</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the job object was last updated in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">url</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The permanent IRI of the job's HTML representation.</c>
+          </texttable>
+        
+        </section>
 
         <section anchor="note" title="Note">
           <t>The "note" object type represents short-form text messages. This
@@ -955,6 +1542,75 @@
           whether or not a "note" object represents a person's current status
           is based on the context in which the "note" is used.</t>
           
+        </section>
+
+        <section anchor="offer" title="Offer">
+        
+          <t>The "offer" object type represents an offer of some form. For 
+          instance, an offer to sell a particular item.</t>
+          
+          <t>At a minimum, the object object has the following properties:</t>
+          
+          <texttable>
+            <ttcol align="left" width="15%">Property</ttcol>
+            <ttcol align="left" width="21%">Value</ttcol>
+            <ttcol align="left">Description</ttcol>
+            
+            <c><spanx style="verb">availability</spanx></c>
+            <c>Object</c>
+            <c>An Activity Streams object that provides information about the
+            availability of the offer.</c>
+            
+            <c><spanx style="verb">condition</spanx></c>
+            <c>Object</c>
+            <c>An Activity Streams object that provides information about the 
+            condition of the item being offered.</c>
+            
+            <c><spanx style="verb">displayName</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The natural-language, human-readable and plain-text title of the 
+            offer.</c>
+            
+            <c><spanx style="verb">id</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The unique identifier for the offer object.</c>
+            
+            <c><spanx style="verb">item</spanx></c>
+            <c>Object</c>
+            <c>An Activity Streams object that provides information about the 
+            item or items being offered.</c>
+            
+            <c><spanx style="verb">published</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the offer object was created in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">terms</spanx></c>
+            <c>Object</c>
+            <c>An Activity Streams object that provides information about 
+            the relevant terms and restrictions on the offer.</c>
+            
+            <c><spanx style="verb">updated</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the offer object was last updated in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">url</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The permanent IRI of the offer's HTML representation.</c>
+            
+            <c><spanx style="verb">validFrom</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional date and time at which the offer becomes valid specified 
+            as an <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">validUntil</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional date and time after which the offer is no longer valid 
+            specified as an <xref target="RFC3339"/> "date-time".</c>
+            
+          </texttable>
+        
         </section>
 
         <section anchor="person" title="Person">
@@ -1075,6 +1731,43 @@
           <c>The country name component.</c>
           
           </texttable>
+        </section>
+        
+        <section anchor="process" title="Process">
+        
+          <t>The "process" object type represents a process of some sort.</t>
+          
+          <t>At a minimum, the process object has the following properties:</t>
+          
+          <texttable>
+            <ttcol align="left" width="15%">Property</ttcol>
+            <ttcol align="left" width="21%">Value</ttcol>
+            <ttcol align="left">Description</ttcol>
+            
+            <c><spanx style="verb">displayName</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The natural-language, human-readable and plain-text title of the 
+            process.</c>
+            
+            <c><spanx style="verb">id</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The unique identifier for the process object.</c>
+            
+            <c><spanx style="verb">published</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the process object was created in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">updated</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The optional time the process object was last updated in the form of an 
+            <xref target="RFC3339"/> "date-time".</c>
+            
+            <c><spanx style="verb">url</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The permanent IRI of the process' HTML representation.</c>
+          </texttable>
+        
         </section>
 
         <section anchor="product" title="Product">
@@ -1312,6 +2005,64 @@
 
           </texttable>
 
+        </section>
+
+        <section anchor="task" title="Task">
+          
+          <t>The "task" object type represents an activity that has yet to 
+          be completed.</t>
+          
+          <t>At a minimum, the task object has the following properties:</t>
+          
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+            <c><spanx style="verb">actor</spanx></c>
+            <c>Object</c>
+            <c>An optional Activity Streams object that provides information 
+            about the actor that is expected to complete the task.</c>
+            
+            <c><spanx style="verb">by</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>An optional <xref target="RFC3339">"date-time"</xref> specifying
+            the date and time by which the task is to be completed.</c>
+            
+            <c><spanx style="verb">displayName</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The natural-language, human-readable and plain-text title for the 
+            task.</c>   
+            
+            <c><spanx style="verb">id</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>The unique identifier for the task object.</c>
+            
+            <c><spanx style="verb">object</spanx></c>
+            <c>Object</c>
+            <c>An Activity Streams object describing the object of the task.</c>
+            
+            <c><spanx style="verb">prerequisites</spanx></c>
+            <c>Array of Tasks</c>
+            <c>An optional Array of other "task" objects to be completed before this
+            task can be completed.</c>
+            
+            <c><spanx style="verb">required</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> Boolean</c>
+            <c>A boolean value indicating whether completion of the task is
+            considered to be mandatory or not.</c>
+            
+            <c><spanx style="verb">supersedes</spanx></c>
+            <c>Array of Tasks</c>
+            <c>An optional Array of other "task" objects superseded by this 
+            this task object.</c>
+            
+            <c><spanx style="verb">verb</spanx></c>
+            <c><xref target="RFC4627">JSON</xref> String</c>
+            <c>A String indicating the verb of this task.</c>
+          
+          </texttable>
+        
         </section>
 
         <section anchor="video" title="Video">
