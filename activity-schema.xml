@@ -6,6 +6,8 @@
   <!ENTITY rfc1952 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1952.xml'>
   <!ENTITY rfc3339 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml'>
   <!ENTITY rfc4627 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4627.xml'>
+  <!ENTITY rfc3986 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3986.xml'>
+  <!ENTITY rfc3987 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3987.xml'>
 ]>
 <?rfc toc="yes"?>
 <?rfc tocompact="yes"?>
@@ -50,7 +52,7 @@
       <organization>Microsoft</organization>
     </author>
 
-    <date />
+    <date month="May" year="2012" /> 
 
     <abstract>
       <t>This document presents a base set of Object types and Verbs for use
@@ -72,14 +74,19 @@
     </section>
 
     <section title="Notational Conventions">
-      <t>This specification allows the use of IRIs [RFC3987]. Every URI
-      [RFC3986] is also an IRI, so a URI MAY be used wherever an IRI is named.
-      When an IRI that is not also a URI is given for dereferencing, it MUST
-      be mapped to a URI using the steps in Section 3.1 of [RFC3987]. When an
-      IRI is serving as an identifier, it MUST NOT be so mapped.</t>
+      <t>This specification allows the use of <xref target="RFC3987">IRIs</xref>. 
+      Every <xref target="RFC3986">URI</xref> is also an IRI, so a URI MAY be 
+      used wherever an IRI is named. When an IRI that is not also a URI is 
+      given for dereferencing, it MUST be mapped to a URI using the steps in 
+      Section 3.1 of <xref target="RFC3987"/>. When an IRI is serving as an 
+      identifier, it MUST NOT be so mapped.</t>
     </section>
 
       <section anchor="verbs" title="Verbs">
+      
+        <t>This specification defines the following core verbs in addition
+        to the default <spanx style="verb">post</spanx> verb that is defined in Section 6 of 
+        <xref target="activitystreams"/>:</t>
       
         <texttable>
           <ttcol align="left" width="15%">Verb</ttcol>
@@ -232,8 +239,7 @@
 
           <c><spanx style="verb">follow</spanx></c>
           <c>Indicates that the actor began following the activity of the 
-          object. In most cases, the object will be a 
-          <xref target="person">Person</xref>, but it can
+          object. In most cases, the objectType will be a "person", but it can 
           potentially be of any type that can sensibly generate activity.
           Processors MAY ignore (silently drop) successive identical "follow" 
           activities.</c>
@@ -274,11 +280,10 @@
         
           <c><spanx style="verb">join</spanx></c>
           <c>Indicates that the actor has become a member of the object. This 
-          specification only defines the meaning of this verb
-          when its object is a <xref target="group">group</xref>, though
-          implementors SHOULD be prepared to handle other Object types as
-          meaning MAY be provided by extension specifications. Processors 
-          MAY ignore (silently drop) successive identical "join" activities.</c>
+          specification only defines the meaning of this verb when the 
+          <spanx style="verb">object</spanx> of the Activity has an
+          <spanx style="verb">objectType</spanx> of <spanx style="verb">group</spanx>, 
+          though implementors SHOULD be prepared to handle other types of objects.</c>
 
           <c><spanx style="verb">leave</spanx></c>
           <c>Indicates that the actor has left the object. For instance, 
@@ -506,10 +511,9 @@
 
           <c><spanx style="verb">update</spanx></c>
           <c>The "update" verb indicates that the actor has modified the
-          object. Implementors SHOULD use verbs such as <spanx style="verb">post</spanx>
-          where the actor is adding new items to a <xref target="collection">collection</xref> or 
-          similar. Update is reserved for modifications to existing objects 
-          or data such as changing a user's profile information.</c>
+          object. Use of the "update" verb is generally reserved to indicate 
+          modifications to existing objects or data such as changing an existing
+          user's profile information.</c>
           
           <c><spanx style="verb">use</spanx></c>
           <c>Indicates that the actor has used the object in some manner.</c>
@@ -531,320 +535,190 @@
       </section>
 
       <section anchor="object-types" title="Object Types">
+
+        <t>The table contains the core set of common objectTypes in addition
+        to the <spanx style="verb">activity</spanx> objectType defined in 
+        Section 7 of <xref target="activitystreams"/>.</t>
       
-        <section anchor="alert" title="Alert">
-          <t>The "alert" object type indicates that the object represents 
-          a significant notification of some kind, such as a severe weather
-          alert, amber alert, system malfunction, or any other type of event.</t>
-          
-          <t>At a minumum, an alert object has the following properties:</t>
-          
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
+        <t>All Activity Stream Objects inherit the same fundamental set of 
+        basic properties as defined in section 3.4 of <xref target="activitystreams"/>.
+        In addition to these, objects of any specific type are permitted to 
+        introduce additional optional or required properties that are meaningful
+        to objects of that type.</t>
+
+        <texttable>
+          <ttcol align="left" width="15%">Object Type</ttcol>
           <ttcol align="left">Description</ttcol>
           
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the alert. If the alert 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> of the alert
-          is the <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
+          <c><spanx style="verb">alert</spanx></c>
+          <c>Represents any kind of significant notification.</c>
           
-          <c><spanx style="verb">content</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional main body content represented as a fragment of HTML. </c>
-                              
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          alert. HTML markup MUST NOT be included</c>
+          <c><spanx style="verb">application</spanx></c>
+          <c>Represents any kind of software application.</c>
           
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the alert.</c>
-                    
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the alert was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-         
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional short, natural-language, human-readable snippet or summary of
-          the alert represented as a fragment of HTML.</c>
-                    
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the alert was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the alert's HTML representation.</c>
-          
-          <c><spanx style="verb">severity</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> Number</c>
-          <c>An optional, non-negative integer value in the range 0-100 
-          indicating the expected or actual severity of the event identified
-          by the alert, with a value of 1 indicating the highest possible 
-          severity and 100 indicating the lowest. A value of 0 explicitly 
-          indicates that no severity value has been assigned to the event.</c>
-          
-          <c><spanx style="verb">urgency</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> Number</c>
-          <c>An optional, non-negative integer value in the range 0-100 
-          indicating the expected or actual urgency of the event identified
-          by the alert, with a value of 1 indicating the highest possible 
-          urgency and 100 indicating the lowest. A value of 0 explicitly 
-          indicates that no urgency value has been assigned to the event.</c>
-          
-          <c><spanx style="verb">certainty</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> Number</c>
-          <c>An optional, non-negative decimal value in the range 0.00-1.00
-          indicating the expected or actual certainty of the event identified
-          by the alert, with a value of 0.00 indicating the least possible 
-          certainty and 1.00 indicating the highest.</c>
-          
-          </texttable>
-          
-        </section>
-      
-        <section anchor="application" title="Application">
-        
-          <t>The "application" object type represents a software application 
-          of any sort.</t>
-          
-          <t>At a minimum, the application object has the following properties:</t>
-          
-          <texttable>
-            <ttcol align="left" width="15%">Property</ttcol>
-            <ttcol align="left" width="21%">Value</ttcol>
-            <ttcol align="left">Description</ttcol>
-            
-            <c><spanx style="verb">displayName</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The natural-language, human-readable and plain-text title of the 
-            application.</c>
-            
-            <c><spanx style="verb">id</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The unique identifier for the application object.</c>
-            
-            <c><spanx style="verb">published</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the application object was created in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">updated</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the application object was last updated in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">url</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The permanent IRI of the application's HTML representation.</c>
-          </texttable>
-        
-        </section>
-      
-        <section anchor="article" title="Article">
-          <t>The "article" object type indicates that the object is an
-          article, such as a news article, a knowledge base entry, or other
-          similar construct. Such objects generally consist of paragraphs 
+          <c><spanx style="verb">article</spanx></c>
+          <c>Represents objects such as news articles, knowledge base entries, 
+          or other similar construct. Such objects generally consist of paragraphs 
           of text, in some cases incorporating embedded media such as photos 
-          and inline hyperlinks to other resources.</t>
-
-          <t>At a minimum, an article object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
+          and inline hyperlinks to other resources.</c>
           
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the article. If the article 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> of the article
-          is the <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-
-          <c><spanx style="verb">content</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional main body content represented as a fragment of HTML. </c>
-                              
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          article.HTML markup MUST NOT be included</c>
+          <c><spanx style="verb">audio</spanx></c>
+          <c>Represents audio content of any kind. Objects of this type MAY
+          contain an additional property named <spanx style="verb">embedCode</spanx> 
+          whose value is a String containing a fragment of HTML that, when 
+          embedded in an HTML page, provides an interactive player UI for the 
+          audio stream; and an additional property named <spanx style="verb">stream</spanx> 
+          whose value is an Activity Streams Media Link to the audio content 
+          itself.</c>
           
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the article.</c>
-                    
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the article was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-         
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional short, natural-language, human-readable snippet or summary of
-          the article represented as a fragment of HTML.</c>
-                    
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the article was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
+          <c><spanx style="verb">badge</spanx></c>
+          <c>Represents a badge or award granted to an object (typically a 
+          <spanx style="verb">person</spanx> object)</c>
           
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the article's HTML representation.</c>
+          <c><spanx style="verb">binary</spanx></c>
+          <c>Objects of this type are used to carry arbirary Base64-encoded
+          binary data within an Activity Stream object. It is primarily 
+          intended to attach binary data to other types of objects through
+          the use of the "attachments" property. Objects of this type 
+          will contain the additional properties specified in 
+          <xref target="binary"/>.</c>
           
-          </texttable>
-
-        </section>
-
-        <section anchor="audio" title="Audio">
-          <t>The "audio" object type represents audio content.</t>
-
-          <t>At a minimum, an audio object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
+          <c><spanx style="verb">bookmark</spanx></c>
+          <c>Represents a pointer to some URL -- typically a web page. In most 
+          cases, bookmarks are specific to a given user and contain metadata 
+          chosen by that user. Bookmark Objects are similar in principle to the 
+          concept of bookmarks or favorites in a web browser. A bookmark 
+          represents a pointer to the URL, not the URL or the associated resource 
+          itself. Objects of this type SHOULD contain an additional 
+          <spanx style="verb">targetUrl</spanx> property whose value is a 
+          String containing the IRI of the target of the bookmark.</c>
           
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the audio stream. If the audio 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-                    
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title for the 
-          audio stream. HTML markup MUST NOT be included</c>
+          <c><spanx style="verb">collection</spanx></c>
+          <c>Represents a generic collection of objects of any type. This object
+          type can be used, for instance, to represent a collection of files 
+          like a folder; a collection of photos like an album; and so forth. 
+          Objects of this type MAY contain an additional <spanx style="verb">objectTypes</spanx>
+          property whose value is an Array of Strings specifying the expected
+          objectType of objects contained within the collection.</c>
           
-          <c><spanx style="verb">embedCode</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>An optional HTML fragment that, when embedded in an HTML page, will
-          provide an interactive player UI for the audio stream.</c>
+          <c><spanx style="verb">comment</spanx></c>
+          <c>Represents a textual response to another object. Objects of this 
+          type MAY contain an additional <spanx style="verb">inReplyTo</spanx>
+          property whose value is an Array of one or more other Activity Stream 
+          Objects for which the object is to be considered a response.</c>
           
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the audio object.</c>
- 
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the audio object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
+          <c><spanx style="verb">device</spanx></c>
+          <c>Represents a device of any sort.</c>
           
-          <c><spanx style="verb">stream</spanx></c>
-          <c>Media Link</c>
-          <c>A link to the audio content itself. Represented in JSON as a 
-          media link as defined in JSON Activity Streams 1.0.</c>
+          <c><spanx style="verb">event</spanx></c>
+          <c>Represents an event that occurs at a certain location during 
+          a particular period of time. Objects of this type MAY contain the 
+          additional properties specified in <xref target="event"/>.</c>
           
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional short, natural-language, human-readable snippet or summary of
-          the audio stream represented as a fragment of HTML.</c>
-                    
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the audio object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
+          <c><spanx style="verb">file</spanx></c>
+          <c>Represents any form of document or file. Objects of this type 
+          MAY contain an additional <spanx style="verb">fileUrl</spanx>
+          property whose value a dereferenceable IRI that can be used to 
+          retrieve the file; and an additional <spanx style="verb">mimeType</spanx>
+          property whose value is the MIME type of the file described by the 
+          object.</c>
           
-          </texttable>
-        </section>
-
-        <section anchor="badge" title="Badge">
-          <t>The "badge" object type represents a Badge or Award granted to 
-          an object (typically a person).</t>
-
-          <t>At a minimum, an badge object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
+          <c><spanx style="verb">game</spanx></c>
+          <c>Represents a game or competition of any kind.</c>
           
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the badge. If the badge 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-                    
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title for the 
-          badge. HTML markup MUST NOT be included</c>
+          <c><spanx style="verb">group</spanx></c>
+          <c>Represents a grouping of objects in which member objects can 
+          join or leave.</c>
           
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the badge object.</c>
- 
           <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>An optional link to an image resource providing a visual representation
-          of the badge. Processors MAY ignore images
-          that are of an inappropriate size for their user interface.</c>
- 
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the badge object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
+          <c>Represents a graphical image. Objects of this type MAY contain
+          an additional <spanx style="verb">fullImage</spanx> property whose 
+          value is an Activity Streams Media Link to a "full-sized" representation
+          of the image.</c>
           
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional short, natural-language, human-readable description of
-          the badge represented as a fragment of HTML.</c>
-                    
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the badge object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
+          <c><spanx style="verb">job</spanx></c>
+          <c>Represents information about a job or a job posting.</c>
           
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the badge's HTML representation.</c>
+          <c><spanx style="verb">note</spanx></c>
+          <c>Represents a short-form text message. This object is intended 
+          primarily for use in "micro-blogging" scenarios and in systems
+          where users are invited to publish short, often plain-text messages
+          whose useful lifespan is generally shorter than that of an article
+          of weblog entry. A note is similar in structure to an article, but 
+          typically does not have a title or distinct paragraphs and tends to 
+          be much shorter in length.</c>
           
-          </texttable>
-        </section>
-
-        <section anchor="binary" title="Binary">
+          <c><spanx style="verb">organization</spanx></c>
+          <c>Represents an organization of any kind.</c>
+          
+          <c><spanx style="verb">person</spanx></c>
+          <c>Represents an individual person.</c>
+          
+          <c><spanx style="verb">place</spanx></c>
+          <c>Represents a physical location. Locations can be represented 
+          using geographic coordinates, a physical address, a free-form 
+          location name, or any combination of these. Objects of this type
+          MAY contain the additional properties specified in 
+          <xref target="place"/>.</c>
+          
+          <c><spanx style="verb">process</spanx></c>
+          <c>Represents any form of process. For instance, a long-running 
+          task that is started and expected to continue operating for a 
+          period of time.</c>
+          
+          <c><spanx style="verb">product</spanx></c>
+          <c>Represents a commercial good or service. Objects of this type
+          MAY contain an additional <spanx style="verb">fullImage</spanx> 
+          property whose value is an Activity Streams Media Link to an image
+          resource representative of the product.</c>
+          
+          <c><spanx style="verb">question</spanx></c>
+          <c>Represents a question or a poll. Objects of this type MAY contain
+          an additional <spanx style="verb">options</spanx> property whose value
+          is an Array of possible answers to the question in the form of 
+          Activity Stream objects of any type.</c>
+          
+          <c><spanx style="verb">review</spanx></c>
+          <c>Represents a primarily prose-based commentary on another object.
+          Objects of this type MAY contain a <spanx style="verb">rating</spanx>
+          property as specified in <xref target="rating-property"/>.</c>
+          
+          <c><spanx style="verb">service</spanx></c>
+          <c>Represents any form of hosted or consumable service that performs
+          some kind of work or benefit for other entities. Examples of such 
+          objects include websites, businesses, etc.</c>
+          
+          <c><spanx style="verb">task</spanx></c>
+          <c>Represents an activity that has yet to be completed. Objects of
+          this type SHOULD contain additional properties as specified in 
+          <xref target="task"/>.</c>
+          
+          <c><spanx style="verb">video</spanx></c>
+          <c>Represents video content of any kind. Objects of this type MAY
+          contain an additional property named <spanx style="verb">embedCode</spanx> 
+          whose value is a String containing a fragment of HTML that, when 
+          embedded in an HTML page, provides an interactive player UI for the 
+          video stream; and an additional property named <spanx style="verb">stream</spanx> 
+          whose value is an Activity Streams Media Link to the video content 
+          itself.</c>
+          
+        </texttable>
+      
+        <section anchor="binary" title="Binary Objects">
         
           <t>The "binary" object type is used to carry arbitrary Base64-encoded
           binary data within an Activity Stream object. It is primarily
           intended to attach binary data to other object types through the
           use of the "attachments" property.</t>
           
-          <t>At a minimum, the binary object has the following properties:</t>
+          <t>In addition to the core properties shared by all Activity Streams
+          Objects, "binary" objects MAY contain the following properties:</t>
 
           <texttable>
           <ttcol align="left" width="15%">Property</ttcol>
           <ttcol align="left" width="21%">Value</ttcol>
           <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the object. If the object 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
+                    
           <c><spanx style="verb">compression</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>A comma-separated list of compression algorithms applied to the
@@ -862,18 +736,9 @@
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The URL-Safe Base64-encoded representation of the binary data.</c>
           
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          object.</c>
-          
           <c><spanx style="verb">fileUrl</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The IRI of the object described by this object.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the object.</c>
           
           <c><spanx style="verb">length</spanx></c>
           <c><xref target="RFC4627">JSON</xref> Number</c>
@@ -885,303 +750,36 @@
           <c>An optional MD5 checksum calculated over the unencoded, uncompressed
           octets contained with the "data" field.</c>
           
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
           <c><spanx style="verb">mimeType</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The MIME type of the object described by the object.</c>
           
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the object's HTML representation.</c>
-          </texttable>
-        
-        </section>
-
-        <section anchor="bookmark" title="Bookmark">
-        
-          <t>The "bookmark" object type represents a pointer to some URL --
-          typically a web page. In most cases, a bookmark is specific to a
-          given user and contains metadata chosen by that user. Bookmark
-          Objects are similar in principle to the concept of bookmarks or
-          favorites in a web browser. A bookmark represents a pointer to the
-          URL, not the URL or the associated resource itself.</t>
-
-          <t>When dealing with bookmarks it is important to note the
-          distinction between the title, description, and URL of the bookmark
-          itself and the title, content, and URL of the resource that is the
-          target of the bookmark. In some implementations these MAY be the
-          same, but bookmark managers often allow a user to edit the title and
-          description of his or her own bookmarks to differ from the metadata
-          on the target itself.</t>
-
-          <t>Some implementations refer to this object type as a "link". This
-          specification uses the term "bookmark" to avoid confusion with the
-          general concept of hyperlinks which apply to all object types.</t>
-
-          <t>Since bookmarks are often specific to a particular user, even
-          though multiple users might have bookmarks pointing at the same
-          resource, it is appropriate to use the <spanx style="verb">post</spanx> verb to describe the
-          publication of such a bookmark. The <spanx style="verb">favorite</spanx> verb SHOULD
-          be used when a user flags another user's bookmark as being a
-          favorite without creating his own bookmark, or when a user flags his
-          own bookmark as being a favorite as a special classification within
-          his own bookmark collection.</t>
-
-          <t>At a minimum, a bookmark object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the bookmark. If the bookmark 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          bookmark as entered by the user who created it. HTML markup MUST NOT 
-          be included. Publishers MAY user the title of the target resource
-          as a default for this peroperty where a user has not entered a 
-          customized value</c>
-
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the bookmark object.</c>
-           
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>An optional link to an image resource providing a visual representation
-          of the bookmarked resource. Processors MAY ignore thumbnails
-          that are of an inappropriate size for their user interface.</c>
-                    
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the bookmark object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-
-          <c><spanx style="verb">targetUrl</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The IRI of the item that is the target of the bookmark.</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the bookmark object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          </texttable>
-
-        </section>
-
-        <section anchor="collection" title="Collection">
-          <t>The "collection" object type represents a generic collection of objects 
-          of any type. This object type can be used, for instance, to represent
-          a collection of files like a folder, a collection of photos like 
-          an album, and so forth.</t>
-
-          <t>At a minimum, the collection object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the collection. If the collection 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          collection.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the collection object.</c>
-          
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>A link to an image resource that can be used as a preview image
-          for the collection. Processors MAY ignore images that are of an 
-          inappropriate size for their user interface.</c>
-          
-          <c><spanx style="verb">objectTypes</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> Array of Strings</c>
-          <c>An optional array of JSON strings identifying the member 
-          object types for the collection.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the collection object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the collection object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the collection's HTML representation.</c>
-          
-          </texttable>
-
-          <t>Previous version of this specification defined specific object 
-          types for "folder", "photo-album", "playlist", and "list", each 
-          of which can be represented as "collection" objects with specific 
-          types of member objects, e.g. the "photo-album" can be represented as 
-          a "collection" of "image" objects. These more specific object types
-          SHOULD be handled as deprecated aliases of the "collection" object
-          type.</t>
-
-        </section>
-
-        <section anchor="comment" title="Comment">
-          <t>The "comment" object type represents a textual response to
-          another object. The comment object type MUST NOT be used for other 
-          kinds of responses, such as video replies or reviews.</t>
-
-          <t>At a minimum, the comment object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the comment. If the comment 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">content</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The main body content represented as a fragment of HTML. Publishers
-          SHOULD include any markup necessary to achieve a similar presentation to
-          that on the publisher's own HTML pages. Processors MAY remove all HTML
-          markup and consider the comment to be plain text.</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional, natural-language, human-readable and plain-text subject of the 
-          comment. Many systems do not have the concept of a title or subject
-          for a comment; such systems MUST omit the <spanx style="verb">displayName</spanx>
-          property. Processors SHOULD refer to such comments as simply being 
-          "a comment", with appropriate localization, if they are to be described
-          in a sentence.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the comment object.</c>
-          
-          <c><spanx style="verb">inReplyTo</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> Array of Objects</c>
-          <c>A listing of one or more objects for which this object is a 
-          response.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the comment object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the comment object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          </texttable>
-        </section>
-
-        <section anchor="device" title="Device">
-        
-          <t>The "device" object type represents a device of any sort.</t>
-          
-          <t>At a minimum, the device object has the following properties:</t>
-          
-          <texttable>
-            <ttcol align="left" width="15%">Property</ttcol>
-            <ttcol align="left" width="21%">Value</ttcol>
-            <ttcol align="left">Description</ttcol>
-            
-            <c><spanx style="verb">displayName</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The natural-language, human-readable and plain-text title of the 
-            device.</c>
-            
-            <c><spanx style="verb">id</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The unique identifier for the device object.</c>
-            
-            <c><spanx style="verb">published</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the device object was created in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">updated</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the device object was last updated in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">url</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The permanent IRI of the device's HTML representation.</c>
           </texttable>
         
         </section>
 
         <section anchor="event" title="Event">
-          <t>The "event" object type represents an event that occurs in a
-          certain place during a particular interval of time.</t>
 
-          <t>At a minimum, the event object has the following properties:</t>
+          <t>In addition to the core properties shared by all Activity Streams
+          Objects, "event" objects MAY contain the following properties:</t>
 
           <texttable>
           <ttcol align="left" width="15%">Property</ttcol>
           <ttcol align="left" width="21%">Value</ttcol>
           <ttcol align="left">Description</ttcol>
+
+          <c><spanx style="verb">attendedBy</spanx></c>
+          <c>Collection object</c>
+          <c>A Collection object as defined in Section 3.5 of 
+          <xref target="activitystreams"/> that provides information 
+          about actors that attended the event.</c>
           
           <c><spanx style="verb">attending</spanx></c>
           <c>Collection object</c>
-          <c>An optional link to a collection providing information about
-          actors who have responded to the event object using the
+          <c>A Collection object as defined in Section 3.5 of 
+          <xref target="activitystreams"/> that provides information 
+          about actors that have responded to the event object using the
           <spanx style="verb">rsvp-yes</spanx> verb.</c>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the event. If the event 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          event.</c>
           
           <c><spanx style="verb">endTime</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
@@ -1189,517 +787,55 @@
           String conforming to the "date-time" production in 
           <xref target="RFC3339"/></c>
           
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the event object.</c>
-          
-          <c><spanx style="verb">location</spanx></c>
-          <c><xref target="location">Place</xref> object</c>
-          <c>The optional, location or venue for the event expressed as a place 
-          object as described in <xref target="location"/>.</c>
-
           <c><spanx style="verb">maybeAttending</spanx></c>
           <c>Collection object</c>
-          <c>An optional link to a collection providing information about
-          actors who have responded to the event object using the
+          <c>A Collection object as defined in Section 3.5 of 
+          <xref target="activitystreams"/> that provides information 
+          about actors that have responded to the event object using the
           <spanx style="verb">rsvp-maybe</spanx> verb.</c>
+          
+          <c><spanx style="verb">notAttendedBy</spanx></c>
+          <c>Collection object</c>
+          <c>A Collection object as defined in Section 3.5 of 
+          <xref target="activitystreams"/> that provides information 
+          about actors that did not attend the event.</c>
           
           <c><spanx style="verb">notAttending</spanx></c>
           <c>Collection object</c>
-          <c>An optional link to a collection providing information about
-          actors who have responded to the event object using the
+          <c>A Collection object as defined in Section 3.5 of 
+          <xref target="activitystreams"/> that provides information about
+          actors that have responded to the event object using the
           <spanx style="verb">rsvp-no</spanx> verb.</c>
 
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the event object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
           <c><spanx style="verb">startTime</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
           <c>The date and time that the event begins represented as a JSON
           String conforming to the "date-time" production in 
           <xref target="RFC3339"/></c>
           
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional short, natural-language, human-readable description of
-          the event represented as a fragment of HTML.</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the event object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the event's HTML representation.</c>
- 
           </texttable>
-        </section>
-
-        <section anchor="file" title="File">
-          <t>The "file" object type represents some document or other file
-          with no additional machine-readable semantics.</t>
-
-          <t>It is intended that this type be used as a base type for other
-          Objects that manifest as files, so that additional semantics can be
-          added while providing a fallback ability for clients that do not
-          support the more specific Object type.</t>
-
-          <t>At a minimum, the file object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the file. If the file 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          file.</c>
-          
-          <c><spanx style="verb">fileUrl</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The IRI of the file described by this object.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the file object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the file object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">mimeType</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The MIME type of the file described by the object.</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the file object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the file's HTML representation.</c>
-          </texttable>
-        </section>
-        
-        <section anchor="game" title="Game">
-        
-          <t>The "game" object type represents a game or competition of any 
-          sort.</t>
-          
-          <t>At a minimum, the game object has the following properties:</t>
-          
-          <texttable>
-            <ttcol align="left" width="15%">Property</ttcol>
-            <ttcol align="left" width="21%">Value</ttcol>
-            <ttcol align="left">Description</ttcol>
-            
-            <c><spanx style="verb">displayName</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The natural-language, human-readable and plain-text title of the 
-            game.</c>
-            
-            <c><spanx style="verb">id</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The unique identifier for the game object.</c>
-            
-            <c><spanx style="verb">published</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the game object was created in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">updated</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the game object was last updated in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">url</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The permanent IRI of the game's HTML representation.</c>
-          </texttable>
-        
-        </section>
-
-        <section anchor="group" title="Group">
-          <t>The "group" object type represents a grouping of objects in which
-          member objects can join or leave.</t>
-
-          <t>At a minimum, the group object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the group. If the group 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title of the 
-          group.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the group object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the group object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the group object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the group's HTML representation.</c>
-          
-          </texttable>
-        </section>
-
-        <section anchor="image" title="Image">
-          <t>The "image" object type represents a graphical image.</t>
-          
-          <t>Previous versions of this specification had defined a "photo" 
-          object type which SHOULD be treated as a deprecated alias of 
-          "image".</t>
-
-          <t>At a minimum, the image object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the image. If the image 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional natural-language and plain-text caption for the image. 
-          HTML Markup MUST NOT be used.</c>
-          
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>A link to a thumbnail version of the image. Processors MAY ignore
-          thumbnails that are of an inappropriate size for their user interface.</c>
-          
-          <c><spanx style="verb">fullImage</spanx></c>
-          <c>Media Link</c>
-          <c>A link to a larger -- ideally, full-size -- version of the image
-          intended for standalone viewing.</c>
-
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the image object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the image object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional, natural-language description of the image in the form
-          of a fragment of HTML.</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the image object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the image's HTML representation.</c>
-          
-          </texttable>
-        </section>
-        
-        <section anchor="job" title="Job">
-        
-          <t>The "job" object type represents information about a job or 
-          a job posting.</t>
-          
-          <t>At a minimum, the job object has the following properties:</t>
-          
-          <texttable>
-            <ttcol align="left" width="15%">Property</ttcol>
-            <ttcol align="left" width="21%">Value</ttcol>
-            <ttcol align="left">Description</ttcol>
-            
-            <c><spanx style="verb">displayName</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The natural-language, human-readable and plain-text title of the 
-            job.</c>
-            
-            <c><spanx style="verb">id</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The unique identifier for the job object.</c>
-            
-            <c><spanx style="verb">published</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the job object was created in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">updated</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the job object was last updated in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">url</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The permanent IRI of the job's HTML representation.</c>
-          </texttable>
-        
-        </section>
-
-        <section anchor="note" title="Note">
-          <t>The "note" object type represents short-form text messages. This
-          object type is intended for use in "micro-blogging" and in systems
-          where users are invited to publish short, often plain-text messages
-          whose useful lifespan is generally shorter than that of an article
-          or weblog entry.</t>
-
-          <t>A note is similar in structure to an article, but it does not
-          have a title and its body tends to be shorter. Applications will
-          often display the entire content of a note in an activity stream UI,
-          whereas they MAY display only the title or the title and summary for
-          a weblog entry.</t>
-
-          <t>At a minimum, a note object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the note. If the note 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-
-          <c><spanx style="verb">content</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The content of the note. Publishers SHOULD include any markup 
-          necessary to achieve a similar presentation to that on the 
-          publisher's own HTML pages, including any links that the service
-          automatically adds. Processors MAY remove all HTML markup and 
-          consider the comment to be plain text.</c>
-
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the note object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the note object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the note object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the note's HTML representation.</c>
-          
-          </texttable>
-          
-          <t>It is expected that the "note" object type can be used for a 
-          broad range of purposes, including the representation of a human-readable 
-          description of what the author is doing, feeling or experiencing.
-          Older versions of this specification had defined a "status" object type
-          for that purpose. There are deployed implementations that currently
-          still use "status". The "status" object type SHOULD be treated as a
-          deprecated alias of the "note" object type. The determination of 
-          whether or not a "note" object represents a person's current status
-          is based on the context in which the "note" is used.</t>
-          
-        </section>
-
-        <section anchor="offer" title="Offer">
-        
-          <t>The "offer" object type represents an offer of some form. For 
-          instance, an offer to sell a particular item.</t>
-          
-          <t>At a minimum, the object object has the following properties:</t>
-          
-          <texttable>
-            <ttcol align="left" width="15%">Property</ttcol>
-            <ttcol align="left" width="21%">Value</ttcol>
-            <ttcol align="left">Description</ttcol>
-            
-            <c><spanx style="verb">availability</spanx></c>
-            <c>Object</c>
-            <c>An Activity Streams object that provides information about the
-            availability of the offer.</c>
-            
-            <c><spanx style="verb">condition</spanx></c>
-            <c>Object</c>
-            <c>An Activity Streams object that provides information about the 
-            condition of the item being offered.</c>
-            
-            <c><spanx style="verb">displayName</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The natural-language, human-readable and plain-text title of the 
-            offer.</c>
-            
-            <c><spanx style="verb">id</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The unique identifier for the offer object.</c>
-            
-            <c><spanx style="verb">item</spanx></c>
-            <c>Object</c>
-            <c>An Activity Streams object that provides information about the 
-            item or items being offered.</c>
-            
-            <c><spanx style="verb">published</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the offer object was created in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">terms</spanx></c>
-            <c>Object</c>
-            <c>An Activity Streams object that provides information about 
-            the relevant terms and restrictions on the offer.</c>
-            
-            <c><spanx style="verb">updated</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the offer object was last updated in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">url</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The permanent IRI of the offer's HTML representation.</c>
-            
-            <c><spanx style="verb">validFrom</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional date and time at which the offer becomes valid specified 
-            as an <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">validUntil</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional date and time after which the offer is no longer valid 
-            specified as an <xref target="RFC3339"/> "date-time".</c>
-            
-          </texttable>
-        
-        </section>
-
-        <section anchor="person" title="Person">
-          <t>The "person" object type represents a user account. This is often
-          represents a person, but might also be a company or fictitious
-          character that is being represented by a user account.</t>
-
-          <t>At a minimum, the person object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>A name that can be used for the person in the user interface. This
-          is often a name by which the individual is known in a given context;
-          no restriction is placed on what kind of name may be used here.</c>
-
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>A link to an image representing the person. Processors MAY ignore
-          thumbnails that are of an inappropriate size for their user interface.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the person object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the person object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the person object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the person's HTML representation.</c>
-          
-          </texttable>
-          
         </section>
 
         <section anchor="place" title="Place">
-          <t>The "place" object type represents a location on Earth. Locations
-          can be represented using geographic coordinates, a physical address,
-          a free-form location name, or any combination of these.</t>
-
-          <t>At a minimum, the place object has the following properties:</t>
+          
+          <t>In addition to the core properties shared by all Activity Streams
+          Objects, "place" objects MAY contain the following properties:</t>
 
           <texttable>
           <ttcol align="left" width="15%">Property</ttcol>
           <ttcol align="left" width="21%">Value</ttcol>
           <ttcol align="left">Description</ttcol>
           
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>An optional natural-language, human-readable and plain-text name of the 
-          place. HTML markup MUST NOT be included</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the place object.</c>
-          
           <c><spanx style="verb">position</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional latitude, longitude and altitude of the place as a point
+          <c>The latitude, longitude and altitude of the place as a point
           on Earth. Represented as an ISO 6709 compliant string. For instance
           <spanx style="verb">"position":"+27.5916+086.5640+8850/"</spanx>.</c>
           
           <c><spanx style="verb">address</spanx></c>
           <c><xref target="RFC4627">JSON</xref> Object</c>
-          <c>A optional physical address represented as a JSON object with the properties
+          <c>A physical address represented as a JSON object with the properties
           defined in the table below.</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the place's HTML representation.</c>
           
           </texttable>
 
@@ -1739,287 +875,11 @@
           
           </texttable>
         </section>
-        
-        <section anchor="process" title="Process">
-        
-          <t>The "process" object type represents a process of some sort.</t>
-          
-          <t>At a minimum, the process object has the following properties:</t>
-          
-          <texttable>
-            <ttcol align="left" width="15%">Property</ttcol>
-            <ttcol align="left" width="21%">Value</ttcol>
-            <ttcol align="left">Description</ttcol>
-            
-            <c><spanx style="verb">displayName</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The natural-language, human-readable and plain-text title of the 
-            process.</c>
-            
-            <c><spanx style="verb">id</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The unique identifier for the process object.</c>
-            
-            <c><spanx style="verb">published</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the process object was created in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">updated</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The optional time the process object was last updated in the form of an 
-            <xref target="RFC3339"/> "date-time".</c>
-            
-            <c><spanx style="verb">url</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The permanent IRI of the process' HTML representation.</c>
-          </texttable>
-        
-        </section>
-
-        <section anchor="product" title="Product">
-          <t>The "product" object type represents a commercial good or
-          service.</t>
-
-          <t>At a minimum, the product object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the product. If the product
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional natural-language and plain-text name for the product. 
-          HTML Markup MUST NOT be used.</c>
-
-          <c><spanx style="verb">fullImage</spanx></c>
-          <c>Media Link</c>
-          <c>A link to a larger -- ideally, full-size -- version of the image 
-          of the product.</c>
-          
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>A link to a thumbnail-sized image of the product. Processors MAY ignore
-          thumbnails that are of an inappropriate size for their user interface.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the product object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the product object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional, natural-language description of the product in the form
-          of a fragment of HTML.</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the product object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the product's HTML representation.</c>
-          
-          </texttable>
-        </section>
-
-        <section anchor="question" title="Question">
-          <t>The "question" object type represents a question or poll.</t>
-          
-          <t>At a minimum, a question object has the following properties:</t>
-          
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the question. If the review
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-
-          <c><spanx style="verb">content</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The content of the question in the form of a fragment of HTML. 
-          Publishers SHOULD include any markup necessary to achieve a similar
-          presentation to that on the publisher's own HTML pages, including
-          any links that the service automatically adds. Processors MAY remove
-          all HTML markup and consider the content to be plain text.</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The title of the question. Some systems do not have the concept
-          of a title for a question; such systems MUST omit the <spanx style="verb">displayName</spanx>
-          property. Processors SHOULD refer to such questions as simply being "a question",
-          with appropriate localization, if they are to be described in a sentence.</c>
-                    
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the question object.</c>
-          
-          <c><spanx style="verb">options</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> Array of Objects</c>
-          <c>An optional listing of possible answers for the question. These
-          may be of any <spanx style="verb">objectType</spanx> and SHOULD 
-          contain an <spanx style="verb">id</spanx> property distinctly 
-          identifying each possible answer.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the question object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the question object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the question's HTML representation.</c>
-          
-          </texttable>
-          
-        </section>
-
-        <section anchor="review" title="Review">
-          <t>The "review" object type represents a primarily prose-based
-          commentary on another object.</t>
-
-          <t>At a minimum, a review object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the review. If the review
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-
-          <c><spanx style="verb">content</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The content of the review in the form of a fragment of HTML. 
-          Publishers SHOULD include any markup necessary to achieve a similar
-          presentation to that on the publisher's own HTML pages, including
-          any links that the service automatically adds. Processors MAY remove
-          all HTML markup and consider the content to be plain text.</c>
-          
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The title of the review. Many systems do not have the concept
-          of a title for a review; such systems MUST omit the <spanx style="verb">displayName</spanx>
-          property. Processors SHOULD refer to such reviews as simply being "a review",
-          with appropriate localization, if they are to be described in a sentence.</c>
-                    
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the review object.</c>
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the review object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">rating</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> Number</c>
-          <c>A rating for the object given as a number between 1.0 and 
-          5.0 inclusive with one decimal place of precision.</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the review object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the review's HTML representation.</c>
-
-          </texttable>
-        </section>
-
-        <section anchor="service" title="Service">
-          <t>The "service" object type represents a website, personal website
-          or blog, business, brand, or other entity that performs some kind of
-          work for other entities, people, or services, or acts as kind of
-          container for other objects.</t>
-
-          <t>At a minimum, the service object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, plain-text name of the service. HTML markup
-          MUST NOT be used.</c>
-                    
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the service object.</c>
-
-          <c><spanx style="verb">image</spanx></c>
-          <c>Media Link</c>
-          <c>A link to a small image representing the service.</c>          
-          
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the service object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>A description of the service in the form of a fragment of HTML. 
-          Publishers SHOULD include any markup necessary to achieve a similar
-          presentation to that on the publisher's own HTML pages, including
-          any links that the service automatically adds. Processors MAY remove
-          all HTML markup and consider the content to be plain text.</c>
-          
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the service object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">url</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The permanent IRI of the service's HTML representation.</c>
-
-          </texttable>
-
-        </section>
 
         <section anchor="task" title="Task">
           
-          <t>The "task" object type represents an activity that has yet to 
-          be completed.</t>
-          
-          <t>At a minimum, the task object has the following properties:</t>
+          <t>In addition to the core properties shared by all Activity Streams
+          Objects, "task" objects MAY contain the following properties:</t>
           
           <texttable>
           <ttcol align="left" width="15%">Property</ttcol>
@@ -2028,22 +888,13 @@
           
             <c><spanx style="verb">actor</spanx></c>
             <c>Object</c>
-            <c>An optional Activity Streams object that provides information 
+            <c>An Activity Streams Object that provides information 
             about the actor that is expected to complete the task.</c>
             
             <c><spanx style="verb">by</spanx></c>
             <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>An optional <xref target="RFC3339">"date-time"</xref> specifying
+            <c>A <xref target="RFC3339">"date-time"</xref> specifying
             the date and time by which the task is to be completed.</c>
-            
-            <c><spanx style="verb">displayName</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The natural-language, human-readable and plain-text title for the 
-            task.</c>   
-            
-            <c><spanx style="verb">id</spanx></c>
-            <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>The unique identifier for the task object.</c>
             
             <c><spanx style="verb">object</spanx></c>
             <c>Object</c>
@@ -2051,7 +902,7 @@
             
             <c><spanx style="verb">prerequisites</spanx></c>
             <c>Array of Tasks</c>
-            <c>An optional Array of other "task" objects to be completed before this
+            <c>An Array of other "task" objects to be completed before this
             task can be completed.</c>
             
             <c><spanx style="verb">required</spanx></c>
@@ -2061,73 +912,19 @@
             
             <c><spanx style="verb">supersedes</spanx></c>
             <c>Array of Tasks</c>
-            <c>An optional Array of other "task" objects superseded by this 
+            <c>An Array of other "task" objects superseded by this 
             this task object.</c>
             
             <c><spanx style="verb">verb</spanx></c>
             <c><xref target="RFC4627">JSON</xref> String</c>
-            <c>A String indicating the verb of this task.</c>
+            <c>A String indicating the verb for this task as defined for 
+            the <spanx style="verb">verb</spanx> property in an Activity 
+            in Section 3.2 of <xref target="activitystreams"/>.</c>
           
           </texttable>
         
         </section>
 
-        <section anchor="video" title="Video">
-          <t>The "video" object type represents video content, which usually
-          consists of a motion picture track and an audio track.</t>
-
-          <t>At a minimum, the video object has the following properties:</t>
-
-          <texttable>
-          <ttcol align="left" width="15%">Property</ttcol>
-          <ttcol align="left" width="21%">Value</ttcol>
-          <ttcol align="left">Description</ttcol>
-          
-          <c><spanx style="verb">author</spanx></c>
-          <c>Activity Object</c>
-          <c>Activity Object, typically using the "person" object type, 
-          responsible for the creation of the video stream. If the video 
-          object appears within an activity, and the 
-          <spanx style="verb">author</spanx> is the 
-          <spanx style="verb">actor</spanx> for the activity, the 
-          <spanx style="verb">author</spanx> property MAY be omitted</c>
-                    
-          <c><spanx style="verb">displayName</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The natural-language, human-readable and plain-text title for the 
-          video stream. HTML markup MUST NOT be included</c>
-          
-          <c><spanx style="verb">embedCode</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>An optional HTML fragment that, when embedded in an HTML page, will
-          provide an interactive player UI for the video stream.</c>
-          
-          <c><spanx style="verb">id</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The unique identifier for the video object.</c>
- 
-          <c><spanx style="verb">published</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the video object was created in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          <c><spanx style="verb">stream</spanx></c>
-          <c>Media Link</c>
-          <c>A link to the video content itself. Represented in JSON as a 
-          media link as defined in JSON Activity Streams 1.0.</c>
-          
-          <c><spanx style="verb">summary</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>Optional short, natural-language, human-readable snippet or summary of
-          the video stream represented as a fragment of HTML.</c>
-                    
-          <c><spanx style="verb">updated</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The optional time the video object was last updated in the form of an 
-          <xref target="RFC3339"/> "date-time".</c>
-          
-          </texttable>
-        </section>
       </section>
 
       <section title="Base Extension Properties">
@@ -2294,6 +1091,8 @@
   &rfc1952;
   &rfc3339;
   &rfc4627;
+  &rfc3986;
+  &rfc3987;
       <reference anchor="activitystreams">
         <front>
           <title>JSON Activity Streams 1.0</title>
@@ -2327,8 +1126,5 @@
       </reference>
     </references>
 
-    <section title="Acknowledgements">
-      <t>...</t>
-    </section>
   </back>
 </rfc>
