@@ -130,7 +130,7 @@
                 border-style: solid; border-color: #333;
                 border-width: 1px 2px;
         }
-        table.full td, table.headers td, table.none td { border-style: _none; border: 1px solid grey }
+        table.full td, table.headers td, table.none td { border-style: _none; }
 
         hr { height: 1px; }
         hr.insert {
@@ -156,7 +156,7 @@
 <tr><td class="header">&nbsp;</td><td class="header">Facebook</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">R. Dolin</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">Microsoft</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">May 14, 2012</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">May 2012</td></tr>
 </table></td></tr></table>
 <h1><br />Activity Base Schema (Draft)</h1>
 
@@ -175,33 +175,53 @@
 <p class="toc">
 <a href="#anchor1">1.</a>&nbsp;
 Introduction<br />
-<a href="#anchor2">2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor2">1.1.</a>&nbsp;
 Notational Conventions<br />
-<a href="#verbs">3.</a>&nbsp;
+<a href="#verbs">2.</a>&nbsp;
 Verbs<br />
-<a href="#object-types">4.</a>&nbsp;
+<a href="#object-types">3.</a>&nbsp;
 Object Types<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#binary">4.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#audio-video">3.1.</a>&nbsp;
+Audio and Video Objects<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#binary">3.2.</a>&nbsp;
 Binary Objects<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#event">4.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#event">3.3.</a>&nbsp;
 Event<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#place">4.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#issue">3.4.</a>&nbsp;
+Issue<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#place">3.5.</a>&nbsp;
 Place<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#task">4.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#task">3.6.</a>&nbsp;
 Task<br />
-<a href="#anchor3">5.</a>&nbsp;
+<a href="#anchor3">4.</a>&nbsp;
 Base Extension Properties<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#location">5.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#context">4.1.</a>&nbsp;
+Context<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#location">4.2.</a>&nbsp;
 Location<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#mood-property">5.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#mood-property">4.3.</a>&nbsp;
 Mood<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rating-property">5.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rating-property">4.4.</a>&nbsp;
 Rating<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#source">5.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#result-property">4.5.</a>&nbsp;
+Result<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#source">4.6.</a>&nbsp;
 Source<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tags-property">5.5.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tags-property">4.7.</a>&nbsp;
 Tags<br />
-<a href="#rfc.references1">6.</a>&nbsp;
+<a href="#multipage-collections">5.</a>&nbsp;
+Multi-page Collections<br />
+<a href="#external-vocabularies">6.</a>&nbsp;
+External Vocabularies<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#dc">6.1.</a>&nbsp;
+&quot;dc&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#links">6.2.</a>&nbsp;
+&quot;links&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#opengraph">6.3.</a>&nbsp;
+&quot;opengraph&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#schema_org">6.4.</a>&nbsp;
+&quot;schema_org&quot;<br />
+<a href="#rfc.references1">7.</a>&nbsp;
 Normative References<br />
 <a href="#rfc.authors">&#167;</a>&nbsp;
 Authors' Addresses<br />
@@ -218,25 +238,25 @@ Introduction</h3>
 </p>
 <a name="anchor2"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.2"></a><h3>2.&nbsp;
+<a name="rfc.section.1.1"></a><h3>1.1.&nbsp;
 Notational Conventions</h3>
 
 <p>This specification allows the use of <a class='info' href='#RFC3987'>IRIs<span> (</span><span class='info'>Duerst, M. and M. Suignard, &ldquo;Internationalized Resource Identifiers (IRIs),&rdquo; January&nbsp;2005.</span><span>)</span></a> [RFC3987]. 
-      Every <a class='info' href='#RFC3986'>URI<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a> [RFC3986] is also an IRI, so a URI MAY be 
-      used wherever an IRI is named. When an IRI that is not also a URI is 
-      given for dereferencing, it MUST be mapped to a URI using the steps in 
-      Section 3.1 of <a class='info' href='#RFC3987'>[RFC3987]<span> (</span><span class='info'>Duerst, M. and M. Suignard, &ldquo;Internationalized Resource Identifiers (IRIs),&rdquo; January&nbsp;2005.</span><span>)</span></a>. When an IRI is serving as an 
-      identifier, it MUST NOT be so mapped.
+        Every <a class='info' href='#RFC3986'>URI<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a> [RFC3986] is also an IRI, so a URI MAY be 
+        used wherever an IRI is named. When an IRI that is not also a URI is 
+        given for dereferencing, it MUST be mapped to a URI using the steps in 
+        Section 3.1 of <a class='info' href='#RFC3987'>[RFC3987]<span> (</span><span class='info'>Duerst, M. and M. Suignard, &ldquo;Internationalized Resource Identifiers (IRIs),&rdquo; January&nbsp;2005.</span><span>)</span></a>. When an IRI is serving as an 
+        identifier, it MUST NOT be so mapped.
 </p>
 <a name="verbs"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.3"></a><h3>3.&nbsp;
+<a name="rfc.section.2"></a><h3>2.&nbsp;
 Verbs</h3>
 
 <p>This specification defines the following core verbs in addition
         to the default <tt>post</tt> verb that is defined in Section 6 of 
         <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a>:
-</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
 <col align="left" width="15%"><col align="left">
 <tr><th align="left">Verb</th><th align="left">Description</th></tr>
 <tr>
@@ -246,12 +266,13 @@ Verbs</h3>
 </tr>
 <tr>
 <td align="left"><tt>access</tt>&nbsp;</td>
-<td align="left">Indicates that the actor has gained access to the object.</td>
+<td align="left">Indicates that the actor has accessed the object. For instance,
+          a person accessing a room, or accessing a file.</td>
 </tr>
 <tr>
 <td align="left"><tt>acknowledge</tt>&nbsp;</td>
 <td align="left">Indicates that the actor has acknowledged the object. This 
-          effectively signals that the actor is aware of the objects
+          effectively signals that the actor is aware of the object's
           existence.</td>
 </tr>
 <tr>
@@ -261,7 +282,9 @@ Verbs</h3>
 </tr>
 <tr>
 <td align="left"><tt>agree</tt>&nbsp;</td>
-<td align="left">Indicates that the actor agrees with the object.</td>
+<td align="left">Indicates that the actor agrees with the object. For example, 
+          a person agreeing with an argument, or expressing agreement with
+          a particular issue.</td>
 </tr>
 <tr>
 <td align="left"><tt>append</tt>&nbsp;</td>
@@ -392,7 +415,7 @@ Verbs</h3>
 <tr>
 <td align="left"><tt>dislike</tt>&nbsp;</td>
 <td align="left">Indicates that the actor dislikes the object. Note that the 
-          "dislike" verb is distinct from the "unlike" verb which connotates
+          "dislike" verb is distinct from the "unlike" verb which assumes
           that the object had been previously "liked".</td>
 </tr>
 <tr>
@@ -415,6 +438,15 @@ Verbs</h3>
 <td align="left"><tt>find</tt>&nbsp;</td>
 <td align="left">Indicates that the actor has found the object. If a target is 
           specified, it SHOULD indicate where the object was found.</td>
+</tr>
+<tr>
+<td align="left"><tt>flag-as-inappropriate</tt>&nbsp;</td>
+<td align="left">Indicates that the actor has flagged the object as being 
+          inappropriate for some reason. When using this verb, the 
+          <tt>context</tt> property, as specified 
+          within <a class='info' href='#context'>Section&nbsp;4.1<span> (</span><span class='info'>Context</span><span>)</span></a> can be used to 
+          provide additional detail about why the object has been 
+          flagged.</td>
 </tr>
 <tr>
 <td align="left"><tt>follow</tt>&nbsp;</td>
@@ -599,7 +631,7 @@ Verbs</h3>
 <td align="left"><tt>rsvp-maybe</tt>&nbsp;</td>
 <td align="left">The "possible RSVP" verb indicates that the actor has made a
           possible RSVP for the object. This specification only defines the
-          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;4.2<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
           handle other object types as meaning MAY be provided by extension
           specifications. The use of this verb is only appropriate when the RSVP was
           created by an explicit action by the actor. It is not appropriate to
@@ -610,7 +642,7 @@ Verbs</h3>
 <td align="left"><tt>rsvp-no</tt>&nbsp;</td>
 <td align="left">The "negative RSVP" verb indicates that the actor has made a
           negative RSVP for the object. This specification only defines the
-          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;4.2<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
           handle other object types as meaning MAY be provided by extension
           specifications. The use of this verb is only appropriate when the RSVP was
           created by an explicit action by the actor. It is not appropriate to
@@ -621,7 +653,7 @@ Verbs</h3>
 <td align="left"><tt>rsvp-yes</tt>&nbsp;</td>
 <td align="left">The "positive RSVP" verb indicates that the actor has made a
           positive RSVP for an object. This specification only defines the
-          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;4.2<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
           handle other object types as meaning MAY be provided by extension
           specifications. The use of this verb is only appropriate when the RSVP was
           created by an explicit action by the actor. It is not appropriate to
@@ -757,7 +789,7 @@ Verbs</h3>
           and "consume".</td>
 </tr>
 <tr>
-<td align="left"><tt>won</tt>&nbsp;</td>
+<td align="left"><tt>win</tt>&nbsp;</td>
 <td align="left">Indicates that the actor has won the object. This verb is typically
           applicable only when the object represents some form of competition, 
           such as a game.</td>
@@ -767,7 +799,7 @@ Verbs</h3>
 
 <a name="object-types"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4"></a><h3>4.&nbsp;
+<a name="rfc.section.3"></a><h3>3.&nbsp;
 Object Types</h3>
 
 <p>The table contains the core set of common objectTypes in addition
@@ -779,7 +811,7 @@ Object Types</h3>
         In addition to these, objects of any specific type are permitted to 
         introduce additional optional or required properties that are meaningful
         to objects of that type.
-</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
 <col align="left" width="15%"><col align="left">
 <tr><th align="left">Object Type</th><th align="left">Description</th></tr>
 <tr>
@@ -800,12 +832,7 @@ Object Types</h3>
 <tr>
 <td align="left"><tt>audio</tt>&nbsp;</td>
 <td align="left">Represents audio content of any kind. Objects of this type MAY
-          contain an additional property named <tt>embedCode</tt> 
-          whose value is a String containing a fragment of HTML that, when 
-          embedded in an HTML page, provides an interactive player UI for the 
-          audio stream; and an additional property named <tt>stream</tt> 
-          whose value is an Activity Streams Media Link to the audio content 
-          itself.</td>
+          contain an additional property as specified in <a class='info' href='#audio-video'>Section&nbsp;3.1<span> (</span><span class='info'>Audio and Video Objects</span><span>)</span></a>.</td>
 </tr>
 <tr>
 <td align="left"><tt>badge</tt>&nbsp;</td>
@@ -817,9 +844,9 @@ Object Types</h3>
 <td align="left">Objects of this type are used to carry arbirary Base64-encoded
           binary data within an Activity Stream object. It is primarily 
           intended to attach binary data to other types of objects through
-          the use of the "attachments" property. Objects of this type 
-          will contain the additional properties specified in 
-          <a class='info' href='#binary'>Section&nbsp;4.1<span> (</span><span class='info'>Binary Objects</span><span>)</span></a>.</td>
+          the use of the <tt>attachments</tt> property. 
+          Objects of this type will contain the additional properties specified in 
+          <a class='info' href='#binary'>Section&nbsp;3.2<span> (</span><span class='info'>Binary Objects</span><span>)</span></a>.</td>
 </tr>
 <tr>
 <td align="left"><tt>bookmark</tt>&nbsp;</td>
@@ -856,7 +883,7 @@ Object Types</h3>
 <td align="left"><tt>event</tt>&nbsp;</td>
 <td align="left">Represents an event that occurs at a certain location during 
           a particular period of time. Objects of this type MAY contain the 
-          additional properties specified in <a class='info' href='#event'>Section&nbsp;4.2<span> (</span><span class='info'>Event</span><span>)</span></a>.</td>
+          additional properties specified in <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>.</td>
 </tr>
 <tr>
 <td align="left"><tt>file</tt>&nbsp;</td>
@@ -884,6 +911,14 @@ Object Types</h3>
           of the image.</td>
 </tr>
 <tr>
+<td align="left"><tt>issue</tt>&nbsp;</td>
+<td align="left">Represents a report about a problem or situation that needs to 
+          be resolved. For instance, the <tt>issue</tt> object
+          can be used to represent reports detailing software defects, or 
+          reports of acceptable use violations, and so forth. Objects of this 
+          type MAY contain the additional properties specified in <a class='info' href='#issue'>Section&nbsp;3.4<span> (</span><span class='info'>Issue</span><span>)</span></a>.</td>
+</tr>
+<tr>
 <td align="left"><tt>job</tt>&nbsp;</td>
 <td align="left">Represents information about a job or a job posting.</td>
 </tr>
@@ -902,6 +937,20 @@ Object Types</h3>
 <td align="left">Represents an organization of any kind.</td>
 </tr>
 <tr>
+<td align="left"><tt>page</tt>&nbsp;</td>
+<td align="left">Represents an area, typically a web page, that is representative 
+          of, and generally managed by a particular entity. Such areas are 
+          usually dedicated to displaying descriptive information about the 
+          entity and showcasing recent content such as articles, photographs and 
+          videos. Most social networking applications, for example, provide 
+          individual users with their own dedicated "profile" pages. Several
+          allow similar types of pages to be created for commercial entities,
+          organizations or events. While the specific details of how pages 
+          are implemented, their characteristics and use may vary, the one 
+          unifying property is that they are typically "owned" by a single 
+          entity that is represented by the content provided by the page itself.</td>
+</tr>
+<tr>
 <td align="left"><tt>person</tt>&nbsp;</td>
 <td align="left">Represents an individual person.</td>
 </tr>
@@ -911,7 +960,7 @@ Object Types</h3>
           using geographic coordinates, a physical address, a free-form 
           location name, or any combination of these. Objects of this type
           MAY contain the additional properties specified in 
-          <a class='info' href='#place'>Section&nbsp;4.3<span> (</span><span class='info'>Place</span><span>)</span></a>.</td>
+          <a class='info' href='#place'>Section&nbsp;3.5<span> (</span><span class='info'>Place</span><span>)</span></a>.</td>
 </tr>
 <tr>
 <td align="left"><tt>process</tt>&nbsp;</td>
@@ -937,7 +986,7 @@ Object Types</h3>
 <td align="left"><tt>review</tt>&nbsp;</td>
 <td align="left">Represents a primarily prose-based commentary on another object.
           Objects of this type MAY contain a <tt>rating</tt>
-          property as specified in <a class='info' href='#rating-property'>Section&nbsp;5.3<span> (</span><span class='info'>Rating</span><span>)</span></a>.</td>
+          property as specified in <a class='info' href='#rating-property'>Section&nbsp;4.4<span> (</span><span class='info'>Rating</span><span>)</span></a>.</td>
 </tr>
 <tr>
 <td align="left"><tt>service</tt>&nbsp;</td>
@@ -949,24 +998,45 @@ Object Types</h3>
 <td align="left"><tt>task</tt>&nbsp;</td>
 <td align="left">Represents an activity that has yet to be completed. Objects of
           this type SHOULD contain additional properties as specified in 
-          <a class='info' href='#task'>Section&nbsp;4.4<span> (</span><span class='info'>Task</span><span>)</span></a>.</td>
+          <a class='info' href='#task'>Section&nbsp;3.6<span> (</span><span class='info'>Task</span><span>)</span></a>.</td>
 </tr>
 <tr>
 <td align="left"><tt>video</tt>&nbsp;</td>
 <td align="left">Represents video content of any kind. Objects of this type MAY
-          contain an additional property named <tt>embedCode</tt> 
-          whose value is a String containing a fragment of HTML that, when 
-          embedded in an HTML page, provides an interactive player UI for the 
-          video stream; and an additional property named <tt>stream</tt> 
-          whose value is an Activity Streams Media Link to the video content 
-          itself.</td>
+          contain additional properties as specified in <a class='info' href='#audio-video'>Section&nbsp;3.1<span> (</span><span class='info'>Audio and Video Objects</span><span>)</span></a>.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<a name="audio-video"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.1"></a><h3>3.1.&nbsp;
+Audio and Video Objects</h3>
+
+<p>In addition to the core properties shared by all Activity Streams
+        Objects, "audio" and "video" objects MAY contain the following 
+        properties:
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>embedCode</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left">A fragment of HTML markup that, when embedded within another HTML
+        page, provides an interactive user-interface for viewing or listening
+        to the video or audio stream.</td>
+</tr>
+<tr>
+<td align="left"><tt>stream</tt>&nbsp;</td>
+<td align="left">Media Link</td>
+<td align="left">An Activity Streams Media Link to the video or audio content itself.</td>
 </tr>
 </table>
 <br clear="all" />
 
 <a name="binary"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
+<a name="rfc.section.3.2"></a><h3>3.2.&nbsp;
 Binary Objects</h3>
 
 <p>The "binary" object type is used to carry arbitrary Base64-encoded
@@ -976,7 +1046,7 @@ Binary Objects</h3>
 </p>
 <p>In addition to the core properties shared by all Activity Streams
           Objects, "binary" objects MAY contain the following properties:
-</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
 <col align="left" width="15%"><col align="left" width="21%"><col align="left">
 <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
 <tr>
@@ -1001,7 +1071,7 @@ Binary Objects</h3>
 <tr>
 <td align="left"><tt>fileUrl</tt>&nbsp;</td>
 <td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
-<td align="left">The IRI of the object described by this object.</td>
+<td align="left">An optional IRI for the binary data described by this object.</td>
 </tr>
 <tr>
 <td align="left"><tt>length</tt>&nbsp;</td>
@@ -1023,14 +1093,29 @@ Binary Objects</h3>
 </table>
 <br clear="all" />
 
+<p>Note that the <tt>binary</tt> and 
+          <tt>file</tt> objectTypes are conceptually
+          related. The key difference between the two lies in the fact
+          that the <tt>file</tt> objectType is more
+          representative of the abstract description of a file or document
+          while the <tt>binary</tt> objectType represents
+          the actual, concrete stream of octets that make up the content.
+</p>
+<p>Because of their close relationship, it is possible for the 
+          <tt>file</tt> objectType to share the same 
+          basic properties as the <tt>binary</tt> 
+          objectType. That is, a <tt>file</tt> MAY
+          also have properties such as <tt>length</tt>,
+          <tt>mimeType</tt>, and <tt>md5</tt>.
+</p>
 <a name="event"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.2"></a><h3>4.2.&nbsp;
+<a name="rfc.section.3.3"></a><h3>3.3.&nbsp;
 Event</h3>
 
 <p>In addition to the core properties shared by all Activity Streams
           Objects, "event" objects MAY contain the following properties:
-</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
 <col align="left" width="15%"><col align="left" width="21%"><col align="left">
 <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
 <tr>
@@ -1038,15 +1123,14 @@ Event</h3>
 <td align="left">Collection object</td>
 <td align="left">A Collection object as defined in Section 3.5 of 
           <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a> that provides information 
-          about actors that attended the event.</td>
+          about entities that attended the event.</td>
 </tr>
 <tr>
 <td align="left"><tt>attending</tt>&nbsp;</td>
 <td align="left">Collection object</td>
 <td align="left">A Collection object as defined in Section 3.5 of 
           <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a> that provides information 
-          about actors that have responded to the event object using the
-          <tt>rsvp-yes</tt> verb.</td>
+          about entities that intend to attend the event.</td>
 </tr>
 <tr>
 <td align="left"><tt>endTime</tt>&nbsp;</td>
@@ -1056,27 +1140,32 @@ Event</h3>
           <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a></td>
 </tr>
 <tr>
+<td align="left"><tt>invited</tt>&nbsp;</td>
+<td align="left">Collection object</td>
+<td align="left">A Collection object as defined in Section 3.5 of 
+          <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a> that provides information 
+          about the entities that have been invited to the event.</td>
+</tr>
+<tr>
 <td align="left"><tt>maybeAttending</tt>&nbsp;</td>
 <td align="left">Collection object</td>
 <td align="left">A Collection object as defined in Section 3.5 of 
           <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a> that provides information 
-          about actors that have responded to the event object using the
-          <tt>rsvp-maybe</tt> verb.</td>
+          about entities that possibly may attend the event.</td>
 </tr>
 <tr>
 <td align="left"><tt>notAttendedBy</tt>&nbsp;</td>
 <td align="left">Collection object</td>
 <td align="left">A Collection object as defined in Section 3.5 of 
           <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a> that provides information 
-          about actors that did not attend the event.</td>
+          about entities that did not attend the event.</td>
 </tr>
 <tr>
 <td align="left"><tt>notAttending</tt>&nbsp;</td>
 <td align="left">Collection object</td>
 <td align="left">A Collection object as defined in Section 3.5 of 
           <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a> that provides information about
-          actors that have responded to the event object using the
-          <tt>rsvp-no</tt> verb.</td>
+          e entities that do not intend to attend the event.</td>
 </tr>
 <tr>
 <td align="left"><tt>startTime</tt>&nbsp;</td>
@@ -1088,14 +1177,33 @@ Event</h3>
 </table>
 <br clear="all" />
 
+<a name="issue"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.4"></a><h3>3.4.&nbsp;
+Issue</h3>
+
+<p>In addition to the core properties shared by all Activity Streams
+          Objects, "issue" objects MAY contain the following properties:
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>types</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Array</td>
+<td align="left">An array of one or more absolute IRI's that describe the type of
+          issue represented by the object.</td>
+</tr>
+</table>
+<br clear="all" />
+
 <a name="place"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.3"></a><h3>4.3.&nbsp;
+<a name="rfc.section.3.5"></a><h3>3.5.&nbsp;
 Place</h3>
 
 <p>In addition to the core properties shared by all Activity Streams
           Objects, "place" objects MAY contain the following properties:
-</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
 <col align="left" width="15%"><col align="left" width="21%"><col align="left">
 <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
 <tr>
@@ -1116,7 +1224,7 @@ Place</h3>
 
 <p>The properties for the <tt>address</tt>
           property are:
-</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
 <col align="left" width="15%"><col align="left" width="21%"><col align="left">
 <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
 <tr>
@@ -1156,12 +1264,12 @@ Place</h3>
 
 <a name="task"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.4"></a><h3>4.4.&nbsp;
+<a name="rfc.section.3.6"></a><h3>3.6.&nbsp;
 Task</h3>
 
 <p>In addition to the core properties shared by all Activity Streams
           Objects, "task" objects MAY contain the following properties:
-</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
 <col align="left" width="15%"><col align="left" width="21%"><col align="left">
 <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
 <tr>
@@ -1211,15 +1319,58 @@ Task</h3>
 
 <a name="anchor3"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5"></a><h3>5.&nbsp;
+<a name="rfc.section.4"></a><h3>4.&nbsp;
 Base Extension Properties</h3>
 
 <p>This specification defines an initial set of extension properties
         that can be used with all activities or objects.
 </p>
+<a name="context"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
+Context</h3>
+
+<p>The basic model for an Activity provides properties that allow
+          the expression of who (<tt>actor</tt>) performed
+          the action, what (<tt>object</tt>) was acted 
+          upon, the action (<tt>verb</tt>) that was taken,
+          and to what the action was directed (<tt>target</tt>).
+          The additional <tt>context</tt> property allows 
+          the Activity to further include information about why a particular 
+          action occurred by providing details about the context within which 
+          a particular Activity was performed. The value of the <tt>
+          context</tt> property is an Object of any objectType. The meaning of
+          the <tt>context</tt> property is only defined 
+          when used within an Activity object.
+</p>
+<p>For example, the following Activity uses the <tt>context</tt>
+          property to reference the specific reasons a particular article object
+          has been flagged as being inappropriate:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Joe"
+    },
+    "verb": "flag-as-inappropriate",
+    "object": {
+      "objectType": "article",
+      "displayName": "An article about stuff"
+    },
+    "context": {
+      "objectType": "issue",
+      "displayName": "Terms of Use Violation",
+      "url": "http://.../terms-of-use",
+      "types": [
+        "http://example.org/codes/inappropriateMaterial",
+        "http://example.org/codes/copyrightViolation"
+      ]
+    }
+  }
+</pre></div>
 <a name="location"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+<a name="rfc.section.4.2"></a><h3>4.2.&nbsp;
 Location</h3>
 
 <p>Location data can be added to any object type or activity. Location 
@@ -1249,7 +1400,7 @@ Location</h3>
 </pre></div>
 <a name="mood-property"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
+<a name="rfc.section.4.3"></a><h3>4.3.&nbsp;
 Mood</h3>
 
 <p>Mood describes the mood of the user when the activity was
@@ -1261,7 +1412,7 @@ Mood</h3>
 <p>In JSON, Moods are included within an object or activity using
           a property named <tt>mood</tt> whose value 
           is a JSON object with the following properties:
-</p><table class="full" align="center" border="0" cellpadding="2" cellspacing="2">
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
 <col align="left" width="15%"><col align="left" width="21%"><col align="left">
 <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
 <tr>
@@ -1291,7 +1442,7 @@ Mood</h3>
 </pre></div>
 <a name="rating-property"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.3"></a><h3>5.3.&nbsp;
+<a name="rfc.section.4.4"></a><h3>4.4.&nbsp;
 Rating</h3>
 
 <p>A rating given as a number between 1.0 and 5.0 inclusive with 
@@ -1310,15 +1461,52 @@ Rating</h3>
     "rating": 3.5
   }
 </pre></div>
+<a name="result-property"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.5"></a><h3>4.5.&nbsp;
+Result</h3>
+
+<p>The <tt>result</tt> provides a description of
+          the result of any particular activity. The value of the <tt>
+          result</tt> property is an Object of any objectType. The meaning of
+          the <tt>result</tt> property is only defined 
+          when used within an Activity object.
+</p>
+<p>For instance:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Joe"
+    },
+    "verb": "complete",
+    "object": {
+      "objectType": "http://example.org/Exam",
+      "displayName": "The Big Exam"
+    },
+    "result": {
+      "score": 123,
+      "duration": "P1H",
+    }
+  }
+</pre></div>
+<p>Use of the <tt>result</tt> property is only
+          applicable with certain combinations of verbs and objectTypes. 
+          In many cases, the result will be implicit in the combination of 
+          actor, verb and object used -- for example, in an activity where
+          a person, Joe, creates an article, the result of the activity is 
+          clear without the need to specify a separate <tt>result</tt>
+          property.
+</p>
 <a name="source"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.4"></a><h3>5.4.&nbsp;
+<a name="rfc.section.4.6"></a><h3>4.6.&nbsp;
 Source</h3>
 
 <p>The <tt>source</tt> property provides a reference
           to the original source of an object or activity. The value of the 
           <tt>source</tt> property is an Object of any 
-          object type.
+          objectType.
 </p>
 <p>The <tt>source</tt> property is closely related to the 
           <tt>generator</tt> and <tt>provider</tt>
@@ -1347,7 +1535,7 @@ Source</h3>
 </pre></div>
 <a name="tags-property"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.5"></a><h3>5.5.&nbsp;
+<a name="rfc.section.4.7"></a><h3>4.7.&nbsp;
 Tags</h3>
 
 <p>A listing of the objects that have been associated with a 
@@ -1372,9 +1560,332 @@ Tags</h3>
     ]
   }
 </pre></div>
+<a name="multipage-collections"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Multi-page Collections</h3>
+
+<p>A multi-page collection is a set of linked collection objects that 
+      together contain the complete set of objects that can be considered 
+      to be members of the collection.
+</p>
+<p>When using multi-paged collections, the following additional properties 
+      can be used in addition to the core collection properties defined in section 
+      3.5 of <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a>.
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
+<col align="left"><col align="left"><col align="left">
+<tr><th align="left">Name</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>itemsAfter</tt>&nbsp;</td>
+<td align="left">String</td>
+<td align="left">An RFC 3339 date-time, as described in Section 3 of 
+        <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a>, indicating that the 
+        <tt>items</tt> array contains only
+        items published or updated after the date and 
+        time specified.</td>
+</tr>
+<tr>
+<td align="left"><tt>itemsBefore</tt>&nbsp;</td>
+<td align="left">String</td>
+<td align="left">An RFC 3339 date-time, as described in Section 3 of 
+        <a class='info' href='#activitystreams'>[activitystreams]<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a>, indicating that the 
+        <tt>items</tt> array contains only
+        items published or updated before the date and time 
+        specified.</td>
+</tr>
+<tr>
+<td align="left"><tt>itemsPerPage</tt>&nbsp;</td>
+<td align="left">Integer</td>
+<td align="left">A non-negative integer specifying the maximum number of 
+        objects that will be included in the value of the <tt>items</tt> 
+        array.</td>
+</tr>
+<tr>
+<td align="left"><tt>links</tt>&nbsp;</td>
+<td align="left"><a class='info' href='#links'>Links<span> (</span><span class='info'>&quot;links&quot;</span><span>)</span></a></td>
+<td align="left">Collection of links connecting this collection object
+        to the other collection objects containing additional 
+        items that can be considered members of the collection.</td>
+</tr>
+<tr>
+<td align="left"><tt>startIndex</tt>&nbsp;</td>
+<td align="left">Integer</td>
+<td align="left">A non-negative integer value identifying the relative 
+        position within the collection of the first object contained in 
+        the items property. For instance, if there are 20 items that 
+        are considered to be members of a collection, but only the last
+        10 of those items are serialized within the value of the 
+        <tt>items</tt> property, the value of 
+        <tt>startIndex</tt> would be 10.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>The value of the <tt>links</tt> property 
+      is an object as defined in <a class='info' href='#links'>Section&nbsp;6.2<span> (</span><span class='info'>&quot;links&quot;</span><span>)</span></a>. The properties
+      of the object are Registered Link Relations as defined by 
+      <a class='info' href='#RFC5988'>[RFC5988]<span> (</span><span class='info'>Nottingham, M., &ldquo;Web Linking,&rdquo; October&nbsp;2010.</span><span>)</span></a>.
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
+<col align="left"><col align="left"><col align="left">
+<tr><th align="left">Name</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>first</tt>&nbsp;</td>
+<td align="left">String</td>
+<td align="left">The absolute IRI reference for the furthest preceding 
+          page of the multi-page collection.</td>
+</tr>
+<tr>
+<td align="left"><tt>last</tt>&nbsp;</td>
+<td align="left">String</td>
+<td align="left">The absolute IRI reference for the furthest following 
+        page of the multi-page collection.</td>
+</tr>
+<tr>
+<td align="left"><tt>previous</tt>&nbsp;</td>
+<td align="left">String</td>
+<td align="left">The absolute IRI reference for the immediately preceding 
+        page of the multi-page collection.</td>
+</tr>
+<tr>
+<td align="left"><tt>next</tt>&nbsp;</td>
+<td align="left">String</td>
+<td align="left">The absolute IRI reference for the immediately following 
+        page of the multi-page collection.</td>
+</tr>
+<tr>
+<td align="left"><tt>current</tt>&nbsp;</td>
+<td align="left">String</td>
+<td align="left">The absolute IRI reference for a page containing the items 
+        that have been updated most recently.</td>
+</tr>
+<tr>
+<td align="left"><tt>self</tt>&nbsp;</td>
+<td align="left">String</td>
+<td align="left">The absolute IRI reference of this page.</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>For example, one page of a multi-page 
+      collection:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "totalItems": 12,
+    "itemsPerPage" : 10,
+    "startIndex": 10,
+    "links": {
+      "self": "http://example.org/items?page=1"
+      "next": "http://example.org/items?page=2",
+      "previous": "http://example.org/items?page=3",
+      "current": "http://example.org/items"
+    },
+    "items" : [
+      {
+        "objectType": "person",
+        "displayName":"Joe"
+      },
+      {
+        "objectType": "person",
+        "displayName":"Sally"
+      }
+    ]
+  }
+</pre></div>
+<p>Note that, as the example illustrates, the 
+        <tt>totalItems</tt> property specifies the total
+        number of items that can be considered to be a part of the collection
+        as a whole, while the <tt>itemsPerPage</tt> indicates
+        the maximum number of objects that will be included in this particular 
+        subset. The actual number of objects included in the value of the 
+        <tt>items</tt> properly MAY be equal to or less than 
+        either of these values.
+</p>
+<a name="external-vocabularies"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+External Vocabularies</h3>
+
+<p>Any object within an Activity Streams object can be extended with
+      additional properties not defined by the <a class='info' href='#activitystreams'>core
+      Activity Streams<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a> [activitystreams] specification or this document. Such extension 
+      properties can be specific to individual applications or be drawn from 
+      other defined vocabularies such as that defined by the Schema.org organization
+      and others.
+</p>
+<p>When utilizing such vocabularies, it is possible that conflicts in the
+      naming of properties and format of expected values may arise. To mitigate
+      the risk of such conflicts, the following guidelines SHOULD be followed:
+      
+      </p>
+<ol class="text">
+<li>When selecting the <tt>objectType</tt> for an
+        object, if there is a close equivalent <tt>objectType</tt>
+        already defined by this specification, then that <tt>objectType</tt>
+        SHOULD be used.
+</li>
+<li>When properties specific to an external vocabulary are to be included
+        within an object, those SHOULD be grouped together under a single 
+        "namespace" property whose name is uniquely reflective of the vocabulary.
+</li>
+<li>When including properties from the external vocabulary, avoid properties
+        that are a close semantic match to existing properties defined by this or
+        the <a class='info' href='#activitystreams'>core Activity Streams<span> (</span><span class='info'>Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</span><span>)</span></a> [activitystreams] specification.
+        For example, within the Schema.org vocabulary, the properties
+        <tt>name</tt>, <tt>description</tt>, 
+        <tt>url</tt> and <tt>image</tt> are
+        semantically equivalent to core Activity Streams object properties are 
+        therefore SHOULD NOT be used.
+</li>
+</ol><p>
+      
+</p>
+<p>This specification defines the following initial set of "namespace" 
+      properties that correspond to specific external vocabularies currently 
+      considered to be reasonable candidates for use within Activity Streams
+      objects. Future versions of this specification MAY add additional 
+      "namespace" properties to this list. Implementors are free to define
+      additional "namespace" properties representing other external vocabularies
+      as necessary; however, there is a risk of potential conflicts if multiple 
+      independent implementors select the same "namespace" property to represent
+      different external vocabularies. To help prevent such conflicts, implementors 
+      SHOULD publicly document their use of external vocabularies.
+</p>
+<a name="dc"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.1"></a><h3>6.1.&nbsp;
+&quot;dc&quot;</h3>
+
+<p>The <tt>dc</tt> "namespace" property is
+        defined to encapsulate the set of extension properties that
+        represent information specific to the <a href='http://dublincore.org'>Dublin 
+        Core Metadata Initiative</a>. If, for instance, Dublin Core properties 
+        can be applied to an Activity Streams object, those properties SHOULD be 
+        grouped together under the <tt>dc</tt> property.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "file",
+    "displayName": "A Document",
+    "fileUrl": "http://example.org/foo.html"
+    "dc": {
+      "format": "text/html; charset="UTF-8"
+    }
+  }
+</pre></div>
+<p>Note that properties defined with the Dublin Core vocabulary that
+        are semantically equivalent to core Activity Streams properties SHOULD
+        NOT be used anywhere within an Activity Streams object. Rather, the
+        values associated with those properties SHOULD be mapped to the existing
+        Activity Streams properties.
+</p>
+<a name="links"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.2"></a><h3>6.2.&nbsp;
+&quot;links&quot;</h3>
+
+<p>The <tt>links</tt> "namespace" property is defined
+        to encapsulate the set of extension properties that represent links to 
+        external resources. Property names are defined as being either Registered
+        or Extension Link Relation Types as defined by <a class='info' href='#RFC5988'>[RFC5988]<span> (</span><span class='info'>Nottingham, M., &ldquo;Web Linking,&rdquo; October&nbsp;2010.</span><span>)</span></a>.
+        The list of currently known Registered Link Relations can be found within the
+        <a href='http://www.iana.org/assignments/link-relations/link-relations.xml'>IANA Registry of Link Relations</a>.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "note",
+    "displayName": "This is a simple note",
+    "links": {
+      "canonical": "http://www.example.org/notes/123",
+      "edit": "http://www.example.org/api/notes/123"
+    }
+  }
+</pre></div>
+<p>The value of each property within the <tt>links</tt>
+        object is either a JSON String containing an absolute 
+        <a class='info' href='#RFC3987'>IRI<span> (</span><span class='info'>Duerst, M. and M. Suignard, &ldquo;Internationalized Resource Identifiers (IRIs),&rdquo; January&nbsp;2005.</span><span>)</span></a> [RFC3987] that is the target of the link, or an 
+        array of JSON Strings containing absolute IRIs in the case where multiple 
+        links with the same Link Relation must be specified.
+</p>
+<p>When the value is specified as an array of absolute IRIs, the ordering
+        of values within the array is considered insignificant. Each contained
+        value is to be treated as a separate link. Values within the array SHOULD
+        NOT be duplicated.
+</p>
+<p>When using extension link relation types, the property name MAY be 
+        specified as an <a class='info' href='#RFC3987'>IRI<span> (</span><span class='info'>Duerst, M. and M. Suignard, &ldquo;Internationalized Resource Identifiers (IRIs),&rdquo; January&nbsp;2005.</span><span>)</span></a> [RFC3987] but MUST be converted to 
+        <a class='info' href='#RFC3986'>URIs<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a> [RFC3986] when compared and dereferenced as required 
+        by Section 4.2 of <a class='info' href='#RFC5988'>[RFC5988]<span> (</span><span class='info'>Nottingham, M., &ldquo;Web Linking,&rdquo; October&nbsp;2010.</span><span>)</span></a>.
+</p>
+<p>As defined in Section 3 of <a class='info' href='#RFC5988'>[RFC5988]<span> (</span><span class='info'>Nottingham, M., &ldquo;Web Linking,&rdquo; October&nbsp;2010.</span><span>)</span></a>, such properties
+        can be viewed as statements of the form "The containing object has a 
+        {relation type} resource at {target IRI}" where the {relation type} is
+        identified by the property name, and the {target IRI} is provided by the 
+        property value.
+</p>
+<a name="opengraph"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.3"></a><h3>6.3.&nbsp;
+&quot;opengraph&quot;</h3>
+
+<p>The <tt>opengraph</tt> "namespace" property is
+        defined to encapsulate the set of extension properties that
+        represent information specific to an <a href='https://developers.facebook.com/docs/opengraph/'>OpenGraph</a>
+        data type. If, for instance, OpenGraph properties can be applied to
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <tt>opengraph</tt> property.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "person",
+    "displayName": "John Smith",
+    "opengraph": {
+      "username": "john_smith",
+      "verified": false,
+      "relationship_status": "Single"
+    }
+  }
+</pre></div>
+<p>Note that properties defined with the OpenGraph vocabulary that
+        are semantically equivalent to core Activity Streams properties SHOULD
+        NOT be used anywhere within an Activity Streams object. Rather, the
+        values associated with those properties SHOULD be mapped to the existing
+        Activity Streams properties.
+</p>
+<a name="schema_org"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.4"></a><h3>6.4.&nbsp;
+&quot;schema_org&quot;</h3>
+
+<p>The <tt>schema_org</tt> "namespace" property is 
+        defined to encapsulate the set of extension properties that represent
+        information specific to a <a href='http://schema.org'>Schema.org</a>
+        data type. If, for instance, Schema.org properties can be applied to 
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <tt>schema_org</tt> property.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "person",
+    "displayName": "John Smith",
+    "schema_org": {
+      "birthDate": "1976-12-23",
+      "gender": "Male"
+    }
+  }
+</pre></div>
+<p>Note that properties defined within the Schema.org vocabulary that
+        are semantically equivalent to core Activity Streams properties SHOULD 
+        NOT be used anywhere within an Activity Streams object. Rather, the 
+        values associated with those properties SHOULD be mapped to the existing
+        Activity Streams properties.
+</p>
 <a name="rfc.references1"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<h3>6.&nbsp;Normative References</h3>
+<h3>7.&nbsp;Normative References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="RFC1951">[RFC1951]</a></td>
 <td class="author-text"><a href="mailto:ghost@aladdin.com">Deutsch, P.</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc1951">DEFLATE Compressed Data Format Specification version 1.3</a>,&rdquo; RFC&nbsp;1951, May&nbsp;1996 (<a href="http://www.rfc-editor.org/rfc/rfc1951.txt">TXT</a>, <a href="http://www.rfc-editor.org/rfc/rfc1951.ps">PS</a>, <a href="http://www.rfc-editor.org/rfc/rfc1951.pdf">PDF</a>).</td></tr>
@@ -1390,6 +1901,8 @@ Tags</h3>
 <td class="author-text">Duerst, M. and M. Suignard, &ldquo;<a href="http://tools.ietf.org/html/rfc3987">Internationalized Resource Identifiers (IRIs)</a>,&rdquo; RFC&nbsp;3987, January&nbsp;2005 (<a href="http://www.rfc-editor.org/rfc/rfc3987.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC4627">[RFC4627]</a></td>
 <td class="author-text">Crockford, D., &ldquo;<a href="http://tools.ietf.org/html/rfc4627">The application/json Media Type for JavaScript Object Notation (JSON)</a>,&rdquo; RFC&nbsp;4627, July&nbsp;2006 (<a href="http://www.rfc-editor.org/rfc/rfc4627.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC5988">[RFC5988]</a></td>
+<td class="author-text">Nottingham, M., &ldquo;<a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>,&rdquo; RFC&nbsp;5988, October&nbsp;2010 (<a href="http://www.rfc-editor.org/rfc/rfc5988.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="activitystreams">[activitystreams]</a></td>
 <td class="author-text">Snell, J., Atkins, M., Norris, W., Messina, C., Wilkinson, M., and R. Dolin, &ldquo;JSON Activity Streams 1.0,&rdquo; May&nbsp;2011.</td></tr>
 </table>

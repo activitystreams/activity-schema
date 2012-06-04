@@ -8,6 +8,7 @@
   <!ENTITY rfc4627 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4627.xml'>
   <!ENTITY rfc3986 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3986.xml'>
   <!ENTITY rfc3987 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3987.xml'>
+  <!ENTITY rfc5988 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5988.xml'>
 ]>
 <?rfc toc="yes"?>
 <?rfc tocompact="yes"?>
@@ -70,16 +71,16 @@
   <middle>
     <section title="Introduction">
       <t>This document presents a base set of object types and verbs for use
-      with Activity Streams.</t>
-    </section>
-
-    <section title="Notational Conventions">
-      <t>This specification allows the use of <xref target="RFC3987">IRIs</xref>. 
-      Every <xref target="RFC3986">URI</xref> is also an IRI, so a URI MAY be 
-      used wherever an IRI is named. When an IRI that is not also a URI is 
-      given for dereferencing, it MUST be mapped to a URI using the steps in 
-      Section 3.1 of <xref target="RFC3987"/>. When an IRI is serving as an 
-      identifier, it MUST NOT be so mapped.</t>
+      with Activity Streams.</t>   
+            
+      <section title="Notational Conventions">
+        <t>This specification allows the use of <xref target="RFC3987">IRIs</xref>. 
+        Every <xref target="RFC3986">URI</xref> is also an IRI, so a URI MAY be 
+        used wherever an IRI is named. When an IRI that is not also a URI is 
+        given for dereferencing, it MUST be mapped to a URI using the steps in 
+        Section 3.1 of <xref target="RFC3987"/>. When an IRI is serving as an 
+        identifier, it MUST NOT be so mapped.</t>
+      </section>  
     </section>
 
       <section anchor="verbs" title="Verbs">
@@ -97,11 +98,12 @@
           instance, a person accepting an award, or accepting an assignment.</c>
           
           <c><spanx style="verb">access</spanx></c>
-          <c>Indicates that the actor has gained access to the object.</c>
+          <c>Indicates that the actor has accessed the object. For instance,
+          a person accessing a room, or accessing a file.</c>
       
           <c><spanx style="verb">acknowledge</spanx></c>
           <c>Indicates that the actor has acknowledged the object. This 
-          effectively signals that the actor is aware of the objects
+          effectively signals that the actor is aware of the object's
           existence.</c>
       
           <c><spanx style="verb">add</spanx></c>
@@ -109,7 +111,9 @@
           For instance, adding a photo to an album.</c>
           
           <c><spanx style="verb">agree</spanx></c>
-          <c>Indicates that the actor agrees with the object.</c>
+          <c>Indicates that the actor agrees with the object. For example, 
+          a person agreeing with an argument, or expressing agreement with
+          a particular issue.</c>
           
           <c><spanx style="verb">append</spanx></c>
           <c>Indicates that the actor has appended the object to the target.
@@ -216,7 +220,7 @@
           
           <c><spanx style="verb">dislike</spanx></c>
           <c>Indicates that the actor dislikes the object. Note that the 
-          "dislike" verb is distinct from the "unlike" verb which connotates
+          "dislike" verb is distinct from the "unlike" verb which assumes
           that the object had been previously "liked".</c>
       
           <c><spanx style="verb">experience</spanx></c>
@@ -236,6 +240,14 @@
           <c><spanx style="verb">find</spanx></c>
           <c>Indicates that the actor has found the object. If a target is 
           specified, it SHOULD indicate where the object was found.</c>
+
+          <c><spanx style="verb">flag-as-inappropriate</spanx></c>
+          <c>Indicates that the actor has flagged the object as being 
+          inappropriate for some reason. When using this verb, the 
+          <spanx style="verb">context</spanx> property, as specified 
+          within <xref target="context"/> can be used to 
+          provide additional detail about why the object has been 
+          flagged.</c>
 
           <c><spanx style="verb">follow</spanx></c>
           <c>Indicates that the actor began following the activity of the 
@@ -525,7 +537,7 @@
           This verb is a more specific form of the verbs "experience", "play"
           and "consume".</c>
           
-          <c><spanx style="verb">won</spanx></c>
+          <c><spanx style="verb">win</spanx></c>
           <c>Indicates that the actor has won the object. This verb is typically
           applicable only when the object represents some form of competition, 
           such as a game.</c>
@@ -564,12 +576,7 @@
           
           <c><spanx style="verb">audio</spanx></c>
           <c>Represents audio content of any kind. Objects of this type MAY
-          contain an additional property named <spanx style="verb">embedCode</spanx> 
-          whose value is a String containing a fragment of HTML that, when 
-          embedded in an HTML page, provides an interactive player UI for the 
-          audio stream; and an additional property named <spanx style="verb">stream</spanx> 
-          whose value is an Activity Streams Media Link to the audio content 
-          itself.</c>
+          contain an additional property as specified in <xref target="audio-video"/>.</c>
           
           <c><spanx style="verb">badge</spanx></c>
           <c>Represents a badge or award granted to an object (typically a 
@@ -579,8 +586,8 @@
           <c>Objects of this type are used to carry arbirary Base64-encoded
           binary data within an Activity Stream object. It is primarily 
           intended to attach binary data to other types of objects through
-          the use of the "attachments" property. Objects of this type 
-          will contain the additional properties specified in 
+          the use of the <spanx style="verb">attachments</spanx> property. 
+          Objects of this type will contain the additional properties specified in 
           <xref target="binary"/>.</c>
           
           <c><spanx style="verb">bookmark</spanx></c>
@@ -636,6 +643,13 @@
           value is an Activity Streams Media Link to a "full-sized" representation
           of the image.</c>
           
+          <c><spanx style="verb">issue</spanx></c>
+          <c>Represents a report about a problem or situation that needs to 
+          be resolved. For instance, the <spanx style="verb">issue</spanx> object
+          can be used to represent reports detailing software defects, or 
+          reports of acceptable use violations, and so forth. Objects of this 
+          type MAY contain the additional properties specified in <xref target="issue"/>.</c>
+          
           <c><spanx style="verb">job</spanx></c>
           <c>Represents information about a job or a job posting.</c>
           
@@ -650,6 +664,19 @@
           
           <c><spanx style="verb">organization</spanx></c>
           <c>Represents an organization of any kind.</c>
+          
+          <c><spanx style="verb">page</spanx></c>
+          <c>Represents an area, typically a web page, that is representative 
+          of, and generally managed by a particular entity. Such areas are 
+          usually dedicated to displaying descriptive information about the 
+          entity and showcasing recent content such as articles, photographs and 
+          videos. Most social networking applications, for example, provide 
+          individual users with their own dedicated "profile" pages. Several
+          allow similar types of pages to be created for commercial entities,
+          organizations or events. While the specific details of how pages 
+          are implemented, their characteristics and use may vary, the one 
+          unifying property is that they are typically "owned" by a single 
+          entity that is represented by the content provided by the page itself.</c>
           
           <c><spanx style="verb">person</spanx></c>
           <c>Represents an individual person.</c>
@@ -695,14 +722,34 @@
           
           <c><spanx style="verb">video</spanx></c>
           <c>Represents video content of any kind. Objects of this type MAY
-          contain an additional property named <spanx style="verb">embedCode</spanx> 
-          whose value is a String containing a fragment of HTML that, when 
-          embedded in an HTML page, provides an interactive player UI for the 
-          video stream; and an additional property named <spanx style="verb">stream</spanx> 
-          whose value is an Activity Streams Media Link to the video content 
-          itself.</c>
+          contain additional properties as specified in <xref target="audio-video"/>.</c>
           
         </texttable>
+      
+        <section anchor="audio-video" title="Audio and Video Objects">
+        
+        <t>In addition to the core properties shared by all Activity Streams
+        Objects, "audio" and "video" objects MAY contain the following 
+        properties:</t>
+        
+        <texttable>
+        <ttcol align="left" width="15%">Property</ttcol>
+        <ttcol align="left" width="21%">Value</ttcol>
+        <ttcol align="left">Description</ttcol>
+        
+        <c><spanx style="verb">embedCode</spanx></c>
+        <c><xref target="RFC4627">JSON</xref> String</c>
+        <c>A fragment of HTML markup that, when embedded within another HTML
+        page, provides an interactive user-interface for viewing or listening
+        to the video or audio stream.</c>
+        
+        <c><spanx style="verb">stream</spanx></c>
+        <c>Media Link</c>
+        <c>An Activity Streams Media Link to the video or audio content itself.</c>
+        
+        </texttable>
+        
+        </section>
       
         <section anchor="binary" title="Binary Objects">
         
@@ -738,7 +785,7 @@
           
           <c><spanx style="verb">fileUrl</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>The IRI of the object described by this object.</c>
+          <c>An optional IRI for the binary data described by this object.</c>
           
           <c><spanx style="verb">length</spanx></c>
           <c><xref target="RFC4627">JSON</xref> Number</c>
@@ -755,6 +802,21 @@
           <c>The MIME type of the object described by the object.</c>
           
           </texttable>
+          
+          <t>Note that the <spanx style="verb">binary</spanx> and 
+          <spanx style="verb">file</spanx> objectTypes are conceptually
+          related. The key difference between the two lies in the fact
+          that the <spanx style="verb">file</spanx> objectType is more
+          representative of the abstract description of a file or document
+          while the <spanx style="verb">binary</spanx> objectType represents
+          the actual, concrete stream of octets that make up the content.</t>
+          
+          <t>Because of their close relationship, it is possible for the 
+          <spanx style="verb">file</spanx> objectType to share the same 
+          basic properties as the <spanx style="verb">binary</spanx> 
+          objectType. That is, a <spanx style="verb">file</spanx> MAY
+          also have properties such as <spanx style="verb">length</spanx>,
+          <spanx style="verb">mimeType</spanx>, and <spanx style="verb">md5</spanx>.</t>
         
         </section>
 
@@ -772,14 +834,13 @@
           <c>Collection object</c>
           <c>A Collection object as defined in Section 3.5 of 
           <xref target="activitystreams"/> that provides information 
-          about actors that attended the event.</c>
+          about entities that attended the event.</c>
           
           <c><spanx style="verb">attending</spanx></c>
           <c>Collection object</c>
           <c>A Collection object as defined in Section 3.5 of 
           <xref target="activitystreams"/> that provides information 
-          about actors that have responded to the event object using the
-          <spanx style="verb">rsvp-yes</spanx> verb.</c>
+          about entities that intend to attend the event.</c>
           
           <c><spanx style="verb">endTime</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
@@ -787,25 +848,29 @@
           String conforming to the "date-time" production in 
           <xref target="RFC3339"/></c>
           
+          <c><spanx style="verb">invited</spanx></c>
+          <c>Collection object</c>
+          <c>A Collection object as defined in Section 3.5 of 
+          <xref target="activitystreams"/> that provides information 
+          about the entities that have been invited to the event.</c>
+          
           <c><spanx style="verb">maybeAttending</spanx></c>
           <c>Collection object</c>
           <c>A Collection object as defined in Section 3.5 of 
           <xref target="activitystreams"/> that provides information 
-          about actors that have responded to the event object using the
-          <spanx style="verb">rsvp-maybe</spanx> verb.</c>
+          about entities that possibly may attend the event.</c>
           
           <c><spanx style="verb">notAttendedBy</spanx></c>
           <c>Collection object</c>
           <c>A Collection object as defined in Section 3.5 of 
           <xref target="activitystreams"/> that provides information 
-          about actors that did not attend the event.</c>
+          about entities that did not attend the event.</c>
           
           <c><spanx style="verb">notAttending</spanx></c>
           <c>Collection object</c>
           <c>A Collection object as defined in Section 3.5 of 
           <xref target="activitystreams"/> that provides information about
-          actors that have responded to the event object using the
-          <spanx style="verb">rsvp-no</spanx> verb.</c>
+          e entities that do not intend to attend the event.</c>
 
           <c><spanx style="verb">startTime</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
@@ -814,6 +879,24 @@
           <xref target="RFC3339"/></c>
           
           </texttable>
+        </section>
+        
+        <section anchor="issue" title="Issue">
+        
+          <t>In addition to the core properties shared by all Activity Streams
+          Objects, "issue" objects MAY contain the following properties:</t>
+          
+          <texttable>
+          <ttcol align="left" width="15%">Property</ttcol>
+          <ttcol align="left" width="21%">Value</ttcol>
+          <ttcol align="left">Description</ttcol>
+          
+          <c><spanx style="verb">types</spanx></c>
+          <c><xref target="RFC4627">JSON</xref> Array</c>
+          <c>An array of one or more absolute IRI's that describe the type of
+          issue represented by the object.</c>
+          </texttable>
+        
         </section>
 
         <section anchor="place" title="Place">
@@ -931,6 +1014,49 @@
         <t>This specification defines an initial set of extension properties
         that can be used with all activities or objects.</t>
 
+        <section anchor="context" title="Context">
+        
+          <t>The basic model for an Activity provides properties that allow
+          the expression of who (<spanx style="verb">actor</spanx>) performed
+          the action, what (<spanx style="verb">object</spanx>) was acted 
+          upon, the action (<spanx style="verb">verb</spanx>) that was taken,
+          and to what the action was directed (<spanx style="verb">target</spanx>).
+          The additional <spanx style="verb">context</spanx> property allows 
+          the Activity to further include information about why a particular 
+          action occurred by providing details about the context within which 
+          a particular Activity was performed. The value of the <spanx style="verb">
+          context</spanx> property is an Object of any objectType. The meaning of
+          the <spanx style="verb">context</spanx> property is only defined 
+          when used within an Activity object.</t>
+          
+          <t>For example, the following Activity uses the <spanx style="verb">context</spanx>
+          property to reference the specific reasons a particular article object
+          has been flagged as being inappropriate:</t>
+<figure><artwork>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Joe"
+    },
+    "verb": "flag-as-inappropriate",
+    "object": {
+      "objectType": "article",
+      "displayName": "An article about stuff"
+    },
+    "context": {
+      "objectType": "issue",
+      "displayName": "Terms of Use Violation",
+      "url": "http://.../terms-of-use",
+      "types": [
+        "http://example.org/codes/inappropriateMaterial",
+        "http://example.org/codes/copyrightViolation"
+      ]
+    }
+  }
+</artwork></figure>
+        
+        </section>
+
         <section anchor="location" title="Location">
           <t>Location data can be added to any object type or activity. Location 
           can be specified via geographic coordinates, a street address, 
@@ -1021,12 +1147,50 @@
           
         </section>
         
+        <section anchor="result-property" title="Result">
+        
+          <t>The <spanx style="verb">result</spanx> provides a description of
+          the result of any particular activity. The value of the <spanx style="verb">
+          result</spanx> property is an Object of any objectType. The meaning of
+          the <spanx style="verb">result</spanx> property is only defined 
+          when used within an Activity object.</t>
+          
+          <t>For instance:</t>
+          
+<figure><artwork><![CDATA[
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Joe"
+    },
+    "verb": "complete",
+    "object": {
+      "objectType": "http://example.org/Exam",
+      "displayName": "The Big Exam"
+    },
+    "result": {
+      "score": 123,
+      "duration": "P1H",
+    }
+  }
+]]></artwork></figure>
+
+          <t>Use of the <spanx style="verb">result</spanx> property is only
+          applicable with certain combinations of verbs and objectTypes. 
+          In many cases, the result will be implicit in the combination of 
+          actor, verb and object used -- for example, in an activity where
+          a person, Joe, creates an article, the result of the activity is 
+          clear without the need to specify a separate <spanx style="verb">result</spanx>
+          property.</t>
+        
+        </section>
+        
         <section anchor="source" title="Source">
     
           <t>The <spanx style="verb">source</spanx> property provides a reference
           to the original source of an object or activity. The value of the 
           <spanx style="verb">source</spanx> property is an Object of any 
-          object type.</t>
+          objectType.</t>
           
           <t>The <spanx style="verb">source</spanx> property is closely related to the 
           <spanx style="verb">generator</spanx> and <spanx style="verb">provider</spanx>
@@ -1082,6 +1246,313 @@
       </section>
     </section>
     
+    <section title="Multi-page Collections" anchor="multipage-collections">
+      
+      <t>A multi-page collection is a set of linked collection objects that 
+      together contain the complete set of objects that can be considered 
+      to be members of the collection.</t>
+      
+      <t>When using multi-paged collections, the following additional properties 
+      can be used in addition to the core collection properties defined in section 
+      3.5 of <xref target="activitystreams"/>.</t>
+      
+      <texttable>
+        <ttcol>Name</ttcol>
+        <ttcol>Value</ttcol>
+        <ttcol>Description</ttcol>
+
+        <c><spanx style="verb">itemsAfter</spanx></c>
+        <c>String</c>
+        <c>An RFC 3339 date-time, as described in Section 3 of 
+        <xref target="activitystreams"/>, indicating that the 
+        <spanx style="verb">items</spanx> array contains only
+        items published or updated after the date and 
+        time specified.</c>
+        
+        <c><spanx style="verb">itemsBefore</spanx></c>
+        <c>String</c>
+        <c>An RFC 3339 date-time, as described in Section 3 of 
+        <xref target="activitystreams"/>, indicating that the 
+        <spanx style="verb">items</spanx> array contains only
+        items published or updated before the date and time 
+        specified.</c>  
+        
+        <c><spanx style="verb">itemsPerPage</spanx></c>
+        <c>Integer</c>
+        <c>A non-negative integer specifying the maximum number of 
+        objects that will be included in the value of the <spanx style="verb">items</spanx> 
+        array.</c>
+        
+        <c><spanx style="verb">links</spanx></c>
+        <c><xref target="links">Links</xref></c>
+        <c>Collection of links connecting this collection object
+        to the other collection objects containing additional 
+        items that can be considered members of the collection.</c>
+        
+        <c><spanx style="verb">startIndex</spanx></c>
+        <c>Integer</c>
+        <c>A non-negative integer value identifying the relative 
+        position within the collection of the first object contained in 
+        the items property. For instance, if there are 20 items that 
+        are considered to be members of a collection, but only the last
+        10 of those items are serialized within the value of the 
+        <spanx style="verb">items</spanx> property, the value of 
+        <spanx style="verb">startIndex</spanx> would be 10.</c>
+        
+      </texttable>
+      
+      <t>The value of the <spanx style="verb">links</spanx> property 
+      is an object as defined in <xref target="links"/>. The properties
+      of the object are Registered Link Relations as defined by 
+      <xref target="RFC5988"/>.</t>
+      
+      <texttable>
+        <ttcol>Name</ttcol>
+        <ttcol>Value</ttcol>
+        <ttcol>Description</ttcol>
+            
+        <c><spanx style="verb">first</spanx></c>
+        <c>String</c>
+        <c>The absolute IRI reference for the furthest preceding 
+          page of the multi-page collection.</c>
+            
+        <c><spanx style="verb">last</spanx></c>
+        <c>String</c>
+        <c>The absolute IRI reference for the furthest following 
+        page of the multi-page collection.</c>
+            
+        <c><spanx style="verb">previous</spanx></c>
+        <c>String</c>
+        <c>The absolute IRI reference for the immediately preceding 
+        page of the multi-page collection.</c>
+            
+        <c><spanx style="verb">next</spanx></c>
+        <c>String</c>
+        <c>The absolute IRI reference for the immediately following 
+        page of the multi-page collection.</c>
+            
+        <c><spanx style="verb">current</spanx></c>
+        <c>String</c>
+        <c>The absolute IRI reference for a page containing the items 
+        that have been updated most recently.</c> 
+        
+        <c><spanx style="verb">self</spanx></c>
+        <c>String</c>
+        <c>The absolute IRI reference of this page.</c>
+            
+      </texttable>
+      
+      <figure><preamble>For example, one page of a multi-page 
+      collection:</preamble><artwork>
+  {
+    "totalItems": 12,
+    "itemsPerPage" : 10,
+    "startIndex": 10,
+    "links": {
+      "self": "http://example.org/items?page=1"
+      "next": "http://example.org/items?page=2",
+      "previous": "http://example.org/items?page=3",
+      "current": "http://example.org/items"
+    },
+    "items" : [
+      {
+        "objectType": "person",
+        "displayName":"Joe"
+      },
+      {
+        "objectType": "person",
+        "displayName":"Sally"
+      }
+    ]
+  }
+        </artwork></figure>
+        
+        <t>Note that, as the example illustrates, the 
+        <spanx style="verb">totalItems</spanx> property specifies the total
+        number of items that can be considered to be a part of the collection
+        as a whole, while the <spanx style="verb">itemsPerPage</spanx> indicates
+        the maximum number of objects that will be included in this particular 
+        subset. The actual number of objects included in the value of the 
+        <spanx style="verb">items</spanx> properly MAY be equal to or less than 
+        either of these values.</t>
+      
+    </section>
+    
+    <section title="External Vocabularies" anchor="external-vocabularies">
+      
+      <t>Any object within an Activity Streams object can be extended with
+      additional properties not defined by the <xref target="activitystreams">core
+      Activity Streams</xref> specification or this document. Such extension 
+      properties can be specific to individual applications or be drawn from 
+      other defined vocabularies such as that defined by the Schema.org organization
+      and others.</t>
+      
+      <t>When utilizing such vocabularies, it is possible that conflicts in the
+      naming of properties and format of expected values may arise. To mitigate
+      the risk of such conflicts, the following guidelines SHOULD be followed:
+      
+      <list style="numbers">
+        <t>When selecting the <spanx style="verb">objectType</spanx> for an
+        object, if there is a close equivalent <spanx style="verb">objectType</spanx>
+        already defined by this specification, then that <spanx style="verb">objectType</spanx>
+        SHOULD be used.</t>
+        <t>When properties specific to an external vocabulary are to be included
+        within an object, those SHOULD be grouped together under a single 
+        "namespace" property whose name is uniquely reflective of the vocabulary.</t>
+        <t>When including properties from the external vocabulary, avoid properties
+        that are a close semantic match to existing properties defined by this or
+        the <xref target="activitystreams">core Activity Streams</xref> specification.
+        For example, within the Schema.org vocabulary, the properties
+        <spanx style="verb">name</spanx>, <spanx style="verb">description</spanx>, 
+        <spanx style="verb">url</spanx> and <spanx style="verb">image</spanx> are
+        semantically equivalent to core Activity Streams object properties are 
+        therefore SHOULD NOT be used.</t>
+      </list>
+      </t>
+      
+      <t>This specification defines the following initial set of "namespace" 
+      properties that correspond to specific external vocabularies currently 
+      considered to be reasonable candidates for use within Activity Streams
+      objects. Future versions of this specification MAY add additional 
+      "namespace" properties to this list. Implementors are free to define
+      additional "namespace" properties representing other external vocabularies
+      as necessary; however, there is a risk of potential conflicts if multiple 
+      independent implementors select the same "namespace" property to represent
+      different external vocabularies. To help prevent such conflicts, implementors 
+      SHOULD publicly document their use of external vocabularies.</t>
+      
+      <section title="&quot;dc&quot;" anchor="dc">
+        
+        <t>The <spanx style="verb">dc</spanx> "namespace" property is
+        defined to encapsulate the set of extension properties that
+        represent information specific to the <eref target="http://dublincore.org">Dublin 
+        Core Metadata Initiative</eref>. If, for instance, Dublin Core properties 
+        can be applied to an Activity Streams object, those properties SHOULD be 
+        grouped together under the <spanx style="verb">dc</spanx> property.</t>
+        
+        <figure><preamble>For example:</preamble><artwork>
+  {
+    "objectType": "file",
+    "displayName": "A Document",
+    "fileUrl": "http://example.org/foo.html"
+    "dc": {
+      "format": "text/html; charset="UTF-8"
+    }
+  }
+        </artwork></figure>
+        
+        <t>Note that properties defined with the Dublin Core vocabulary that
+        are semantically equivalent to core Activity Streams properties SHOULD
+        NOT be used anywhere within an Activity Streams object. Rather, the
+        values associated with those properties SHOULD be mapped to the existing
+        Activity Streams properties.</t>
+        
+      </section>
+      
+      <section title="&quot;links&quot;" anchor="links">
+ 
+        <t>The <spanx style="verb">links</spanx> "namespace" property is defined
+        to encapsulate the set of extension properties that represent links to 
+        external resources. Property names are defined as being either Registered
+        or Extension Link Relation Types as defined by <xref target="RFC5988"/>.
+        The list of currently known Registered Link Relations can be found within the
+        <eref target="http://www.iana.org/assignments/link-relations/link-relations.xml">
+        IANA Registry of Link Relations</eref>.</t>
+        
+        <figure><preamble>For example:</preamble><artwork>
+  {
+    "objectType": "note",
+    "displayName": "This is a simple note",
+    "links": {
+      "canonical": "http://www.example.org/notes/123",
+      "edit": "http://www.example.org/api/notes/123"
+    }
+  }
+        </artwork></figure>
+        
+        <t>The value of each property within the <spanx style="verb">links</spanx>
+        object is either a JSON String containing an absolute 
+        <xref target="RFC3987">IRI</xref> that is the target of the link, or an 
+        array of JSON Strings containing absolute IRIs in the case where multiple 
+        links with the same Link Relation must be specified.</t>
+        
+        <t>When the value is specified as an array of absolute IRIs, the ordering
+        of values within the array is considered insignificant. Each contained
+        value is to be treated as a separate link. Values within the array SHOULD
+        NOT be duplicated.</t>
+      
+        <t>When using extension link relation types, the property name MAY be 
+        specified as an <xref target="RFC3987">IRI</xref> but MUST be converted to 
+        <xref target="RFC3986">URIs</xref> when compared and dereferenced as required 
+        by Section 4.2 of <xref target="RFC5988"/>.</t>
+      
+        <t>As defined in Section 3 of <xref target="RFC5988"/>, such properties
+        can be viewed as statements of the form "The containing object has a 
+        {relation type} resource at {target IRI}" where the {relation type} is
+        identified by the property name, and the {target IRI} is provided by the 
+        property value.</t>
+        
+      </section>
+      
+      <section title="&quot;opengraph&quot;" anchor="opengraph">
+        
+        <t>The <spanx style="verb">opengraph</spanx> "namespace" property is
+        defined to encapsulate the set of extension properties that
+        represent information specific to an <eref target="https://developers.facebook.com/docs/opengraph/">OpenGraph</eref>
+        data type. If, for instance, OpenGraph properties can be applied to
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <spanx style="verb">opengraph</spanx> property.</t>
+        
+        <figure><preamble>For example:</preamble><artwork>
+  {
+    "objectType": "person",
+    "displayName": "John Smith",
+    "opengraph": {
+      "username": "john_smith",
+      "verified": false,
+      "relationship_status": "Single"
+    }
+  }
+        </artwork></figure>
+        
+        <t>Note that properties defined with the OpenGraph vocabulary that
+        are semantically equivalent to core Activity Streams properties SHOULD
+        NOT be used anywhere within an Activity Streams object. Rather, the
+        values associated with those properties SHOULD be mapped to the existing
+        Activity Streams properties.</t>
+        
+      </section>
+      
+      <section title="&quot;schema_org&quot;" anchor="schema_org">
+        
+        <t>The <spanx style="verb">schema_org</spanx> "namespace" property is 
+        defined to encapsulate the set of extension properties that represent
+        information specific to a <eref target="http://schema.org">Schema.org</eref>
+        data type. If, for instance, Schema.org properties can be applied to 
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <spanx style="verb">schema_org</spanx> property.</t>
+        
+        <figure><preamble>For example:</preamble><artwork>
+  {
+    "objectType": "person",
+    "displayName": "John Smith",
+    "schema_org": {
+      "birthDate": "1976-12-23",
+      "gender": "Male"
+    }
+  }
+        </artwork></figure>
+        
+        <t>Note that properties defined within the Schema.org vocabulary that
+        are semantically equivalent to core Activity Streams properties SHOULD 
+        NOT be used anywhere within an Activity Streams object. Rather, the 
+        values associated with those properties SHOULD be mapped to the existing
+        Activity Streams properties.</t>
+        
+      </section>
+      
+    </section>
+    
   </middle>
 
   <back>
@@ -1093,6 +1564,7 @@
   &rfc4627;
   &rfc3986;
   &rfc3987;
+  &rfc5988;
       <reference anchor="activitystreams">
         <front>
           <title>JSON Activity Streams 1.0</title>
