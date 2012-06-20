@@ -1321,10 +1321,15 @@
         <c>The absolute IRI reference for the furthest following 
         page of the multi-page collection.</c>
             
-        <c><spanx style="verb">previous</spanx></c>
+        <c><spanx style="verb">prev</spanx></c>
         <c>String</c>
         <c>The absolute IRI reference for the immediately preceding 
-        page of the multi-page collection.</c>
+        page of the multi-page collection. Note that the property
+        name <spanx style="verb">previous</spanx> MAY be used as an 
+        equivalent alternative; however implementations SHOULD use 
+        <spanx style="verb">prev</spanx> and MUST NOT use both 
+        <spanx style="verb">prev</spanx> AND <spanx style="verb">previous</spanx>
+        within the same <spanx style="verb">links</spanx> object.</c>
             
         <c><spanx style="verb">next</spanx></c>
         <c>String</c>
@@ -1351,7 +1356,7 @@
     "links": {
       "self": "http://example.org/items?page=1"
       "next": "http://example.org/items?page=2",
-      "previous": "http://example.org/items?page=3",
+      "prev": "http://example.org/items?page=3",
       "current": "http://example.org/items"
     },
     "items" : [
@@ -1407,6 +1412,8 @@
         <spanx style="verb">url</spanx> and <spanx style="verb">image</spanx> are
         semantically equivalent to core Activity Streams object properties are 
         therefore SHOULD NOT be used.</t>
+        <t>Further, avoid utilizing properties from multiple external vocabularies
+        that are similar or semantically equivalent to each other.</t>
       </list>
       </t>
       
