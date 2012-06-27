@@ -6,6 +6,7 @@
   <!ENTITY rfc1952 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1952.xml'>
   <!ENTITY rfc3339 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml'>
   <!ENTITY rfc4627 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4627.xml'>
+  <!ENTITY rfc4646 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4646.xml'>
   <!ENTITY rfc3986 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3986.xml'>
   <!ENTITY rfc3987 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3987.xml'>
   <!ENTITY rfc5988 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5988.xml'>
@@ -171,7 +172,9 @@
           instance, canceling a calendar event.</c>
           
           <c><spanx style="verb">close</spanx></c>
-          <c>Indicates that the actor has closed the object.</c>
+          <c>Indicates that the actor has closed the object. For instance,
+          the object could represent a ticket being tracked in an issue
+          management system.</c>
           
           <c><spanx style="verb">complete</spanx></c>
           <c>Indicates that the actor has completed the object.</c>
@@ -193,11 +196,6 @@
           <c><spanx style="verb">checkin</spanx></c>
           <c>Indicates that the actor has checked-in to the object. For 
           instance, a person checking-in to a Place.</c>
-          
-          <c><spanx style="verb">close</spanx></c>
-          <c>Indicates that the actor has closed the object. For instance,
-          the object could represent a ticket being tracked in an issue
-          management system.</c>
           
           <c><spanx style="verb">create</spanx></c>
           <c>Indicates that the actor has created the object.</c>
@@ -661,6 +659,9 @@
           of weblog entry. A note is similar in structure to an article, but 
           typically does not have a title or distinct paragraphs and tends to 
           be much shorter in length.</c>
+          
+          <c><spanx style="verb">offer</spanx></c>
+          <c>Represents an offer of any kind.</c>
           
           <c><spanx style="verb">organization</spanx></c>
           <c>Represents an organization of any kind.</c>
@@ -1303,8 +1304,9 @@
       
       <t>The value of the <spanx style="verb">links</spanx> property 
       is an object as defined in <xref target="links"/>. The properties
-      of the object are Registered Link Relations as defined by 
-      <xref target="RFC5988"/>.</t>
+      of the object are Registered or Extension Link Relations as defined by 
+      <xref target="RFC5988"/>. The following Registered Link Relations are
+      identified as having specific purpose for use with Multi-page Collections:</t>
       
       <texttable>
         <ttcol>Name</ttcol>
@@ -1312,18 +1314,18 @@
         <ttcol>Description</ttcol>
             
         <c><spanx style="verb">first</spanx></c>
-        <c>String</c>
-        <c>The absolute IRI reference for the furthest preceding 
-          page of the multi-page collection.</c>
+        <c><xref target="link-objects">Link Object</xref></c>
+        <c>A Link Object referencing the furthest preceding page 
+        of the multi-page collection.</c>
             
         <c><spanx style="verb">last</spanx></c>
-        <c>String</c>
-        <c>The absolute IRI reference for the furthest following 
+        <c><xref target="link-objects">Link Object</xref></c>
+        <c>A Link Object referencing the furthest following 
         page of the multi-page collection.</c>
             
         <c><spanx style="verb">prev</spanx></c>
-        <c>String</c>
-        <c>The absolute IRI reference for the immediately preceding 
+        <c><xref target="link-objects">Link Object</xref></c>
+        <c>A Link Object referencing the immediately preceding 
         page of the multi-page collection. Note that the property
         name <spanx style="verb">previous</spanx> MAY be used as an 
         equivalent alternative; however implementations SHOULD use 
@@ -1332,18 +1334,18 @@
         within the same <spanx style="verb">links</spanx> object.</c>
             
         <c><spanx style="verb">next</spanx></c>
-        <c>String</c>
-        <c>The absolute IRI reference for the immediately following 
+        <c><xref target="link-objects">Link Object</xref></c>
+        <c>A Link Object referencing the immediately following 
         page of the multi-page collection.</c>
             
         <c><spanx style="verb">current</spanx></c>
-        <c>String</c>
-        <c>The absolute IRI reference for a page containing the items 
-        that have been updated most recently.</c> 
+        <c><xref target="link-objects">Link Object</xref></c>
+        <c>A Link Object referencing the page containing the items 
+        that have been updated or published most recently.</c> 
         
         <c><spanx style="verb">self</spanx></c>
-        <c>String</c>
-        <c>The absolute IRI reference of this page.</c>
+        <c><xref target="link-objects">Link Object</xref></c>
+        <c>A Link Object referencing this page.</c>
             
       </texttable>
       
@@ -1354,10 +1356,10 @@
     "itemsPerPage" : 10,
     "startIndex": 10,
     "links": {
-      "self": "http://example.org/items?page=1"
-      "next": "http://example.org/items?page=2",
-      "prev": "http://example.org/items?page=3",
-      "current": "http://example.org/items"
+      "self": {"href":"http://example.org/items?page=1"},
+      "next": {"href":"http://example.org/items?page=2"},
+      "prev": {"href":"http://example.org/items?page=3"},
+      "current": {"href":"http://example.org/items"}
     },
     "items" : [
       {
@@ -1471,22 +1473,25 @@
     "objectType": "note",
     "displayName": "This is a simple note",
     "links": {
-      "canonical": "http://www.example.org/notes/123",
-      "edit": "http://www.example.org/api/notes/123"
+      "canonical": {
+        "href":"http://www.example.org/notes/123"
+      },
+      "edit": {
+        "href":"http://www.example.org/api/notes/123"
+      }
     }
   }
         </artwork></figure>
         
         <t>The value of each property within the <spanx style="verb">links</spanx>
-        object is either a JSON String containing an absolute 
-        <xref target="RFC3987">IRI</xref> that is the target of the link, or an 
-        array of JSON Strings containing absolute IRIs in the case where multiple 
-        links with the same Link Relation must be specified.</t>
+        object is either a single Link Object as defined in <xref target="link-objects"/> 
+        or an array of Link Objects in the case where multiple links with the same 
+        Link Relation must be specified.</t>
         
-        <t>When the value is specified as an array of absolute IRIs, the ordering
+        <t>When the value is specified as an array of Link Objects, the ordering
         of values within the array is considered insignificant. Each contained
-        value is to be treated as a separate link. Values within the array SHOULD
-        NOT be duplicated.</t>
+        value is to be treated as a separate link. An array SHOULD NOT contain
+        multiple Link Objects specifying the same <spanx style="verb">href</spanx> value.</t>
       
         <t>When using extension link relation types, the property name MAY be 
         specified as an <xref target="RFC3987">IRI</xref> but MUST be converted to 
@@ -1499,13 +1504,47 @@
         identified by the property name, and the {target IRI} is provided by the 
         property value.</t>
         
+        <section title="Link Objects" anchor="link-objects">
+          
+          <t>All links are expressed as JSON objects that MUST contain an 
+          <spanx style="verb">href</spanx> property whose value is an 
+          absolute <xref target="RFC3987">IRI</xref> providing the target of
+          the link. The object MAY contain the following additional properties:</t>
+          
+          <texttable>
+            <ttcol>Name</ttcol>
+            <ttcol>Value</ttcol>
+            <ttcol>Description</ttcol>
+            
+            <c><spanx style="verb">hreflang</spanx></c>
+            <c><xref target="RFC4646">Language Tag</xref></c>
+            <c>A hint that identifies the language of the target resource.</c>
+            
+            <c><spanx style="verb">title</spanx></c>
+            <c>JSON String</c>
+            <c>A human-readable descriptive label for the link.</c>
+            
+            <c><spanx style="verb">type</spanx></c>
+            <c>JSON String</c>
+            <c>A hint that identifies the media type of the linked resource.</c>
+          </texttable>
+          
+          <t>Link Objects MAY contain an <spanx style="verb">objectType</spanx>
+          property with the value <spanx style="verb">link</spanx>.</t>
+          
+          <t>Additional properties MAY be specified but are undefined by 
+            this specification.</t>
+          
+        </section>
+        
       </section>
       
       <section title="&quot;opengraph&quot;" anchor="opengraph">
         
         <t>The <spanx style="verb">opengraph</spanx> "namespace" property is
         defined to encapsulate the set of extension properties that
-        represent information specific to an <eref target="https://developers.facebook.com/docs/opengraph/">OpenGraph</eref>
+        represent information specific to an 
+        <eref target="https://developers.facebook.com/docs/opengraph/">OpenGraph</eref>
         data type. If, for instance, OpenGraph properties can be applied to
         an Activity Streams object, those properties SHOULD be grouped 
         together under the <spanx style="verb">opengraph</spanx> property.</t>
@@ -1569,6 +1608,7 @@
   &rfc1952;
   &rfc3339;
   &rfc4627;
+  &rfc4646;
   &rfc3986;
   &rfc3987;
   &rfc5988;
