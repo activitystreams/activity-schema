@@ -911,10 +911,10 @@
           <ttcol align="left">Description</ttcol>
           
           <c><spanx style="verb">position</spanx></c>
-          <c><xref target="RFC4627">JSON</xref> String</c>
+          <c><xref target="RFC4627">JSON</xref> Object</c>
           <c>The latitude, longitude and altitude of the place as a point
-          on Earth. Represented as an ISO 6709 compliant string. For instance
-          <spanx style="verb">"position":"+27.5916+086.5640+8850/"</spanx>.</c>
+          on Earth. Represented as on object with three properties as 
+          described below.</c>
           
           <c><spanx style="verb">address</spanx></c>
           <c><xref target="RFC4627">JSON</xref> Object</c>
@@ -922,6 +922,38 @@
           defined in the table below.</c>
           
           </texttable>
+
+          <t>The properties for the <spanx style="verb">position</spanx>
+          property are:</t>
+          
+          <texttable>
+            <ttcol align="left" width="15%">Property</ttcol>
+            <ttcol align="left" width="21%">Value</ttcol>
+            <ttcol align="left">Description</ttcol>
+            
+            <c><spanx style="verb">altitude</spanx></c>
+            <c>Number</c>
+            <c>The elevation of this point relative to the Earth, in meters 
+            above mean sea level. (e.g. 8848.00)</c>
+            
+            <c><spanx style="verb">latitude</spanx></c>
+            <c>Number</c>
+            <c>The latitude of this point on Earth in decimal form (e.g. 27.9881)</c>
+            
+            <c><spanx style="verb">longitude</spanx></c>
+            <c>Number</c>
+            <c>The longitude of this point on Earth in decimal form (e.g. 86.9253)</c>
+          </texttable>
+          
+          <t>Note that in older versions of this specification, the value of 
+          the <spanx style="verb">position</spanx> property was represented 
+          as an ISO 6709 compliant String. For instance
+          <spanx style="verb">"position":"+27.5916+086.5640+8850/"</spanx>.
+          This format has been deprecated and SHOULD NOT be used. However, there
+          might be existing deployed applications still utilizing the ISO 6709.
+          Consuming implementations can choose to continue supporting the ISO 
+          6709 format but SHOULD NOT produce Activity Streams that use the 
+          deprecated format.</t>
 
           <t>The properties for the <spanx style="verb">address</spanx>
           property are:</t>
@@ -1080,7 +1112,11 @@
     "displayName": "John Doe",
     "location": {
       "displayName": "Mount Everest",
-      "position": "+27.5916+086.5640+8850/"
+      "position": {
+        "altitude": 8848.00,
+        "latitude": 27.9881,
+        "longitude": 86.9253
+      }
     }
   }
 ]]></artwork></figure>
@@ -1412,7 +1448,7 @@
         For example, within the Schema.org vocabulary, the properties
         <spanx style="verb">name</spanx>, <spanx style="verb">description</spanx>, 
         <spanx style="verb">url</spanx> and <spanx style="verb">image</spanx> are
-        semantically equivalent to core Activity Streams object properties are 
+        semantically equivalent to core Activity Streams object properties and 
         therefore SHOULD NOT be used.</t>
         <t>Further, avoid utilizing properties from multiple external vocabularies
         that are similar or semantically equivalent to each other.</t>
@@ -1455,6 +1491,91 @@
         NOT be used anywhere within an Activity Streams object. Rather, the
         values associated with those properties SHOULD be mapped to the existing
         Activity Streams properties.</t>
+        
+      </section>
+      
+      <section title="&quot;geojson&quot;" anchor="geojson">
+        
+        <t>The <spanx style="verb">geojson</spanx> "namespace" property is defined
+        defined to encapsulate the set of extension properties that
+        represent information specific to an 
+        <eref target="http://www.geojson.org/geojson-spec.html">GeoJSON</eref>
+        data type. If, for instance, GeoJSON properties can be applied to
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <spanx style="verb">geojson</spanx> property.</t>
+        
+        <figure><preamble>For example:</preamble><artwork>
+  {
+    "objectType": "place",
+    "displayName": "A GeoJSON Described Place",
+    "geojson": { 
+      "type": "FeatureCollection",
+      "features": [
+        {"type": "Feature",
+         "geometry": {
+           "type": "Point", 
+           "coordinates": [102.0, 0.5]
+         },
+         "properties": {
+           "prop0": "value0"}
+         },
+         {"type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [102.0, 0.0], 
+              [103.0, 1.0], 
+              [104.0, 0.0], 
+              [105.0, 1.0]
+            ]
+          },
+          "properties": {
+            "prop0": "value0",
+            "prop1": 0.0
+          }
+        },
+        {"type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [[100.0, 0.0], 
+              [101.0, 0.0], 
+              [101.0, 1.0],
+              [100.0, 1.0], 
+              [100.0, 0.0]]]
+           },
+           "properties": {
+             "prop0": "value0",
+             "prop1": {"this": "that"}
+           }
+         }
+      ]
+    }
+  }
+        </artwork></figure>
+        
+      </section>
+      
+      <section title="&quot;ld&quot;" anchor="ld">
+        
+        <t>The <spanx style="verb">ld</spanx> "namespace" property is defined
+        to encapsulate the set of extension properties that represent information
+        specific to the <eref target="http://json-ld.org/">JSON Linked Data</eref>
+        vocabulary. If, for instance, Linked Data properties can be applied to
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <spanx style="verb">ld</spanx> property.</t>
+        
+        <figure><preamble>For example:</preamble><artwork>
+ {
+   "objectType": "person",
+   "displayName": "John Doe",
+   "ld": {
+     "@context": "http://json-ld.org/contexts/person.ld",
+     "@id": "http://example.org/john.doe",
+     "born": "1929-12-12"
+   }
+ }
+        </artwork></figure>
         
       </section>
       
@@ -1539,6 +1660,30 @@
         
       </section>
       
+      <section title="&quot;odata&quot;" anchor="odata">
+        
+        <t>The <spanx style="verb">odata</spanx> "namespace" property is 
+        defined to encapsulate the set of extension properties that represent
+        information specific to the <eref target="http://www.odata.org/">OData</eref>
+        specification. If, for instance, OData properties can be applied to 
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <spanx style="verb">odata</spanx> property.</t>
+        
+        <figure><preamble>For example:</preamble><artwork>
+ {
+   "objectType": "person",
+   "displayName": "John Doe",
+   "odata": {            
+     "__metadata": { ... },
+     "com.example.user.kind" : "PAID",
+     "CustomerID": "JDOE",
+     "UserName": "jdoe",
+   }
+ }
+        </artwork></figure>
+        
+      </section>
+      
       <section title="&quot;opengraph&quot;" anchor="opengraph">
         
         <t>The <spanx style="verb">opengraph</spanx> "namespace" property is
@@ -1583,18 +1728,13 @@
     "objectType": "person",
     "displayName": "John Smith",
     "schema_org": {
-      "birthDate": "1976-12-23",
-      "gender": "Male"
+      "additionalType": ["http://schema.org/Person"]
+      "birthDate": ["1976-12-23"],
+      "gender": ["Male"]
     }
   }
         </artwork></figure>
-        
-        <t>Note that properties defined within the Schema.org vocabulary that
-        are semantically equivalent to core Activity Streams properties SHOULD 
-        NOT be used anywhere within an Activity Streams object. Rather, the 
-        values associated with those properties SHOULD be mapped to the existing
-        Activity Streams properties.</t>
-        
+                
       </section>
       
     </section>

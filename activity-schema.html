@@ -215,13 +215,19 @@ Multi-page Collections<br />
 External Vocabularies<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#dc">6.1.</a>&nbsp;
 &quot;dc&quot;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#links">6.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#geojson">6.2.</a>&nbsp;
+&quot;geojson&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ld">6.3.</a>&nbsp;
+&quot;ld&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#links">6.4.</a>&nbsp;
 &quot;links&quot;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#link-objects">6.2.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#link-objects">6.4.1.</a>&nbsp;
 Link Objects<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#opengraph">6.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#odata">6.5.</a>&nbsp;
+&quot;odata&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#opengraph">6.6.</a>&nbsp;
 &quot;opengraph&quot;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#schema_org">6.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#schema_org">6.7.</a>&nbsp;
 &quot;schema_org&quot;<br />
 <a href="#rfc.references1">7.</a>&nbsp;
 Normative References<br />
@@ -1210,10 +1216,10 @@ Place</h3>
 <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
 <tr>
 <td align="left"><tt>position</tt>&nbsp;</td>
-<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
+<td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] Object</td>
 <td align="left">The latitude, longitude and altitude of the place as a point
-          on Earth. Represented as an ISO 6709 compliant string. For instance
-          <tt>"position":"+27.5916+086.5640+8850/"</tt>.</td>
+          on Earth. Represented as on object with three properties as 
+          described below.</td>
 </tr>
 <tr>
 <td align="left"><tt>address</tt>&nbsp;</td>
@@ -1224,6 +1230,40 @@ Place</h3>
 </table>
 <br clear="all" />
 
+<p>The properties for the <tt>position</tt>
+          property are:
+</p><table class="full" border="1" cellpadding="2" cellspacing="2">
+<col align="left" width="15%"><col align="left" width="21%"><col align="left">
+<tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+<tr>
+<td align="left"><tt>altitude</tt>&nbsp;</td>
+<td align="left">Number</td>
+<td align="left">The elevation of this point relative to the Earth, in meters 
+            above mean sea level. (e.g. 8848.00)</td>
+</tr>
+<tr>
+<td align="left"><tt>latitude</tt>&nbsp;</td>
+<td align="left">Number</td>
+<td align="left">The latitude of this point on Earth in decimal form (e.g. 27.9881)</td>
+</tr>
+<tr>
+<td align="left"><tt>longitude</tt>&nbsp;</td>
+<td align="left">Number</td>
+<td align="left">The longitude of this point on Earth in decimal form (e.g. 86.9253)</td>
+</tr>
+</table>
+<br clear="all" />
+
+<p>Note that in older versions of this specification, the value of 
+          the <tt>position</tt> property was represented 
+          as an ISO 6709 compliant String. For instance
+          <tt>"position":"+27.5916+086.5640+8850/"</tt>.
+          This format has been deprecated and SHOULD NOT be used. However, there
+          might be existing deployed applications still utilizing the ISO 6709.
+          Consuming implementations can choose to continue supporting the ISO 
+          6709 format but SHOULD NOT produce Activity Streams that use the 
+          deprecated format.
+</p>
 <p>The properties for the <tt>address</tt>
           property are:
 </p><table class="full" border="1" cellpadding="2" cellspacing="2">
@@ -1396,7 +1436,11 @@ Location</h3>
     "displayName": "John Doe",
     "location": {
       "displayName": "Mount Everest",
-      "position": "+27.5916+086.5640+8850/"
+      "position": {
+        "altitude": 8848.00,
+        "latitude": 27.9881,
+        "longitude": 86.9253
+      }
     }
   }
 </pre></div>
@@ -1624,7 +1668,7 @@ Multi-page Collections</h3>
 <br clear="all" />
 
 <p>The value of the <tt>links</tt> property 
-      is an object as defined in <a class='info' href='#links'>Section&nbsp;6.2<span> (</span><span class='info'>&quot;links&quot;</span><span>)</span></a>. The properties
+      is an object as defined in <a class='info' href='#links'>Section&nbsp;6.4<span> (</span><span class='info'>&quot;links&quot;</span><span>)</span></a>. The properties
       of the object are Registered or Extension Link Relations as defined by 
       <a class='info' href='#RFC5988'>[RFC5988]<span> (</span><span class='info'>Nottingham, M., &ldquo;Web Linking,&rdquo; October&nbsp;2010.</span><span>)</span></a>. The following Registered Link Relations are
       identified as having specific purpose for use with Multi-page Collections:
@@ -1741,7 +1785,7 @@ External Vocabularies</h3>
         For example, within the Schema.org vocabulary, the properties
         <tt>name</tt>, <tt>description</tt>, 
         <tt>url</tt> and <tt>image</tt> are
-        semantically equivalent to core Activity Streams object properties are 
+        semantically equivalent to core Activity Streams object properties and 
         therefore SHOULD NOT be used.
 </li>
 <li>Further, avoid utilizing properties from multiple external vocabularies
@@ -1790,9 +1834,96 @@ External Vocabularies</h3>
         values associated with those properties SHOULD be mapped to the existing
         Activity Streams properties.
 </p>
-<a name="links"></a><br /><hr />
+<a name="geojson"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.2"></a><h3>6.2.&nbsp;
+&quot;geojson&quot;</h3>
+
+<p>The <tt>geojson</tt> "namespace" property is defined
+        defined to encapsulate the set of extension properties that
+        represent information specific to an 
+        <a href='http://www.geojson.org/geojson-spec.html'>GeoJSON</a>
+        data type. If, for instance, GeoJSON properties can be applied to
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <tt>geojson</tt> property.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "objectType": "place",
+    "displayName": "A GeoJSON Described Place",
+    "geojson": {
+      "type": "FeatureCollection",
+      "features": [
+        {"type": "Feature",
+         "geometry": {
+           "type": "Point",
+           "coordinates": [102.0, 0.5]
+         },
+         "properties": {
+           "prop0": "value0"}
+         },
+         {"type": "Feature",
+          "geometry": {
+            "type": "LineString",
+            "coordinates": [
+              [102.0, 0.0],
+              [103.0, 1.0],
+              [104.0, 0.0],
+              [105.0, 1.0]
+            ]
+          },
+          "properties": {
+            "prop0": "value0",
+            "prop1": 0.0
+          }
+        },
+        {"type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [[100.0, 0.0],
+              [101.0, 0.0],
+              [101.0, 1.0],
+              [100.0, 1.0],
+              [100.0, 0.0]]]
+           },
+           "properties": {
+             "prop0": "value0",
+             "prop1": {"this": "that"}
+           }
+         }
+      ]
+    }
+  }
+</pre></div>
+<a name="ld"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.3"></a><h3>6.3.&nbsp;
+&quot;ld&quot;</h3>
+
+<p>The <tt>ld</tt> "namespace" property is defined
+        to encapsulate the set of extension properties that represent information
+        specific to the <a href='http://json-ld.org/'>JSON Linked Data</a>
+        vocabulary. If, for instance, Linked Data properties can be applied to
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <tt>ld</tt> property.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+ {
+   "objectType": "person",
+   "displayName": "John Doe",
+   "ld": {
+     "@context": "http://json-ld.org/contexts/person.ld",
+     "@id": "http://example.org/john.doe",
+     "born": "1929-12-12"
+   }
+ }
+</pre></div>
+<a name="links"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.4"></a><h3>6.4.&nbsp;
 &quot;links&quot;</h3>
 
 <p>The <tt>links</tt> "namespace" property is defined
@@ -1818,7 +1949,7 @@ External Vocabularies</h3>
   }
 </pre></div>
 <p>The value of each property within the <tt>links</tt>
-        object is either a single Link Object as defined in <a class='info' href='#link-objects'>Section&nbsp;6.2.1<span> (</span><span class='info'>Link Objects</span><span>)</span></a> 
+        object is either a single Link Object as defined in <a class='info' href='#link-objects'>Section&nbsp;6.4.1<span> (</span><span class='info'>Link Objects</span><span>)</span></a> 
         or an array of Link Objects in the case where multiple links with the same 
         Link Relation must be specified.
 </p>
@@ -1840,7 +1971,7 @@ External Vocabularies</h3>
 </p>
 <a name="link-objects"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6.2.1"></a><h3>6.2.1.&nbsp;
+<a name="rfc.section.6.4.1"></a><h3>6.4.1.&nbsp;
 Link Objects</h3>
 
 <p>All links are expressed as JSON objects that MUST contain an 
@@ -1874,9 +2005,34 @@ Link Objects</h3>
 <p>Additional properties MAY be specified but are undefined by 
             this specification.
 </p>
+<a name="odata"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.5"></a><h3>6.5.&nbsp;
+&quot;odata&quot;</h3>
+
+<p>The <tt>odata</tt> "namespace" property is 
+        defined to encapsulate the set of extension properties that represent
+        information specific to the <a href='http://www.odata.org/'>OData</a>
+        specification. If, for instance, OData properties can be applied to 
+        an Activity Streams object, those properties SHOULD be grouped 
+        together under the <tt>odata</tt> property.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+ {
+   "objectType": "person",
+   "displayName": "John Doe",
+   "odata": {
+     "__metadata": { ... },
+     "com.example.user.kind" : "PAID",
+     "CustomerID": "JDOE",
+     "UserName": "jdoe",
+   }
+ }
+</pre></div>
 <a name="opengraph"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6.3"></a><h3>6.3.&nbsp;
+<a name="rfc.section.6.6"></a><h3>6.6.&nbsp;
 &quot;opengraph&quot;</h3>
 
 <p>The <tt>opengraph</tt> "namespace" property is
@@ -1907,7 +2063,7 @@ Link Objects</h3>
 </p>
 <a name="schema_org"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6.4"></a><h3>6.4.&nbsp;
+<a name="rfc.section.6.7"></a><h3>6.7.&nbsp;
 &quot;schema_org&quot;</h3>
 
 <p>The <tt>schema_org</tt> "namespace" property is 
@@ -1923,17 +2079,12 @@ Link Objects</h3>
     "objectType": "person",
     "displayName": "John Smith",
     "schema_org": {
-      "birthDate": "1976-12-23",
-      "gender": "Male"
+      "additionalType": ["http://schema.org/Person"]
+      "birthDate": ["1976-12-23"],
+      "gender": ["Male"]
     }
   }
 </pre></div>
-<p>Note that properties defined within the Schema.org vocabulary that
-        are semantically equivalent to core Activity Streams properties SHOULD 
-        NOT be used anywhere within an Activity Streams object. Rather, the 
-        values associated with those properties SHOULD be mapped to the existing
-        Activity Streams properties.
-</p>
 <a name="rfc.references1"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <h3>7.&nbsp;Normative References</h3>
