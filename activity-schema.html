@@ -156,7 +156,7 @@
 <tr><td class="header">&nbsp;</td><td class="header">Facebook</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">R. Dolin</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">Microsoft</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">June 2012</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">August 29, 2012</td></tr>
 </table></td></tr></table>
 <h1><br />Activity Base Schema (Draft)</h1>
 
@@ -207,7 +207,9 @@ Rating<br />
 Result<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#source">4.6.</a>&nbsp;
 Source<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tags-property">4.7.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#startEndTime">4.7.</a>&nbsp;
+Starting and Ending Timestamps<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tags-property">4.8.</a>&nbsp;
 Tags<br />
 <a href="#multipage-collections">5.</a>&nbsp;
 Multi-page Collections<br />
@@ -255,6 +257,12 @@ Notational Conventions</h3>
         given for dereferencing, it MUST be mapped to a URI using the steps in 
         Section 3.1 of <a class='info' href='#RFC3987'>[RFC3987]<span> (</span><span class='info'>Duerst, M. and M. Suignard, &ldquo;Internationalized Resource Identifiers (IRIs),&rdquo; January&nbsp;2005.</span><span>)</span></a>. When an IRI is serving as an 
         identifier, it MUST NOT be so mapped.
+</p>
+<p>Unless otherwise specified, all properties specifying date and
+        time values MUST conform to the "date-time" production in <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a>.
+        In addition, an uppercase "T" character MUST be used to separate date
+        and time, and an uppercase "Z" character MUST be present in the absence of
+        a numeric time zone offset.
 </p>
 <a name="verbs"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -429,7 +437,7 @@ Verbs</h3>
           for both the actor and object, the meaning of this verb can 
           overlap that of the "consume" and "play" verbs. For instance, 
           a person might "experience" a movie; or "play" the movie; or "consume"
-          the movie. The "experience" verb SHOULD be considered a more generic
+          the movie. The "experience" verb can be considered a more generic
           form of other more specific verbs as "consume", "play", "watch", 
           "listen", and "read"</td>
 </tr>
@@ -440,8 +448,7 @@ Verbs</h3>
 </tr>
 <tr>
 <td align="left"><tt>find</tt>&nbsp;</td>
-<td align="left">Indicates that the actor has found the object. If a target is 
-          specified, it SHOULD indicate where the object was found.</td>
+<td align="left">Indicates that the actor has found the object.</td>
 </tr>
 <tr>
 <td align="left"><tt>flag-as-inappropriate</tt>&nbsp;</td>
@@ -507,7 +514,7 @@ Verbs</h3>
           specification only defines the meaning of this verb when the 
           <tt>object</tt> of the Activity has an
           <tt>objectType</tt> of <tt>group</tt>, 
-          though implementors SHOULD be prepared to handle other types of objects.</td>
+          though implementors need to be prepared to handle other types of objects.</td>
 </tr>
 <tr>
 <td align="left"><tt>leave</tt>&nbsp;</td>
@@ -635,34 +642,31 @@ Verbs</h3>
 <td align="left"><tt>rsvp-maybe</tt>&nbsp;</td>
 <td align="left">The "possible RSVP" verb indicates that the actor has made a
           possible RSVP for the object. This specification only defines the
-          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications. The use of this verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</td>
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors need to be prepared to
+          handle other object types. The use of this verb is only appropriate 
+          when the RSVP was created by an explicit action by the actor. It 
+          is not appropriate to use this verb when a user has been added as 
+          an attendee by an event organiser or administrator.</td>
 </tr>
 <tr>
 <td align="left"><tt>rsvp-no</tt>&nbsp;</td>
 <td align="left">The "negative RSVP" verb indicates that the actor has made a
           negative RSVP for the object. This specification only defines the
-          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications. The use of this verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</td>
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors need to be prepared to
+          handle other object types. The use of this verb is only appropriate 
+          when the RSVP was created by an explicit action by the actor. It is 
+          not appropriate to use this verb when a user has been added as an 
+          attendee by an event organiser or administrator.</td>
 </tr>
 <tr>
 <td align="left"><tt>rsvp-yes</tt>&nbsp;</td>
 <td align="left">The "positive RSVP" verb indicates that the actor has made a
           positive RSVP for an object. This specification only defines the
-          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications. The use of this verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</td>
+          meaning of this verb when its object is an event (see <a class='info' href='#event'>Section&nbsp;3.3<span> (</span><span class='info'>Event</span><span>)</span></a>), though implementors need to be prepared to
+          handle other object types. The use of this verb is only appropriate 
+          when the RSVP was created by an explicit action by the actor. It 
+          is not appropriate to use this verb when a user has been added as 
+          an attendee by an event organiser or administrator.</td>
 </tr>
 <tr>
 <td align="left"><tt>satisfy</tt>&nbsp;</td>
@@ -1005,7 +1009,7 @@ Object Types</h3>
 <tr>
 <td align="left"><tt>task</tt>&nbsp;</td>
 <td align="left">Represents an activity that has yet to be completed. Objects of
-          this type SHOULD contain additional properties as specified in 
+          this type can contain additional properties as specified in 
           <a class='info' href='#task'>Section&nbsp;3.6<span> (</span><span class='info'>Task</span><span>)</span></a>.</td>
 </tr>
 <tr>
@@ -1060,16 +1064,15 @@ Binary Objects</h3>
 <tr>
 <td align="left"><tt>compression</tt>&nbsp;</td>
 <td align="left"><a class='info' href='#RFC4627'>JSON<span> (</span><span class='info'>Crockford, D., &ldquo;The application/json Media Type for JavaScript Object Notation (JSON),&rdquo; July&nbsp;2006.</span><span>)</span></a> [RFC4627] String</td>
-<td align="left">A comma-separated list of compression algorithms applied to the
+<td align="left">An optional token identifying a compression algorithm applied to the
           binary data prior to Base64-encoding. Possible algorithms are 
           "deflate" and "gzip", respectively indicating the use of the 
           compression mechanisms defined by <a class='info' href='#RFC1951'>[RFC1951]<span> (</span><span class='info'>Deutsch, P., &ldquo;DEFLATE Compressed Data Format Specification version 1.3,&rdquo; May&nbsp;1996.</span><span>)</span></a> and
-          <a class='info' href='#RFC1952'>[RFC1952]<span> (</span><span class='info'>Deutsch, P., Gailly, J-L., Adler, M., Deutsch, L., and G. Randers-Pehrson, &ldquo;GZIP file format specification version 4.3,&rdquo; May&nbsp;1996.</span><span>)</span></a>. Additional compression algorithsm MAY
-          be used. If multiple compression algorithms are
-          applied, they must be listed in the order they were applied to 
-          the data. For instance, if the data was first compressed with 
-          deflate and then again using gzip, the value would be 
-          "compression":"deflate, gzip"</td>
+          <a class='info' href='#RFC1952'>[RFC1952]<span> (</span><span class='info'>Deutsch, P., Gailly, J-L., Adler, M., Deutsch, L., and G. Randers-Pehrson, &ldquo;GZIP file format specification version 4.3,&rdquo; May&nbsp;1996.</span><span>)</span></a>. Additional compression algorithms MAY
+          be used but are not defined by this specification. Note that 
+          previous versions of this specification allowed for multiple
+          compression algorithms to be applied and listed using a comma-separated
+          format. The use of multiple compressions is no longer permitted.</td>
 </tr>
 <tr>
 <td align="left"><tt>data</tt>&nbsp;</td>
@@ -1579,9 +1582,42 @@ Source</h3>
     }
   }
 </pre></div>
-<a name="tags-property"></a><br /><hr />
+<a name="startEndTime"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.7"></a><h3>4.7.&nbsp;
+Starting and Ending Timestamps</h3>
+
+<p>When an long running Activity occurs over a distinct period of 
+          time, or when an Object represents a long-running process or event,
+          the <tt>startTime</tt> and <tt>endTime</tt>
+          properties can be used to specify the date and time at which the activity
+          or object begins or concludes. The values for each are represented as 
+          JSON Strings conforming to the "date-time" production in <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a>.
+</p>
+<p>For example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "John Doe"},
+    "verb": "at",
+    "object": {
+      "objectType":"place",
+      "displayName":"Home"},
+    "published": "2012-08-28T03:34:23Z",
+    "startTime": "2012-08-12T12:13:14Z",
+    "endTime": "2012-08-13T01:34:12Z"
+  }
+</pre></div>
+<p>The <tt>startTime</tt> and 
+          <tt>endTime</tt> verbs can be used independently
+          or together. If both are specified, the <tt>endTime</tt>
+          property MUST specify a moment in time that is more recent that that
+          specified by the <tt>startTime</tt> property.
+</p>
+<a name="tags-property"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.8"></a><h3>4.8.&nbsp;
 Tags</h3>
 
 <p>A listing of the objects that have been associated with a 
@@ -1692,7 +1728,7 @@ Multi-page Collections</h3>
 <td align="left"><a class='info' href='#link-objects'>Link Object<span> (</span><span class='info'>Link Objects</span><span>)</span></a></td>
 <td align="left">A Link Object referencing the immediately preceding 
         page of the multi-page collection. Note that the property
-        name <tt>previous</tt> MAY be used as an 
+        name <tt>previous</tt> can be used as an 
         equivalent alternative; however implementations SHOULD use 
         <tt>prev</tt> and MUST NOT use both 
         <tt>prev</tt> AND <tt>previous</tt>
@@ -1749,7 +1785,7 @@ Multi-page Collections</h3>
         as a whole, while the <tt>itemsPerPage</tt> indicates
         the maximum number of objects that will be included in this particular 
         subset. The actual number of objects included in the value of the 
-        <tt>items</tt> properly MAY be equal to or less than 
+        <tt>items</tt> properly can be equal to or less than 
         either of these values.
 </p>
 <a name="external-vocabularies"></a><br /><hr />
@@ -1765,7 +1801,7 @@ External Vocabularies</h3>
       and others.
 </p>
 <p>When utilizing such vocabularies, it is possible that conflicts in the
-      naming of properties and format of expected values may arise. To mitigate
+      naming of properties and format of expected values might arise. To mitigate
       the risk of such conflicts, the following guidelines SHOULD be followed:
       
       </p>
@@ -1797,13 +1833,14 @@ External Vocabularies</h3>
 <p>This specification defines the following initial set of "namespace" 
       properties that correspond to specific external vocabularies currently 
       considered to be reasonable candidates for use within Activity Streams
-      objects. Future versions of this specification MAY add additional 
+      objects. Future versions of this specification might add additional 
       "namespace" properties to this list. Implementors are free to define
       additional "namespace" properties representing other external vocabularies
       as necessary; however, there is a risk of potential conflicts if multiple 
       independent implementors select the same "namespace" property to represent
-      different external vocabularies. To help prevent such conflicts, implementors 
-      SHOULD publicly document their use of external vocabularies.
+      different external vocabularies. To help prevent such conflicts, it is 
+      RECOMMENDED that implementors publicly document their use of external 
+      vocabularies.
 </p>
 <a name="dc"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1828,12 +1865,6 @@ External Vocabularies</h3>
     }
   }
 </pre></div>
-<p>Note that properties defined with the Dublin Core vocabulary that
-        are semantically equivalent to core Activity Streams properties SHOULD
-        NOT be used anywhere within an Activity Streams object. Rather, the
-        values associated with those properties SHOULD be mapped to the existing
-        Activity Streams properties.
-</p>
 <a name="geojson"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.2"></a><h3>6.2.&nbsp;
@@ -1958,7 +1989,7 @@ External Vocabularies</h3>
         value is to be treated as a separate link. An array SHOULD NOT contain
         multiple Link Objects specifying the same <tt>href</tt> value.
 </p>
-<p>When using extension link relation types, the property name MAY be 
+<p>When using extension link relation types, the property name can be 
         specified as an <a class='info' href='#RFC3987'>IRI<span> (</span><span class='info'>Duerst, M. and M. Suignard, &ldquo;Internationalized Resource Identifiers (IRIs),&rdquo; January&nbsp;2005.</span><span>)</span></a> [RFC3987] but MUST be converted to 
         <a class='info' href='#RFC3986'>URIs<span> (</span><span class='info'>Berners-Lee, T., Fielding, R., and L. Masinter, &ldquo;Uniform Resource Identifier (URI): Generic Syntax,&rdquo; January&nbsp;2005.</span><span>)</span></a> [RFC3986] when compared and dereferenced as required 
         by Section 4.2 of <a class='info' href='#RFC5988'>[RFC5988]<span> (</span><span class='info'>Nottingham, M., &ldquo;Web Linking,&rdquo; October&nbsp;2010.</span><span>)</span></a>.
@@ -2055,12 +2086,6 @@ Link Objects</h3>
     }
   }
 </pre></div>
-<p>Note that properties defined with the OpenGraph vocabulary that
-        are semantically equivalent to core Activity Streams properties SHOULD
-        NOT be used anywhere within an Activity Streams object. Rather, the
-        values associated with those properties SHOULD be mapped to the existing
-        Activity Streams properties.
-</p>
 <a name="schema_org"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.7"></a><h3>6.7.&nbsp;

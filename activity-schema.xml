@@ -54,7 +54,7 @@
       <organization>Microsoft</organization>
     </author>
 
-    <date month="June" year="2012" /> 
+    <date month="August" year="2012" /> 
 
     <abstract>
       <t>This document presents a base set of Object types and Verbs for use
@@ -81,6 +81,13 @@
         given for dereferencing, it MUST be mapped to a URI using the steps in 
         Section 3.1 of <xref target="RFC3987"/>. When an IRI is serving as an 
         identifier, it MUST NOT be so mapped.</t>
+        
+        <t>Unless otherwise specified, all properties specifying date and
+        time values MUST conform to the "date-time" production in <xref target="RFC3339" />.
+        In addition, an uppercase "T" character MUST be used to separate date
+        and time, and an uppercase "Z" character MUST be present in the absence of
+        a numeric time zone offset.</t>
+        
       </section>  
     </section>
 
@@ -227,7 +234,7 @@
           for both the actor and object, the meaning of this verb can 
           overlap that of the "consume" and "play" verbs. For instance, 
           a person might "experience" a movie; or "play" the movie; or "consume"
-          the movie. The "experience" verb SHOULD be considered a more generic
+          the movie. The "experience" verb can be considered a more generic
           form of other more specific verbs as "consume", "play", "watch", 
           "listen", and "read"</c>
       
@@ -236,8 +243,7 @@
           special interest.</c>
           
           <c><spanx style="verb">find</spanx></c>
-          <c>Indicates that the actor has found the object. If a target is 
-          specified, it SHOULD indicate where the object was found.</c>
+          <c>Indicates that the actor has found the object.</c>
 
           <c><spanx style="verb">flag-as-inappropriate</spanx></c>
           <c>Indicates that the actor has flagged the object as being 
@@ -293,7 +299,7 @@
           specification only defines the meaning of this verb when the 
           <spanx style="verb">object</spanx> of the Activity has an
           <spanx style="verb">objectType</spanx> of <spanx style="verb">group</spanx>, 
-          though implementors SHOULD be prepared to handle other types of objects.</c>
+          though implementors need to be prepared to handle other types of objects.</c>
 
           <c><spanx style="verb">leave</spanx></c>
           <c>Indicates that the actor has left the object. For instance, 
@@ -400,34 +406,31 @@
           <c>The "possible RSVP" verb indicates that the actor has made a
           possible RSVP for the object. This specification only defines the
           meaning of this verb when its object is an event (see <xref
-          target="event"></xref>), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications. The use of this verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</c>
+          target="event"></xref>), though implementors need to be prepared to
+          handle other object types. The use of this verb is only appropriate 
+          when the RSVP was created by an explicit action by the actor. It 
+          is not appropriate to use this verb when a user has been added as 
+          an attendee by an event organiser or administrator.</c>
 
           <c><spanx style="verb">rsvp-no</spanx></c>
           <c>The "negative RSVP" verb indicates that the actor has made a
           negative RSVP for the object. This specification only defines the
           meaning of this verb when its object is an event (see <xref
-          target="event"></xref>), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications. The use of this verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</c>
+          target="event"></xref>), though implementors need to be prepared to
+          handle other object types. The use of this verb is only appropriate 
+          when the RSVP was created by an explicit action by the actor. It is 
+          not appropriate to use this verb when a user has been added as an 
+          attendee by an event organiser or administrator.</c>
 
           <c><spanx style="verb">rsvp-yes</spanx></c>
           <c>The "positive RSVP" verb indicates that the actor has made a
           positive RSVP for an object. This specification only defines the
           meaning of this verb when its object is an event (see <xref
-          target="event" />), though implementors SHOULD be prepared to
-          handle other object types as meaning MAY be provided by extension
-          specifications. The use of this verb is only appropriate when the RSVP was
-          created by an explicit action by the actor. It is not appropriate to
-          use this verb when a user has been added as an attendee by an event
-          organiser or administrator.</c>
+          target="event" />), though implementors need to be prepared to
+          handle other object types. The use of this verb is only appropriate 
+          when the RSVP was created by an explicit action by the actor. It 
+          is not appropriate to use this verb when a user has been added as 
+          an attendee by an event organiser or administrator.</c>
           
           <c><spanx style="verb">satisfy</spanx></c>
           <c>Indicates that the actor has satisfied the object. If a target 
@@ -718,7 +721,7 @@
           
           <c><spanx style="verb">task</spanx></c>
           <c>Represents an activity that has yet to be completed. Objects of
-          this type SHOULD contain additional properties as specified in 
+          this type can contain additional properties as specified in 
           <xref target="task"/>.</c>
           
           <c><spanx style="verb">video</spanx></c>
@@ -769,16 +772,15 @@
                     
           <c><spanx style="verb">compression</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
-          <c>A comma-separated list of compression algorithms applied to the
+          <c>An optional token identifying a compression algorithm applied to the
           binary data prior to Base64-encoding. Possible algorithms are 
           "deflate" and "gzip", respectively indicating the use of the 
           compression mechanisms defined by <xref target="RFC1951" /> and
-          <xref target="RFC1952"/>. Additional compression algorithsm MAY
-          be used. If multiple compression algorithms are
-          applied, they must be listed in the order they were applied to 
-          the data. For instance, if the data was first compressed with 
-          deflate and then again using gzip, the value would be 
-          "compression":"deflate, gzip"</c>
+          <xref target="RFC1952"/>. Additional compression algorithms MAY
+          be used but are not defined by this specification. Note that 
+          previous versions of this specification allowed for multiple
+          compression algorithms to be applied and listed using a comma-separated
+          format. The use of multiple compressions is no longer permitted.</c>
           
           <c><spanx style="verb">data</spanx></c>
           <c><xref target="RFC4627">JSON</xref> String</c>
@@ -1256,6 +1258,39 @@
 ]]></artwork></figure>
     
         </section>
+    
+        <section anchor="startEndTime" title="Starting and Ending Timestamps">
+          
+          <t>When an long running Activity occurs over a distinct period of 
+          time, or when an Object represents a long-running process or event,
+          the <spanx style="verb">startTime</spanx> and <spanx style="verb">endTime</spanx>
+          properties can be used to specify the date and time at which the activity
+          or object begins or concludes. The values for each are represented as 
+          JSON Strings conforming to the "date-time" production in <xref target="RFC3339"/>.</t>
+          
+          <t>For example:</t>
+<figure><artwork><![CDATA[
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "John Doe"},
+    "verb": "at",
+    "object": {
+      "objectType":"place",
+      "displayName":"Home"},
+    "published": "2012-08-28T03:34:23Z",
+    "startTime": "2012-08-12T12:13:14Z",
+    "endTime": "2012-08-13T01:34:12Z"
+  }  
+]]></artwork></figure>
+
+          <t>The <spanx style="verb">startTime</spanx> and 
+          <spanx style="verb">endTime</spanx> verbs can be used independently
+          or together. If both are specified, the <spanx style="verb">endTime</spanx>
+          property MUST specify a moment in time that is more recent that that
+          specified by the <spanx style="verb">startTime</spanx> property.</t>
+
+        </section>
         
         <section anchor="tags-property" title="Tags">
           <t>A listing of the objects that have been associated with a 
@@ -1363,7 +1398,7 @@
         <c><xref target="link-objects">Link Object</xref></c>
         <c>A Link Object referencing the immediately preceding 
         page of the multi-page collection. Note that the property
-        name <spanx style="verb">previous</spanx> MAY be used as an 
+        name <spanx style="verb">previous</spanx> can be used as an 
         equivalent alternative; however implementations SHOULD use 
         <spanx style="verb">prev</spanx> and MUST NOT use both 
         <spanx style="verb">prev</spanx> AND <spanx style="verb">previous</spanx>
@@ -1416,7 +1451,7 @@
         as a whole, while the <spanx style="verb">itemsPerPage</spanx> indicates
         the maximum number of objects that will be included in this particular 
         subset. The actual number of objects included in the value of the 
-        <spanx style="verb">items</spanx> properly MAY be equal to or less than 
+        <spanx style="verb">items</spanx> properly can be equal to or less than 
         either of these values.</t>
       
     </section>
@@ -1431,7 +1466,7 @@
       and others.</t>
       
       <t>When utilizing such vocabularies, it is possible that conflicts in the
-      naming of properties and format of expected values may arise. To mitigate
+      naming of properties and format of expected values might arise. To mitigate
       the risk of such conflicts, the following guidelines SHOULD be followed:
       
       <list style="numbers">
@@ -1458,13 +1493,14 @@
       <t>This specification defines the following initial set of "namespace" 
       properties that correspond to specific external vocabularies currently 
       considered to be reasonable candidates for use within Activity Streams
-      objects. Future versions of this specification MAY add additional 
+      objects. Future versions of this specification might add additional 
       "namespace" properties to this list. Implementors are free to define
       additional "namespace" properties representing other external vocabularies
       as necessary; however, there is a risk of potential conflicts if multiple 
       independent implementors select the same "namespace" property to represent
-      different external vocabularies. To help prevent such conflicts, implementors 
-      SHOULD publicly document their use of external vocabularies.</t>
+      different external vocabularies. To help prevent such conflicts, it is 
+      RECOMMENDED that implementors publicly document their use of external 
+      vocabularies.</t>
       
       <section title="&quot;dc&quot;" anchor="dc">
         
@@ -1485,12 +1521,6 @@
     }
   }
         </artwork></figure>
-        
-        <t>Note that properties defined with the Dublin Core vocabulary that
-        are semantically equivalent to core Activity Streams properties SHOULD
-        NOT be used anywhere within an Activity Streams object. Rather, the
-        values associated with those properties SHOULD be mapped to the existing
-        Activity Streams properties.</t>
         
       </section>
       
@@ -1614,7 +1644,7 @@
         value is to be treated as a separate link. An array SHOULD NOT contain
         multiple Link Objects specifying the same <spanx style="verb">href</spanx> value.</t>
       
-        <t>When using extension link relation types, the property name MAY be 
+        <t>When using extension link relation types, the property name can be 
         specified as an <xref target="RFC3987">IRI</xref> but MUST be converted to 
         <xref target="RFC3986">URIs</xref> when compared and dereferenced as required 
         by Section 4.2 of <xref target="RFC5988"/>.</t>
@@ -1705,12 +1735,6 @@
     }
   }
         </artwork></figure>
-        
-        <t>Note that properties defined with the OpenGraph vocabulary that
-        are semantically equivalent to core Activity Streams properties SHOULD
-        NOT be used anywhere within an Activity Streams object. Rather, the
-        values associated with those properties SHOULD be mapped to the existing
-        Activity Streams properties.</t>
         
       </section>
       
