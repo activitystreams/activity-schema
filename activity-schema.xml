@@ -936,15 +936,19 @@
             <c><spanx style="verb">altitude</spanx></c>
             <c>Number</c>
             <c>The elevation of this point relative to the Earth, in meters 
-            above mean sea level. (e.g. 8848.00)</c>
+            above or below mean sea level. (e.g. 8848.00, -86.00).</c>
             
             <c><spanx style="verb">latitude</spanx></c>
             <c>Number</c>
-            <c>The latitude of this point on Earth in decimal form (e.g. 27.9881)</c>
+            <c>The latitude of this point on Earth according to the WGS-84 
+            coordinate reference system in decimal degrees (e.g. 27.9881,    
+            -3.12676).</c>
             
             <c><spanx style="verb">longitude</spanx></c>
             <c>Number</c>
-            <c>The longitude of this point on Earth in decimal form (e.g. 86.9253)</c>
+            <c>The longitude of this point on Earth according to the WGS-84
+            coordinate reference system in decimal degrees (e.g. 86.9253,
+            -134.4323).</c>
           </texttable>
           
           <t>Note that in older versions of this specification, the value of 

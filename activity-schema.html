@@ -156,7 +156,7 @@
 <tr><td class="header">&nbsp;</td><td class="header">Facebook</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">R. Dolin</td></tr>
 <tr><td class="header">&nbsp;</td><td class="header">Microsoft</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">August 29, 2012</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">August 30, 2012</td></tr>
 </table></td></tr></table>
 <h1><br />Activity Base Schema (Draft)</h1>
 
@@ -1242,17 +1242,21 @@ Place</h3>
 <td align="left"><tt>altitude</tt>&nbsp;</td>
 <td align="left">Number</td>
 <td align="left">The elevation of this point relative to the Earth, in meters 
-            above mean sea level. (e.g. 8848.00)</td>
+            above or below mean sea level. (e.g. 8848.00, -86.00).</td>
 </tr>
 <tr>
 <td align="left"><tt>latitude</tt>&nbsp;</td>
 <td align="left">Number</td>
-<td align="left">The latitude of this point on Earth in decimal form (e.g. 27.9881)</td>
+<td align="left">The latitude of this point on Earth according to the WGS-84 
+            coordinate reference system in decimal degrees (e.g. 27.9881,    
+            -3.12676).</td>
 </tr>
 <tr>
 <td align="left"><tt>longitude</tt>&nbsp;</td>
 <td align="left">Number</td>
-<td align="left">The longitude of this point on Earth in decimal form (e.g. 86.9253)</td>
+<td align="left">The longitude of this point on Earth according to the WGS-84
+            coordinate reference system in decimal degrees (e.g. 86.9253,
+            -134.4323).</td>
 </tr>
 </table>
 <br clear="all" />
