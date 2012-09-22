@@ -2010,7 +2010,8 @@ In addition to the core properties shared by all Activity Streams Objects, <tt>a
 </table>
 
 For example:
-```
+
+``` json
   {
     "objectType": "video",
     "displayName": "Cute little kittens",
