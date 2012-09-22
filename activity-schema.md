@@ -33,7 +33,7 @@ This specification defines the following core verbs in addition to the default <
     "object": {
       "objectType": "job", 
       "displayName": "Director of Marketing"},
-    "title": "Sally accepted the Directory of Marketing job."
+    "title": "Sally accepted the Director of Marketing job."
   }
       </pre>
     </td>
@@ -2067,7 +2067,7 @@ Note that the <tt>binary</tt> and <tt>file</tt> objectTypes are conceptually rel
 Because of their close relationship, it is possible for the <tt>file</tt> objectType to share the same basic properties as the <tt>binary</tt> objectType.  That is, a <tt>file</tt> MAY also have properties such as <tt>length</tt>, <tt>mimeType</tt>, and <tt>md5</tt>.
 
 For example
-```
+``` json
   {
     "objectType": "note",
     "displayName": "A note with a binary attachment",
@@ -2131,7 +2131,7 @@ In addition to the core properties shared by all Activity Streams Objects, <tt>e
 </table>
 
 For example:
-```
+``` json
   {
     "objectType": "event",
     "displayName": "Meeting with Joe",
@@ -2166,7 +2166,7 @@ In addition to the core properties shared by all Activity Streams Objects, <tt>i
 </table>
 
 For example:
-```
+``` json
   {
     "objectType": "issue",
     "displayName": "Terms of Use Violation",
@@ -2197,7 +2197,7 @@ In addition to the core properties shared by all Activity Streams Objects, <tt>p
 </table>
 
 For example:
-```
+``` json
   {
     "objectType": "permission",
     "displayName": "Permission to Edit File: 2Q2014 Sales Forecast.xls",
@@ -2249,7 +2249,7 @@ The properties for the <tt>position</tt> property are:
 </table>
 
 For example:
-```
+``` json
   {
     "objectType": "place",
     "displayName": "Some Random Location on Earth",
@@ -2300,7 +2300,7 @@ The properties for the <tt>address</tt> property are:
 </table>
 
 For example:
-```
+``` json
   {
     "objectType": "place",
     "displayName": "This is not really my address",
@@ -2328,7 +2328,7 @@ In addition to the core properties shared by all Activity Streams Objets, <tt>ro
 </table> 
 
 For example:
-```
+``` json
   {
     "objectType": "group",
     "displayName": "My Work Group",
@@ -2391,7 +2391,7 @@ In addition to the core properties shared by all Activity Streams Objects, <tt>t
 </table>
 
 For example:
-```
+``` json
   {
     "objectType": "task",
     "displayName": "James needs to read the spec",
@@ -2419,7 +2419,7 @@ This specification defines an initial set of extension properties that can be us
 The basic model for an Activity provides properties that allow the expression of who (<tt>actor</tt>) performed the action, what (<tt>object</tt>) was acted upon, the action (<tt>verb</tt>) that was taken, and to what the action was directed (<tt>target</tt>).  The additional <tt>context</tt> property allows the Activity to further include information about why a particular action occurred by providing details about the context within which a particular Activity was performed.  The value of the <tt>context</tt> property is an Object of any objectType.  The meaning of the <tt>context</tt> property is only defined when used within an Activity object.
 
 For example, the following Activity uses the <tt>context</tt> property to reference the specific reasons a particular article object has been flagged as being inappropriate:
-```
+``` json
   {
     "actor": {
       "objectType": "person",
@@ -2451,7 +2451,7 @@ Within a JSON-serialized Activity Stream, the Location is represented using a pr
 When appearing within an activity, the location data indicates the location where the activity occurred.  When appearing within an object, the location data indicates the location of that object at the time the activity occurred.
 
 For example:
-```
+``` json
   {
     "objectType": "person",
     "displayName": "John Doe",
@@ -2487,7 +2487,7 @@ In JSON, Moods are included within an object or activity using a property named 
 </table>
 
 For example:
-```
+``` json
   {
     "objectType": "person",
     "displayName": "James",
@@ -2507,7 +2507,7 @@ A rating given as a number between 1.0 and 5.0 inclusive with one decimal place 
 Ratings are generally most useful only for particular types of objects, such as audio, video, photos and places.
 
 For example:
-```
+``` json
   {
     "objectType": "review",
     "content": "This is a great product",
@@ -2520,7 +2520,7 @@ For example:
 The <tt>result</tt> provides a description of the result of any particular activity.  The value of the <tt>result</tt> property is an Object of any objectType.  The meaning of the <tt>result</tt> property is only defined when used within an Activity object.
 
 For instance:
-```
+``` json
   {
     "actor": {
       "objectType": "person",
@@ -2547,7 +2547,7 @@ The <tt>source</tt> property provides a reference to the original source of an o
 The <tt>source</tt> property is closely related to the <tt>generator</tt> and <tt>provider</tt> properties but serves the distinct purpose of identifying where the activity or object was originally published as opposed to identifying the applications that generated or published it.
 
 For example:
-```
+``` json
   {
     "actor": {
       "objectType": "person",
@@ -2571,7 +2571,7 @@ For example:
 When an long running Activity occurs over a distinct period of time, or when an Object represents a long-running process or event, the <tt>startTime</tt> and <tt>endTime</tt> properties can be used to specify the date and time at which the activity or object begins or concludes.  The values for each are represented as JSON Strings conforming to the "date-time" production in [RFC3339][RFC3339].
 
 For example:
-```
+``` json json
   {
     "actor": {
       "objectType": "person",
@@ -2593,7 +2593,7 @@ The <tt>startTime</tt> and <tt>endTime</tt> properties can be used independently
 A listing of the objects that have been associated with a particular object.  Represented in JSON using a property named <tt>tags</tt> whose value is an Array of objects.
 
 For example:
-```
+``` json
   {
     "objectType": "photo",
     "image": "http://example.org/photos/fluffycat.jpg",
@@ -2645,7 +2645,7 @@ When using multi-paged collections, the following additional properties can be u
   </tr>
 </table>      
    
-The value of the <tt>[links](#links)</tt> property is an object.  The properties of the object are Registered or Extension Link Relations as defined by [RFC5988][RFC5988].  The following Registered Link Relations are identified as having specific purpose for use with Multi-page Collections:
+The value of the <tt>[links](#links)</tt> property is an object.  The members of the object are Registered or Extension Link Relations as defined by [RFC5988][RFC5988].  The following Registered Link Relations are identified as having specific purpose for use with Multi-page Collections:
 
 <table border="1">
   <tr><th align="left">Name</th><th align="left">Value</th><th align="left">Description</th></tr>
@@ -2682,7 +2682,7 @@ The value of the <tt>[links](#links)</tt> property is an object.  The properties
 </table>
 
 For example, one page of a multi-page collection:
-```
+``` json
   {
     "totalItems": 12,
     "itemsPerPage" : 10,
@@ -2726,7 +2726,7 @@ This specification defines the following initial set of namespace properties tha
 The <tt>dc</tt> namespace property is defined to encapsulate the set of extension properties that represent information specific to the [Dublin Core Metadata Initiative][1].  If, for instance, Dublin Core properties can be applied to an Activity Streams object, those properties SHOULD be grouped together under the <tt>dc</tt> property.
 
 For example:
-```
+``` json json
   {
     "objectType": "file",
     "displayName": "A Document",
@@ -2742,7 +2742,7 @@ For example:
 The <tt>geojson</tt> namespace property is defined defined to encapsulate the set of extension properties that represent information specific to an [GeoJSON][2] data type.  If, for instance, GeoJSON properties can be applied to an Activity Streams object, those properties SHOULD be grouped together under the <tt>geojson</tt> property.
 
 For example:
-```
+``` json
   {
     "objectType": "place",
     "displayName": "A GeoJSON Described Place",
@@ -2796,7 +2796,7 @@ For example:
 The <tt>ld</tt> namespace property is defined to encapsulate the set of extension properties that represent information specific to the [JSON Linked Data][3] vocabulary.  If, for instance, Linked Data properties can be applied to an Activity Streams object, those properties SHOULD be grouped together under the <tt>ld</tt> property.
 
 For example:
-```
+``` json json
   {
     "objectType": "person",
     "displayName": "John Doe",
@@ -2813,7 +2813,7 @@ For example:
 The <tt>links</tt> namespace property is defined to encapsulate the set of extension properties that represent links to external resources. Property names are defined as being either Registered or Extension Link Relation Types as defined by [RFC5988][RFC5988].  The list of currently known Registered Link Relations can be found within the [IANA Registry of Link Relations][4].
 
 For example:
-```
+``` json
   {
     "objectType": "note",
     "displayName": "This is a simple note",
@@ -2868,7 +2868,7 @@ Additional properties MAY be specified but are undefined by this specification.
 The <tt>odata</tt> namespace property is defined to encapsulate the set of extension properties that represent information specific to the [OData][5] specification.  If, for instance, OData properties can be applied to an Activity Streams object, those properties SHOULD be grouped together under the <tt>odata</tt> property.
 
 For example:
-``` 
+```  json
   {
     "objectType": "person",
     "displayName": "John Doe",
@@ -2886,7 +2886,7 @@ For example:
 The <tt>opengraph</tt> namespace property is defined to encapsulate the set of extension properties that represent information specific to an [OpenGraph][6] data type.  If, for instance, OpenGraph properties can be applied to an Activity Streams object, those properties SHOULD be grouped together under the <tt>opengraph</tt> property.
 
 For example:
-``` 
+```  json json
   {
     "objectType": "person",
     "displayName": "John Smith",
@@ -2903,7 +2903,7 @@ For example:
 The <tt>schema\_org</tt> namespace property is defined to encapsulate the set of extension properties that represent information specific to a [Schema.org][7] data type.  If, for instance, Schema.org properties can be applied to an Activity Streams object, those properties SHOULD be grouped together under the <tt>schema_org</tt> property.
 
 For example:
-``` 
+```  json
   {
     "objectType": "person",
     "displayName": "John Smith",
@@ -2957,3 +2957,5 @@ Your use of this Specification may be subject to other third party rights. THIS 
 [5]: http://www.odata.org/ "OData"
 [6]: https://developers.facebook.com/docs/opengraph/ "OpenGraph"
 [7]: http://schema.org "Schema.org"
+
+
