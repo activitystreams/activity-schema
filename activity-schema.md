@@ -1094,7 +1094,8 @@ This specification defines the following core verbs in addition to the default <
       "objectType": "badge",
       "displayName": "Most Checkins in 24 hours"
     },
-    "title": "Laura was awarded a badget for \"Most Checkins in 24 hours\""
+    "title": "Laura was awarded a badge 
+      for \"Most Checkins in 24 hours\""
   }
       </pre>
     </td>
