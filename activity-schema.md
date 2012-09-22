@@ -19,362 +19,1832 @@ Unless otherwise specified, all properties specifying date and time values MUST 
 This specification defines the following core verbs in addition to the default <tt>post</tt> verb that is defined in Section 6 of [activitystreams][activitystreams]:
 
 <table border="1">
-  <tr><th align="left">Verb</th><th align="left">Description</th></tr>
+  <tr><th align="left" width="5%">Verb</th><th width="50%" align="left">Description</th><th align="left" nowrap="nowrap">Example</th></tr>
   <tr>
-    <td><tt>accept</tt></td>
+    <td align="center"><tt>accept</tt></td>
     <td>Indicates that that the actor has accepted the object. For instance, a person accepting an award, or accepting an assignment.</td>
+    <td nowrap="nowrap">
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Sally"},
+    "verb": "accept",
+    "object": {
+      "objectType": "job", 
+      "displayName": "Director of Marketing"},
+    "title": "Sally accepted the Directory of Marketing job."
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>access</tt></td>
+    <td align="center"><tt>access</tt></td>
     <td>Indicates that the actor has accessed the object. For instance, a person accessing a room, or accessing a file.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Joe"},
+    "verb": "access",
+    "object": {
+      "objectType": "file", 
+      "displayName": "4Q2012 Sales Forecast.xls"},
+    "published": "2012-12-12T12:12:12Z",
+    "title": "Joe accessed the file \"4Q2012 Sales Forecast.xls\""
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>acknowledge</tt></td>
+    <td align="center"><tt>acknowledge</tt></td>
     <td>Indicates that the actor has acknowledged the object. This effectively signals that the actor is aware of the object's existence.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Sally"},
+    "verb": "acknowledge",
+    "object": {
+      "objectType": "issue", 
+      "displayName": "#123: There is a problem with the build"},
+    "Sally acknowledged Issue #123"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>add</tt></td>
+    <td align="center"><tt>add</tt></td>
     <td>Indicates that the actor has added the object to the target. For instance, adding a photo to an album.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Joe"},
+    "verb": "add",
+    "object": {
+      "objectType": "image", 
+      "displayName": "My cat", 
+      "fullImage": {
+        "url": "http://example.org/cat.jpg"
+      }
+    },
+    "target": {
+      "objectType": "collection",
+      "displayName": "Joe's Photo Album",
+      "objectTypes": ["image"]
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>agree</tt></td>
+    <td align="center"><tt>agree</tt></td>
     <td>Indicates that the actor agrees with the object. For example, a person agreeing with an argument, or expressing agreement with a particular issue.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Sally"},
+    "verb": "agree",
+    "object": {
+      "objectType": "article", 
+      "displayName": "Some Random Article Online"}
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>append</tt></td>
+    <td align="center"><tt>append</tt></td>
     <td>Indicates that the actor has appended the object to the target. For instance, a person appending a new record to a database.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Joe"},
+    "verb": "append",
+    "object": {
+      "content": "This is some text"
+    }
+    "target": {
+      "objectType": "file", 
+      "displayName": "log.txt"}
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>approve</tt></td>
+    <td align="center"><tt>approve</tt></td>
     <td>Indicates that the actor has approved the object. For instance, a manager might approve a travel request.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Sally"},
+    "verb": "approve",
+    "object": {
+      "objectType": "task", 
+      "actor": {"displayName": "Joe"},
+      "verb": "join",
+      "object": {
+        "objectType":"group", 
+        "displayName": "Administrators"}
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>archive</tt></td>
+    <td align="center"><tt>archive</tt></td>
     <td>Indicates that the actor has archived the object.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Joe"},
+    "verb": "archive",
+    "object": {
+      "objectType": "file", 
+      "displayName": "4Q2012 Sales Forecast.xls"}
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>assign</tt></td>
+    <td align="center"><tt>assign</tt></td>
     <td>Indicates that the actor has assigned the object to the target.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Sally"},
+    "verb": "assign",
+    "object": {
+      "objectType": "issue", 
+      "displayName": "Issue #123: Some Issue"},
+    "target": {
+      "objectType": "person",
+      "displayName": "Joe"
+    },
+    "title": "Sally assigned Issue #123 to Joe"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>at</tt></td>
+    <td align="center"><tt>at</tt></td>
     <td>Indicates that the actor is currently located at the object. For instance, a person being at a specific physical location.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Joe"},
+    "verb": "at",
+    "object": {
+      "objectType": "place",
+      "displayName": "Acme, Co."
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>attach</tt></td>
+    <td align="center"><tt>attach</tt></td>
     <td>Indicates that the actor has attached the object to the target.For instance, a person attaching a file to a wiki page or an email.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Sally"},
+    "verb": "attach",
+    "object": {
+      "objectType": "binary",
+      "data": "dGhpcyBpcyB1bmNvbXByZXNzZWQgZGF0YQo="
+    },
+    "target": {
+      "objectType": "issue",
+      "displayName": "Issue #123"
+    },
+    "title": "Sally added an attachment to Issue #123"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>attend</tt></td>
+    <td align="center"><tt>attend</tt></td>
     <td>Indicates that the actor has attended the object. For instance, a person attending a meeting.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "attend",
+  "object": {
+    "objectType": "event",
+    "displayName": "Sally's Meeting"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>author</tt></td>
+    <td align="center"><tt>author</tt></td>
     <td>Indicates that the actor has authored the object. Note that this is a more specific form of the verb "create".</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "author",
+  "object": {
+    "objectType": "file",
+    "displayName": "4Q2012 Sales Forecast.xls"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>authorize</tt></td>
+    <td align="center"><tt>authorize</tt></td>
     <td>Indicates that the actor has authorized the object. If a target is specified, it means that the authorization is specifically in regards to the target. For instance, a service can authorize a person to access a given application; in which case the actor is the service, the object is the person, and the target is the application. In contrast, a person can authorize a request; in which case the actor is the person and the object is the request and there might be no explicit target.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "authorize",
+  "object": {
+    "objectType": "task",
+    "actor": {
+      "objectType": "person",
+      "displayName": "Sally"
+    },
+    "verb": "access",
+    "object": {
+      "objectType": "place",
+      "displayName": "Joe's Home"
+    }
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>borrow</tt></td>
+    <td align="center"><tt>borrow</tt></td>
     <td>Indicates that the actor has borrowed the object. If a target is specified, it identifies the entity from which the object was borrowed. For instance, if a person borrows a book from a library, the person is the actor, the book is the object and the library is the target.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "borrow",
+  "object": {
+    "objectType": "book",
+    "displayName": "Cloud Atlas"
+  },
+  "target": {
+    "objectType": "person",
+    "displayName": "Joe"
+  },
+  "title": "Sally borrowed the book 'Cloud Atlas' from Joe"
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>build</tt></td>
+    <td align="center"><tt>build</tt></td>
     <td>Indicates that the actor has built the object. For example, if a person builds a model or compiles code.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "build",
+  "object": {
+    "objectType": "application",
+    "displayName": "MyApp Builder 12345"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>cancel</tt></td>
+    <td align="center"><tt>cancel</tt></td>
     <td>Indicates that the actor has canceled the object. For instance, canceling a calendar event.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "cancel",
+  "object": {
+    "objectType": "offer",
+    "displayName": "Free Money!"
+  },
+  "title": "Sally cancelled the offer for free money."
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>close</tt></td>
+    <td align="center"><tt>close</tt></td>
     <td>Indicates that the actor has closed the object. For instance, the object could represent a ticket being tracked in an issue management system.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "close",
+  "object": {
+    "objectType": "issue",
+    "displayName": "Issue #123"
+  },
+  "title": "Joe closed issue #123"
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>complete</tt></td>
+    <td align="center"><tt>complete</tt></td>
     <td>Indicates that the actor has completed the object.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "complete",
+  "object": {
+    "objectType": "process",
+    "displayName": "Some long process"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>confirm</tt></td>
+    <td align="center"><tt>confirm</tt></td>
     <td>Indicates that the actor has confirmed or agrees with the object. For instance, a software developer might confirm an issue reported against a product.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "confirm",
+  "object": {
+    "objectType": "issue",
+    "displayName": "Issue #123"
+  },
+  "title": "Joe confirmed issue #123"
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>consume</tt></td>
+    <td align="center"><tt>consume</tt></td>
     <td>Indicates that the actor has consumed the object. The specific meaning is dependent largely on the object's type. For instance, an actor may "consume" an audio object, indicating that the actor has listened to it; or an actor may "consume" a book, indicating that the book has been read. As such, the "consume" verb is a more generic form of other more specific verbs such as "read" and "play".</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "consume",
+  "object": {
+    "objectType": "product",
+    "displayName": "Some amazing product"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>checkin</tt></td>
+    <td align="center"><tt>checkin</tt></td>
     <td>Indicates that the actor has checked-in to the object. For instance, a person checking-in to a Place.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "checkin",
+  "object": {
+    "objectType": "place",
+    "displayName": "Acme, Co"
+  },
+  "title": "Joe checked in at Acme, Co"
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>create</tt></td>
+    <td align="center"><tt>create</tt></td>
     <td>Indicates that the actor has created the object.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "create",
+  "object": {
+    "objectType": "product",
+    "displayName": "Some amazing product"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>delete</tt></td>
+    <td align="center"><tt>delete</tt></td>
     <td>Indicates that the actor has deleted the object. This implies, but does not require, the permanent destruction of the object.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "delete",
+  "object": {
+    "objectType": "file",
+    "displayName": "4Q2012 Sales Forecast.xls"
+  },
+  "title": "Joe is probably going to get fired."
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>deliver</tt></td>
+    <td align="center"><tt>deliver</tt></td>
     <td>Indicates that the actor has delivered the object. For example, delivering a package.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "deliver",
+  "object": {
+    "objectType": "note",
+    "displayName": "Bad News",
+    "content": "Joe deleted the sales forecast"
+  },
+  "target": {
+    "objectType": "person",
+    "displayName": "Joe's Boss"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>deny</tt></td>
+    <td align="center"><tt>deny</tt></td>
     <td>Indicates that the actor has denied the object. For example, a manager may deny a travel request.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "deny",
+  "object": {
+    "objectType": "task",
+    "actor": {
+      "objectType": "person",
+      "displayName": "Joe"
+    },
+    "verb": "delete",
+    "object": {
+      "objectType": "file",
+      "displayName": "4Q2012 Sales Forecast.xls"
+    }
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>disagree</tt></td>
+    <td align="center"><tt>disagree</tt></td>
     <td>Indicates that the actor disagrees with the object.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "disagree",
+  "object": {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Joe"},
+    "verb": "deny",
+    "object": {
+      "objectType": "task",
+      "actor": {
+        "objectType": "person",
+        "displayName": "Joe"
+      },
+      "verb": "delete",
+      "object": {
+        "objectType": "file",
+        "displayName": "4Q2012 Sales Forecast.xls"
+      }
+    }
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>dislike</tt></td>
+    <td align="center"><tt>dislike</tt></td>
     <td>Indicates that the actor dislikes the object. Note that the "dislike" verb is distinct from the "unlike" verb which assumes that the object had been previously "liked".</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "dislike",
+  "object": {
+    "objectType": "person",
+    "displayName": "Sally"
+  }
+}
+    </pre>
+    </td>   
   </tr>
   <tr>
-    <td><tt>experience</tt></td>
+    <td align="center"><tt>experience</tt></td>
     <td>Indicates that the actor has experienced the object in some manner. Note that, depending on the specific object types used for both the actor and object, the meaning of this verb can overlap that of the "consume" and "play" verbs. For instance, a person might "experience" a movie; or "play" the movie; or "consume" the movie. The "experience" verb can be considered a more generic form of other more specific verbs as "consume", "play", "watch", "listen", and "read"</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally"},
+  "verb": "experience",
+  "object": {
+    "objectType": "event",
+    "displayName": "Disciplinary Action for Joe"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>favorite</tt></td>
+    <td align="center"><tt>favorite</tt></td>
     <td>Indicates that the actor marked the object as an item of special interest.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe's Boss"},
+  "verb": "favorite",
+  "object": {
+    "objectType": "person",
+    "displayName": "Sally"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>find</tt></td>
+    <td align="center"><tt>find</tt></td>
     <td>Indicates that the actor has found the object.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "find",
+  "object": {
+    "objectType": "application",
+    "displayName": "Unapproved Software Application"
+  },
+  "location": {
+    "objectType": "place",
+    "displayName": "Sally's Computer"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>flag-as-inappropriate</tt></td>
+    <td align="center"><tt>flag-as-inappropriate</tt></td>
     <td>Indicates that the actor has flagged the object as being 
  inappropriate for some reason. When using this verb, the 
  <a href="#context"><tt>context</tt></a> property can be used to provide additional detail about why the object has been flagged.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Sally's Boss"},
+  "verb": "flag-as-inappropriate",
+  "object": {
+    "objectType": "application",
+    "displayName": "Unapproved Software Application",
+    "location": {
+      "displayName": "Sally's Computer"
+    }
+  },
+  "context": {
+    "objectType": "issue",
+    "displayName": "Issue #125",
+    "types": ["http://example.org/violation-of-corporate-policy"]
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>follow</tt></td>
+    <td align="center"><tt>follow</tt></td>
     <td>Indicates that the actor began following the activity of the object. In most cases, the objectType will be a "person", but it can potentially be of any type that can sensibly generate activity. Processors MAY ignore (silently drop) successive identical "follow" activities.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe"},
+  "verb": "follow",
+  "object": {
+    "objectType": "issue",
+    "displayName": "Issue #125"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>give</tt></td>
+    <td align="center"><tt>give</tt></td>
     <td>Indicates that the actor is giving an object to the target. Examples include one person giving a <tt>badge</tt> object to another person. The <tt>object</tt> identifies the object being given. The <tt>target</tt> identifies the receiver.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Joe's Boss"},
+  "verb": "give",
+  "object": {
+    "objectType": "note",
+    "displayName": "Notice of Employment Termination"
+  },
+  "target": {
+    "objectType": "collection",
+    "items": [
+      {
+        "objectType": "person",
+        "displayName": "Joe"
+      },
+      {
+        "objectType": "person",
+        "displayName": "Sally"
+      }
+    ]
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>host</tt></td>
+    <td align="center"><tt>host</tt></td>
     <td>Indicates that the actor is hosting the object. As in hosting an event, or hosting a service.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Bob"},
+  "verb": "host",
+  "object": {
+    "objectType": "event",
+    "displayName": "Job Interview"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>ignore</tt></td>
+    <td align="center"><tt>ignore</tt></td>
     <td>Indicates that the actor has ignored the object. For instance, this verb may be used when an actor has ignored a friend request, in which case the object may be the <tt>request-friend</tt> activity.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Laura"},
+  "verb": "ignore",
+  "object": {
+    "objectType": "note",
+    "displayName": "Joe's request for his job back."
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>insert</tt></td>
+    <td align="center"><tt>insert</tt></td>
     <td>Indicates that the actor has inserted the object into the target.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Bob"},
+  "verb": "insert",
+  "object": {
+    "objectType": "note",
+    "displayName": "Notes about Employee Disciplinary Actions"
+  },
+  "target": {
+    "objectType": "file",
+    "displayName": "2013 Corporate Policy Updates.doc"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>install</tt></td>
+    <td align="center"><tt>install</tt></td>
     <td>Indicates that the actor has installed the object, as in installing an application.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Laura"},
+  "verb": "install",
+  "object": {
+    "objectType": "application",
+    "displayName": "Approved Software Scanning Tool",
+    "location": {
+      "displayName": "All computers in Building A"
+    }
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>interact</tt></td>
+    <td align="center"><tt>interact</tt></td>
     <td>Indicates that the actor has interacted with the object. For instance, when one person interacts with another.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Bob"},
+  "verb": "interact",
+  "object": {
+    "objectType": "person",
+    "displayName": "Laura"
+  },
+  "title": "Bob called Laura."
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>invite</tt></td>
+    <td align="center"><tt>invite</tt></td>
     <td>Indicates that the actor has invited the object, typically a person object, to join or participate in the object described by
  the <tt>target</tt>. The target could, for instance, be an event, group or a service.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Laura"},
+  "verb": "invite",
+  "object": {
+    "objectType": "person",
+    "displayName": "Mark"
+  },
+  "target": {
+    "objectType": "event",
+    "displayName": "Job Interview"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>join</tt></td>
+    <td align="center"><tt>join</tt></td>
     <td>Indicates that the actor has become a member of the object. This specification only defines the meaning of this verb when the 
  <tt>object</tt> of the Activity has an <tt>objectType</tt> of <tt>group</tt>, though implementors need to be prepared to handle other types of objects.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Mark"},
+  "verb": "join",
+  "object": {
+    "objectType": "organization",
+    "displayName": "Acme, Co"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>leave</tt></td>
+    <td align="center"><tt>leave</tt></td>
     <td>Indicates that the actor has left the object. For instance, a Person leaving a Group or checking-out of a Place.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Mark"},
+  "verb": "leave",
+  "object": {
+    "objectType": "organization",
+    "displayName": "Other, Co"
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>like</tt></td>
+    <td align="center"><tt>like</tt></td>
     <td>Indicates that the actor marked the object as an item of special interest. The "like" verb is considered to be an alias of "favorite". The two verb are semantically identical.</td>
+    <td>
+    <pre>
+{
+  "actor": {
+    "objectType": "person", 
+    "displayName": "Laura"},
+  "verb": "like",
+  "object": {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Mark"},
+    "verb": "join",
+    "object": {
+      "objectType": "organization",
+      "displayName": "Acme, Co"
+    }
+  }
+}
+    </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>listen</tt></td>
+    <td align="center"><tt>listen</tt></td>
     <td>Indicates that the actor has listened to the object. This is typically only applicable for objects representing audio content, such as music, an audio-book, or a radio broadcast. The "listen" verb is a more specific form of the "consume", "experience" and "play" verbs.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person", 
+      "displayName": "Mark"},
+    "verb": "listen",
+    "object": {
+      "objectType": "audio",
+      "displayName": "Welcome to the Company (Podcast).mp3"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>lose</tt></td>
+    <td align="center"><tt>lose</tt></td>
     <td>Indicates that the actor has lost the object. For instance, if a person loses a game.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "organization",
+      "displayName": "New York Yankees"
+    },
+    "verb": "lose",
+    "object": {
+      "objectType": "game",
+      "displayName": "World Series"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>make-friend</tt></td>
+    <td align="center"><tt>make-friend</tt></td>
     <td>Indicates the creation of a friendship that is reciprocated by the object. Since this verb implies an activity on the part of its object, processors MUST NOT accept activities with this verb unless they are able to verify through some external means that there is in fact a reciprocated connection. For example, a processor may have received a guarantee from a particular publisher that the publisher will only use this Verb in cases where a reciprocal relationship exists.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "make-friend",
+    "object": {
+      "objectType": "person",
+      "displayName": "Laura"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>open</tt></td>
+    <td align="center"><tt>open</tt></td>
     <td>Indicates that the actor has opened the object. For instance, the object could represent a ticket being tracked in an issue management system.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "open",
+    "object": {
+      "objectType": "issue",
+      "displayName": "Issue #126"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>play</tt></td>
+    <td align="center"><tt>play</tt></td>
     <td>Indicates that the actor spent some time enjoying the object. For example, if the object is a video this indicates that the subject watched all or part of the video. The "play" verb is a more specific form of the "consume" verb.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "play",
+    "object": {
+      "objectType": "audio",
+      "displayName": "Call Me Maybe"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>present</tt></td>
+    <td align="center"><tt>present</tt></td>
     <td>Indicates that the actor has presented the object. For instance, when a person gives a presentation at a conference.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "present",
+    "object": {
+      "objectType": "file",
+      "displayName": "1Q2013 Sales Forecast.ppt"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>purchase</tt></td>
+    <td align="center"><tt>purchase</tt></td>
     <td>Indicates that the actor has purchased the object. If a target is specified, in indicates the entity from which the object was purchased.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "purchase",
+    "object": {
+      "objectType": "video",
+      "displayName": "The Avengers"
+    },
+    "title": "Mark purchased the movie, The Avengers"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>qualify</tt></td>
+    <td align="center"><tt>qualify</tt></td>
     <td>Indicates that the actor has qualified for the object. If a target is specified, it indicates the context within which the qualification applies.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "qualify",
+    "object": {
+      "objectType": "offer",
+      "displayName": "Free Money!"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>read</tt></td>
+    <td align="center"><tt>read</tt></td>
     <td>Indicates that the actor read the object. This is typically only applicable for objects representing printed or written content, such as a book, a message or a comment. The "read" verb is a more specific form of the "consume", "experience" and "play" verbs.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "read",
+    "object": {
+      "objectType": "book",
+      "displayName": "Cloud Atlas"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>receive</tt></td>
+    <td align="center"><tt>receive</tt></td>
     <td>Indicates that the actor is receiving an object. Examples include a person receiving a <tt>badge</tt> object. The <tt>object</tt> identifies the object being received.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "receive",
+    "object": {
+      "objectType": "badge",
+      "displayName": "Most Checkins in 24 hours"
+    },
+    "title": "Laura was awarded a badget for \"Most Checkins in 24 hours\""
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>reject</tt></td>
+    <td align="center"><tt>reject</tt></td>
     <td>Indicates that the actor has rejected the object.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "reject",
+    "object": {
+      "objectType": "issue",
+      "displayName": "Issue #126"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>remove</tt></td>
+    <td align="center"><tt>remove</tt></td>
     <td>Indicates that the actor has removed the object from the target.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "remove",
+    "object": {
+      "objectType": "image",
+      "displayName": "Cat Photo",
+      "fullImage": {
+        "url": "http://example.org/cats.jpg"
+      }
+    },
+    "target": {
+      "objectType": "collection",
+      "displayName": "Cat Photo Album",
+      "objectTypes": ["image"]
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>remove-friend</tt></td>
+    <td align="center"><tt>remove-friend</tt></td>
     <td>Indicates that the actor has removed the object from the collection of friends.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "remove-friend",
+    "object": {
+      "objectType": "person",
+      "displayName": "Laura"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>replace</tt></td>
+    <td align="center"><tt>replace</tt></td>
     <td>Indicates that the actor has replaced the target with the object.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "replace",
+    "object": {
+      "objectType": "file",
+      "displayName": "Updated 1Q2014 Sales Forecast.xls"
+    },
+    "target": {
+      "objectType": "file",
+      "displayName": "1Q2014 Sales Forecast.xls"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>request</tt></td>
+    <td align="center"><tt>request</tt></td>
     <td>Indicates that the actor has requested the object. If a target is specified, it indicates the entity from which the object is being  requested.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "request",
+    "object": {
+      "objectType": "task",
+      "actor": {
+        "objectType": "person",
+        "displayName": "Mark"
+      },
+      "verb": "join", 
+      "object": {
+        "objectType": "event",
+        "displayName": "The Big Meeting"
+      }
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>request-friend</tt></td>
+    <td align="center"><tt>request-friend</tt></td>
     <td>Indicates the creation of a friendship that has not yet been reciprocated by  the object.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "request-friend",
+    "object": {
+      "objectType": "person",
+      "displayName": "Laura"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>resolve</tt></td>
+    <td align="center"><tt>resolve</tt></td>
     <td>Indicates that the actor has resolved the object. For instance, the object could represent a ticket being tracked in an issue management system.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "resolve",
+    "object": {
+      "objectType": "issue",
+      "displayName": "Issue #126"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>return</tt></td>
+    <td align="center"><tt>return</tt></td>
     <td>Indicates that the actor has returned the object. If a target is specified, it indicates the entity to which the object was returned.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "return",
+    "object": {
+      "objectType": "book",
+      "displayName": "Cloud Atlas"
+    },
+    "target": {
+      "objectType": "person",
+      "displayName": "Laura"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>retract</tt></td>
+    <td align="center"><tt>retract</tt></td>
     <td>Indicates that the actor has retracted the object. For instance, if an actor wishes to retract a previously published activity, the object would be the previously published activity that is being retracted.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "retract",
+    "object": {
+      "actor": {
+        "objectType": "person",
+        "displayName": "Mark"
+      },
+      "verb": "return",
+      "object": {
+        "objectType": "book",
+        "displayName": "Cloud Atlas"
+      },
+      "target": {
+        "objectType": "person",
+        "displayName": "Laura"
+      }
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>rsvp-maybe</tt></td>
+    <td align="center"><tt>rsvp-maybe</tt></td>
     <td>The "possible RSVP" verb indicates that the actor has made a possible RSVP for the object. This specification only defines the meaning of this verb when its object is an <a href="#event">event</a>, though implementors need to be prepared to handle other object types. The use of this verb is only appropriate when the RSVP was created by an explicit action by the actor. It is not appropriate to use this verb when a user has been added as an attendee by an event organiser or administrator.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "rsvp-maybe",
+    "object": {
+      "objectType": "event",
+      "displayName": "The Big Meeting"
+    },
+    "title": "Laura might attend The Big Meeting"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>rsvp-no</tt></td>
+    <td align="center"><tt>rsvp-no</tt></td>
     <td>The "negative RSVP" verb indicates that the actor has made a negative RSVP for the object. This specification only defines the meaning of this verb when its object is an <a href="#event">event</a>, though implementors need to be prepared to handle other object types. The use of this verb is only appropriate when the RSVP was created by an explicit action by the actor. It is not appropriate to use this verb when a user has been added as an attendee by an event organiser or administrator.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "rsvp-no",
+    "object": {
+      "objectType": "event",
+      "displayName": "The Big Meeting"
+    },
+    "title": "Mark will not attend the Big Meeting"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>rsvp-yes</tt></td>
+    <td align="center"><tt>rsvp-yes</tt></td>
     <td>The "positive RSVP" verb indicates that the actor has made a positive RSVP for an object. This specification only defines the meaning of this verb when its object is an <a href="#event">event</a>, though implementors need to be prepared to handle other object types. The use of this verb is only appropriate when the RSVP was created by an explicit action by the actor. It is not appropriate to use this verb when a user has been added as an attendee by an event organiser or administrator.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "rsvp-yes",
+    "object": {
+      "objectType": "event",
+      "displayName": "The Big Meeting"
+    },
+    "title": "Laura will attend the Big Meeting"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>satisfy</tt></td>
+    <td align="center"><tt>satisfy</tt></td>
     <td>Indicates that the actor has satisfied the object. If a target is specified, it indicate the context within which the object was satisfied. For instance, if a person satisfies the requirements for a particular challenge, the person is the actor; the requirement is the object; and the challenge is the target.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "satisfy",
+    "object": {
+      "objectType": "http://example.org/condition",
+      "displayName": "Some Condition"
+    },
+    "target": {
+      "objectType": "http://example.org/parole",
+      "displayName": "Terms of Parole"
+    },
+    "title": "Mark has satisfied a condition of his parole."
+  } 
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>save</tt></td>
+    <td align="center"><tt>save</tt></td>
     <td>Indicates that the actor has called out the object as being of interest primarily to him- or herself. Though this action MAY be shared publicly, the implication is that the object has been saved primarily for the actor's own benefit rather than to show it to others as would be indicated by the "share" verb.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "save",
+    "object": {
+      "objectType": "note",
+      "displayName": "A note about something important"
+    },
+    "target": {
+      "objectType": "collection",
+      "displayName": "Laura's Reading List"
+    },
+    "title": "Laura saved the note to her reading list"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>schedule</tt></td>
+    <td align="center"><tt>schedule</tt></td>
     <td>Indicates that the actor has scheduled the object. For instance, scheduling a meeting.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "schedule",
+    "object": {
+      "objectType": "event",
+      "displayName": "The Big Meeting"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>search</tt></td>
+    <td align="center"><tt>search</tt></td>
     <td>Indicates that the actor is or has searched for the object. If a target is specified, it indicates the context within which the search is or has been conducted.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "search",
+    "object": {
+      "objectType": "place",
+      "displayName": "Big Hotel",
+      "address": {
+        "locality": "New York",
+        "region": "NY"
+      }
+    },
+    "title": "Laura searched for a hotel in New York City, NY"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>sell</tt></td>
+    <td align="center"><tt>sell</tt></td>
     <td>Indicates that the actor has sold the object. If a target is specified, it indicates the entity to which the object was sold.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "sell",
+    "object": {
+      "objectType": "product",
+      "displayName": "A cool product"
+    },
+    "target": {
+      "objectType": "person",
+      "displayName": "Laura"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>send</tt></td>
+    <td align="center"><tt>send</tt></td>
     <td>Indicates that the actor has sent the object. If a target is specified, it indicates the entity to which the object was sent.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "send",
+    "object": {
+      "objectType": "note",
+      "content": "Thank you for the cool product."
+    },
+    "target": {
+      "objectType": "person",
+      "displayName": "Mark"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>share</tt></td>
+    <td align="center"><tt>share</tt></td>
     <td>Indicates that the actor has called out the object to readers. In most cases, the actor did not create the object being shared, but is instead drawing attention to it.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "share",
+    "object": {
+      "objectType": "note",
+      "displayName": "An important note"
+    },
+    "title": "Mark shared an important note."
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>sponsor</tt></td>
+    <td align="center"><tt>sponsor</tt></td>
     <td>Indicates that the actor has sponsored the object. If a target is specified, it indicates the context within which the sponsorship is offered. For instance, a company can sponsor an event; or an individual can sponsor a project; etc.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "organization",
+      "displayName": "Acme, Co"
+    },
+    "verb": "sponsor",
+    "object": {
+      "objectType": "game",
+      "displayName": "World Series"
+    },
+    "title": "Acme, Co sponsored the World Series"
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>start</tt></td>
+    <td align="center"><tt>start</tt></td>
     <td>Indicates that the actor has started the object. For instance, when a person starts a project.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "start",
+    "object": {
+      "objectType": "process",
+      "displayName": "A Long Running Process"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>stop-following</tt></td>
+    <td align="center"><tt>stop-following</tt></td>
     <td>Indicates that the actor has stopped following the object.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "stop-following",
+    "object": {
+      "objectType": "person",
+      "displayName": "Mark"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>submit</tt></td>
+    <td align="center"><tt>submit</tt></td>
     <td>Indicates that the actor has submitted the object. If a target is specified, it indicates the entity to which the object was submitted.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "submit",
+    "object": {
+      "objectType": "issue",
+      "displayName": "Issue #127"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>tag</tt></td>
+    <td align="center"><tt>tag</tt></td>
     <td>Indicates that the actor has associated the object with the target. For example, if the actor specifies that a particular user appears in a photo. the object is the user and the target is the photo.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "tag",
+    "object": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "target": {
+      "objectType": "image",
+      "displayName": "Pictures of my cats"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>terminate</tt></td>
+    <td align="center"><tt>terminate</tt></td>
     <td>Indicates that the actor has terminated the object. </td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "terminate",
+    "object": {
+      "objectType": "process",
+      "displayName": "A long running process"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>tie</tt></td>
+    <td align="center"><tt>tie</tt></td>
     <td>Indicates that the actor has neither won or lost the object. This verb is generally only applicable when the object represents some form of competition, such as a game.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "collection",
+      "items": [
+        {
+          "objectType": "organization",
+          "displayName": "New York Giants"
+        },
+        {
+          "objectType": "organization",
+          "displayName": "Oakland Raiders"
+        }
+      ]
+    },
+    "verb": "tie",
+    "object": {
+      "objectType": "game",
+      "displayName": "Super Bowl"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>unfavorite</tt></td>
+    <td align="center"><tt>unfavorite</tt></td>
     <td>Indicates that the actor has removed the object from the collection of favorited items.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "unfavorite",
+    "object": {
+      "objectType": "article",
+      "displayName": "Some article"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>unlike</tt></td>
+    <td align="center"><tt>unlike</tt></td>
     <td>Indicates that the actor has removed the object from the collection of liked items.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "unlike",
+    "object": {
+      "objectType": "article",
+      "displayName": "Some article"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>unsatisfy</tt></td>
+    <td align="center"><tt>unsatisfy</tt></td>
     <td>Indicates that the actor has not satisfied the object. If a target is specified, it indicates the context within which the object was not satisfied. For instance, if a person fails to satisfy the requirements of some particular challenge, the person is the actor; the requirement is the object and the challenge is the target.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "unsatisfy",
+    "object": {
+      "objectType": "http://example.org/condition",
+      "displayName": "Some Condition"
+    },
+    "target": {
+      "objectType": "http://example.org/parole",
+      "displayName": "Terms of Parole"
+    },
+    "title": "Mark has not satisfied a condition of his parole."
+  } 
+      </pre>
+    </td>
+
   </tr>
   <tr>
-    <td><tt>unsave</tt></td>
+    <td align="center"><tt>unsave</tt></td>
     <td>Indicates that the actor has removed the object from the collection of saved items.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "unsave",
+    "object": {
+      "objectType": "article",
+      "displayName": "Some article"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>unshare</tt></td>
+    <td align="center"><tt>unshare</tt></td>
     <td>Indicates that the actor is no longer sharing the object. If a target is specified, it indicates the entity with whom the object is no longer being shared.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "unshare",
+    "object": {
+      "objectType": "article",
+      "displayName": "Some article"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>update</tt></td>
+    <td align="center"><tt>update</tt></td>
     <td>The "update" verb indicates that the actor has modified the object. Use of the "update" verb is generally reserved to indicate modifications to existing objects or data such as changing an existing user's profile information.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "update",
+    "object": {
+      "objectType": "article",
+      "displayName": "Some article"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>use</tt></td>
+    <td align="center"><tt>use</tt></td>
     <td>Indicates that the actor has used the object in some manner.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Laura"
+    },
+    "verb": "use",
+    "object": {
+      "objectType": "product",
+      "displayName": "A cool product"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>watch</tt></td>
+    <td align="center"><tt>watch</tt></td>
     <td>Indicates that the actor has watched the object. This verb is typically applicable only when the object represents dynamic, visible content such as a movie, a television show or a public performance. This verb is a more specific form of the verbs "experience", "play" and "consume".</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "person",
+      "displayName": "Mark"
+    },
+    "verb": "watch",
+    "object": {
+      "objectType": "video",
+      "displayName": "Some random movie"
+    }
+  }
+      </pre>
+    </td>
   </tr>
   <tr>
-    <td><tt>win</tt></td>
+    <td align="center"><tt>win</tt></td>
     <td>Indicates that the actor has won the object. This verb is typically applicable only when the object represents some form of competition, such as a game.</td>
+    <td>
+      <pre>
+  {
+    "actor": {
+      "objectType": "organization",
+      "displayName": "Arizona Diamond Backs"
+    },
+    "verb": "win",
+    "object": {
+      "objectType": "game",
+      "displayName": "World Series"
+    }
+  }
+      </pre>
+    </td>
   </tr>
 </table>
 
@@ -424,7 +1894,7 @@ All Activity Stream Objects inherit the same fundamental set of basic properties
   </tr>
   <tr>
     <td><tt>device</tt></td>
-    <td>Represents a device of any sort.</td>
+    <td>Represents a device of any type.</td>
   </tr>
   <tr>
     <td><tt>event</tt></td>
@@ -440,7 +1910,7 @@ All Activity Stream Objects inherit the same fundamental set of basic properties
   </tr>
   <tr>
     <td><tt>group</tt></td>
-    <td>Represents a grouping of objects in which member objects can join or leave.</td>
+    <td>Represents a grouping of objects in which member objects can join or leave. Objects of this type MAY contain the additional properties specified <a href='#roleGroup'>here</a>.</td>
   </tr>
   <tr>
     <td><tt>image</tt></td>
@@ -471,6 +1941,10 @@ All Activity Stream Objects inherit the same fundamental set of basic properties
     <td>Represents an area, typically a web page, that is representative of, and generally managed by a particular entity. Such areas are usually dedicated to displaying descriptive information about the entity and showcasing recent content such as articles, photographs and videos. Most social networking applications, for example, provide individual users with their own dedicated "profile" pages. Several allow similar types of pages to be created for commercial entities, organizations or events. While the specific details of how pages are implemented, their characteristics and use may vary, the one unifying property is that they are typically "owned" by a single entity that is represented by the content provided by the page itself.</td>
   </tr>
   <tr>
+    <td><tt>permission</tt></td>
+    <td>Represents a permission that can be granted to an individual. For instance, a person can be granted permission to modify a file.  Objects of this type MAY contain the additional properties specified <a href='#permissions'>here</a>.
+  </tr>
+  <tr>
     <td><tt>person</tt></td>
     <td>Represents an individual person.</td>
   </tr>
@@ -495,12 +1969,20 @@ All Activity Stream Objects inherit the same fundamental set of basic properties
     <td>Represents a primarily prose-based commentary on another object. Objects of this type MAY contain a <tt>rating</tt> property as specified <a href='#rating-property'>here</a>.</td>
   </tr>
   <tr>
+    <td><tt>role</tt></td>
+    <td>Represents a role assigned to some entity within a specific context. For instance, a person be assigned the "admin" role within a particular group. Objects of this type MAY contain the additional properties specified <a href='#roleGroup'>here</a>.</td>
+  </tr>
+  <tr>
     <td><tt>service</tt></td>
     <td>Represents any form of hosted or consumable service that performs some kind of work or benefit for other entities. Examples of such objects include websites, businesses, etc.</td>
   </tr>
   <tr>
     <td><tt>task</tt></td>
     <td>Represents an activity that has yet to be completed. Objects of this type can contain additional properties as specified <a href='#task'>here</a>.</td>
+  </tr>
+  <tr>
+    <td><tt>team</tt></td>
+    <td>Represents a team of any type.</td>
   </tr>
   <tr>
     <td><tt>video</tt></td>
@@ -694,6 +2176,37 @@ For example:
   }
 ```
 
+### Permissions
+<a name="permissions">
+In addition to the core properties shared by all Activity Streams Objects, <tt>permission</tt> objects MAY contain the following properties:
+
+<table border="1">
+  <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+  <tr>
+    <td><tt>scope</tt></td>
+    <td>Activity Streams Object</td> 
+    <td>A single Activity Streams Object, of any objectType, that identifies the scope of the permission. For example, if the permission objects describes write permissions for a given file, the <tt>scope</tt> property would be a <tt>file</tt> object describing that file.</td>
+  </tr>
+  <tr>
+    <td><tt>actions</tt></td>
+    <td>Array of Strings</td>
+    <td>An array of Strings that identify the specific actions associated with the permission. The actions are application and scope specific. No common, core set of actions is defined by this specification.</td>
+  </tr>
+</table>
+
+For example:
+```
+  {
+    "objectType": "permission",
+    "displayName": "Permission to Edit File: 2Q2014 Sales Forecast.xls",
+    "scope": {
+      "objectType": "file",
+      "displayName": "2Q2014 Sales Forecast.xls"
+    },
+    "actions": ["modify", "delete", "create"]
+  }
+```
+
 ### Place
 <a name="place" />
 In addition to the core properties shared by all Activity Streams Objects, <tt>place</tt> objects MAY contain the following properties:
@@ -796,6 +2309,38 @@ For example:
       "region": "NY",
       "postalCode": "11111",
       "country": "US"
+    }
+  }
+```
+
+### Roles and Groups
+<a name="roleGroup">
+In addition to the core properties shared by all Activity Streams Objets, <tt>role</tt> and <tt>group</tt> objects MAY contain the following:
+
+<table border="1">
+  <tr><th align="left">Property</th><th align="left">Value</th><th align="left">Description</th></tr>
+  <tr>
+    <td><tt>members</tt></td>
+    <td>Collection Object</td>
+    <td>An optional Activity Streams Collection object listing the members of a group, or listing the entities assigned to a particular role.</td>
+</table> 
+
+For example:
+```
+  {
+    "objectType": "group",
+    "displayName": "My Work Group",
+    "members": {
+      "items": [
+        {
+          "objectType": "person",
+          "displayName": "Laura"
+        },
+        {
+          "objectType": "person",
+          "displayName": "Mark"
+        }
+      ]
     }
   }
 ```
@@ -1367,6 +2912,16 @@ For example:
     }
   }
 ```
+
+## License
+
+As of [date], the following persons or entities have made this Specification available under the Open Web Foundation Agreement Version 1.0, which is available at http://www.openwebfoundation.org/legal/.
+
+[List of persons or entities]
+
+You can review the signed copies of the Open Web Foundation Agreement Version 1.0 for this Specification at http://activitystrea.ms/licensing/, which may also include additional parties to those listed above.
+
+Your use of this Specification may be subject to other third party rights. THIS SPECIFICATION IS PROVIDED "AS IS." The contributors expressly disclaim any warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to the Specification. The entire risk as to implementing or otherwise using the Specification is assumed by the Specification implementer and user. IN NO EVENT WILL ANY PARTY BE LIABLE TO ANY OTHER PARTY FOR LOST PROFITS OR ANY FORM OF INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER FROM ANY CAUSES OF ACTION OF ANY KIND WITH RESPECT TO THIS SPECIFICATION OR ITS GOVERNING AGREEMENT, WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, AND WHETHER OR NOT THE OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Normative References
 <a name="references" />
