@@ -2886,7 +2886,7 @@ For example:
 The <tt>opengraph</tt> namespace property is defined to encapsulate the set of extension properties that represent information specific to an [OpenGraph][6] data type.  If, for instance, OpenGraph properties can be applied to an Activity Streams object, those properties SHOULD be grouped together under the <tt>opengraph</tt> property.
 
 For example:
-```  json json
+```  json
   {
     "objectType": "person",
     "displayName": "John Smith",
