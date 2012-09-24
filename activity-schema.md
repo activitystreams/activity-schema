@@ -2571,7 +2571,7 @@ For example:
 When an long running Activity occurs over a distinct period of time, or when an Object represents a long-running process or event, the <tt>startTime</tt> and <tt>endTime</tt> properties can be used to specify the date and time at which the activity or object begins or concludes.  The values for each are represented as JSON Strings conforming to the "date-time" production in [RFC3339][RFC3339].
 
 For example:
-``` json json
+``` json
   {
     "actor": {
       "objectType": "person",
