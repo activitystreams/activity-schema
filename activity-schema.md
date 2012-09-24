@@ -2104,7 +2104,7 @@ In addition to the core properties shared by all Activity Streams Objects, <tt>e
     <td>The date and time that the event ends represented as a String conforming to the "date-time" production in [RFC3339].</td>
   </tr>
   <tr>
-    <td><tt>invite</tt></td>
+    <td><tt>invited</tt></td>
     <td>Collection</td>
     <td>A collection object as defined in Section 3.5 of the JSON Activity Streams specification that provides information about entities that have been invited to the event.</td>
   </tr>
@@ -2178,7 +2178,7 @@ For example:
   }
 ```
 
-### Permissions
+### Permission
 <a name="permissions">
 In addition to the core properties shared by all Activity Streams Objects, <tt>permission</tt> objects MAY contain the following properties:
 
